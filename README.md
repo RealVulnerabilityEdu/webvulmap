@@ -1,1 +1,1 @@
-# CISC4900
+Initial setup for project
