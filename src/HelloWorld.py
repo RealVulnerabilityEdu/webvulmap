@@ -1,5 +1,6 @@
 class HelloWorld:
     def __init__(self):
-        print("Hello World!")
+        print("Hello World!!")
+    
 
-print("Hello World!")
+h1 = HelloWorld()
