@@ -4,3 +4,4 @@ class HelloWorld:
     
 
 h1 = HelloWorld()
+print("Test message")
