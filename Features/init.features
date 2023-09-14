@@ -1,1 +1,43 @@
-initial 
+Feature: Vulnerability Lookup
+
+As an instructor.
+I want to teach about vulnerability X.
+So that I can teach people how the exploit works and what was done to fix it. 
+
+Scenario: Return a vulnerability given these parameters
+
+Given: The name of the vulnerability in combination with the fact the person is an 
+Instructor.
+
+String title: buffer overflow
+
+Result: info from cve.org 
+
+And: The type of user is an instructor
+
+String typeOfUser: instructor
+
+Result: info from Github to show source code and patch
+
+
+
+As a student.
+I want to learn about vulnerability X.
+So that I can see how it's replicated, and what was done to fix it so I can write safer code.
+
+Scenario: Return a vulnerability given these parameters
+
+Given: The name of the vulnerability in combination with the fact the person is an 
+Student.
+String title: OS command injection
+
+Result: info from cve.org 
+
+
+
+And: The type of user is an Student
+
+String typeOfUser: Student
+
+Result: info from Github to show source code and patch
+Result: A live demo where OS command injection was done to an example application
