@@ -1,8 +1,10 @@
 Feature: Vulnerability Lookup
 
 As an instructor.
-I want to teach about vulnerability X.
-So that I can teach people how the exploit works and what was done to fix it. 
+I want to look up vulnerability X in the system by entering its CVE ID (E.g buffer overflow CVE-2019-1234).
+in order to teach people about how vulnerability X works and what they can do to fix it
+
+
 
 Scenario: Return a vulnerability given these parameters
 
@@ -21,6 +23,7 @@ Result: info from Github to show source code and patch
 
 
 
+
 As a student.
 I want to learn about vulnerability X.
 So that I can see how it's replicated, and what was done to fix it so I can write safer code.
@@ -32,8 +35,6 @@ Student.
 String title: OS command injection
 
 Result: info from cve.org 
-
-
 
 And: The type of user is an Student
 
