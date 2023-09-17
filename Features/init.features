@@ -1,10 +1,9 @@
 Feature: Vulnerability Lookup
 
+//normal usage
 As an instructor.
 I want to look up vulnerability X in the system by entering its CVE ID (E.g buffer overflow CVE-2019-1234).
 in order to teach people about how vulnerability X works and what they can do to fix it
-
-
 
 Scenario: Return a vulnerability given these parameters
 
@@ -22,6 +21,19 @@ String typeOfUser: instructor
 Result: info from Github to show source code and patch
 
 
+//edge cases or incorrect usage
+As an instructor.
+I want to look up vulnerability X in the system by entering its CVE ID (E.g buffer overflow CVE-2019-1234).
+But said vulnerability does not exist in the system.
+
+Scenario: Return a vulnerability given these parameters. But the vulnerability does not exist. 
+Thus the system returns a data not found error.
+
+Given: A invalid string that does not exist on the database
+
+String title: buffer overflowing omg...blah blah blah
+
+Result: Entry not found error
 
 
 As a student.
@@ -42,3 +54,5 @@ String typeOfUser: Student
 
 Result: info from Github to show source code and patch
 Result: A live demo where OS command injection was done to an example application
+
+
