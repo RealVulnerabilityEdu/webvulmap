@@ -1,5 +1,7 @@
+SHELL=/bin/zsh
+export
+
 setup: 
-	
 	conda activate p4900
 
 

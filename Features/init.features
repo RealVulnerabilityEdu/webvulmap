@@ -2,17 +2,17 @@ Feature: Vulnerability Lookup
 
 //normal usage
 As an instructor.
-I want to look up vulnerability X in the system by entering its CVE ID (E.g buffer overflow CVE-2019-1234).
-in order to teach people about how vulnerability X works and what they can do to fix it
+I want to teach curriculum X. when I search for X, there should be a list that matches my query. 
+When I click on the element, I should see related CVEs and CWEs related to the curriculum.
 
 Scenario: Return a vulnerability given these parameters
 
-Given: The name of the vulnerability in combination with the fact the person is an 
-Instructor.
+Given: knowledge area and knowledge topic and the user is a Instructor.
 
-String title: buffer overflow
+String knowledge area (input): Query languages
+String knowledge topic (input): SQL
 
-Result: info from cve.org 
+Result: info relating to the query language, such as CWE-89 SQL injection
 
 And: The type of user is an instructor
 
@@ -23,10 +23,10 @@ Result: info from Github to show source code and patch
 
 //edge cases or incorrect usage
 As an instructor.
-I want to look up vulnerability X in the system by entering its CVE ID (E.g buffer overflow CVE-2019-1234).
-But said vulnerability does not exist in the system.
+I want to look for knowledge area Y from a list. But the knowledge topic does not exist. 
+Thus I search for knowledge area Y.  
 
-Scenario: Return a vulnerability given these parameters. But the vulnerability does not exist. 
+Scenario: Return related knowledge topic and CWEs given these parameters. But the topic does not exist. 
 Thus the system returns a data not found error.
 
 Given: A invalid string that does not exist on the database
@@ -37,22 +37,23 @@ Result: Entry not found error
 
 
 As a student.
-I want to learn about vulnerability X.
-So that I can see how it's replicated, and what was done to fix it so I can write safer code.
+I want to learn about knowledge area X.
+I select knowledge topic X from the list of knowledge topics.
 
-Scenario: Return a vulnerability given these parameters
+Scenario: Return related knowledge topic and CWEs given these parameters
 
-Given: The name of the vulnerability in combination with the fact the person is an 
+Given: The name of the knowledge area in combination with the fact the person is an 
 Student.
-String title: OS command injection
 
-Result: info from cve.org 
+String title: Commandline Operations
+
+Result: info relating to the knowledge area, such as CWE-78 OS command injection
 
 And: The type of user is an Student
 
 String typeOfUser: Student
 
-Result: info from Github to show source code and patch
+Result: info from https://cwe.mitre.org/data/definitions/78.html to show info about the vulnerability
 Result: A live demo where OS command injection was done to an example application
 
 
