@@ -5,9 +5,8 @@ As an instructor.
 I want to teach curriculum X. when I search for X, there should be a list that matches my query. 
 When I click on the element, I should see related CVEs and CWEs related to the curriculum.
 
-Scenario: Return a vulnerability given these parameters
-
-Given: knowledge area and knowledge topic and the user is a Instructor.
+Scenario: Return relevent knowledge topics and CWEs given these parameters
+Given: knowledge area and knowledge area and the user is a Instructor.
 
 String knowledge area (input): Query languages
 String knowledge topic (input): SQL
@@ -15,9 +14,7 @@ String knowledge topic (input): SQL
 Result: info relating to the query language, such as CWE-89 SQL injection
 
 And: The type of user is an instructor
-
 String typeOfUser: instructor
-
 Result: info from Github to show source code and patch
 
 
@@ -30,9 +27,7 @@ Scenario: Return related knowledge topic and CWEs given these parameters. But th
 Thus the system returns a data not found error.
 
 Given: A invalid string that does not exist on the database
-
 String title: buffer overflowing omg...blah blah blah
-
 Result: Entry not found error
 
 
@@ -44,7 +39,6 @@ Scenario: Return related knowledge topic and CWEs given these parameters
 
 Given: The name of the knowledge area in combination with the fact the person is an 
 Student.
-
 String title: Commandline Operations
 
 Result: info relating to the knowledge area, such as CWE-78 OS command injection
