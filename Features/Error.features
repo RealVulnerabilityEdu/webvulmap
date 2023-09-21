@@ -1,0 +1,11 @@
+Feature: Error Handling
+
+//edge cases or incorrect usage
+As an instructor.
+I want to look for knowledge area Y from a list. But the knowledge topic does not exist. 
+Thus I search for knowledge area Y.  
+Scenario: Return related knowledge topic and CWEs given these parameters. But the topic does not exist. 
+Thus the system returns a data not found error.
+Given: I searched for a topic. But it does not exist in the list
+String title: "buffer overflowing in heaven"
+Result: I should see Entry not found error

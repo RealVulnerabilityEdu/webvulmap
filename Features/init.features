@@ -1,52 +1,31 @@
-Feature: Vulnerability Lookup
+Feature: Topic Lookup and roadmap towards topic
 
 //normal usage
 As an instructor.
 I want to teach curriculum X. when I search for X, there should be a list that matches my query. 
 When I click on the element, I should see related CVEs and CWEs related to the curriculum.
-
 Scenario: Return relevent knowledge topics and CWEs given these parameters
-Given: knowledge area and knowledge area and the user is a Instructor.
-
+Given: A home page with a list of knowledge areas. A specific view since the user is a Instructor.
 String knowledge area (input): Query languages
 String knowledge topic (input): SQL
-
-Result: info relating to the query language, such as CWE-89 SQL injection
-
+Result: info relating to the query language, such as CWE-89 SQL injection.
+Result: As well as topics needs to help students know what is SQL in the first place. 
+i.e SQL 101
 And: The type of user is an instructor
 String typeOfUser: instructor
-Result: info from Github to show source code and patch
-
-
-//edge cases or incorrect usage
-As an instructor.
-I want to look for knowledge area Y from a list. But the knowledge topic does not exist. 
-Thus I search for knowledge area Y.  
-
-Scenario: Return related knowledge topic and CWEs given these parameters. But the topic does not exist. 
-Thus the system returns a data not found error.
-
-Given: A invalid string that does not exist on the database
-String title: buffer overflowing omg...blah blah blah
-Result: Entry not found error
+Result: info from Github to show source code and patch.
 
 
 As a student.
 I want to learn about knowledge area X.
-I select knowledge topic X from the list of knowledge topics.
-
+So I select knowledge topic X from the list of knowledge topics.
 Scenario: Return related knowledge topic and CWEs given these parameters
-
-Given: The name of the knowledge area in combination with the fact the person is an 
-Student.
-String title: Commandline Operations
-
+Given: I am on the knowledge area page and I select a knowledge area.
+String title(input): Commandline Operations
+Result: The name of the knowledge area in combination with relevent topics, CWEs, CVEs, and code.
 Result: info relating to the knowledge area, such as CWE-78 OS command injection
-
 And: The type of user is an Student
-
 String typeOfUser: Student
-
 Result: info from https://cwe.mitre.org/data/definitions/78.html to show info about the vulnerability
 Result: A live demo where OS command injection was done to an example application
 
