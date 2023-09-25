@@ -9,3 +9,4 @@ Thus the system returns a data not found error.
 Given: I searched for a topic. But it does not exist in the list
 String title: "buffer overflowing in heaven"
 Result: I should see Entry not found error
+
