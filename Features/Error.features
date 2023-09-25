@@ -10,3 +10,13 @@ Given: I searched for a topic. But it does not exist in the list
 String title: "buffer overflowing in heaven"
 Result: I should see Entry not found error
 
+Feature: Error Handling
+    As a user
+    I want to look for knowledge area Y from a list. But the knowledge topic does not exist.
+    Thus I search for knowledge area Y anyway.
+    Then I should see a message that says "Entry not found"
+Scenario: Return related knowledge topic and CWEs given these parameters. But the topic does not exist.
+    Given: I searched for a topic. 
+    Then I see a message that says "Entry not found"
+    
+    
