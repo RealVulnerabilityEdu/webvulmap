@@ -1,10 +1,12 @@
+User story 1:
 As an instructor.
 I want to look for knowledge area Y from a list. But the knowledge topic does not exist. 
 Thus I search for knowledge area Y.  
 But there is no such topic, so I should see a error page
 
+
 Feature: Error Handling
-        
+
     Scenario: Return related knowledge topic and CWEs given these parameters. But the topic does not exist.
         Thus I search for knowledge area Y anyway.
         Then I should see a message that says "Entry not found"
