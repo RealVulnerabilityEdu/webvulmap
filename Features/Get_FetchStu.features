@@ -37,4 +37,13 @@ Feature: Get knowledge area
         When I click on the source
         And I should be on a new page with a list of related patches
         
+Feature: Error Handling
+
+    Scenario: Return related knowledge topic and CWEs given these parameters. But the topic does not exist.
+        Thus I search for knowledge area Y anyway.
+        Then I should see a message that says "Entry not found"
+        Given: I searched for a topic. 
+        Then I see a message that says "Entry not found"
+    
+    
 
