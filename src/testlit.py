@@ -14,3 +14,6 @@ text_search = st.text_input('Search')
 #test to see if the input is read correctly
 st.write('You searched for: ', text_search)
 
+# print from csv
+df = pd.read_csv('../data/my_data.csv')
+st.write(df)
