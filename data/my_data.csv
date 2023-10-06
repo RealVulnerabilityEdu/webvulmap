@@ -1,2 +1,4 @@
-Query Languages, SQL, SQL injection CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
-Query Languages, SQL, SQL injection CWE-566 (https://cwe.mitre.org/data/definitions/566.html)
+1, Query Languages, SQL, SQL injection CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+1, Query Languages, SQL, SQL injection CWE-566 (https://cwe.mitre.org/data/definitions/566.html)
+2, Programming Languages, PHP, PHP injection CWE-94 (https://cwe.mitre.org/data/definitions/94.html)
+2, Programming Languages, C++, Buffer overflow CWE-120 (https://cwe.mitre.org/data/definitions/120.html)
