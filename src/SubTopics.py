@@ -1,4 +1,5 @@
 from Topics import Topics
+# this class is a subclass of Topics
 class SubTopics(Topics):
 
     # constructor
