@@ -1,13 +1,12 @@
-1, Query Languages, SQL, SQL injection CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
-1, Query Languages, SQL, SQL injection CWE-566 (https://cwe.mitre.org/data/definitions/566.html)
-2, Programming Languages, PHP, PHP injection CWE-94 (https://cwe.mitre.org/data/definitions/94.html)
-2, Programming Languages, C++, Buffer overflow CWE-120 (https://cwe.mitre.org/data/definitions/120.html)
-1, Query Languages, SQL, Authorization Bypass Through User-Controlled SQL Primary Key (https://cwe.mitre.org/data/definitions/566.html)
-3, TEST TOPIC1, test++, cats are cool www.cats.com
-3, TEST TOPIC1, test++, dogs are cool www.dogs.com
-4, TEST TOPIC2, test++, cats are cool www.cats.com
-4, TEST TOPIC2, test++, dogs are cool www.dogs.com
-5, TEST TOPIC3, test++, cats are cool www.cats.com
-5, TEST TOPIC3, test++, dogs are cool www.dogs.com
-6, TEST TOPIC4, test++, cats are cool www.cats.com
-3, TEST TOPIC1, test++, rats are cool www.rats.com
+1, Query Languages, SQL, SQL injection CWE-89, (https://cwe.mitre.org/data/definitions/89.html)
+2, Programming Languages, PHP, PHP injection CWE-94, (https://cwe.mitre.org/data/definitions/94.html)
+2, Programming Languages, C++, Buffer overflow CWE-120, (https://cwe.mitre.org/data/definitions/120.html)
+1, Query Languages, SQL, Authorization Bypass Through CWE-566, User-Controlled SQL Primary Key (https://cwe.mitre.org/data/definitions/566.html)
+3, TEST TOPIC1, test++, cats are cool, www.cats.com
+3, TEST TOPIC1, test++, dogs are cool, www.dogs.com
+4, TEST TOPIC2, test++, cats are cool, www.cats.com
+4, TEST TOPIC2, test++, dogs are cool, www.dogs.com
+5, TEST TOPIC3, test++, cats are cool, www.cats.com
+5, TEST TOPIC3, test++, dogs are cool, www.dogs.com
+6, TEST TOPIC4, test++, cats are cool, www.cats.com
+3, TEST TOPIC1, test++, rats are cool, www.rats.com

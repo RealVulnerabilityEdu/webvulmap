@@ -1,17 +1,17 @@
 from Topics import Topics
-# this class is a subclass of Topics
-class SubTopics(Topics):
 
+class SubTopics(Topics):
     cwe = []
 
-
-    # constructor
     def __init__(self, topic_id, subtopic_name):
-        self.subtopic_id = topic_id
-        self.subtopic_name = subtopic_name
-        self.cwe = [] # initialize a array of cwes that are related to the subtopic
-    
-    # to string method
+        super().__init__(topic_id, subtopic_name)  # Call the superclass constructor
+        self.cwe = []  # Initialize an array of CWEs related to the subtopic
+
     def toString(self):
-        return "SubTopic ID: (" + str(self.subtopic_id) + ") SubTopic Name: " + str(self.subtopic_name)
-        
+        return "SubTopic ID: (" + str(self.topic_id) + ") SubTopic Name: " + str(self.topic_name)
+
+    def addCwe(self, cwe):
+        self.cwe.append(cwe)
+    
+    def getCwes(self):
+        return self.cwe

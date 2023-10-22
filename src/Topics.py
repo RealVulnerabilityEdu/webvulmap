@@ -1,7 +1,5 @@
 class Topics:
-
-    #array of subtopics
-    subtopics = []
+    subtopics = {}
 
     #string topic name, topic id
     topic_name = ""
@@ -11,7 +9,7 @@ class Topics:
     def __init__(self, topic_id, topic_name):
         self.topic_id = topic_id
         self.topic_name = topic_name
-        self.subtopics = [] # initialize a array of subtopics
+        self.subtopics = {}
     
     # get topic id
     def getID(self):
