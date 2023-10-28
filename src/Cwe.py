@@ -12,10 +12,14 @@ class Cwe(SubTopics):
         self.source_url = source_url
         self.cve = [] # initialize a array of cves that are related to the cwe
     
-    # to string method
+    # to string method to print out the cwe id and cwe name and source url
     def toString(self):
-        return f"CWE ID: <{self.cwe_id}> CWE Name: {self.cwe_name}"
+        return f"CWE ID: <{self.cwe_id}> CWE Name: {self.cwe_name} Source URL: {self.source_url}"
     
     # get cwe
     def getCwes(self):
         return self.cwe
+    
+    # add source url
+    def addSourceUrl(self, source_url):
+        self.source_url = source_url

@@ -41,6 +41,13 @@ for index, row in df.iterrows():
     cwe = Cwe(cwe_id, subtopic_name, source_url)
     topic_dict[topic_id].subtopics[subtopic_name].addCwe(cwe)
 
+    # add source url to its respective CWE object (if it exists, row[4] is not empty)
+    if source_url:
+        # -1 is the last element in the array
+        topic_dict[topic_id].subtopics[subtopic_name].cwe[-1].addSourceUrl(source_url)
+    
+    
+
 # Convert the dictionary values (topics) to a list
 topics = list(topic_dict.values())
 
@@ -53,6 +60,5 @@ for topic in topics:
         for subtopic in topic.subtopics.values():
             display_cwes(subtopic)
 
-# Print data from the CSV file.
-df = pd.read_csv('../data/my_data.csv')
+# Print data from the CSV file. This is just for testing purposes.
 st.write(df)

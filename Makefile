@@ -1,4 +1,4 @@
-SHELL=/bin/zsh
+#SHELL=/bin/zsh
 export
 
 setup: 
@@ -6,4 +6,4 @@ setup:
 
 
 run: 
-	streamlit run /Users/jeffreyzhang/Projects/CISC4900/src/testlit.py
+	streamlit run /Users/jeffreyzhang/Projects/CISC4900/src/App.py
