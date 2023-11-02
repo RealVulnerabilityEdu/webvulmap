@@ -13,21 +13,31 @@ def display_cwes(subtopic):
         st.write(cwe.toString())
 
 print('running from ' + os.getcwd())
-st.write("""# Prototype 1
+st.write("""# Prototype 1 CWE page
 """)
 
 text_search = st.text_input('Search')
 
 st.write('You searched for:', text_search)
 
-df = pd.read_csv('../data/my_data.csv', engine='python', header=None, delimiter=', ')
+# header for the table TopicID, Topic Name, SubTopic Name, CWE ID, Source URL
+
+colNames = ['TopicID', 'Topic Name', 'SubTopic Name', 'CWE ID', 'Source URL']
+df = pd.read_csv('../data/my_data.csv', engine="python" , names = colNames ,header=None, delimiter=',')
 topic_dict = {}  # Dictionary to store topics and their subtopics
 
 # Create a dictionary to track the visibility state of each topic's subtopics
 topic_visibility = {}
 
 for index, row in df.iterrows():
-    topic_id, topic_name, subtopic_name, cwe_id, source_url = row[0], row[1], row[2], row[3], row[4]
+    topic_id = row['TopicID']
+    topic_name = row['Topic Name']
+    subtopic_name = row['SubTopic Name']
+    cwe_id = row['CWE ID']
+    source_url = row['Source URL']
+    # Get the values from the CSV file
+
+    #topic_id, topic_name, subtopic_name, cwe_id, source_url = row[0], row[1], row[2], row[3], row[4]
 
     # Add topic to dictionary if it doesn't already exist
     if topic_id not in topic_dict:
