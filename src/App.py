@@ -22,7 +22,7 @@ st.write('You searched for:', text_search)
 
 # header for the table TopicID, Topic Name, SubTopic Name, CWE ID, Source URL
 
-colNames = ['TopicID', 'Topic Name', 'SubTopic Name', 'CWE ID', 'Source URL']
+colNames = ['TopicID', 'Topic Name', 'SubTopic Name', 'Vulnerability Name' ,'CWE ID', 'Source URL']
 df = pd.read_csv('../data/my_data.csv', engine="python" , names = colNames ,header=None, delimiter=',')
 topic_dict = {}  # Dictionary to store topics and their subtopics
 
@@ -33,11 +33,11 @@ for index, row in df.iterrows():
     topic_id = row['TopicID']
     topic_name = row['Topic Name']
     subtopic_name = row['SubTopic Name']
+    vulnerability_name = row['Vulnerability Name']
     cwe_id = row['CWE ID']
     source_url = row['Source URL']
     # Get the values from the CSV file
 
-    #topic_id, topic_name, subtopic_name, cwe_id, source_url = row[0], row[1], row[2], row[3], row[4]
 
     # Add topic to dictionary if it doesn't already exist
     if topic_id not in topic_dict:
@@ -46,8 +46,8 @@ for index, row in df.iterrows():
 
     # Add subtopic to topic if it doesn't already exist
     if subtopic_name not in topic_dict[topic_id].subtopics:
-        subtopic = SubTopics(topic_id, subtopic_name)
-        topic_dict[topic_id].subtopics[subtopic_name] = subtopic  # Use dictionary-like syntax to add subtopic
+        subtopic = SubTopics(topic_id, subtopic_name, vulnerability_name)
+        topic_dict[topic_id].subtopics[subtopic_name] = subtopic  # Use dictionary like syntax to add subtopic
     cwe = Cwe(cwe_id, subtopic_name, source_url)
     topic_dict[topic_id].subtopics[subtopic_name].addCwe(cwe)
 
