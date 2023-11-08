@@ -5,12 +5,16 @@ from Topics import Topics
 from SubTopics import SubTopics
 from Cwe import Cwe
 
-st.set_page_config(page_title="Prototype 1")  # Set the page title
-
+# function to display the cwes upon clicking the topic
 def display_cwes(subtopic):
     st.write(f"**{subtopic.toString()}**")
     for cwe in subtopic.getCwes():
         st.write(cwe.toString())
+
+
+st.set_page_config(page_title="Prototype 1")  # Set the page title
+
+
 
 print('running from ' + os.getcwd())
 st.write("""# Prototype 1 CWE page
@@ -22,18 +26,18 @@ st.write('You searched for:', text_search)
 
 # header for the table TopicID, Topic Name, SubTopic Name, CWE ID, Source URL
 
-colNames = ['TopicID', 'Topic Name', 'SubTopic Name', 'Vulnerability Name' ,'CWE ID', 'Source URL']
+colNames = ['TopicID', 'Topic Name', 'SubTopic Name', 'Weakness Name' ,'CWE ID', 'Source URL']
 df = pd.read_csv('../data/my_data.csv', engine="python" , names = colNames ,header=None, delimiter=',')
 topic_dict = {}  # Dictionary to store topics and their subtopics
 
-# Create a dictionary to track the visibility state of each topic's subtopics
+# Create a dictionary to track the visibility state of each topic
 topic_visibility = {}
 
 for index, row in df.iterrows():
     topic_id = row['TopicID']
     topic_name = row['Topic Name']
     subtopic_name = row['SubTopic Name']
-    vulnerability_name = row['Vulnerability Name']
+    vulnerability_name = row['Weakness Name']
     cwe_id = row['CWE ID']
     source_url = row['Source URL']
     # Get the values from the CSV file

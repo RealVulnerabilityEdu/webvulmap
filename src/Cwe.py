@@ -23,3 +23,5 @@ class Cwe(SubTopics):
     # add source url
     def addSourceUrl(self, source_url):
         self.source_url = source_url
+    
+    
