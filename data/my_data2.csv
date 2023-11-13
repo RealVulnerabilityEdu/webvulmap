@@ -1,4 +1,4 @@
 Buffer overflow ,CVE-2022-24324 ,https://nvd.nist.gov/vuln/detail/CVE-2022-24324 ,CWE-120
 SQL injection   ,CVE-2023-3983  ,https://nvd.nist.gov/vuln/detail/CVE-2023-3983  ,CWE-89
-
-
+Buffer overflow ,CVE-2022-24324 ,https://nvd.nist.gov/vuln/detail/CVE-2022-24324 ,CWE-120
+Test            ,CVE-1232-1233  ,https://nvd.nist.gov/vuln/detail/CVE-1232-1233  ,CWE-123

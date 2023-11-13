@@ -70,7 +70,7 @@ for topic in topics:
     button_label = f"Topic ID: ({topic.getID()}) Topic Name: {topic.getName()}"
     button_key = f"button_{topic.getID()}"
     toggle_subtopics = st.checkbox(button_label, key=button_key)
-    if toggle_subtopics:
+    if toggle_subtopics == True:
         for subtopic in topic.subtopics.values():
             display_cwes(subtopic)
 

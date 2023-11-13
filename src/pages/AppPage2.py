@@ -34,6 +34,26 @@ for index, row in df.iterrows():
     # add cve id to its respective topic object (if it exists, row[1] is not empty, and if it is not already in the array)
     if cve_id and cve_id not in topic_dict[vulnerability_name].getCves():
         topic_dict[vulnerability_name].addCve(cve_id)
+    
+    # add source url to its respective topic object (if it exists, row[2] is not empty, and if it is not already in the array)
+    if source_url and source_url not in topic_dict[vulnerability_name].getCves():
+        topic_dict[vulnerability_name].add_CveSource(source_url)
+
+    # add cwe id to its respective topic object (if it exists, row[3] is not empty, and if it is not already in the array)
+    if cwe_id and cwe_id not in topic_dict[vulnerability_name].getCves():
+        topic_dict[vulnerability_name].addCwe(cwe_id)
+
+# display the list of software vulnerabilities as clickable elements with toggles
+for topic in topic_dict.values():
+    topic_visibility[topic.getName()] = st.checkbox(topic.getName(), value=False)
+    if topic_visibility[topic.getName()]:
+        
+        st.write("CVE ID: ", topic.getCves())
+        st.write("Source URL: ", topic.getCveSource())
+        st.write("CWE ID: ", topic.getCwes())
+        st.write("")
+
+
 
 
 
