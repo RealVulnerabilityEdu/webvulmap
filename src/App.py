@@ -76,3 +76,7 @@ for topic in topics:
 
 # Print data from the CSV file. This is just for testing purposes.
 st.write(df)
+
+#pass processed topics list to AppPage3.py
+
+
