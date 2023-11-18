@@ -22,17 +22,7 @@ df2 = pd.read_csv('../data/my_data2.csv', engine="python" , names = colNames2 ,h
 
 # Table object has these parameters: knowledgeArea, knowledgeTopic, CWE des, CWEID, sourceURLcwe, cve des, cveID, sourceURLcve
 # traverse through the first csv file and add the values that matches the knowledgeArea, knowledgeTopic, CWE des, CWEID, sourceURLcwe
-# for index, row in df.iterrows():
-#     knowledgeArea = row['Topic Name']
-#     knowledgeTopic = row['SubTopic Name']
-#     CWE = row['Weakness Name']
-#     CWEID = row['CWE ID']
-#     sourceURLcwe = row['Source URL']
-#     cve = ""
-#     cveID = ""
-#     sourceURLcve = ""
 
-# traverse through the first csv file and add the values that match
 for index, row in df.iterrows():
     knowledgeArea = row['Topic Name']
     knowledgeTopic = row['SubTopic Name']
@@ -52,9 +42,6 @@ for index, row in df.iterrows():
             cve.append(row2['Software vulnerability name (CVE name)'])
             cveID.append(row2['CVE ID'])
             sourceURLcve.append(row2['Source URL'])
-
-        
-
     # add the table to the array of tables
     tables.append(Table(knowledgeArea, knowledgeTopic, CWE, CWEID, sourceURLcwe, cve, cveID, sourceURLcve))
 
