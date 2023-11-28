@@ -10,4 +10,6 @@ class TestApp():
     def test_outputTopicName():
         topic = Topics("topic1")
         assert TestApp.outputTopicName(topic) == "topic1"
+
+
         
