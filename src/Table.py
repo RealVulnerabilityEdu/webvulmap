@@ -27,10 +27,9 @@ class Table:
         return ''.join([f'<a href="{url}" target="_blank">Link</a> ' for url in url_list])
     
     # single argument: usually a single CWE url TODO workaround for now
-    def generate_link(self, string, base_url="http://localhost:8501/"):
-        # Check if the URL already has http:// or https://
-        if not string.startswith(("http://", "https://")):
-            string = f"{base_url}{string}"
+    def generate_link(self, string):
+        
+        string = string.replace("(" , ") ", )
 
         return f'<a href="{string}" target="_blank">Link</a>'
 
@@ -70,7 +69,7 @@ class Table:
         self.cveID = pad_list(self.cveID)
         self.sourceURLcve = pad_list(self.sourceURLcve)
 
-        cwe_link = self.generate_link(self.sourceURLcwe[0]) #TODO this is broken
+        cwe_link = self.generate_link(self.sourceURLcwe)
         cve_links = self.generate_links(self.sourceURLcve[0])
 
         # Create an HTML table with the padded data and "Link" alias for URLs

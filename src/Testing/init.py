@@ -11,5 +11,7 @@ class TestApp():
         topic = Topics("topic1")
         assert TestApp.outputTopicName(topic) == "topic1"
 
-
+    def test_getCWEID():
+        topic = Topics(1, "topic1")
+        assert topic.getID() == 1
         

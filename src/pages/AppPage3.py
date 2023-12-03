@@ -44,8 +44,12 @@ for index, row in df.iterrows():
     # add the table to the array of tables
     tables.append(Table(knowledgeArea, knowledgeTopic, CWE, CWEID, sourceURLcwe, cve, cveID, sourceURLcve))
 
+
+# multi select box for filtering by desired keywords
+filter_keywords = st.multiselect("Filter by keywords", ["CWE", "CVE", "knowledgeArea", "knowledgeTopic"])
+
 # Create a text input box for filtering by knowledgeTopic
-filter_topic = st.text_input("Filter by knowledgeTopic", "")
+filter_topic = st.text_input("Filter by Language", "")
 
 
 # Filter the tables based on the knowledgeTopic TODO initial filtering
