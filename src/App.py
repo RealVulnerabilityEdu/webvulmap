@@ -20,9 +20,6 @@ print('running from ' + os.getcwd())
 st.write("""# Prototype 1 CWE page
 """)
 
-text_search = st.text_input('Search')
-
-st.write('You searched for:', text_search)
 
 # header for the table TopicID, Topic Name, SubTopic Name, CWE ID, Source URL
 

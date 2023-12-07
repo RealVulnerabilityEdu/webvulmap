@@ -69,6 +69,8 @@ class Table:
         self.cveID = pad_list(self.cveID)
         self.sourceURLcve = pad_list(self.sourceURLcve)
 
+
+
         cwe_link = self.generate_link(self.sourceURLcwe)
         cve_links = self.generate_links(self.sourceURLcve[0])
 
