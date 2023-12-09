@@ -64,7 +64,7 @@ topics = list(topic_dict.values())
 
 # Display topics as clickable elements with toggles
 for topic in topics:
-    button_label = f"Topic ID: ({topic.getID()}) Topic Name: {topic.getName()}"
+    button_label = f"Topic Number: ({topic.getID()}) Topic Name: {topic.getName()}"
     button_key = f"button_{topic.getID()}"
     toggle_subtopics = st.checkbox(button_label, key=button_key)
     if toggle_subtopics == True:
@@ -72,8 +72,8 @@ for topic in topics:
             display_cwes(subtopic)
 
 # Print data from the CSV file. This is just for testing purposes.
-st.write(df)
+# st.write(df)
 
-#pass processed topics list to AppPage3.py
+
 
 

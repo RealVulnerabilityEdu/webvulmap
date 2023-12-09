@@ -30,7 +30,7 @@ class Topics:
     
     # to string method
     def toString(self):
-        return f"Topic ID: ({self.topic_id}) Topic Name: {self.topic_name}"
+        return f"Topic Number: ({self.topic_id}) Topic Name: {self.topic_name}"
     
     # add subtopic to array
     def addSubTopic(self, subtopic):
