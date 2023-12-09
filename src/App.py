@@ -11,15 +11,12 @@ def display_cwes(subtopic):
     for cwe in subtopic.getCwes():
         st.write(cwe.toString())
 
-
 st.set_page_config(page_title="Prototype 1")  # Set the page title
-
 
 
 print('running from ' + os.getcwd())
 st.write("""# Prototype 1 CWE page
 """)
-
 
 # header for the table TopicID, Topic Name, SubTopic Name, CWE ID, Source URL
 
@@ -56,7 +53,6 @@ for index, row in df.iterrows():
     if source_url:
         # -1 is the last element in the array
         topic_dict[topic_id].subtopics[subtopic_name].cwe[-1].addSourceUrl(source_url)
-    
     
 
 # Convert the dictionary values (topics) to a list
