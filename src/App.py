@@ -11,10 +11,6 @@ def display_cwes(subtopic):
     for cwe in subtopic.getCwes():
         st.write(cwe.toString())
 
-# def load_data():
-#     col_names = ['TopicID', 'Topic Name', 'SubTopic Name', 'Weakness Name', 'CWE ID', 'Source URL']
-#     df = pd.read_csv('../data/my_data.csv', engine="python", names=col_names, header=None, delimiter=',')
-#     return df
 
 def load_data(csv_path):
     col_names = ['TopicID', 'Topic Name', 'SubTopic Name', 'Weakness Name', 'CWE ID', 'Source URL']
