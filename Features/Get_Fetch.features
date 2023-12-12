@@ -2,7 +2,7 @@ User Story 1:
 As an instructor.
 I want to teach a curriculum about SQL. when I search for the SQL knowledge area, 
 there should be a list that matches my query. 
-When I click on the element, I should see related CVEs and CWEs related to the curriculum
+When I click on the element, I should see related CVEs and CWEs related to the topic
 so I can form a lecture that incorporates those relevent topics. Such as SQL, and then 
 SQL injection, and then a CVE that shows an example of SQL injection, and then a patch.
 

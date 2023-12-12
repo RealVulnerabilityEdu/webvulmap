@@ -16,9 +16,10 @@ class Cwe(SubTopics):
     def toString(self):
         return f"CWE ID: <{self.cwe_id}> CWE Name: {self.cwe_name} Source URL: {self.source_url}"
     
-    # get cwe
-    def getCwes(self):
-        return self.cwe
+    
+    # get cwe id
+    def getCweID(self):
+        return self.cwe_id
     
     # add source url
     def addSourceUrl(self, source_url):
