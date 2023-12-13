@@ -36,7 +36,7 @@ def create_tables(df1, df2):
 
 def main():
     st.set_page_config(page_title="Pathway Page")
-    st.write("""# Prototype 1 Roadmap Page""")
+    st.write("""# Page: Table of contents""")
 
     df1, df2 = read_csv_files()
     tables = create_tables(df1, df2)

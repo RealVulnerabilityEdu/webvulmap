@@ -2,3 +2,4 @@ Buffer Copy without Checking Size of Input ,CVE-2022-24324 ,https://nvd.nist.gov
 SQL injection                              ,CVE-2023-3983  ,https://nvd.nist.gov/vuln/detail/CVE-2023-3983  ,CWE-89
 Buffer overflow via long src command       ,CVE-2000-1094  ,https://nvd.nist.gov/vuln/detail/CVE-2000-1094  ,CWE-120
 Test                                       ,CVE-1232-1233  ,https://nvd.nist.gov/vuln/detail/CVE-1232-1233  ,CWE-123
+Python compiler uses eval() to execute malicious strings as Python code ,CVE-2022-2054 ,https://nvd.nist.gov/vuln/detail/CVE-2022-2054, CWE-94

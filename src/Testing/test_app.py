@@ -1,8 +1,7 @@
 import os
 import pandas as pd
 from App import process_data, display_cwes, load_data
-from Cwe import Cwe
-from SubTopics import SubTopics
+from unittest.mock import patch
 
 def test_process_data():
     # Load test data
@@ -21,26 +20,31 @@ def test_process_data():
     assert 'Language 1.1' in test_topic_dict[1].subtopics['Language 1.1'].toString()
 
 
-# def test_display_cwe(capsys):
-#     # Create a Subtopic object with CWEs for testing
-#     subtopic = SubTopics(1, 'Language 1.1', 'Weakness 1.1.1')
-#     cwe1 = Cwe('CWE-111', 'Language 1.1', 'http://example.com/cwe-111')
-    
-#     subtopic.addCwe(cwe1)
+# Mock Streamlit functions to test display_cwes function
+@patch('App.st.write') #patch is used to mock the st.write function
+def test_display_cwes(mock_write):
+    # Import here to avoid issues with patching
+    from SubTopics import SubTopics
+    from Cwe import Cwe
 
-#     # Call the display_cwes function with the Subtopic object
-#     display_cwes(subtopic)
+    # Create a Subtopic object with CWEs for testing
+    subtopic = SubTopics(1, 'Language 1.1', 'Weakness 1.1.1')
+    cwe1 = Cwe('CWE-111', 'Language 1.1', 'http://example.com/cwe-111')
 
+    # Add the CWE to the subtopic
+    subtopic.addCwe(cwe1)
 
+    # Call the display_cwes function with the Subtopic object
+    display_cwes(subtopic)
 
-#     # Capture the printed output
-#     captured = capsys.readouterr()
+    # Assertions to ensure the mock was called with the expected output
+    expected_output_1 = f"**{subtopic.toString()}**"
+    expected_output_2 = cwe1.toString()
 
-#     # Print captured output for debugging
-#     print(captured.out)
+    # Verify that the mock was called with the expected output
+    mock_write.assert_any_call(expected_output_1)
+    mock_write.assert_any_call(expected_output_2)
 
-#     # assertions 
-#     assert 'CWE-111' in captured.out
     
 
 def test_load_data():
