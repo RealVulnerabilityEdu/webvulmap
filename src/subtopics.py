@@ -1,4 +1,5 @@
-from Topics import Topics
+from topics import Topics
+
 
 class SubTopics(Topics):
     cwe = []
@@ -10,10 +11,17 @@ class SubTopics(Topics):
         self.weakness_name = weakness_name
 
     def toString(self):
-        return "SubTopic ID: (" + str(self.topic_id) + ") SubTopic Name: " + str(self.topic_name) + "\n Weakness Name: " + str(self.weakness_name)
+        return (
+            "SubTopic ID: ("
+            + str(self.topic_id)
+            + ") SubTopic Name: "
+            + str(self.topic_name)
+            + "\n Weakness Name: "
+            + str(self.weakness_name)
+        )
 
     def addCwe(self, cwe):
         self.cwe.append(cwe)
-    
+
     def getCwes(self):
         return self.cwe
