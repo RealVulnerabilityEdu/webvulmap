@@ -19,10 +19,23 @@
             "module": "streamlit",
             
             "args": [
-                
                 "run",
                 "${file}"
             ]
-        }
+        },
+        {
+            "name": "Python:Streamlit with Args",
+            "type": "python",
+            "request": "launch",
+            "module": "streamlit",
+
+            "args": [
+                "run",
+                "${file}",
+                "--",
+                "--data_dir",
+                "data"
+            ]
+        },
     ]
 }

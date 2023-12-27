@@ -28,5 +28,3 @@
 
 # conn.commit()
 # conn.close()
-
-
