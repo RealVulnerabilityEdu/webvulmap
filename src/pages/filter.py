@@ -1,9 +1,11 @@
 import os
-from loguru import logger
+
 import pandas as pd
 import streamlit as st
-from view.table import Table
+from loguru import logger
+
 from utils.cmdl_utils import get_run_settings
+from view.table import Table
 
 
 # Assuming Table is defined in a separate file

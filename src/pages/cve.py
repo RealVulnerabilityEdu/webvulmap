@@ -1,7 +1,9 @@
 import os
-from loguru import logger
+
 import pandas as pd
 import streamlit as st
+from loguru import logger
+
 from model.topics import Topics
 from utils.cmdl_utils import get_run_settings
 

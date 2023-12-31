@@ -1,6 +1,8 @@
 import os
-import streamlit as st
+
 import pandas as pd
+import streamlit as st
+
 
 class Table:
     knowledgeArea = ""
@@ -81,7 +83,9 @@ class Table:
 
         # Construct the correct file paths based on the folder structure
         current_folder = os.path.dirname(os.path.abspath(__file__))
-        template_path = os.path.join(current_folder, "..", "templates", "table_template.html")
+        template_path = os.path.join(
+            current_folder, "..", "templates", "table_template.html"
+        )
         style_path = os.path.join(current_folder, "..", "styles", "table_styles.css")
 
         # Read HTML template from file

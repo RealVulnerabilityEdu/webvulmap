@@ -1,7 +1,9 @@
 import os
-import pandas as pd
-from src.app import process_data, display_cwes, load_data
 from unittest.mock import patch
+
+import pandas as pd
+
+from src.app import display_cwes, load_data, process_data
 
 
 def test_process_data():
@@ -41,8 +43,8 @@ def test_process_data():
 @patch("App.st.write")  # patch is used to mock the st.write function
 def test_display_cwes(mock_write):
     # Import here to avoid issues with patching
-    from src.subtopics import SubTopics
     from src.cwe import Cwe
+    from src.subtopics import SubTopics
 
     # Create a Subtopic object with CWEs for testing
     subtopic = SubTopics(1, "Language 1.1", "Weakness 1.1.1")
