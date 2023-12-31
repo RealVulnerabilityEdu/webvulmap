@@ -1,5 +1,6 @@
 import argparse
 import os
+import streamlit as st
 
 
 MAPPING_DATA_DIR = os.path.join("data")
@@ -45,4 +46,10 @@ def setup_parser(app_name):
 def get_run_settings(app_name):
     parser = setup_parser(app_name)
     args = parser.parse_args()
-    return RunSettings(data_dir=args.data_dir)
+    if args.data_dir:
+        st.session_state['data_dir'] = args.data_dir
+        return RunSettings(data_dir=args.data_dir)
+    elif 'data_dir' in st.session_state:
+        return RunSettings(data_dir=st.session_state['data_dir'])
+    else:
+        return RunSettings()
