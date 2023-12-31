@@ -1,4 +1,4 @@
-from subtopics import SubTopics
+from .subtopics import SubTopics
 
 # this class is a subclass of subtopics
 

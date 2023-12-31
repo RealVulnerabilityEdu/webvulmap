@@ -1,4 +1,4 @@
-from topics import Topics
+from .topics import Topics
 
 
 class SubTopics(Topics):

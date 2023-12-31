@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from topics import Topics
+from model.topics import Topics
 from utils.cmdl_utils import get_run_settings
 
 

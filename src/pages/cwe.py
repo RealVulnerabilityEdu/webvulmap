@@ -3,11 +3,10 @@ import os
 import pandas as pd
 import streamlit as st
 
-from cwe import Cwe
-from subtopics import SubTopics
-from topics import Topics
+from model.cwe import Cwe
+from model.subtopics import SubTopics
+from model.topics import Topics
 from utils.cmdl_utils import get_run_settings
-
 
 # Function to display the CWEs upon clicking the subtopic
 def display_cwes(subtopic):
@@ -68,9 +67,11 @@ def process_data(df):
 
 def main():
     app_settings = get_run_settings("Secure Software Dev Web App")
-    st.set_page_config(page_title="CWE List")  # Set the page title
+    # st.set_page_config(page_title="CS Topics to CWE List")  # Set the page title
+    st.title("CWE List")
 
     print("running from " + os.getcwd())
+
     st.write("""# Show CWE By CS Topic""")
 
     # description text of what a CWE is

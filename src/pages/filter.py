@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from table import Table
+from view.table import Table
 from utils.cmdl_utils import get_run_settings
 
 
