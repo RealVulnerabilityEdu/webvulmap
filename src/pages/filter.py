@@ -1,5 +1,7 @@
-import streamlit as st
+import os
+from loguru import logger
 import pandas as pd
+import streamlit as st
 from view.table import Table
 from utils.cmdl_utils import get_run_settings
 
@@ -62,6 +64,8 @@ def create_tables(df1, df2):
 
 
 def main():
+    logger.debug("running script " + __file__ + " off working directory " + os.getcwd())
+
     app_settings = get_run_settings("Secure Software Dev Web App")
     st.set_page_config(page_title="Pathway Page")
     st.write("""# Page: Table of contents""")

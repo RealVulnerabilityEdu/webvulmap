@@ -2,7 +2,7 @@ import os
 
 import pandas as pd
 import streamlit as st
-
+from loguru import logger
 from model.cwe import Cwe
 from model.subtopics import SubTopics
 from model.topics import Topics
@@ -66,11 +66,11 @@ def process_data(df):
 
 
 def main():
+    logger.debug("running script " + __file__ + " off working directory " + os.getcwd())
+
     app_settings = get_run_settings("Secure Software Dev Web App")
     # st.set_page_config(page_title="CS Topics to CWE List")  # Set the page title
     st.title("CWE List")
-
-    print("running from " + os.getcwd())
 
     st.write("""# Show CWE By CS Topic""")
 

@@ -1,5 +1,7 @@
-import streamlit as st
+import os
+from loguru import logger
 import pandas as pd
+import streamlit as st
 from model.topics import Topics
 from utils.cmdl_utils import get_run_settings
 
@@ -55,6 +57,8 @@ def process_data(df):
 
 
 def main():
+    logger.debug("running script " + __file__ + " off working directory " + os.getcwd())
+
     app_settings = get_run_settings("Secure Software Dev Web App")
     st.set_page_config(page_title="CVE and CWE")  # Set the page title
 
