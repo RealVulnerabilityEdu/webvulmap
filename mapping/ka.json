@@ -1,0 +1,189 @@
+[
+    {
+        "ka": "Software Development Fundamentals",
+        "shortka": "SDF",
+        "units": [
+            {
+                "ku": "Algorithms and Design",
+                "topics": [
+                    {
+                        "topic": "The concept and properties of algorithms",
+                        "subtopics": [
+                            {
+                                "subtopic": "Informal comparison of algorithm efficiency (e.g., operation counts)"
+                            }
+                        ]
+                    },
+                    {
+                        "topic": "The role of algorithms in the problem-solving process"
+                    },
+                    {
+                        "topic": "Problem-solving strategies",
+                        "subtopics": [
+                            {
+                                "subtopic": "Iterative and recursive mathematical functions"
+                            },
+                            {
+                                "subtopic": "Iterative and recursive traversal of data structures"
+                            },
+                            {
+                                "subtopic": "Divide-and-conquer strategies"
+                            }
+                        ]
+                    },
+                    {
+                        "topic": "Fundamental design concepts and principles",
+                        "subtopics": [
+                            {
+                                "subtopic": "Abstraction"
+                            },
+                            {
+                                "subtopic": "Program decomposition"
+                            },
+                            {
+                                "subtopic": "Encapsulation and information hiding"
+                            },
+                            {
+                                "subtopic": "Separation of behavior and implementation"
+                            }
+                        ]
+                    }
+                ],
+                "outcomes": [
+                    "Discuss the importance of algorithms in the problem-solving process. [Familiarity]",
+                    "Discuss how a problem may be solved by multiple algorithms, each with different properties. [Familiarity]",
+                    "Create algorithms for solving simple problems. [Usage]",
+                    "Use a programming language to implement, test, and debug algorithms for solving simple problems. [Usage]",
+                    "Implement, test, and debug simple recursive functions and procedures. [Usage]",
+                    "Determine whether a recursive or iterative solution is most appropriate for a problem. [Assessment]",
+                    "Implement a divide-and-conquer algorithm for solving a problem. [Usage]",
+                    "Apply the techniques of decomposition to break a program into smaller pieces. [Usage]",
+                    "Identify the data components and behaviors of multiple abstract data types. [Usage]",
+                    "Implement a coherent abstract data type, with loose coupling between components and behaviors. [Usage]",
+                    "Identify the relative strengths and weaknesses among multiple designs or implementations for a problem. [Assessment]"
+                ]
+            },
+            {
+                "ku": "Fundamental Programming Concepts",
+                "topics": [
+                    {
+                        "topic": "Basic syntax and semantics of a higher-level language"
+                    },
+                    {
+                        "topic": "Variables and primitive data types (e.g., numbers, characters, Booleans)"
+                    },
+                    {
+                        "topic": "Expressions and assignments"
+                    },
+                    {
+                        "topic": "Simple I/O including file I/O"
+                    },
+                    {
+                        "topic": "Conditional and iterative control structures"
+                    },
+                    {
+                        "topic": "Functions and parameter passing"
+                    },
+                    {
+                        "topic": "The concept of recursion"
+                    }
+                ],
+                "outcomes": [
+                    "Analyze and explain the behavior of simple programs involving the fundamental programming constructs variables, expressions, assignments, I/O, control constructs, functions, parameter passing, and recursion. [Assessment]",
+                    "Identify and describe uses of primitive data types. [Familiarity]",
+                    "Write programs that use primitive data types. [Usage]",
+                    "Modify and expand short programs that use standard conditional and iterative control structures and functions. [Usage]",
+                    "Design, implement, test, and debug a program that uses each of the following fundamental programming constructs: basic computation, simple I/O, standard conditional and iterative structures, the definition of functions, and parameter passing. [Usage]",
+                    "Write a program that uses file I/O to provide persistence across multiple executions. [Usage]",
+                    "Choose appropriate conditional and iteration constructs for a given programming task. [Assessment]",
+                    "Describe the concept of recursion and give examples of its use. [Familiarity]",
+                    "Identify the base case and the general case of a recursively-defined problem. [Assessment]"
+                ]
+            },
+            {
+                "ku": "Fundamental Data Structures",
+                "topics": [
+                    { "topic": "Arrays" },
+                    { "topic": "Records/structs (heterogeneous aggregates)" },
+                    { "topic": "Strings and string processing" },
+                    { "topic": "Abstract data types and their implementation",
+                      "subtopics": [
+                        { "subtopic": "Stacks" }, 
+                        { "subtopic": "Queues" }, 
+                        { "subtopic": "Priority queues" },
+                        { "subtopic": "Sets" },
+                        { "subtopic": "Maps" }
+                      ]
+                    },
+                    { "topic": "References and aliasing" },
+                    { "topic": "Linked lists" },
+                    { "topic": "Strategies for choosing the appropriate data structure" }
+                ],
+                "outcomes": [
+                    "Discuss the appropriate use of built-in data structures. [Familiarity]", 
+                    "Describe common applications for each of the following data structures: stack, queue, priority queue, set, and map. [Familiarity]", 
+                    "Write programs that use each of the following data structures: arrays, records/structs, strings, linked lists, stacks, queues, sets, and maps. [Usage]", 
+                    "Compare alternative implementations of data structures with respect to performance. [Assessment]", 
+                    "Describe how references allow for objects to be accessed in multiple ways. [Familiarity]", 
+                    "Compare and contrast the costs and benefits of dynamic and static data structure implementations. [Assessment]", 
+                    "Choose the appropriate data structure for modeling a given problem. [Assessment]"
+                ]
+            },
+            {
+                "ku": "Development Methods",
+                "topics": [
+                    { "topic": "Program comprehension" },
+                    { "topic": "Program correctness",
+                      "subtopics": [
+                        { "subtopic": "Types of errors (syntax, logic, run-time)" },
+                        { "subtopic": "The concept of a specification" },
+                        { "subtopic": "Defensive programming (e.g. secure coding, exception handling)" },
+                        { "subtopic": "Code reviews" },
+                        { "subtopic": "Testing fundamentals and test-case generation" },
+                        { "subtopic": "The role and the use of contracts, including pre- and post-conditions" },
+                        { "subtopic": "Unit testing" }
+                      ]
+                    },
+                    { "topic": "Simple refactoring" },
+                    { "topic": "Modern programming environments",
+                      "subtopics": [
+                        { "subtopic": "Code search" },
+                        { "subtopic": "Programming using library components and their APIs" }
+                      ]
+                    },
+                    { "topic": "Debugging strategies" },
+                    { "topic": "Documentation and program style" }
+                ],
+                "outcomes": [
+                    "Trace the execution of a variety of code segments and write summaries of their computations. [Assessment]",
+                    "Explain why the creation of correct program components is important in the production of high-quality software. [Familiarity]",
+                    "Identify common coding errors that lead to insecure programs (e.g., buffer overflows, memory leaks, malicious code) and apply strategies for avoiding such errors. [Usage]",
+                    "Conduct a personal code review (focused on common coding errors) on a program component using a provided checklist. [Usage]",
+                    "Contribute to a small-team code review focused on component correctness. [Usage]",
+                    "Describe how a contract can be used to specify the behavior of a program component. [Familiarity]",
+                    "Refactor a program by identifying opportunities to apply procedural abstraction. [Usage]",
+                    "Apply a variety of strategies to the testing and debugging of simple programs. [Usage]",
+                    "Construct, execute and debug programs using a modern IDE and associated tools such as unit testing tools and visual debuggers. [Usage]",
+                    "Construct and debug programs using the standard libraries available with a chosen programming language.  [Usage]",
+                    "Analyze the extent to which another programmer’s code meets documentation and programming style standards. [Assessment]",
+                    "Apply consistent documentation and program style standards that contribute to the readability and maintainability of software. [Usage]"
+                ]
+            }
+        ]
+    },
+    {
+        "ka": "Programming Languages",
+        "shortka": "PL"
+    },
+    {   "ka": "Software Engineering",
+        "shortka": "SE"
+    },
+    {
+        "ka": "Systems Fundamentals",
+        "shortka": "SF"
+    },
+    {
+        "ka": "Information Assurance and Security",
+        "shortka": "IAS"
+    }
+]
