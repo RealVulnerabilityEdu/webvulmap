@@ -176,7 +176,58 @@
         "shortka": "PL"
     },
     {   "ka": "Software Engineering",
-        "shortka": "SE"
+        "shortka": "SE",
+        "units": [
+            {
+                "ku": "Software Processes",
+                "topics": [
+                    {
+                        "topic": "Systems level considerations, i.e., the interaction of software with its intended environment (crossreference IAS/Secure Software Engineering)",
+                        "xref": { "shortka": "IAS", "topic": "Secure Software Engineering" }
+                    },
+                    {
+                        "topic": "Introduction to software process models (e.g., waterfall, incremental, agile)",
+                        "subtopics": [
+                            { "subtopic": "Activities within software lifecycles" }
+                        ]
+                    },
+                    {
+                        "topic": "Programming in the large vs. individual programming"
+                    },
+                    {
+                        "topic": "Evaluation of software process models"
+                    },
+                    {
+                        "topic": "Software quality concepts"
+                    },
+                    {
+                        "topic": "Process improvement"
+                    },
+                    {
+                        "topic": "Software process capability maturity models"
+                    },
+                    {
+                        "topioc": "Software process measurements"
+                    }
+                ],
+                "outcomes": [
+                    "Describe how software can interact with and participate in various systems including information management, embedded, process control, and communications systems. [Familiarity]",
+                    "Describe the relative advantages and disadvantages among several major process models (e.g., waterfall, iterative, and agile). [Familiarity]",
+                    "Describe the different practices that are key components of various process models. [Familiarity]",
+                    "Differentiate among the phases of software development. [Familiarity]",
+                    "Describe how programming in the large differs from individual efforts with respect to understanding a large code base, code reading, understanding builds, and understanding context of changes. [Familiarity]",
+                    "Explain the concept of a software lifecycle and provide an example, illustrating its phases including the deliverables that are produced. [Familiarity]",
+                    "Compare several common process models with respect to their value for development of particular classes of software systems taking into account issues such as requirement stability, size, and non-functional characteristics. [Usage]",
+                    "Define software quality and describe the role of quality assurance activities in the software process. [Familiarity]",
+                    "Describe the intent and fundamental similarities among process improvement approaches. [Familiarity]",
+                    "Compare several process improvement models such as CMM, CMMI, CQI, Plan-Do-Check-Act, or ISO9000. [Assessment]",
+                    "Assess a development effort and recommend potential changes by participating in process improvement (using a model such as PSP) or engaging in a project retrospective. [Usage]",
+                    "Explain the role of process maturity models in process improvement. [Familiarity]",
+                    "Describe several process metrics for assessing and controlling a project. [Familiarity]",
+                    "Use project metrics to describe the current state of a project. [Usage]"
+                ]
+            }
+        ]
     },
     {
         "ka": "Systems Fundamentals",
@@ -184,6 +235,127 @@
     },
     {
         "ka": "Information Assurance and Security",
-        "shortka": "IAS"
+        "shortka": "IAS",
+        "units": [
+            {
+                "ku": "Foundational Concepts in Security",
+                "topics": [
+                    { "topic": "CIA (Confidentiality, Integrity, Availability)" },
+                    { 
+                        "topic": "Concepts of risk, threats, vulnerabilities, and attack vectors (crosreference SE/Software Project Management/Risk)",
+                        "xref": { "shortka": "SE", "topic": "Software Project Management", "subtopic": "Risk" }
+                    },
+                    { "topic": "Authentication and authorization, access control (mandatory vs. discretionary)" },
+                    { "topic": "Concept of trust and trustworthiness" },
+                    { 
+                        "topic": "Ethics (responsible disclosure). (crossreference SP/Professional Ethics/Accountability, responsibility and liability)",
+                        "xref": {"shortka": "SP", "topic": "Professional Ethics", "subtopic" :"Accountability, responsibility and liability" }
+                    }
+                ],
+                "outcomes": [
+                    "Analyze the tradeoffs of balancing key security properties (Confidentiality, Integrity, and Availability). [Usage]",
+                    "Describe the concepts of risk, threats, vulnerabilities and attack vectors (including the fact that there is no such thing as perfect security). [Familiarity]",
+                    "Explain the concepts of authentication, authorization, access control. [Familiarity]",
+                    "Explain the concept of trust and trustworthiness. [Familiarity]",
+                    "Describe important ethical issues to consider in computer security, including ethical issues associated with fixing or not fixing vulnerabilities and disclosing or not disclosing vulnerabilities. [Familiarity]"
+                ]
+            },
+            {
+                "ku": "Principles of Secure Design",
+                "topics": [
+                    { 
+                        "topic": "Least privilege and isolation (cross-reference OS/Security and Protection/Policy/mechanism separation and SF/Virtualization and Isolation/Rationale for protection and predictable performance and PL/Language Translation and Execution/Memory management)",
+                        "xrefs": [
+                            { "shortka": "OS", "ku": "Security and Protection", "topic": "Policy/mechanism separation" },
+                            { "shortka": "SF", "ku": "Virtualization and Isolation", "topic": "Rationale for protection and predictable performance" },
+                            { "shortka": "PL", "ku": "Language Translation and Execution", "topic": "Memory management" }
+                        ]
+                    },
+                    { 
+                        "topic": "Fail-safe defaults (cross-reference SE/Software Construction/Coding practices: techniques, idioms/patterns, mechanisms for building quality programs and SDF/Development Methods/Programming correctness)",
+                        "xrefs": [
+                            {
+                                "shortka": "SE",
+                                "ku": "Software Construction",
+                                "topic": "Coding practices: techniques, idioms/patterns, mechanisms for building quality programs"
+                            },
+                            {
+                                "shortka": "SDF",
+                                "ku": "Development Methods",
+                                "topic": "Programming correctness"
+                            }
+                        ] 
+                    },
+                    {
+                        "topic": "Open design (cross-reference SE/Software Evolution/ Software development in the context of large, preexisting code bases)",
+                        "xrefs": [
+                            {"shortka": "SE", "ku": "Software Evolution", "topic": "Software development in the context of large, preexisting code bases}" }
+                        ]
+                    },
+                    {
+                        "topic": "End-to-end security (cross-reference SF/Reliability through Redundancy/How errors increase the longer the distance between the communicating entities; the end-to-end principle)",
+                        "xrefs": [
+                            { "shortka": "SF", "ku": "Reliability through Redundancy", "topic": "How errors increase the longer the distance between the communicating entities; the end-to-end principle" }
+                        ]
+                    },
+                    {
+                        "topic": "Defense in depth (e.g., defensive programming, layered defense)"
+                    },
+                    {
+                        "topic": "Security by design (cross-reference SE/Software Design/System design principles)",
+                        "xrefs": [
+                            { "shortka": "SE", "ku": "Software Design", "topic": "System design principles" }
+                        ]
+                    },
+                    {
+                        "topic": "Tensions between security and other design goals"
+                    },
+                    {
+                        "topic": "Complete mediation"
+                    },
+                    {
+                        "topic": "Use of vetted security components"
+                    },
+                    {
+                        "topic": "Economy of mechanism (reducing trusted computing base, minimize attack surface) (cross-reference SE/Software Design/System design principles and SE/Software Construction/Development context: \"green field\" vs. existing code base)",
+                        "xrefs": [
+                            { "shortka": "SE", "ku": "Software Design", "topic": "System design principles" },
+                            { "shortka": "SE", "ku": "Software Construction", "topic": "Development context: \"green field\" vs. existing code base" }
+                        ]
+                    },
+                    {
+                        "topic": "Usable security (cross-reference HCI/Foundations/Cognitive models that inform interaction design)",
+                        "xrefs": [
+                            { "shortka": "HCI", "ku": "Foundations", "topic": "Cognitive models that inform interaction design" }
+                        ]
+                    },
+                    {                 
+                        "topic": "Security composability"
+                    },
+                    {
+                        "topic": "Prevention, detection, and deterrence (cross-reference SF/Reliability through Redundancy/Distinction between bugs and faults and NC/Reliable Data Delivery/Error control and NC/Reliable Data Delivery/Flow control)",
+                        "xrefs": [
+                            { "shortka": "SF", "ku": "Reliability through Redundancy", "topic": "Distinction between bugs and faults" },
+                            { "shortka": "NC", "ku": "Reliable Data Delivery", "topic": "Error control and NC/Reliable Data Delivery/Flow control" }
+                        ]
+                    }
+                ],
+                "outcomes": [
+                    "Describe the principle of least privilege and isolation as applied to system design. [Familiarity]",
+                    "Summarize the principle of fail-safe and deny-by-default. [Familiarity]",
+                    "Discuss the implications of relying on open design or the secrecy of design for security. [Familiarity]",
+                    "Explain the goals of end-to-end data security. [Familiarity]",
+                    "Discuss the benefits of having multiple layers of defenses. [Familiarity]",
+                    "For each stage in the lifecycle of a product, describe what security considerations should be evaluated. [Familiarity]",
+                    "Describe the cost and tradeoffs associated with designing security into a product. [Familiarity]",
+                    "Describe the concept of mediation and the principle of complete mediation. [Familiarity]",
+                    "Describe standard components for security operations, and explain the benefits of their use instead of reinventing fundamentals operations. [Familiarity]",
+                    "Explain the concept of trusted computing including trusted computing base and attack surface and the principle of minimizing trusted computing base. [Familiarity]",
+                    "Discuss the importance of usability in security mechanism design. [Familiarity]",
+                    "Describe security issues that arise at boundaries between multiple components. [Familiarity]",
+                    "Identify the different roles of prevention mechanisms and detection/deterrence mechanisms. [Familiarity]"
+                ]
+            }
+        ]
     }
 ]
