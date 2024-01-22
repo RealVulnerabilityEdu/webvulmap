@@ -1,3 +1,4 @@
+import argparse
 import os
 import re
 from enum import Enum
@@ -9,10 +10,12 @@ from ka import (
     KnowledgeUnitTier,
 )
 
+PATTERN_KA_HEADING_FMT = r"^\f{{0,1}}({}) \(({})\)$"
+PATTERN_KU_HEADING_FMT = r"^{}/([A-Z].*)$"
 
 # PATTERN_IAS_HEADING = r'^\fInformation Assurance and Security \(IAS\)$'
-PATTERN_IAS_HEADING = r"^\f{0,1}(Software Development Fundamentals) \((SDF)\)$"
-PATTERN_KU_HEADING = r"^SDF/([A-Z].*)$"
+PATTERN_SDF_HEADING = r"^\f{0,1}(Software Development Fundamentals) \((SDF)\)$"
+PATTERN_SDF_KU_HEADING = r"^SDF/([A-Z].*)$"
 PATTERN_TIER_HOURS = r"\[((\d+)\s+([^\s,\,]+)\s+hour[s]{0,1})(,\s*(\d+)\s+([^\s,\,]+)\s+hour[s]{0,1})*\]|\[(Elective)\]"
 PATTERN_KU_TOPICS_HEADING = r"^Topics:$"
 PATTERN_TOPICS_TIER = r"\[Core-Tier\d+\]|\[Elective\]"
@@ -23,8 +26,8 @@ PATTERN_KU_PARTIAL_OUTCOMES_LINE = r"^\d+\.\s*\w.*$"
 PATTERN_KU_OUTCOMES_LINE = r"^\d+\.\s*(\w.*)\[(.*)\]$"
 PATTERN_PAGE_NUMBER = r"^\f-\s*\d+\s*-$"
 
-pattern_ias_heading = re.compile(PATTERN_IAS_HEADING)
-pattern_ku_heading = re.compile(PATTERN_KU_HEADING)
+pattern_ka_heading = re.compile(PATTERN_SDF_HEADING)
+pattern_ku_heading = re.compile(PATTERN_SDF_KU_HEADING)
 pattern_tier_hours = re.compile(PATTERN_TIER_HOURS)
 pattern_ku_topics_heading = re.compile(PATTERN_KU_TOPICS_HEADING)
 pattern_topics_tier = re.compile(PATTERN_TOPICS_TIER)
@@ -90,7 +93,7 @@ def parse_outcome_line(line):
 
 
 def parse_ka_title_line(line):
-    matches = pattern_ias_heading.match(line)
+    matches = pattern_ka_heading.match(line)
     if not matches:
         return None
     if len(matches.groups()) != 2:
@@ -141,19 +144,22 @@ def parse_subtopic_line(line):
     return matches.group(1).strip()
 
 
-def parse_ka(ka_fn):
+def parse_ka(ka_fn, ka_text, short_ka_text):
+    pattern_ka_heading = re.compile(
+        PATTERN_KA_HEADING_FMT.format(ka_text, short_ka_text)
+    )
+    pattern_ku_heading = re.compile(PATTERN_KU_HEADING_FMT.format(short_ka_text))
     ka = None
     topics_tier = None
     state = None
     line_stack = []
-    topics_list = []
     with open(ka_fn, mode="rt") as f:
         line_stack.append(f.readline())
 
         while line_stack:
             line = line_stack.pop()
 
-            if not state and pattern_ias_heading.match(line):
+            if not state and pattern_ka_heading.match(line):
                 state = State.IN_KA
                 ka_title, ka_short_title = parse_ka_title_line(line)
                 ka = KnowledgeArea(ka_title, ka_short_title)
@@ -217,10 +223,33 @@ def parse_ka(ka_fn):
     return ka
 
 
+def parse_cmd_line():
+    parser = argparse.ArgumentParser(prog="PROG")
+    parser.add_argument("--data_dir", nargs=1, help="foo help")
+    parser.add_argument("ka", nargs="+", help="ka help")
+    parser.add_argument("short_ka", nargs="+", help="short_ka help")
+    parser.add_argument("in_file", nargs="+", help="in_file help")
+    parser.add_argument("out_file", nargs="+", help="out_file help")
+    args = parser.parse_args()
+    return args
+
+
+def dump_ka(ka, out_fn):
+    with open(out_fn, "wt") as f:
+        f.write(ka.jsonize())
+
+
 def main():
-    ka_fn = os.path.join("webknwlmap", "curriculum", "data", "cs2013_web_final_sdf.txt")
-    ka = parse_ka(ka_fn)
-    print(ka.jsonize())
+    data_dir = os.path.join("webknwlmap", "curriculum", "data")
+    args = parse_cmd_line()
+    if args.data_dir:
+        data_dir = args.data_dir[0]
+    ka_fn = os.path.join(data_dir, args.in_file[0])
+    ka = parse_ka(ka_fn, args.ka[0], args.short_ka[0])
+    # print(ka.jsonize())
+    output_fn = os.path.join(data_dir, args.out_file[0])
+    dump_ka(ka, output_fn)
+    print("wrote to {}".format(output_fn))
 
 
 if __name__ == "__main__":
