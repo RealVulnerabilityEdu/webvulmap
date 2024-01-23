@@ -21,6 +21,10 @@ PYTHONPATH=${PYTHONPATH} python ${PYTHONPATH}/flatten_ka.py --data_dir=${DATADIR
         "cs2013_web_final_sdf.csv"
 
 PYTHONPATH=${PYTHONPATH} python ${PYTHONPATH}/flatten_ka.py --data_dir=${DATADIR} \
+        "cs2013_web_final_im.json" \
+        "cs2013_web_final_im.csv"
+
+PYTHONPATH=${PYTHONPATH} python ${PYTHONPATH}/flatten_ka.py --data_dir=${DATADIR} \
         "cs2013_web_final_ias.json" \
         "cs2013_web_final_ias.csv"
 

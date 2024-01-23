@@ -20,30 +20,33 @@ def parse_cmd_line():
 
 
 def convert_to_dataframe(ka_fn):
-    with open(ka_fn, mode='rt') as f:
+    with open(ka_fn, mode="rt") as f:
         ka = json.load(f)
-    if not ka: raise ValueError('ka is empty')
+    if not ka:
+        raise ValueError("ka is empty")
     df = pd.DataFrame()
     row_list = []
-    for ku in ka['units']:
-        for t in ku['topics']:
-            subtopic_list = ['']
-            subtopic_list.extend(t['subtopics'])
+    for ku in ka["units"]:
+        for t in ku["topics"]:
+            subtopic_list = [""]
+            subtopic_list.extend(t["subtopics"])
             for st in subtopic_list:
-                if t['tier']:
-                    tier = t['tier']
-                elif isinstance(ku['tiers'], list):
-                    tier = ku['tiers'][0]['tier']
+                if t["tier"]:
+                    tier = t["tier"]
+                elif isinstance(ku["tiers"], list):
+                    tier = ku["tiers"][0]["tier"]
                 else:
-                    tier = ku['tiers']['tier']
-                row_list.append({
-                    'KA': ka['short_ka'],
-                    'Knowledge Area': ka['ka'],
-                    'Knowledge Unit': ku['ku'],
-                    'Tier': tier,
-                    'Topic': t['topic'],
-                    'Subtopic': st
-                })
+                    tier = ku["tiers"]["tier"]
+                row_list.append(
+                    {
+                        "KA": ka["short_ka"],
+                        "Knowledge Area": ka["ka"],
+                        "Knowledge Unit": ku["ku"],
+                        "Tier": tier,
+                        "Topic": t["topic"],
+                        "Subtopic": st if st else t["topic"],
+                    }
+                )
     df = pd.DataFrame(row_list)
     return df
 

@@ -1,3 +1,9 @@
+# Project Specifics
+curriculum/data/*.pdf
+curriculum/data/*.txt
+curriculum/data/*.json
+curriculum/data/*.csv
+
 # ignore trunk
 .trunk/
 

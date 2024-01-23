@@ -23,6 +23,12 @@ PYTHONPATH=${PYTHONPATH} python ${PYTHONPATH}/parse_ka.py --data_dir=${DATADIR} 
         "cs2013_web_final_sdf.json"
 
 PYTHONPATH=${PYTHONPATH} python ${PYTHONPATH}/parse_ka.py --data_dir=${DATADIR} \
+    "Information Management"\
+    "IM"\
+    "cs2013_web_final_im.txt"\
+    "cs2013_web_final_im.json"
+
+PYTHONPATH=${PYTHONPATH} python ${PYTHONPATH}/parse_ka.py --data_dir=${DATADIR} \
         "Information Assurance and Security" \
         "IAS" \
         "cs2013_web_final_ias.txt"\
