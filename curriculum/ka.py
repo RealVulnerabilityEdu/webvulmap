@@ -55,15 +55,21 @@ class KnowledgeTopic:
 
 
 class LearningOutcome:
-    def __init__(self, outcome, mastery) -> None:
+    def __init__(
+        self, outcome_no, outcome, mastery, outcomes_tier, outcome_xref
+    ) -> None:
+        self.number = outcome_no
         self.outcome = outcome
         self.mastery = mastery
+        self.tier = outcomes_tier
+        self.xref = outcome_xref
 
 
 class KnowledgeUnitTier:
     def __init__(self, tier, hours) -> None:
         self.tier = tier
         self.hours = hours
+
 
 class KnowledgeAreaReference:
     def __init__(self, ref_no, ref_entry) -> None:
