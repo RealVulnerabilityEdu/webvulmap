@@ -395,11 +395,21 @@ def parse_ka(ka_fn, ka_text, short_ka_text):
 
 def parse_cmd_line():
     parser = argparse.ArgumentParser(prog="PROG")
-    parser.add_argument("--data_dir", nargs=1, help="foo help")
-    parser.add_argument("ka", nargs="+", help="ka help")
-    parser.add_argument("short_ka", nargs="+", help="short_ka help")
-    parser.add_argument("in_file", nargs="+", help="in_file help")
-    parser.add_argument("out_file", nargs="+", help="out_file help")
+    parser.add_argument(
+        "--data_dir", nargs=1, help="directory for input and output files"
+    )
+    parser.add_argument(
+        "ka", nargs="+", help="knowledge area, e.g., 'Software Engineering'"
+    )
+    parser.add_argument(
+        "short_ka", nargs="+", help="short name for knowledge area, e.g., 'SE'"
+    )
+    parser.add_argument(
+        "in_file",
+        nargs="+",
+        help="input text file extracted from ACM/IEEE CS2013 Curriculum pdf file",
+    )
+    parser.add_argument("out_file", nargs="+", help="output json file")
     args = parser.parse_args()
     return args
 
