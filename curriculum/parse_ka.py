@@ -18,7 +18,8 @@ PATTERN_ALL_KA_HEADING = r"^\f{0,1}(.*) \(([A-Z]+)\)$"
 # PATTERN_IAS_HEADING = r'^\fInformation Assurance and Security \(IAS\)$'
 PATTERN_SDF_HEADING = r"^\f{0,1}(Software Development Fundamentals) \((SDF)\)$"
 PATTERN_SDF_KU_HEADING = r"^SDF/([A-Z].*)$"
-PATTERN_TIER_HOURS = r"\[((\d+)\s+([^\s,\,]+)\s+hour[s]{0,1})(,\s*(\d+)\s+([^\s,\,]+)\s+hour[s]{0,1})*\]|\[(Elective)\]"
+PATTERN_TIER_HOURS = r"\[((\d+)\s+([^\s,\,]+)\s+hour[s]{0,1})([,;]\s*(\d+)\s+([^\s,\,]+)\s+hour[s]{0,1})*\]|\[(Elective)\]"
+PATTERN_TIER_HOURS_ALT = r"\[(\d+)\s+(Core-Tier\d+)\]"
 PATTERN_KU_TOPICS_HEADING = r"^Topics:$"
 PATTERN_TOPICS_TIER = r"\[(Core-Tier\d+)\]|\[(Elective[s]{0,1})\]"
 PATTERN_KU_TOPIC_LINE = r"(?!^Learning [Oo]utomes:$)^•\s*(\w.*)$"
@@ -37,6 +38,7 @@ pattern_all_ka_heading = re.compile(PATTERN_ALL_KA_HEADING)
 pattern_ka_heading = re.compile(PATTERN_SDF_HEADING)
 pattern_ku_heading = re.compile(PATTERN_SDF_KU_HEADING)
 pattern_tier_hours = re.compile(PATTERN_TIER_HOURS)
+pattern_tier_hours_alt = re.compile(PATTERN_TIER_HOURS_ALT)
 pattern_ku_topics_heading = re.compile(PATTERN_KU_TOPICS_HEADING)
 pattern_topics_tier = re.compile(PATTERN_TOPICS_TIER)
 pattern_ku_topic_line = re.compile(PATTERN_KU_TOPIC_LINE)
@@ -250,6 +252,15 @@ def parse_ku_tier_line(line):
         return None
 
 
+def parse_ku_tier_alt_line(line):
+    matches = pattern_tier_hours_alt.match(line)
+    if not matches:
+        return None
+    if len(matches.groups()) != 2:
+        return None
+    return KnowledgeUnitTier(matches.group(2), matches.group(1))
+
+
 def parse_topic_line(line):
     matches = pattern_ku_topic_line.match(line)
     if not matches:
@@ -296,6 +307,10 @@ def parse_ka(ka_fn, ka_text, short_ka_text):
             elif state == State.KU_HEADING and pattern_tier_hours.match(line):
                 state = State.KU_HOURS
                 ku_tiers = parse_ku_tier_line(line)
+                ku.set_tiers(ku_tiers)
+            elif state == State.KU_HEADING and pattern_tier_hours_alt.match(line):
+                state = State.KU_HOURS
+                ku_tiers = parse_ku_tier_alt_line(line)
                 ku.set_tiers(ku_tiers)
             elif state == State.KU_HOURS and pattern_ku_topics_heading.match(line):
                 state = State.KU_TOPICS_HEADING
