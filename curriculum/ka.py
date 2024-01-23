@@ -6,6 +6,10 @@ class KnowledgeArea:
         self.ka = ka
         self.short_ka = short_ka
         self.units = []
+        self.references = []
+
+    def add_ref_entry(self, ref_no, ref_entry):
+        self.references.append(KnowledgeAreaReference(ref_no, ref_entry))
 
     def add_ku(self, ku):
         self.units.append(ku)
@@ -60,3 +64,8 @@ class KnowledgeUnitTier:
     def __init__(self, tier, hours) -> None:
         self.tier = tier
         self.hours = hours
+
+class KnowledgeAreaReference:
+    def __init__(self, ref_no, ref_entry) -> None:
+        self.ref_no = ref_no
+        self.ref_entry = ref_entry

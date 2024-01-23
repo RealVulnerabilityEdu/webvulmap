@@ -13,19 +13,25 @@ from ka import (
 PATTERN_KA_HEADING_FMT = r"^\f{{0,1}}({}) \(({})\)$"
 PATTERN_KU_HEADING_FMT = r"^{}/([A-Z].*)$"
 
+PATTERN_ALL_KA_HEADING = r"^\f{0,1}(.*) \(([A-Z]+)\)$"
 # PATTERN_IAS_HEADING = r'^\fInformation Assurance and Security \(IAS\)$'
 PATTERN_SDF_HEADING = r"^\f{0,1}(Software Development Fundamentals) \((SDF)\)$"
 PATTERN_SDF_KU_HEADING = r"^SDF/([A-Z].*)$"
 PATTERN_TIER_HOURS = r"\[((\d+)\s+([^\s,\,]+)\s+hour[s]{0,1})(,\s*(\d+)\s+([^\s,\,]+)\s+hour[s]{0,1})*\]|\[(Elective)\]"
 PATTERN_KU_TOPICS_HEADING = r"^Topics:$"
 PATTERN_TOPICS_TIER = r"\[Core-Tier\d+\]|\[Elective\]"
-PATTERN_KU_TOPIC_LINE = r"(?!^Learning outomes:$)^•\s*(\w.*)$"
-PATTERN_KU_SUBTOPIC_LINE = r"(?!^Learning outomes:$)^o\s*(\w.*)$"
-PATTERN_KU_LEARNING_OUTCOMES_HEADING = r"^Learning Outcomes:$"
+PATTERN_KU_TOPIC_LINE = r"(?!^Learning [Oo]utomes:$)^•\s*(\w.*)$"
+PATTERN_KU_SUBTOPIC_LINE = r"(?!^Learning [Oo]utomes:$)^o\s*(\w.*)$"
+PATTERN_KU_LEARNING_OUTCOMES_HEADING = r"^Learning [Oo]utcomes:$"
 PATTERN_KU_PARTIAL_OUTCOMES_LINE = r"^\d+\.\s*\w.*$"
 PATTERN_KU_OUTCOMES_LINE = r"^\d+\.\s*(\w.*)\[(.*)\]$"
+PATTERN_KA_REFS_HEADING = r"^References$"
+PATTERN_KA_REFS_ENTRY_LINE = r"^\[(\d+)\]\s+(\w+.*)$"
 PATTERN_PAGE_NUMBER = r"^\f-\s*\d+\s*-$"
+# extracting x-refs
+PATTERN_XREF = r'^.*\(cross-reference\s+([A-Z]+/[^/]*/[^/]*(?!and [A-Z]+).*)\)$'
 
+pattern_all_ka_heading = re.compile(PATTERN_ALL_KA_HEADING)
 pattern_ka_heading = re.compile(PATTERN_SDF_HEADING)
 pattern_ku_heading = re.compile(PATTERN_SDF_KU_HEADING)
 pattern_tier_hours = re.compile(PATTERN_TIER_HOURS)
@@ -35,6 +41,8 @@ pattern_ku_topic_line = re.compile(PATTERN_KU_TOPIC_LINE)
 pattern_ku_outcomes_heading = re.compile(PATTERN_KU_LEARNING_OUTCOMES_HEADING)
 pattern_ku_partial_outcomes_line = re.compile(PATTERN_KU_PARTIAL_OUTCOMES_LINE)
 pattern_ku_outcomes_line = re.compile(PATTERN_KU_OUTCOMES_LINE)
+pattern_ka_refs_heading = re.compile(PATTERN_KA_REFS_HEADING)
+pattern_ka_refs_entry_line = re.compile(PATTERN_KA_REFS_ENTRY_LINE)
 pattern_page_number = re.compile(PATTERN_PAGE_NUMBER)
 pattern_ku_subtopic_line = re.compile(PATTERN_KU_SUBTOPIC_LINE)
 
@@ -48,6 +56,7 @@ State = Enum(
         "TOPICS_TIER",
         "TOPICS_LIST",
         "LEARNING_OUTCOMES_HEADING",
+        "KA_REFS_HEADING",
     ],
 )
 
@@ -64,6 +73,17 @@ def is_ku_heading(state, line, f, line_stack):
     else:
         return False
 
+def is_refs_heading(state, line, f, line_stack):
+    if state != State.LEARNING_OUTCOMES_HEADING:
+        return False
+    if not pattern_ka_refs_heading.match(line):
+        return False
+    next_line = f.readline()
+    line_stack.append(next_line)
+    if pattern_ka_refs_entry_line.match(next_line):
+        return True
+    else:
+        return False
 
 def get_outcome_line(line, f, line_stack):
     while True:
@@ -74,7 +94,7 @@ def get_outcome_line(line, f, line_stack):
             continue
         if not pattern_ku_partial_outcomes_line.match(
             next_line
-        ) and not pattern_ku_heading.match(next_line):
+        ) and not pattern_ku_heading.match(next_line) and not pattern_ka_refs_heading.match(next_line):
             if next_line.strip():
                 line = line.strip() + " " + next_line.strip()
         else:
@@ -82,9 +102,36 @@ def get_outcome_line(line, f, line_stack):
             break
     return line
 
+def get_references_line(line, f, line_stack):
+    while True:
+        next_line = f.readline()
+        if not next_line:
+            return line
+        if pattern_page_number.match(next_line):
+            continue
+        if not pattern_ka_refs_entry_line.match(
+            next_line
+        ) and not pattern_all_ka_heading.match(next_line):
+            if next_line.strip():
+                line = line.strip() + " " + next_line.strip()
+        else:
+            line_stack.append(next_line)
+            break
+    return line
+
+      
 
 def parse_outcome_line(line):
     matches = pattern_ku_outcomes_line.match(line)
+    if not matches:
+        return None
+    if len(matches.groups()) != 2:
+        return None
+    return matches.group(1).strip(), matches.group(2).strip()
+
+
+def parse_references_entry_line(line):
+    matches = pattern_ka_refs_entry_line.match(line)
     if not matches:
         return None
     if len(matches.groups()) != 2:
@@ -145,6 +192,7 @@ def parse_subtopic_line(line):
 
 
 def parse_ka(ka_fn, ka_text, short_ka_text):
+    global pattern_ka_heading, pattern_ku_heading
     pattern_ka_heading = re.compile(
         PATTERN_KA_HEADING_FMT.format(ka_text, short_ka_text)
     )
@@ -159,6 +207,8 @@ def parse_ka(ka_fn, ka_text, short_ka_text):
         while line_stack:
             line = line_stack.pop()
 
+            if '5. Conduct a security verification and assessment (static and dynamic) of a software application. [Usage]\n' in line:
+                pass
             if not state and pattern_ka_heading.match(line):
                 state = State.IN_KA
                 ka_title, ka_short_title = parse_ka_title_line(line)
@@ -203,7 +253,13 @@ def parse_ka(ka_fn, ka_text, short_ka_text):
                 outcome_line = get_outcome_line(line, f, line_stack)
                 outcome, mastery = parse_outcome_line(outcome_line)
                 ku.add_outcome(LearningOutcome(outcome, mastery))
-            elif state == State.LEARNING_OUTCOMES_HEADING and pattern_ku_heading.match(
+            elif state == State.LEARNING_OUTCOMES_HEADING and is_refs_heading(state, line, f, line_stack):
+                state = State.KA_REFS_HEADING
+            elif state == State.KA_REFS_HEADING and pattern_ka_refs_entry_line.match(line):
+                refs_entry_line = get_references_line(line, f, line_stack)
+                ref_no, ref_entry = parse_references_entry_line(refs_entry_line)
+                ka.add_ref_entry(ref_no, ref_entry)
+            elif (state == State.LEARNING_OUTCOMES_HEADING or state == State.KA_REFS_HEADING) and pattern_ku_heading.match(
                 line
             ):
                 state = State.KU_HEADING
