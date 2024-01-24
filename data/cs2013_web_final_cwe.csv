@@ -1,0 +1,6 @@
+KA,Knowledge Area,Knowledge Unit,Tier,Topic,Subtopic,CWE
+IAS,Information Assurance and Security,Defensive Programming,Core-Tier1,Input validation and data sanitization (cross-reference SDF/Development Methods/Program Correctness),Input validation and data sanitization (cross-reference SDF/Development Methods/Program Correctness),CWE-20
+IM,Information Management,Query Languages,Elective,"SQL (data definition, query formulation, update sublanguage, constraints, integrity)","SQL (data definition, query formulation, update sublanguage, constraints, integrity)",CWE-89
+IM,Information Management,Query Languages,Elective,Different ways to invoke non-procedural queries in conventional languages,Different ways to invoke non-procedural queries in conventional languages,"CWE-89,CWE-566"
+IM,Information Management,Query Languages,Elective,Stored procedures,Stored procedures,CWE-89
+SDF,Software Development Fundamentals,Development Methods,Core-Tier1,Program correctness,Program correctness,CWE-20

@@ -14,7 +14,7 @@ def main():
         mapping_df,
         left_on=["KA", "Knowledge Unit", "Subtopic"],
         right_on=["KA", "Knowledge Unit", "Topic"],
-        how="left",
+        how="inner",
     )
     df = df.replace(np.nan, "")
     df.drop(columns=['Topic_y'], inplace=True)

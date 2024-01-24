@@ -17,20 +17,24 @@ def display_cwes(subtopic):
         st.write(cwe.toString())
 
 
-def load_data(csv_path):
-    col_names = [
-        "TopicID",
-        "Topic Name",
-        "SubTopic Name",
-        "Weakness Name",
-        "CWE ID",
-        "Source URL",
-    ]
-    df = pd.read_csv(
-        csv_path, engine="python", names=col_names, header=None, delimiter=","
-    )
-    return df
+# def load_data(csv_path):
+#     col_names = [
+#         "TopicID",
+#         "Topic Name",
+#         "SubTopic Name",
+#         "Weakness Name",
+#         "CWE ID",
+#         "Source URL",
+#     ]
+#     df = pd.read_csv(
+#         csv_path, engine="python", names=col_names, header=None, delimiter=","
+#     )
+#     return df
 
+
+def load_data(csv_path):
+    df = pd.read_csv(csv_path)
+    return df
 
 def process_data(df):
     topic_dict = {}  # Dictionary to store topics and their subtopics
@@ -67,36 +71,70 @@ def process_data(df):
     return topic_dict
 
 
+def display_mapped_cwes(topic_row, cwe_df):
+    mapped_cwe_list = [cwe.strip().upper() for cwe in topic_row['CWE'].split(',')]
+    logger.debug('mapped_cwe_list: {}'.format(mapped_cwe_list))
+    cwe_df_list = []
+    for cwe in mapped_cwe_list:
+        disp_cwe_df = cwe_df[cwe_df['ID'] == cwe]
+        cwe_df_list.append(disp_cwe_df)
+    disp_cwe_df = pd.concat(cwe_df_list)
+    disp_cwe_df.reset_index(drop=True, inplace=True)
+    disp_cwe_df.index += 1
+    logger.debug('disp_cwe_df: {}'.format(disp_cwe_df))
+    disp_cwe_df = disp_cwe_df.to_html(escape=False)
+    st.write(disp_cwe_df, unsafe_allow_html=True, hide_index=True)
+
 def main():
     logger.debug("running script " + __file__ + " off working directory " + os.getcwd())
 
-    app_settings = get_run_settings("Secure Software Dev Web App")
+    app_settings = get_run_settings("Secure Software Knowledge Mapping")
     # st.set_page_config(page_title="CS Topics to CWE List")  # Set the page title
-    st.title("CWE List")
+    st.title("Mapping CS Topics to CWE List")
 
-    st.write("""# Show CWE By CS Topic""")
+    # st.write("""# Show CWE By CS Topic""")
 
-    # description text of what a CWE is
-    st.write("## What is a CWE?")
-    st.write("Common Weakness Enumeration (CWE) is a list of software weaknesses.")
-    st.write(
-        "It serves as a common language, a measuring stick for security tools, and as a baseline for weakness identification, mitigation, and prevention efforts."
-    )
+    # # description text of what a CWE is
+    # st.write("## What is a CWE?")
+    # st.write("Common Weakness Enumeration (CWE) is a list of software weaknesses.")
+    # st.write(
+    #     "It serves as a common language, a measuring stick for security tools, and as a baseline for weakness identification, mitigation, and prevention efforts."
+    # )
 
-    df = load_data(app_settings.topic_to_cwe_file)
-    topic_dict = process_data(df)
+    topic_df = load_data(app_settings.topic_to_cwe_file)
+    cwe_df = load_data(app_settings.cwe_list_file)
+    cwe_df['URL'] = cwe_df.apply(lambda x: '<a href="{}" target="_blank">{}</a>'.format(x['URL'], x['URL']), axis=1)
+    # topic_dict = process_data(df)
 
     # Convert the dictionary values (topics) to a list
-    topics = list(topic_dict.values())
+    # topics = list(topic_dict.values())
 
     # Display topics as clickable elements with toggles
-    for topic in topics:
-        button_label = f"Topic Number: ({topic.getID()}) Topic Name: {topic.getName()}"
-        button_key = f"button_{topic.getID()}"
+    for index,row in topic_df.iterrows():
+        if row['Topic'] == row['Subtopic']:
+            button_label = "{}. Topic: ({}) {}/{}/{} ({})".format(
+                index,
+                row['KA'],
+                row['Knowledge Area'],
+                row['Knowledge Unit'],
+                row['Topic'],
+                row['Tier'])
+        else:
+            button_label = "{}. Topic: ({}) {}/{}/{}/{} ({})".format(
+                index,
+                row['KA'],
+                row['Knowledge Area'],
+                row['Knowledge Unit'],
+                row['Topic'],
+                row['Subtopic'],
+                row['Tier'])
+        button_key = "button_{}".format(index)
         toggle_subtopics = st.checkbox(button_label, key=button_key)
         if toggle_subtopics:
-            for subtopic in topic.subtopics.values():
-                display_cwes(subtopic)
+            display_mapped_cwes(row, cwe_df)
+        # if toggle_subtopics:
+        #     for subtopic in topic.subtopics.values():
+        #         display_cwes(subtopic)
 
 
 if __name__ == "__main__":

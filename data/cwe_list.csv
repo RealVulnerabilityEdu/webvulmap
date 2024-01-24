@@ -1,0 +1,5 @@
+ID,Title,URL
+CWE-20,Improper Input Validation,https://cwe.mitre.org/data/definitions/20.html
+CWE-89,Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection'),https://cwe.mitre.org/data/definitions/89.html
+CWE-120,Buffer Copy without Checking Size of Input ('Classic Buffer Overflow'),https://cwe.mitre.org/data/definitions/120.html
+CWE-566,Authorization Bypass Through User-Controlled SQL Primary Key,https://cwe.mitre.org/data/definitions/566.html
