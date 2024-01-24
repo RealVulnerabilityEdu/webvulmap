@@ -13,7 +13,7 @@ show_pages(
         ),
         Page(
             os.path.join(os.path.dirname(__file__), "pages", "cve.py"),
-            "CVE to CWE",
+            "CVE to CWE and CS Topics",
             ":books:",
         ),
         Page(

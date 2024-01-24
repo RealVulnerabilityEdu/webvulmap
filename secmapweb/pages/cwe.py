@@ -4,17 +4,17 @@ import pandas as pd
 import streamlit as st
 from loguru import logger
 
-from model.cwe import Cwe
-from model.subtopics import SubTopics
-from model.topics import Topics
+# from model.cwe import Cwe
+# from model.subtopics import SubTopics
+# from model.topics import Topics
 from utils.cmdl_utils import get_run_settings
 
 
-# Function to display the CWEs upon clicking the subtopic
-def display_cwes(subtopic):
-    st.write(f"**{subtopic.toString()}**")
-    for cwe in subtopic.getCwes():
-        st.write(cwe.toString())
+# # Function to display the CWEs upon clicking the subtopic
+# def display_cwes(subtopic):
+#     st.write(f"**{subtopic.toString()}**")
+#     for cwe in subtopic.getCwes():
+#         st.write(cwe.toString())
 
 
 # def load_data(csv_path):
@@ -32,43 +32,45 @@ def display_cwes(subtopic):
 #     return df
 
 
+# def process_data(df):
+#     topic_dict = {}  # Dictionary to store topics and their subtopics
+#     topic_visibility = {}  # Dictionary to track the visibility state of each topic
+
+#     for _, row in df.iterrows():
+#         topic_id = row["TopicID"]
+#         topic_name = row["Topic Name"]
+#         subtopic_name = row["SubTopic Name"]
+#         vulnerability_name = row["Weakness Name"]
+#         cwe_id = row["CWE ID"]
+#         source_url = row["Source URL"]
+
+#         # Add topic to dictionary if it doesn't already exist
+#         if topic_id not in topic_dict:
+#             topic_dict[topic_id] = Topics(topic_id, topic_name)
+#             topic_visibility[topic_id] = False  # Initialize visibility state
+
+#         # Add subtopic to topic if it doesn't already exist
+#         if subtopic_name not in topic_dict[topic_id].subtopics:
+#             subtopic = SubTopics(topic_id, subtopic_name, vulnerability_name)
+#             topic_dict[topic_id].subtopics[
+#                 subtopic_name
+#             ] = subtopic  # Use dictionary-like syntax to add subtopic
+#         cwe = Cwe(cwe_id, subtopic_name, source_url)
+#         topic_dict[topic_id].subtopics[subtopic_name].addCwe(cwe)
+
+#         # Add source URL to its respective CWE object (if it exists, row[4] is not empty)
+#         if source_url:
+#             topic_dict[topic_id].subtopics[subtopic_name].cwe[-1].addSourceUrl(
+#                 source_url
+#             )
+
+#     return topic_dict
+
+
+
 def load_data(csv_path):
     df = pd.read_csv(csv_path)
     return df
-
-def process_data(df):
-    topic_dict = {}  # Dictionary to store topics and their subtopics
-    topic_visibility = {}  # Dictionary to track the visibility state of each topic
-
-    for _, row in df.iterrows():
-        topic_id = row["TopicID"]
-        topic_name = row["Topic Name"]
-        subtopic_name = row["SubTopic Name"]
-        vulnerability_name = row["Weakness Name"]
-        cwe_id = row["CWE ID"]
-        source_url = row["Source URL"]
-
-        # Add topic to dictionary if it doesn't already exist
-        if topic_id not in topic_dict:
-            topic_dict[topic_id] = Topics(topic_id, topic_name)
-            topic_visibility[topic_id] = False  # Initialize visibility state
-
-        # Add subtopic to topic if it doesn't already exist
-        if subtopic_name not in topic_dict[topic_id].subtopics:
-            subtopic = SubTopics(topic_id, subtopic_name, vulnerability_name)
-            topic_dict[topic_id].subtopics[
-                subtopic_name
-            ] = subtopic  # Use dictionary-like syntax to add subtopic
-        cwe = Cwe(cwe_id, subtopic_name, source_url)
-        topic_dict[topic_id].subtopics[subtopic_name].addCwe(cwe)
-
-        # Add source URL to its respective CWE object (if it exists, row[4] is not empty)
-        if source_url:
-            topic_dict[topic_id].subtopics[subtopic_name].cwe[-1].addSourceUrl(
-                source_url
-            )
-
-    return topic_dict
 
 
 def display_mapped_cwes(topic_row, cwe_df):

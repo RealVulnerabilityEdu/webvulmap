@@ -10,18 +10,33 @@ from view.table import Table
 
 # Assuming Table is defined in a separate file
 # Function to read CSV files
+# def read_csv_files(topic_cwe_file, cve_cwe_file):
+#     col_names = [
+#         "TopicID",
+#         "Topic Name",
+#         "SubTopic Name",
+#         "Weakness Name",
+#         "CWE ID",
+#         "Source URL",
+#     ]
+#     df1 = pd.read_csv(
+#         topic_cwe_file, engine="python", names=col_names, header=None, delimiter=","
+#     )
+
+#     col_names2 = [
+#         "Software vulnerability name (CVE name)",
+#         "CVE ID",
+#         "Source URL",
+#         "CWE ID",
+#     ]
+#     df2 = pd.read_csv(
+#         cve_cwe_file, engine="python", names=col_names2, header=None, delimiter=","
+#     )
+
+#     return df1, df2
+
 def read_csv_files(topic_cwe_file, cve_cwe_file):
-    col_names = [
-        "TopicID",
-        "Topic Name",
-        "SubTopic Name",
-        "Weakness Name",
-        "CWE ID",
-        "Source URL",
-    ]
-    df1 = pd.read_csv(
-        topic_cwe_file, engine="python", names=col_names, header=None, delimiter=","
-    )
+    df1 = pd.read_csv(topic_cwe_file)
 
     col_names2 = [
         "Software vulnerability name (CVE name)",
