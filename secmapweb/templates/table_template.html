@@ -1,23 +1,32 @@
 <!-- table_template.html -->
 <table class="custom-table">
     <tr>
-        <th>knowledgeArea</th>
-        <th>Ex: Language</th>
-        <th>CWE Description</th>
-        <th>CWE num</th>
-        <th>URL cwe</th>
-        <th>cve Description</th>
-        <th>cve num</th>
-        <th>URL cve</th>
+        <th>KA</th>
+        <th>Knowledge Area</th>
+        <th>Knowledge Unit</th>
+        <th>Knowledge Topic</th>
+        <th>Knowledge Subtopic</th>
+        <th>CWE ID</th>
+        <th>CWE Title</th>
+        <th>CWE URL</th>
+        <th>CVE ID</th>
+        <th>CVE URL</th>
     </tr>
     <tr>
+        <td>{kA}</td>
         <td>{knowledgeArea}</td>
+        <td>{knowledgeUnit}</td>
         <td>{knowledgeTopic}</td>
-        <td>{CWE}</td>
-        <td>{CWEID}</td>
-        <td>{cwe_link}</td>
-        <td style="min-width: 150px;">{cve}</td> 
-        <td style="min-width: 150px;">{cveID}</td>
-        <td>{cve_links}</td>
+        <td>{knowledgeSubtopic}</td>
+        <td>{cweId}</td>
+        <td>{cweTitle}</td>
+        <td>{cweUrl}</td>
+        <td>{cveId}</td>
+        <td>{cveUrl}</td>
+        <!--
+        <td style="min-width: 150px;">{cveId}</td>
+        <td style="min-width: 150px;">{cveId}</td>
+        <td>{cveUrl}</td>
+        -->
     </tr>
 </table>

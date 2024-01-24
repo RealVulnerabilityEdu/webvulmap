@@ -5,30 +5,14 @@ import streamlit as st
 
 
 class Table:
-    knowledgeArea = ""
-    knowledgeTopic = ""
-    CWE = ""
-    CWEID = ""
-    sourceURLcwe = ""
-    cve = [""]
-    cveID = [""]
-    sourceURLcve = [""]
-
-    def __init__(self, kA, kT, cwe, cweID, sourceURLcwe, cve, cveID, sourceURLcve):
-        self.knowledgeArea = kA
-        self.knowledgeTopic = kT
-        self.CWE = cwe
-        self.CWEID = cweID
-        self.sourceURLcwe = sourceURLcwe
-        self.cve = (
-            [cve] if cve else []
-        )  # Convert to a list if not empty, otherwise, keep it as an empty list
-        self.cveID = (
-            [cveID] if cveID else []
-        )  # Convert to a list if not empty, otherwise, keep it as an empty list
-        self.sourceURLcve = (
-            [sourceURLcve] if sourceURLcve else []
-        )  # Convert to a list if not empty, otherwise, keep it as an empty list
+    def __init__(self, short_ka, ka, ku, kt, kst, cwe_id, cwe_title, cwe_url, cve_id, cve_url):
+        self.ka = short_ka
+        self.knowledgeArea = ka
+        self.knowledgeUnit = ku
+        self.knowledgeTopic = kt
+        self.knowledgeSubtopic = kst
+        self.cwe_id, self.cwe_title, self.cwe_url = cwe_id, cwe_title, cwe_url
+        self.cve_id, self.cve_url = cve_id, cve_url
 
     def to_string(self, data_list):
         if data_list and any(data_list):
@@ -36,7 +20,7 @@ class Table:
         else:
             return ""
 
-    # list argument: usually a list of CVE
+    # # list argument: usually a list of CVE
     def generate_links(self, url_list):
         return "".join(
             [f'<a href="{url}" target="_blank">Link</a> ' for url in url_list]
@@ -53,14 +37,16 @@ class Table:
     # to be called in the AppPage3.py file
     def makeTable(self):
         colNames = [
+            "kA",
             "knowledgeArea",
+            "knowledgeUnit",
             "knowledgeTopic",
-            "CWE Description",
-            "CWE num",
-            "sourceURLcwe",
-            "cve Description",
-            "cve num",
-            "sourceURLcve",
+            "knowledgeSubtopic",
+            "cweId",
+            "cweTitle",
+            "cweUrl",
+            "cveId",
+            "cveUrl"
         ]
         # use the colNames array to create a dataframe where the values are created based on what was passed to the constructor
         df = pd.DataFrame(columns=colNames)
@@ -70,16 +56,16 @@ class Table:
         return table
 
     def make_custom_table(self):
-        max_length = 3
+        # max_length = 3
 
-        # Pad the lists to the maximum length using a function
-        def pad_list(lst):
-            return lst + [""] * (max_length - len(lst))
+        # # Pad the lists to the maximum length using a function
+        # def pad_list(lst):
+        #     return lst + [""] * (max_length - len(lst))
 
-        self.sourceURLcve = pad_list(self.sourceURLcve)
+        # self.sourceURLcve = pad_list(self.sourceURLcve)
 
-        cwe_link = self.generate_link(self.sourceURLcwe)
-        cve_links = self.generate_links(self.sourceURLcve[0])
+        cwe_link = self.generate_link(self.cwe_url)
+        cve_link = self.generate_link(self.cve_url)
 
         # Construct the correct file paths based on the folder structure
         current_folder = os.path.dirname(os.path.abspath(__file__))
@@ -94,14 +80,16 @@ class Table:
 
         # Apply the values to the HTML template
         table_html = table_html.format(
+            kA=self.ka,
             knowledgeArea=self.knowledgeArea,
+            knowledgeUnit=self.knowledgeUnit,
             knowledgeTopic=self.knowledgeTopic,
-            CWE=self.CWE,
-            CWEID=self.CWEID,
-            cwe_link=cwe_link,
-            cve=self.to_string(self.cve),
-            cveID=self.to_string(self.cveID),
-            cve_links=cve_links,
+            knowledgeSubtopic=self.knowledgeSubtopic,
+            cweId=self.cwe_id,
+            cweTitle=self.cwe_title,
+            cweUrl=cwe_link,
+            cveId=self.cve_id,
+            cveUrl=cve_link,
         )
 
         # Read CSS styles from file
