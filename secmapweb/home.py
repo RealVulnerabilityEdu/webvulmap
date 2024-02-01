@@ -21,6 +21,11 @@ show_pages(
             "Search",
             ":books:",
         ),
+        Page(
+            os.path.join(os.path.dirname(__file__), "pages", "about.py"),
+            "About",
+            ":question:",
+        )
     ]
 )
 

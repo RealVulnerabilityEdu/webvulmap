@@ -94,14 +94,7 @@ def main():
     # st.set_page_config(page_title="CS Topics to CWE List")  # Set the page title
     st.title("Mapping CS Topics to CWE List")
 
-    # st.write("""# Show CWE By CS Topic""")
 
-    # # description text of what a CWE is
-    # st.write("## What is a CWE?")
-    # st.write("Common Weakness Enumeration (CWE) is a list of software weaknesses.")
-    # st.write(
-    #     "It serves as a common language, a measuring stick for security tools, and as a baseline for weakness identification, mitigation, and prevention efforts."
-    # )
 
     topic_df = load_data(app_settings.topic_to_cwe_file)
     cwe_df = load_data(app_settings.cwe_list_file)
