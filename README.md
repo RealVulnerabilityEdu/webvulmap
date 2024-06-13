@@ -1,6 +1,14 @@
-# webvulmap
+# Mapping Security Vulnerability between Computer Science Body of Knowledge
 
-This is a web application maps between software security topics (CWEs and CVEs)
+## Computer Science Body of Knowledge
+
+ACM/IEEE-CS defines the Computer Science Body of Knowledge in its Computer
+Science curriculum guideline. The guideline exists as a PDF file. To facilitate
+the development of a software application for the mapping, we convert the body
+of knowledge to JSON objects.
+
+## Mapping Web App
+The web application maps between software security topics (CWEs and CVEs)
 and CS curriculum topics. It serves two main goals:
 
 1. it allows instructors or learners understand what prerequisite material is
