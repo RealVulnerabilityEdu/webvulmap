@@ -63,6 +63,17 @@ class LearningOutcome:
         self.mastery = mastery
         self.tier = outcomes_tier
         self.xref = outcome_xref
+    
+
+    def to_json(self):
+        return {
+            "number": self.number,
+            "outcome": self.outcome,
+            "mastery": self.mastery,
+            "tier": self.tier,
+            "xref": self.xref
+        }
+
 
 
 class KnowledgeUnitTier:
