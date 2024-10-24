@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if ! -f cs2013_web_final.pdf; then
-    wget https://www.acm.org/binaries/content/assets/education/cs2013_web_final.pdf -O cs2013_web_final.pdf
+    wget http://www.sci.brooklyn.cuny.edu/~chen/uploads/research/cscurriculum/cs2013_web_final.pdf -O cs2013_web_final.pdf
 fi
 
 pdftotext -layout -raw -f 58 -l 64  cs2013_web_final.pdf cs2013_web_final_al.txt
