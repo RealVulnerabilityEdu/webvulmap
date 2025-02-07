@@ -1,0 +1,19 @@
+ka,short_ka,page_begin,page_end
+"Algorithms and Complexity","AL",58,64
+"Architecture and Organization","AR",65,70
+"Computational Science","CN",71,78
+"Discrete Structures","DS",79,84
+"Graphics and Visualization","GV",85,91
+"Human-Computer Interaction","HCI",92,99
+"Information Assurance and Security","IAS",100,114
+"Information Management Concepts","IM",115,123
+"Intelligent Systems","IS",124,132
+"Networking and Communication","NC",133,137
+"Operating Systems","OS",138,144
+"Platform-Based Development","PBD",145,147
+"Parallel and Distributed Computing","PD",148,157
+"Programming Languages","PL",158,169
+"Software Development Fundamentals","SDF",170,174
+"Software Engineering","SE",175,188
+"Systems Fundamentals","SF",189,194
+"Social Issues and Professional Practice","SP",195,206
