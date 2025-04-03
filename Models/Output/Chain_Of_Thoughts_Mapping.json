@@ -1,0 +1,176 @@
+{
+  "Artificial Intelligence": [
+    {
+      "cwe": "CWE-200",
+      "name": "Exposure of Sensitive Information to an Unauthorized Actor",
+      "reason": "Reason: AI systems may store or transmit sensitive data without proper protection measures, exposing it to unauthorized actors."
+    },
+    {
+      "cwe": "CWE-307",
+      "name": "Improper Access Control",
+      "reason": "Reason: AI systems may lack appropriate access controls, allowing unauthorized users to access sensitive information or perform actions they should not be able to."
+    },
+    {
+      "cwe": "CWE-400",
+      "name": "Uncontrolled Resource Consumption (Memory Leaks)",
+      "reason": "Reason: Training AI models can consume significant resources, and memory leaks in the underlying software could lead to resource exhaustion or denial of service attacks."
+    },
+    {
+      "cwe": "CWE-798",
+      "name": "Use After Free",
+      "reason": "Reason: Memory management issues in AI systems could result in use-after-free vulnerabilities, allowing attackers to execute arbitrary code or crash the system."
+    }
+  ],
+  "Algorithmic Foudations": [
+    {
+      "cwe": "CWE-200",
+      "name": "Information Exposure",
+      "reason": "Reason: Poorly designed algorithms that handle sensitive data could potentially expose this information."
+    }
+  ],
+  "Architecture and Organization ": [
+    {
+      "cwe": "CWE-287",
+      "name": "Improper Access Control",
+      "reason": "Reason: Inadequate separation of duties or lack of appropriate access controls within the architecture can lead to unauthorized access."
+    },
+    {
+      "cwe": "CWE-319",
+      "name": "Cross-Component Resource Sharing",
+      "reason": "Reason: Inefficient or improper use of abstraction barriers can result in information leakage or privilege escalation."
+    },
+    {
+      "cwe": "CWE-264",
+      "name": "Complexity",
+      "reason": "Reason: Complex systems with multiple interconnected components can lead to increased attack surface and potential vulnerabilities."
+    }
+  ],
+  "Data Management": [
+    {
+      "cwe": "CWE-89",
+      "name": "Cross-site Scripting",
+      "reason": "Reason: This vulnerability occurs when user inputs are not properly sanitized or encoded during web page generation, leading to XSS attacks."
+    }
+  ],
+  "Foundations of Programming Languages": [
+    {
+      "cwe": "CWE-189",
+      "name": "Improper Restriction of Excessive Authentication Attempts",
+      "reason": "Reason: Inefficient or lack of proper error handling in a program can inadvertently provide opportunities for malicious users to perform brute force attacks, exploiting weak authentication mechanisms. Programming language foundations, particularly those that do not emphasize secure coding practices and error handling, may contribute to this weakness."
+    }
+  ],
+  "Graphics and Interactive Techniques": [
+    {
+      "cwe": "CWE-180",
+      "name": "Deserialization of Untrusted Data Without an Acceptable Level of Input Validation",
+      "reason": "Reason: When user data is deserialized without proper sanitization, it can lead to Arbitrary Code Execution, which is a severe security vulnerability."
+    }
+  ],
+  "Human-Computer Interaction": [
+    {
+      "cwe": "CWE-89",
+      "name": "Cross-site Scripting",
+      "reason": "Reason: Inadequate input validation could lead to XSS vulnerabilities due to the prioritization of usability in HCI design."
+    },
+    {
+      "cwe": "CWE-20",
+      "name": "Information Exposure or Leakage",
+      "reason": "Reason: HCI principles that emphasize user feedback and interaction could potentially result in information leakage, aiding attackers in understanding the system's structure and vulnerabilities."
+    }
+  ],
+  "Mathematical and Statistical Foundations": [
+    {
+      "cwe": "CWE-257",
+      "name": "Weak Random Number Generator",
+      "reason": "Reason: Poor quality random number generators can create predictable output, leading to vulnerabilities in encryption or authentication processes."
+    }
+  ],
+  "Networking and Communication": [
+    {
+      "cwe": "CWE-20",
+      "name": "Improper Input Validation",
+      "reason": "Reason: Lack of proper input validation can lead to a variety of security weaknesses such as SQL Injection, XSS, or Command Injection. It allows attackers to supply malicious inputs that bypass intended constraints and execute unauthorized operations within the system."
+    }
+  ],
+  "Operating Systems": [
+    {
+      "cwe": "CWE-120",
+      "name": "Buffer Overflow",
+      "reason": "Reason: Improper handling of buffers in the Operating System can lead to buffer overflow vulnerabilities, allowing attackers to inject and execute arbitrary code."
+    }
+  ],
+  "Parallel Distributed Computing": [
+    {
+      "cwe": "CWE-614",
+      "name": "Data Race Condition",
+      "reason": "Reason: Parallel distributed computing often involves multiple processes accessing shared data, which can lead to unpredictable behavior and potential security vulnerabilities if proper synchronization is not used."
+    }
+  ],
+  "Software Development Fundamentals": [
+    {
+      "cwe": "CWE-1",
+      "name": "Improper Input Validation",
+      "reason": "Reason: Lack of proper input validation can lead to a variety of security weaknesses, such as buffer overflows and injection attacks, as developers may not sufficiently validate user inputs or data from external sources before processing them in the application. This vulnerability is prevalent across various software development fundamentals stages, including design, coding, testing, and maintenance."
+    }
+  ],
+  "Software Engineering": [
+    {
+      "cwe": "CWE-1",
+      "name": "Improper Control of Recursion Depth or Recursion Function Stack",
+      "reason": "Reason: During coding, if proper checks are not implemented for recursive function calls, a denial-of-service condition may occur or the program could enter an infinite loop, leading to unintended outcomes. The improper control of recursion can also lead to other security vulnerabilities indirectly by consuming excessive resources and causing system instability."
+    }
+  ],
+  "Security": [
+    {
+      "cwe": "CWE-79",
+      "name": "Improper Neutralization of Input During Web Page Generation",
+      "reason": "Reason: This occurs when user inputs are not properly sanitized, leading to XSS attacks."
+    },
+    {
+      "cwe": "CWE-284",
+      "name": "Insecure or Absent Access Controls",
+      "reason": "Reason: Inadequate access controls could allow unauthorized users to access sensitive data or perform actions they shouldn't be able to."
+    },
+    {
+      "cwe": "CWE-119",
+      "name": "Buffer Copy without Checking Size of Input Data",
+      "reason": "Reason: This can result in Buffer Overflow, which may lead to system crashes or exploitation."
+    },
+    {
+      "cwe": "CWE-125",
+      "name": "Use of Hardcoded Cryptographic Keys or Passwords",
+      "reason": "Reason: Insecure use of cryptographic functions could make sensitive data vulnerable to interception or decryption."
+    },
+    {
+      "cwe": "CWE-200",
+      "name": "Error and Exception Disclosure",
+      "reason": "Reason: Improper error handling can reveal too much information about the underlying system and potentially help attackers."
+    }
+  ],
+  "Society, Ethics, and the Profession": [
+    {
+      "cwe": "CWE-307",
+      "name": "Information Exposure or Leaks Due Lack of Safe Information Removal",
+      "reason": "Reason: The emphasis on ethics in the topic 'Society, Ethics, and the Profession' necessitates a focus on data protection, which is addressed by CWE-307."
+    }
+  ],
+  "Systems Fundatmentals": [
+    {
+      "cwe": "CWE-120",
+      "name": "Heap-based Buffer Overflow",
+      "reason": "Reason: Incorrect handling of dynamic memory allocation in systems can lead to buffer overflow vulnerabilities."
+    },
+    {
+      "cwe": "CWE-79",
+      "name": "Improper Neutralization of Input During Web Page Generation",
+      "reason": "Reason: Insecure input validation and sanitization in systems can result in Cross-Site Scripting (XSS) attacks."
+    }
+  ],
+  "Specialized Platform Development": [
+    {
+      "cwe": "CWE-312",
+      "name": "Path Traversal",
+      "reason": "Reason: Complexity in the platform's architecture and lack of input validation can lead to path traversal vulnerabilities, allowing an attacker to navigate outside the intended directory structure, potentially accessing sensitive files or executing arbitrary commands."
+    }
+  ]
+}
