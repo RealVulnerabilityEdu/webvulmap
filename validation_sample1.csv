@@ -1,0 +1,9 @@
+mapping,accepted,rejected,comments,human
+Networking and Communication -> CWE-319,,,,
+Parallel Distributed Computing -> CWE-601,,,,
+Mathematical and Statistical Foundations -> CWE-548,,,,
+Software Development Fundamentals -> CWE-79,,,,
+Data Management -> CWE-22,,,,
+Software Engineering -> CWE-539,,,,
+Foundations of Programming Languages -> CWE-20,,,,
+Algorithmic Foudations -> CWE-20,,,,
