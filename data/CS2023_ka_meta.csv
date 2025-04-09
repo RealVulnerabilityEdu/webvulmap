@@ -1,0 +1,18 @@
+ka,short_ka,#knowledge_units,cs_core_hours,ka_core_hours,began_page,page_end
+Artificial Intelligence,AI,12,12,18,63,86
+Algorithmic Foudations,AL,5,32,32,87,100
+Architecture and Organization ,AR ,11,9,16,101,112
+Data Management,DM,13,10,26,113,126
+Foundations of Programming Languages,FPL,22,21,19,127,150
+Graphics and Interactive Techniques,GIT,12,4,70,151,172
+Human-Computer Interaction,HCI,6,8,16,173,184
+Mathematical and Statistical Foundations,MSF,5,55,145,185,196
+Networking and Communication,NC,8,7,24,197,204
+Operating Systems,OS,14,8,13,205,216
+Parallel Distributed Computing,PDC,5,9,26,217,228
+Software Development Fundamentals,SDF,5,43,0,229,236
+Software Engineering,SE,9,6,21,237,254
+Security,SEC,7,6,35,255,268
+"Society, Ethics, and the Profession",SEP,11,18,14,269,290
+Systems Fundatmentals,SF,9,18,8,291,300
+Specialized Platform Development,SFD,8,4,0,301,315
