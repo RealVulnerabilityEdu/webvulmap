@@ -1,18 +1,20 @@
-ka,short_ka,#knowledge_units,cs_core_hours,ka_core_hours,began_page,page_end
-Artificial Intelligence,AI,12,12,18,63,86
-Algorithmic Foudations,AL,5,32,32,87,100
-Architecture and Organization ,AR ,11,9,16,101,112
-Data Management,DM,13,10,26,113,126
-Foundations of Programming Languages,FPL,22,21,19,127,150
-Graphics and Interactive Techniques,GIT,12,4,70,151,172
-Human-Computer Interaction,HCI,6,8,16,173,184
-Mathematical and Statistical Foundations,MSF,5,55,145,185,196
-Networking and Communication,NC,8,7,24,197,204
-Operating Systems,OS,14,8,13,205,216
-Parallel Distributed Computing,PDC,5,9,26,217,228
-Software Development Fundamentals,SDF,5,43,0,229,236
-Software Engineering,SE,9,6,21,237,254
-Security,SEC,7,6,35,255,268
-"Society, Ethics, and the Profession",SEP,11,18,14,269,290
-Systems Fundatmentals,SF,9,18,8,291,300
-Specialized Platform Development,SFD,8,4,0,301,315
+ka,short_ka,#knowledge_units,cs_core_hours,ka_core_hours,began_page,page_end,knowledge_unit
+Artificial Intelligence,AI,12,12,18,63,86,"Fundamental Issue,  Search,  Fundamental Knowledge Representation and Reasoning, Machine Learning, Applications and Societal Impact,
+Probabilistic Representation and Reasoning, Planning, Logical Representation and Reasoning ,Agents and Cognitive Systems, Natural Language Processing, Robotics, Perception and Computer Vision"
+Algorithmic Foudations,AL,5,32,32,87,100,"Foundational Data Structures and Algorithms, Algorithmic Strategies, Complexity Analysis, Computational Models and Formal Languages,
+Society, Ethics, and the Profession "
+Architecture and Organization ,AR ,11,9,16,101,112,"Digital Logic and Digital Systems, Machine-Level Data Representation, Assembly Level Machine Organization , Memory Hierarchy ,Interfacing and Communication , Functional Organization,  Performance and Energy Efficiency, Heterogeneous Architectures, Secure Processor Architectures, Quantum Architectures, Sustainability Issues"
+Data Management,DM,13,10,26,113,126,"The Role of Data, Core Database Systems Concepts, Data Modeling ,Relational Databases, Query Construction, Query Processing , DBMS Internals, NoSQL Systems, Data Security & Privacy, Data Analytics, Distributed Databases/Cloud Computing, Semi-structured and Unstructured Databases, Society, Ethics, and the Profession"
+Foundations of Programming Languages,FPL,22,21,19,127,150,"Object-Oriented Programming, Functional Programming, Logic Programming, Shell Scripting, Event-Driven and Reactive Programming, Parallel and Distributed Computing, Aspect-Oriented Programming, Type Systems, Systems Execution and Memory Model,  Language Translation and Execution, Program Abstraction and Representation,Syntax Analysis, Compiler Semantic Analysis, Program Analysis and Analyzers, Code Generation, Runtime Behavior and Systems, Advanced Programming Constructs, Language Pragmatics, Formal Semantic, Formal Development Methodologies, Design Principles of Programming Languages, Society, Ethics, and the Profession"
+Graphics and Interactive Techniques,GIT,12,4,70,151,172,"Fundamental Concepts, Visualization, Applied Rendering and Techniques, Geometric Modeling, Shading and Advanced Rendering, Computer Animation , Simulation,  Immersion, Interaction , Image Processing , Tangible/Physical Computing, Society, Ethics, and the Profession"
+Human-Computer Interaction,HCI,6,8,16,173,184,"Understanding the User, Accountability and Responsibility in Design, Accessibility and Inclusive Design, Evaluating the Design, System Design, Society, Ethics, and the Profession"
+Mathematical and Statistical Foundations,MSF,5,55,145,185,196,"Discrete Mathematics,Probability, Statistics, Linear Algebra, Calculus"
+Networking and Communication,NC,8,7,24,197,204,"Fundamentals, Networked Application, Reliability Support, Routing And Forwarding, Single-Hop Communication, Mobility Support , Network Security, Emerging Topics "
+Operating Systems,OS,14,8,13,205,216,"Role and Purpose of Operating Systems, Principles of Operating System, Concurrency, Protection and Safety, Scheduling, Process Model, Memory Management, Device Management, File System API and Implementation, Advanced File Systems, Virtualization, Real Time and Embedded Systems, Fault Tolerance, Society, Ethics, and the Profession"
+Parallel Distributed Computing,PDC,5,9,26,217,228,"Programs, Communication, Cooridation, Evalution, Algorithms, Society, Ethics, and the Profession"
+Software Development Fundamentals,SDF,5,43,0,229,236,"Fundamental Programming Concepts and Practices, Fundamental Data Structure, Algorithms, Software Development Practices, Society, Ethics, and the Profession"
+Software Engineering,SE,9,6,21,237,254,"Teamwork, Tools and Enviroments, Product Requirements, Software Design, Software Construction, Software Verfication and Validation, Refactoring and Code Evolution, Software Reliability, Formal Methods"
+Security,SEC,7,6,35,255,268,"Foundational Security, Society, Ethics, and the Profession, Secure Coding, Cryptography, Security Analysis, Design, and Engineering , Digital Forensics, Security Governance"
+"Society, Ethics, and the Profession",SEP,11,18,14,269,290,"Social Context, Methods for Ethical Analysis, Professional Ethics, Intellectual Property, Privacy and Civil Liberties, Communication, Sustainability, History, Economies of  Computing, Security Policies, Laws, and Computer Crimes, Diversity, Equity, Inclusion and Accessibility"
+Systems Fundatmentals,SF,9,18,8,291,300,"Overview of Computer Systems, Basic Concepts, Resource Management, System Performance, Performance Evaluation, System Reliability , System Security ,System Design, Society, Ethics, and Profession"
+Specialized Platform Development,SFD,8,4,0,301,315,"Common Aspects, Web Platforms, Mobile Platforms, Robot Platforms, Embedded Platforms, Game Platforms, Interative Computing Platforms, SPD-SEP"
