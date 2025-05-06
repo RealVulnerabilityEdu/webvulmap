@@ -1,0 +1,12 @@
+Knowledge Area Name,Graphics and Interactive Techniques
+Knowledge Unit,Interaction
+CWE ID and Name,Accept,Reject,Why
+CWE-20: Improper Input Validation,,,
+CWE-75: Cross-site Scripting,,,
+CWE-89: SQL Injection,,,
+CWE-119: Cross-Site Request Forgery (CSRF),,,
+CWE-264: Sensitive Data Exposure,,,
+CWE-307: Use after Free,,,
+CWE-312: Insufficient Randomness,,,
+CWE-352: Insecure Use of a Temporary File,,,
+CWE-601: Exposure of Internal Implementation Details,,,
