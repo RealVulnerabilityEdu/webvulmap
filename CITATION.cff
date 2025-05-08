@@ -3,12 +3,12 @@ message: "If you reference or use this software, please cite it as below."
 authors:
   - family-names: Chen
     given-names: Hui
-  - family-names: Kostadin
-    given-names: Damevski
-  - family-names: Jeffrey
-    given-names: Zhang
-  - family-names: Wesley
-    given-names: Liang
+  - family-names: Damevski
+    given-names: Kostadin
+  - family-names: Zhang
+    given-names: Jeffrey
+  - family-names: Liang
+    given-names: Wesley
 title: "CS Topic-CWE-CVE Mapping and Tool"
 version: 0.0.1
 date-released: 2025-04-09
