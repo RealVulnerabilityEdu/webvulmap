@@ -7,7 +7,16 @@ Science curriculum guideline. The guideline exists as a PDF file. To facilitate
 the development of a software application for the mapping, we convert the body
 of knowledge to JSON objects.
 
-## Mapping Web App
+## Project Organization
+
+The project consists of the following subprojects:
+
+- Mapping Web App: [secmapweb](tree/main/secmapweb)
+- CS Curriculum JSONizer: [curriculum](tree/main/curriculum)
+- Mapping Creator: [mapping](tree/main/mapping)
+- Mapping Data: [data](tree/main/data)
+
+### Mapping Web App
 The web application maps between software security topics (CWEs and CVEs)
 and CS curriculum topics. It serves two main goals:
 
@@ -29,3 +38,10 @@ CVE-2000-1094, i.e.,  a Buffer Overflow bug in AOL Instant Messenger (AIM)
 before 4.3.2229 allows remote attackers to execute arbitrary commands via a
 "buddyicon" command with a long "src" argument (source:
 [https://nvd.nist.gov/vuln/detail/CVE-2000-1094](https://nvd.nist.gov/vuln/detail/CVE-2000-1094))
+
+### CS Curriculum JSONizer
+This application converts ACM/IEEE 2013 and ACM/IEEE/AAAI 2023 curricula to JSON objects.
+
+
+### Mapping Creator
+This application creates knowledge mapping used in the Mapping Web App.

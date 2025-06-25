@@ -1,3 +1,4 @@
+import json
 import pandas as pd
 
 input_csv_path = 'CS2023_ka_meta.csv'
@@ -7,7 +8,7 @@ df = pd.read_csv(input_csv_path, encoding='utf-8-sig')
 
 knowledge_structure = {}
 
-for index, row in df.iterrows():
+for _, row in df.iterrows():
     ka = row['ka'].strip()
     ku_list_raw = row['knowledge_unit']
     if pd.isna(ku_list_raw):
