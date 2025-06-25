@@ -11,10 +11,10 @@ of knowledge to JSON objects.
 
 The project consists of the following subprojects:
 
-- Mapping Web App: [secmapweb](tree/main/secmapweb)
-- CS Curriculum JSONizer: [curriculum](tree/main/curriculum)
-- Mapping Creator: [mapping](tree/main/mapping)
-- Mapping Data: [data](tree/main/data)
+- Mapping Web App: [secmapweb](secmapweb)
+- CS Curriculum JSONizer: [curriculum](curriculum)
+- Mapping Creator: [mapping](mapping)
+- Mapping Data: [data](data)
 
 ### Mapping Web App
 The web application maps between software security topics (CWEs and CVEs)
