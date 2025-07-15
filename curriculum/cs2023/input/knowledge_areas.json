@@ -1,0 +1,14 @@
+[
+  {
+    "full_name": "Software Engineering",
+    "short_code": "SE",
+    "start_page": 10,
+    "end_page": 15
+  },
+  {
+    "full_name": "Security and Privacy",
+    "short_code": "SP",
+    "start_page": 16,
+    "end_page": 20
+  }
+]
