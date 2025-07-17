@@ -1,14 +1,14 @@
 [
   {
-    "full_name": "Software Engineering",
-    "short_code": "SE",
-    "start_page": 10,
-    "end_page": 15
+    "short-ka": "SE",
+    "long-ka": "Software Engineering",
+    "begin-page": 10,
+    "end-page": 15
   },
   {
-    "full_name": "Security and Privacy",
-    "short_code": "SP",
-    "start_page": 16,
-    "end_page": 20
+    "short-ka": "SP",
+    "long-ka": "Security and Privacy",
+    "begin-page": 16,
+    "end-page": 20
   }
 ]
