@@ -1,20 +1,9 @@
 import os
 import json
-from pathlib import Path
-from pdfminer.high_level import extract_text
 import sys
-
-# === File and Directory Constants ===
-
-# Input JSON file containing metadata about each knowledge area (KA)
-INPUT_FILE = os.path.join("curriculum", "cs2023", "input", "knowledge_areas.json")
-
-# PDF file to extract text from
-PDF_FILE = os.path.join("curriculum", "cs2023", "CS2023_Curriculum_Guidelines.pdf")
-
-# Directory where extracted text files will be saved
-OUTPUT_DIR = os.path.join("curriculum", "cs2023", "test_dir")
-
+import argparse
+from pathlib import Path
+import fitz  # PyMuPDF
 
 def extract_knowledge_areas(input_file, pdf_file, output_dir):
     """
@@ -38,31 +27,43 @@ def extract_knowledge_areas(input_file, pdf_file, output_dir):
         os.makedirs(output_dir, exist_ok=True)
         print(f"Ensuring output directory exists: {os.path.abspath(output_dir)}")
 
+        # Open the PDF file using PyMuPDF
+        doc = fitz.open(pdf_file)
+
         # Iterate over each knowledge area and extract the corresponding text
         for ka in knowledge_areas:
             short_code = ka["short-ka"]
-            start_page = ka["begin-page"] - 1  # pdfminer is 0-indexed
+            long_name = ka["long-ka"]
+            start_page = ka["begin-page"] - 1  # PyMuPDF is 0-indexed
             end_page = ka["end-page"]
 
             print(f"Extracting {short_code} from pages {start_page + 1} to {end_page}...")
 
+            if start_page < 0 or end_page > len(doc) or start_page >= end_page:
+                print(f"Warning: Skipping {short_code} due to invalid page range.")
+                continue
+
             try:
                 # Extract text from the specified page range
-                text = extract_text(pdf_file, page_numbers=range(start_page, end_page))
+                text = ""
+                for page_num in range(start_page, end_page):
+                    text += doc[page_num].get_text()
             except Exception as e:
                 # Log and skip if extraction fails for a specific KA
                 print(f"Error extracting {short_code}: {e}")
                 continue
 
             # Save the extracted text to a separate .txt file
-            long_name = ka["long-ka"].replace(" ", "_")
-            output_file = os.path.join(output_dir, f"{short_code}_{long_name}.txt")
+            safe_short_code = short_code.replace(" ", "_").replace("/", "-").replace(":", "_").replace("&", "and").replace("(", "").replace(")", "")
+            safe_long_name = long_name.replace(" ", "_").replace("/", "-").replace(":", "_").replace("&", "and").replace("–", "-").replace("(", "").replace(")", "")
+            output_file = os.path.join(output_dir, f"{safe_short_code}_{safe_long_name}.txt")
 
             with open(output_file, "w", encoding="utf-8") as out_file:
-                out_file.write(text)
+                out_file.write(text.strip())
 
             print(f"Saved to {os.path.abspath(output_file)}")
 
+        doc.close()
         return True
 
     except FileNotFoundError as e:
@@ -79,12 +80,19 @@ def extract_knowledge_areas(input_file, pdf_file, output_dir):
 
 def main():
     """
-    Main function to initiate the knowledge area text extraction process.
+    Main function to parse arguments and initiate the knowledge area text extraction process.
     """
-    if extract_knowledge_areas(INPUT_FILE, PDF_FILE, OUTPUT_DIR):
+    parser = argparse.ArgumentParser(description="Extract text by knowledge area from a CS2023 curriculum PDF.")
+    parser.add_argument("--input", required=True, help="Path to the knowledge_areas.json file")
+    parser.add_argument("--pdf", required=True, help="Path to the CS2023_Curriculum_Guidelines.pdf file")
+    parser.add_argument("--output", required=True, help="Directory where extracted .txt files will be saved")
+    
+    args = parser.parse_args()
+
+    if extract_knowledge_areas(args.input, args.pdf, args.output):
         sys.exit(0)  # Exit with success code
     else:
-        sys.exit(1)  # # Exit with failure code 
+        sys.exit(1)  # Exit with failure code
 
 
 if __name__ == "__main__":

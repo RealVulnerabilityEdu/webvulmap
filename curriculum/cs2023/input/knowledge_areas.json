@@ -10,5 +10,35 @@
     "long-ka": "Security and Privacy",
     "begin-page": 16,
     "end-page": 20
+  },
+  {
+    "short-ka": "AI-Core",
+    "long-ka": "Artificial Intelligence (Core)",
+    "begin-page": 21,
+    "end-page": 35
+  },
+  {
+    "short-ka": "AI-Adv",
+    "long-ka": "Artificial Intelligence (Advanced)",
+    "begin-page": 36,
+    "end-page": 50
+  },
+  {
+    "short-ka": "HCI",
+    "long-ka": "Human–Computer Interaction",
+    "begin-page": 51,
+    "end-page": 51
+  },
+  {
+    "short-ka": "DS&ML",
+    "long-ka": "Data Science & Machine Learning – Introduction",
+    "begin-page": 52,
+    "end-page": 66
+  },
+  {
+    "short-ka": "IR:Found",
+    "long-ka": "Information Retrieval: Foundations & Practice",
+    "begin-page": 67,
+    "end-page": 67
   }
 ]
