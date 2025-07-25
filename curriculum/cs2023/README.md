@@ -12,15 +12,16 @@ Each KA is defined by its page range and name in a JSON input file. The script w
 
 ## Project Structure:
 
+```
 curriculum/cs2023/
 ├── input/
 │   └── knowledge_areas.json   # Metadata describing each KA
-├── output/  (auto-created)    # Output directory for extracted text files       
-├── CS2023_Curriculum_Guidelines.pdf  # Source PDF()
+├── output/  (auto-created)    # Output directory for extracted text files
+├── CS2023_Curriculum_Guidelines.pdf  # Source PDF
 ├── extract_ka_sections.py      # Main extraction script (PyMuPDF-based)
 ├── download_cs2023_guidelines.py     # Script to download the official PDF
 └── features/                   # Gherkin feature files for behavior tests
-
+```
 
 ---
 
