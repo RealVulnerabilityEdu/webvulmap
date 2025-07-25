@@ -1,44 +1,104 @@
 [
   {
-    "short-ka": "SE",
-    "long-ka": "Software Engineering",
-    "begin-page": 10,
-    "end-page": 15
+    "short-ka": "AI",
+    "long-ka": "Artificial Intelligence",
+    "begin-page": 22,
+    "end-page": 42
   },
   {
-    "short-ka": "SP",
-    "long-ka": "Security and Privacy",
-    "begin-page": 16,
-    "end-page": 20
+    "short-ka": "AL",
+    "long-ka": "Algorithmic Foundations",
+    "begin-page": 43,
+    "end-page": 54
   },
   {
-    "short-ka": "AI-Core",
-    "long-ka": "Artificial Intelligence (Core)",
-    "begin-page": 21,
-    "end-page": 35
+    "short-ka": "AR",
+    "long-ka": "Architecture and Organization",
+    "begin-page": 55,
+    "end-page": 65
   },
   {
-    "short-ka": "AI-Adv",
-    "long-ka": "Artificial Intelligence (Advanced)",
-    "begin-page": 36,
-    "end-page": 50
+    "short-ka": "DM",
+    "long-ka": "Data Management",
+    "begin-page": 66,
+    "end-page": 78
+  },
+  {
+    "short-ka": "FPL",
+    "long-ka": "Foundations of Programming Languages",
+    "begin-page": 79,
+    "end-page": 103
+  },
+  {
+    "short-ka": "GIT",
+    "long-ka": "Graphics and Interactive Techniques",
+    "begin-page": 104,
+    "end-page": 123
   },
   {
     "short-ka": "HCI",
-    "long-ka": "Human–Computer Interaction",
-    "begin-page": 51,
-    "end-page": 51
+    "long-ka": "Human-Computer Interaction",
+    "begin-page": 124,
+    "end-page": 134
   },
   {
-    "short-ka": "DS&ML",
-    "long-ka": "Data Science & Machine Learning – Introduction",
-    "begin-page": 52,
-    "end-page": 66
+    "short-ka": "MSF",
+    "long-ka": "Mathematical and Statistical Foundations",
+    "begin-page": 135,
+    "end-page": 145
   },
   {
-    "short-ka": "IR:Found",
-    "long-ka": "Information Retrieval: Foundations & Practice",
-    "begin-page": 67,
-    "end-page": 67
+    "short-ka": "NC",
+    "long-ka": "Networking and Communication",
+    "begin-page": 146,
+    "end-page": 151
+  },
+  {
+    "short-ka": "OS",
+    "long-ka": "Operating Systems",
+    "begin-page": 152,
+    "end-page": 165
+  },
+  {
+    "short-ka": "PDC",
+    "long-ka": "Parallel and Distributed Computing",
+    "begin-page": 166,
+    "end-page": 177
+  },
+  {
+    "short-ka": "SDF",
+    "long-ka": "Software Development Fundamentals",
+    "begin-page": 178,
+    "end-page": 184
+  },
+  {
+    "short-ka": "SE",
+    "long-ka": "Software Engineering",
+    "begin-page": 185,
+    "end-page": 200
+  },
+  {
+    "short-ka": "SEC",
+    "long-ka": "Security",
+    "begin-page": 201,
+    "end-page": 213
+  },
+  {
+    "short-ka": "SEP",
+    "long-ka": "Society, Ethics and Professionalism",
+    "begin-page": 214,
+    "end-page": 233
+  },
+  {
+    "short-ka": "SF",
+    "long-ka": "Systems Fundamentals",
+    "begin-page": 234,
+    "end-page": 242
+  },
+  {
+    "short-ka": "SPD",
+    "long-ka": "Specialized Platform Development",
+    "begin-page": 243,
+    "end-page": 257
   }
 ]
