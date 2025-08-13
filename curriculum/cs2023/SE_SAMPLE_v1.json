@@ -1,0 +1,17 @@
+{
+  "knowledge_area": {
+    "name": "Software Engineering",
+    "code": "SE"
+  },
+  "description": "Software engineering is the discipline concerned with the application of theory, knowledge, and practice to effectively and efficiently build reliable software systems that satisfy the needs of customers and users.",
+  "sections": [
+    {
+      "title": "SE/Software Processes",
+      "content_as_text": "This section covers the fundamentals of software processes, including different lifecycle models like waterfall, iterative, and agile. Key topics include requirements engineering, process modeling, and process improvement. Learning outcomes focus on the ability to select and justify an appropriate software process for a given project."
+    },
+    {
+      "title": "SE/Software Design",
+      "content_as_text": "This section focuses on the principles of software design, including architectural patterns, design patterns, and component-level design. Students will learn about concepts like coupling, cohesion, and modularity. Learning outcomes include creating and documenting a software design for a medium-sized software system."
+    }
+  ]
+}
