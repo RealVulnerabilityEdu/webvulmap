@@ -4,6 +4,39 @@
 2. "Which potential cwes can be relevant to the topic {2023_ka.json}?" (give multiple relevant potential cwes if a single strong one is not found)
 3. "Which cwe represents a vulnerability that can occur in risky software related to {2023_ka.json}?"
 
+## Evaluating Generative AI Libraries
+### LangChain
+**What it is**
+
+**Capability**
+
+**Documentation/tutorials**
+
+**Development and user base**
+
+**Affordability**
+
+### CrewAI
+**What it is**
+- a framework for building multi-agent AI system in **Python**
+- **Open source** so you can see how it works, inspect it, run it yourself, modify it, share it, etc.
+
+**Capability**
+- open source and in python means you can **run it locally**
+- allows for **tracing** so you can see the behavior of the LLMs before they respond
+
+**Documentation/tutorials**
+- guides for quickstarts, installation, agents, flows, prompt customization
+- example and community forums for **questions and concerns**
+
+**Development and user base**
+- over 100k certified developers
+- about 2k active contributors
+
+**Affordability**
+- open source core for small scale development and prototypes if **free**
+- **paid plans** available for production, large scale development, and enterprise features
+
 ## References
 ### For general prompt engineering ex.zero-shot, few-shot, chain-of-thought, etc.
 1. Prompt engineering guide: https://www.promptingguide.ai/techniques
