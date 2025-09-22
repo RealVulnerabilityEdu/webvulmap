@@ -1,3 +1,5 @@
+"""Mapping Knowledge Unit to CWEs."""
+
 import json
 import subprocess
 import time
@@ -7,15 +9,18 @@ OUTPUT_JSON = "cwe_mappings4.json"
 MODEL = "mistral"
 SLEEP_BETWEEN_CALLS = 1.5  # seconds
 
+
 def query_model(prompt, model=MODEL):
     result = subprocess.run(
         ["ollama", "run", model, prompt],
         capture_output=True,
         text=True,
         encoding="utf-8",
-        errors="replace"
+        errors="replace",
+        check=True,
     )
     return result.stdout.strip()
+
 
 def build_prompt(ka, ku):
     return f"""
@@ -30,8 +35,9 @@ Format:
 CWE-ID: CWE Title — Reason
 """
 
+
 def main():
-    with open(INPUT_JSON, 'r', encoding='utf-8') as f:
+    with open(INPUT_JSON, "r", encoding="utf-8") as f:
         ka_data = json.load(f)
 
     output = {}
@@ -47,10 +53,11 @@ def main():
             output[ka][ku] = response.splitlines()
             time.sleep(SLEEP_BETWEEN_CALLS)  # throttle to avoid overload
 
-    with open(OUTPUT_JSON, 'w', encoding='utf-8') as f:
+    with open(OUTPUT_JSON, "w", encoding="utf-8") as f:
         json.dump(output, f, indent=4, ensure_ascii=False)
 
     print(f"\n✅ CWE mappings saved to {OUTPUT_JSON}")
+
 
 if __name__ == "__main__":
     main()

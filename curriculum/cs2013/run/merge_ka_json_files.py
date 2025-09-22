@@ -17,7 +17,6 @@ This is the format.
 # Option + Command + L for reformat on mac
 import json
 
-
 # Input list for the json files
 ka_list = [
     "cs2013_web_final_sf.json",
@@ -25,10 +24,7 @@ ka_list = [
     # manually add the rest of the json files here
 ]
 
-all_dict = {
-    "curriculum": "cs2013",
-    "knowledge-areas": []
-}
+all_dict = {"curriculum": "cs2013", "knowledge-areas": []}
 
 for json_file in ka_list:
     with open(json_file, "r") as f:

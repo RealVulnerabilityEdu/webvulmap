@@ -2,9 +2,9 @@ name: Python application
 
 on:
   push:
-    branches: ["main"]
+    branches: [main]
   pull_request:
-    branches: ["main"]
+    branches: [main]
 
 permissions:
   contents: read
@@ -15,6 +15,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
       - name: Set up Python 3.11
         uses: actions/setup-python@v6
         with:
@@ -24,7 +26,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install pip-tools
           pip-compile curriculum/requirements.in > curriculum/requirements.txt
-          if [ -f curriculum/requirements.txt ]; then pip install -r curriculum/requirements.txt; fi
+          if [ -f curriculum/requirements.txt ]; then
+            pip install -r curriculum/requirements.txt;
+          fi
+      # - name: Analysing the code with pylint
+      #   run: |
+      #     for f in  $(git ls-files '*.py'); do
+      #       PYTHONPATH=src pylint "${f}" --fail-under=4.5;
+      #     done
       - name: Test with pytest
         run: |
-          PYTHONPATH=src pytest
+          PYTHONPATH=. pytest

@@ -2,8 +2,7 @@ import os
 from unittest.mock import patch
 
 import pandas as pd
-
-from src.app import display_cwes, load_data, process_data
+from secmapweb.app import display_cwes, load_data, process_data
 
 
 def test_process_data():

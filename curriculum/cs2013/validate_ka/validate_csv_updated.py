@@ -1,30 +1,37 @@
+"""Convert a Knowledge Area CSV file to a JSON file."""
+
 import argparse
 import csv
 import json
 import os
+
 from validate_ka import validate_csv_content
+
 
 # parses command line arguments
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Convert a CSV file into JSON format.")
-    parser.add_argument("--input-file", required=True, help="Path to the input CSV file.")
-    parser.add_argument("--output-file",help="Path to the output JSON file. If not specified, the JSON file will be created with the same name as the CSV file.")
+    parser.add_argument(
+        "--input-file", required=True, help="Path to the input CSV file."
+    )
+    parser.add_argument(
+        "--output-file",
+        help="Path to the output JSON file. If not specified, \
+              the JSON file will be created with the same name as the CSV file.",
+    )
     return parser.parse_args()
 
-# converts a csv file to json after validating.
-def csv_to_json(file_path, output_file):
 
-    if not validate_csv_content(file_path):
+# converts a csv file to json after validating.
+def csv_to_json(input_csv_path, output_json_path):
+    if not validate_csv_content(input_csv_path):
         print("CSV validation failed. Exiting.")
         return
 
-    all_dict = {
-        "curriculum": "cs2013",
-        "knowledge-areas": []
-    }
+    all_dict = {"curriculum": "cs2013", "knowledge-areas": []}
     # error handling
     try:
-        with open(file_path, 'r', encoding='utf-8', newline='') as csvfile:
+        with open(input_csv_path, "r", encoding="utf-8", newline="") as csvfile:
             reader = csv.DictReader(csvfile)
 
             for row in reader:
@@ -39,14 +46,21 @@ def csv_to_json(file_path, output_file):
                 except (KeyError, ValueError) as e:
                     print(f"Skipping row due to error: {e}")
 
-        with open(output_file, "w", encoding="utf-8") as jsonfile:
+        with open(output_json_path, "w", encoding="utf-8") as jsonfile:
             json.dump(all_dict, jsonfile, indent=2)
-        print(f"JSON file created: {output_file}")
+        print(f"JSON file created: {output_json_path}")
 
     except FileNotFoundError:
-        print(f"Error: The file '{file_path}' was not found.")
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}")
+        print(f"Error: The file '{input_csv_path}' was not found.")
+    except PermissionError:
+        print(
+            f"Permission denied when accessing the file \
+                '{input_csv_path}' or '{output_json_path}'."
+        )
+    except json.JSONDecodeError as e:
+        print(f"JSON decoding error: {e}")
+    except csv.Error as e:
+        print(f"CSV error: {e}")
 
 
 if __name__ == "__main__":

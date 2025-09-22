@@ -1,20 +1,24 @@
+"""Representing CS Knowledge Area."""
+
 import json
 import os
 
 
 class KnowledgeArea:
+    """Representing CS Knowledge Area."""
+
     def __init__(self, ka):
         self._ka = ka
 
     @classmethod
-    def from_json(self, json_file):
-        with open(json_file, mode="rt") as f:
+    def from_json(cls, json_file):
+        with open(json_file, mode="rt", encoding="utf-8") as f:
             ka_list = json.load(f)
-            self.validate(ka_list)
+            cls.validate(ka_list)
             return KnowledgeArea(ka_list)
 
     @classmethod
-    def validate(self, ka_list):
+    def validate(cls, ka_list):
         assert isinstance(ka_list, list)
         for ka in ka_list:
             assert "ka" in ka
@@ -31,5 +35,7 @@ class KnowledgeArea:
 
 
 if __name__ == "__main__":
-    ka = KnowledgeArea.from_json(os.path.join(os.path.dirname(__file__), "ka.json"))
+    knowledge_area = KnowledgeArea.from_json(
+        os.path.join(os.path.dirname(__file__), "ka.json")
+    )
     print("tested")

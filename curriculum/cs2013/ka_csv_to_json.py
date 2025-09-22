@@ -1,10 +1,13 @@
+"""Convert Knowledge Area CSV file to JSON file."""
+
 # Option + Command + L for reformat on mac
 
 import argparse
 import csv
 import json
-import os
+
 from validate_ka import validate_csv_content
+
 # File name, method name
 
 
@@ -19,45 +22,42 @@ parser.add_argument(
 )
 args = parser.parse_args()  # Store the parsed arguments
 
-file_path = args.input_file
-output_file = args.output_file
-
+in_file = args.input_file
+out_file = args.output_file
 
 
 # Function to convert the CSV file into a JSON file
-def csv_to_json(file_path, output_file):
+def csv_to_json(input_csv_file, output_json_file):
 
     # Validate CSV file
-    if not validate_csv_content(file_path):
-        print("CSV validation failed.") #returns if validation csv fails.
+    if not validate_csv_content(input_csv_file):
+        print("CSV validation failed.")  # returns if validation csv fails.
         return
 
     # Dictionary to store the final JSON structure
-    all_dict = {
-        "curriculum": "cs2013",
-        "knowledge-areas": []
-    }
+    all_dict = {"curriculum": "cs2013", "knowledge-areas": []}
 
     # Reading in the CSV
-    with open(file_path, 'r') as csvfile:
+    with open(input_csv_file, "r", encoding="utf-8") as csvfile:
         reader = csv.DictReader(csvfile)
 
         for row in reader:
             ka_data = {
-                "short-ka": row['short_ka'],  # Short name of the knowledge area
-                "long-ka": row['ka'],  # Long name of the knowledge area
-                "begin-page": int(row['page_begin']),  # Start page number
-                "end-page": int(row['page_end'])  # End page number
-                # page read in as ints, by default they are strings as that will be invalid.
+                "short-ka": row["short_ka"],  # Short name of the knowledge area
+                "long-ka": row["ka"],  # Long name of the knowledge area
+                "begin-page": int(row["page_begin"]),  # Start page number
+                "end-page": int(row["page_end"]),  # End page number
+                # page read in as ints, by default they are strings as
+                # that will be invalid.
             }
 
             all_dict["knowledge-areas"].append(ka_data)
             # .append vs .extend
 
     # Output
-    with open(output_file, 'w') as jsonfile:
+    with open(output_json_file, "w", encoding="utf-8") as jsonfile:
         json.dump(all_dict, jsonfile, indent=2)
     print("JSON file created.")
 
 
-csv_to_json(file_path, output_file)
+csv_to_json(in_file, out_file)

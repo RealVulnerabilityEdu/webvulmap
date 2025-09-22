@@ -80,7 +80,14 @@
         "text": { "type": "string" },
         "cognitive_level": {
           "type": "string",
-          "enum": ["Remember", "Understand", "Apply", "Analyze", "Evaluate", "Create"]
+          "enum": [
+            "Remember",
+            "Understand",
+            "Apply",
+            "Analyze",
+            "Evaluate",
+            "Create"
+          ]
         }
       },
       "additionalProperties": false
@@ -146,7 +153,10 @@
       "required": ["needs_review", "reasons", "notes"],
       "properties": {
         "needs_review": { "type": "boolean" },
-        "reasons": { "type": "array", "items": { "type": "string", "pattern": "^[a-z0-9-]+$" } },
+        "reasons": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[a-z0-9-]+$" }
+        },
         "notes": { "type": "string" }
       },
       "additionalProperties": false
@@ -154,7 +164,19 @@
 
     "section": {
       "type": "object",
-      "required": ["id", "title", "order", "summary", "topics", "learning_outcomes", "bullets", "crossrefs", "qa_flags", "source_loc", "subsections"],
+      "required": [
+        "id",
+        "title",
+        "order",
+        "summary",
+        "topics",
+        "learning_outcomes",
+        "bullets",
+        "crossrefs",
+        "qa_flags",
+        "source_loc",
+        "subsections"
+      ],
       "properties": {
         "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
         "ka_code": { "type": "string", "pattern": "^[A-Z]{2,5}$" },

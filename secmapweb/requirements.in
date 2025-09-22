@@ -1,0 +1,7 @@
+loguru
+numpy
+pandas
+st-pages
+streamlit
+typing_extensions
+urllib3

@@ -1,4 +1,5 @@
 import os
+
 import numpy as np
 import pandas as pd
 
@@ -6,7 +7,9 @@ import pandas as pd
 def main():
     mapping_fn = os.path.join("webknwlmap", "curriculum", "data", "cs2013_ku_cwe.csv")
     cs2013_fn = os.path.join("webknwlmap", "curriculum", "data", "cs2013_web_final.csv")
-    output_fn = os.path.join("webknwlmap", "curriculum", "data", "cs2013_web_final_cwe.csv")
+    output_fn = os.path.join(
+        "webknwlmap", "curriculum", "data", "cs2013_web_final_cwe.csv"
+    )
     mapping_df = pd.read_csv(mapping_fn, dtype=str)
     cs2013_df = pd.read_csv(cs2013_fn, dtype=str)
     df = pd.merge(
@@ -17,8 +20,8 @@ def main():
         how="inner",
     )
     df = df.replace(np.nan, "")
-    df.drop(columns=['Topic_y'], inplace=True)
-    df.rename(columns={'Topic_x': 'Topic'}, inplace=True)
+    df.drop(columns=["Topic_y"], inplace=True)
+    df.rename(columns={"Topic_x": "Topic"}, inplace=True)
     df.to_csv(
         output_fn,
         index=False,

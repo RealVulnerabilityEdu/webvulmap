@@ -1,6 +1,8 @@
+"""Generate mapping CSV file for human validation."""
+
+import csv
 import json
 import random
-import csv
 import re
 from pathlib import Path
 
@@ -24,16 +26,18 @@ for entry in raw_entries:
         cwe_entries.append(f"{cwe_id}: {cwe_name.strip()}")
 
 # Prepare CSV data
-csv_rows = [["Knowledge Area Name", knowledge_area],
-            ["Knowledge Unit", knowledge_unit],
-            ["CWE ID and Name", "Accept", "Reject", "Why"]]
+csv_rows = [
+    ["Knowledge Area Name", knowledge_area],
+    ["Knowledge Unit", knowledge_unit],
+    ["CWE ID and Name", "Accept", "Reject", "Why"],
+]
 
 for cwe in cwe_entries:
     csv_rows.append([cwe, "", "", ""])
 
 # Write to CSV file
 output_csv_path = "random_knowledge_cwe.csv"
-with open(output_csv_path, "w", newline='', encoding='utf-8') as f:
+with open(output_csv_path, "w", newline="", encoding="utf-8") as f:
     writer = csv.writer(f)
     writer.writerows(csv_rows)
 

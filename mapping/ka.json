@@ -1,361 +1,425 @@
 [
-    {
-        "ka": "Software Development Fundamentals",
-        "shortka": "SDF",
-        "units": [
-            {
-                "ku": "Algorithms and Design",
-                "topics": [
-                    {
-                        "topic": "The concept and properties of algorithms",
-                        "subtopics": [
-                            {
-                                "subtopic": "Informal comparison of algorithm efficiency (e.g., operation counts)"
-                            }
-                        ]
-                    },
-                    {
-                        "topic": "The role of algorithms in the problem-solving process"
-                    },
-                    {
-                        "topic": "Problem-solving strategies",
-                        "subtopics": [
-                            {
-                                "subtopic": "Iterative and recursive mathematical functions"
-                            },
-                            {
-                                "subtopic": "Iterative and recursive traversal of data structures"
-                            },
-                            {
-                                "subtopic": "Divide-and-conquer strategies"
-                            }
-                        ]
-                    },
-                    {
-                        "topic": "Fundamental design concepts and principles",
-                        "subtopics": [
-                            {
-                                "subtopic": "Abstraction"
-                            },
-                            {
-                                "subtopic": "Program decomposition"
-                            },
-                            {
-                                "subtopic": "Encapsulation and information hiding"
-                            },
-                            {
-                                "subtopic": "Separation of behavior and implementation"
-                            }
-                        ]
-                    }
-                ],
-                "outcomes": [
-                    "Discuss the importance of algorithms in the problem-solving process. [Familiarity]",
-                    "Discuss how a problem may be solved by multiple algorithms, each with different properties. [Familiarity]",
-                    "Create algorithms for solving simple problems. [Usage]",
-                    "Use a programming language to implement, test, and debug algorithms for solving simple problems. [Usage]",
-                    "Implement, test, and debug simple recursive functions and procedures. [Usage]",
-                    "Determine whether a recursive or iterative solution is most appropriate for a problem. [Assessment]",
-                    "Implement a divide-and-conquer algorithm for solving a problem. [Usage]",
-                    "Apply the techniques of decomposition to break a program into smaller pieces. [Usage]",
-                    "Identify the data components and behaviors of multiple abstract data types. [Usage]",
-                    "Implement a coherent abstract data type, with loose coupling between components and behaviors. [Usage]",
-                    "Identify the relative strengths and weaknesses among multiple designs or implementations for a problem. [Assessment]"
-                ]
-            },
-            {
-                "ku": "Fundamental Programming Concepts",
-                "topics": [
-                    {
-                        "topic": "Basic syntax and semantics of a higher-level language"
-                    },
-                    {
-                        "topic": "Variables and primitive data types (e.g., numbers, characters, Booleans)"
-                    },
-                    {
-                        "topic": "Expressions and assignments"
-                    },
-                    {
-                        "topic": "Simple I/O including file I/O"
-                    },
-                    {
-                        "topic": "Conditional and iterative control structures"
-                    },
-                    {
-                        "topic": "Functions and parameter passing"
-                    },
-                    {
-                        "topic": "The concept of recursion"
-                    }
-                ],
-                "outcomes": [
-                    "Analyze and explain the behavior of simple programs involving the fundamental programming constructs variables, expressions, assignments, I/O, control constructs, functions, parameter passing, and recursion. [Assessment]",
-                    "Identify and describe uses of primitive data types. [Familiarity]",
-                    "Write programs that use primitive data types. [Usage]",
-                    "Modify and expand short programs that use standard conditional and iterative control structures and functions. [Usage]",
-                    "Design, implement, test, and debug a program that uses each of the following fundamental programming constructs: basic computation, simple I/O, standard conditional and iterative structures, the definition of functions, and parameter passing. [Usage]",
-                    "Write a program that uses file I/O to provide persistence across multiple executions. [Usage]",
-                    "Choose appropriate conditional and iteration constructs for a given programming task. [Assessment]",
-                    "Describe the concept of recursion and give examples of its use. [Familiarity]",
-                    "Identify the base case and the general case of a recursively-defined problem. [Assessment]"
-                ]
-            },
-            {
-                "ku": "Fundamental Data Structures",
-                "topics": [
-                    { "topic": "Arrays" },
-                    { "topic": "Records/structs (heterogeneous aggregates)" },
-                    { "topic": "Strings and string processing" },
-                    { "topic": "Abstract data types and their implementation",
-                      "subtopics": [
-                        { "subtopic": "Stacks" }, 
-                        { "subtopic": "Queues" }, 
-                        { "subtopic": "Priority queues" },
-                        { "subtopic": "Sets" },
-                        { "subtopic": "Maps" }
-                      ]
-                    },
-                    { "topic": "References and aliasing" },
-                    { "topic": "Linked lists" },
-                    { "topic": "Strategies for choosing the appropriate data structure" }
-                ],
-                "outcomes": [
-                    "Discuss the appropriate use of built-in data structures. [Familiarity]", 
-                    "Describe common applications for each of the following data structures: stack, queue, priority queue, set, and map. [Familiarity]", 
-                    "Write programs that use each of the following data structures: arrays, records/structs, strings, linked lists, stacks, queues, sets, and maps. [Usage]", 
-                    "Compare alternative implementations of data structures with respect to performance. [Assessment]", 
-                    "Describe how references allow for objects to be accessed in multiple ways. [Familiarity]", 
-                    "Compare and contrast the costs and benefits of dynamic and static data structure implementations. [Assessment]", 
-                    "Choose the appropriate data structure for modeling a given problem. [Assessment]"
-                ]
-            },
-            {
+  {
+    "ka": "Software Development Fundamentals",
+    "shortka": "SDF",
+    "units": [
+      {
+        "ku": "Algorithms and Design",
+        "topics": [
+          {
+            "topic": "The concept and properties of algorithms",
+            "subtopics": [
+              {
+                "subtopic": "Informal comparison of algorithm efficiency (e.g., operation counts)"
+              }
+            ]
+          },
+          {
+            "topic": "The role of algorithms in the problem-solving process"
+          },
+          {
+            "topic": "Problem-solving strategies",
+            "subtopics": [
+              {
+                "subtopic": "Iterative and recursive mathematical functions"
+              },
+              {
+                "subtopic": "Iterative and recursive traversal of data structures"
+              },
+              {
+                "subtopic": "Divide-and-conquer strategies"
+              }
+            ]
+          },
+          {
+            "topic": "Fundamental design concepts and principles",
+            "subtopics": [
+              {
+                "subtopic": "Abstraction"
+              },
+              {
+                "subtopic": "Program decomposition"
+              },
+              {
+                "subtopic": "Encapsulation and information hiding"
+              },
+              {
+                "subtopic": "Separation of behavior and implementation"
+              }
+            ]
+          }
+        ],
+        "outcomes": [
+          "Discuss the importance of algorithms in the problem-solving process. [Familiarity]",
+          "Discuss how a problem may be solved by multiple algorithms, each with different properties. [Familiarity]",
+          "Create algorithms for solving simple problems. [Usage]",
+          "Use a programming language to implement, test, and debug algorithms for solving simple problems. [Usage]",
+          "Implement, test, and debug simple recursive functions and procedures. [Usage]",
+          "Determine whether a recursive or iterative solution is most appropriate for a problem. [Assessment]",
+          "Implement a divide-and-conquer algorithm for solving a problem. [Usage]",
+          "Apply the techniques of decomposition to break a program into smaller pieces. [Usage]",
+          "Identify the data components and behaviors of multiple abstract data types. [Usage]",
+          "Implement a coherent abstract data type, with loose coupling between components and behaviors. [Usage]",
+          "Identify the relative strengths and weaknesses among multiple designs or implementations for a problem. [Assessment]"
+        ]
+      },
+      {
+        "ku": "Fundamental Programming Concepts",
+        "topics": [
+          {
+            "topic": "Basic syntax and semantics of a higher-level language"
+          },
+          {
+            "topic": "Variables and primitive data types (e.g., numbers, characters, Booleans)"
+          },
+          {
+            "topic": "Expressions and assignments"
+          },
+          {
+            "topic": "Simple I/O including file I/O"
+          },
+          {
+            "topic": "Conditional and iterative control structures"
+          },
+          {
+            "topic": "Functions and parameter passing"
+          },
+          {
+            "topic": "The concept of recursion"
+          }
+        ],
+        "outcomes": [
+          "Analyze and explain the behavior of simple programs involving the fundamental programming constructs variables, expressions, assignments, I/O, control constructs, functions, parameter passing, and recursion. [Assessment]",
+          "Identify and describe uses of primitive data types. [Familiarity]",
+          "Write programs that use primitive data types. [Usage]",
+          "Modify and expand short programs that use standard conditional and iterative control structures and functions. [Usage]",
+          "Design, implement, test, and debug a program that uses each of the following fundamental programming constructs: basic computation, simple I/O, standard conditional and iterative structures, the definition of functions, and parameter passing. [Usage]",
+          "Write a program that uses file I/O to provide persistence across multiple executions. [Usage]",
+          "Choose appropriate conditional and iteration constructs for a given programming task. [Assessment]",
+          "Describe the concept of recursion and give examples of its use. [Familiarity]",
+          "Identify the base case and the general case of a recursively-defined problem. [Assessment]"
+        ]
+      },
+      {
+        "ku": "Fundamental Data Structures",
+        "topics": [
+          { "topic": "Arrays" },
+          { "topic": "Records/structs (heterogeneous aggregates)" },
+          { "topic": "Strings and string processing" },
+          {
+            "topic": "Abstract data types and their implementation",
+            "subtopics": [
+              { "subtopic": "Stacks" },
+              { "subtopic": "Queues" },
+              { "subtopic": "Priority queues" },
+              { "subtopic": "Sets" },
+              { "subtopic": "Maps" }
+            ]
+          },
+          { "topic": "References and aliasing" },
+          { "topic": "Linked lists" },
+          { "topic": "Strategies for choosing the appropriate data structure" }
+        ],
+        "outcomes": [
+          "Discuss the appropriate use of built-in data structures. [Familiarity]",
+          "Describe common applications for each of the following data structures: stack, queue, priority queue, set, and map. [Familiarity]",
+          "Write programs that use each of the following data structures: arrays, records/structs, strings, linked lists, stacks, queues, sets, and maps. [Usage]",
+          "Compare alternative implementations of data structures with respect to performance. [Assessment]",
+          "Describe how references allow for objects to be accessed in multiple ways. [Familiarity]",
+          "Compare and contrast the costs and benefits of dynamic and static data structure implementations. [Assessment]",
+          "Choose the appropriate data structure for modeling a given problem. [Assessment]"
+        ]
+      },
+      {
+        "ku": "Development Methods",
+        "topics": [
+          { "topic": "Program comprehension" },
+          {
+            "topic": "Program correctness",
+            "subtopics": [
+              { "subtopic": "Types of errors (syntax, logic, run-time)" },
+              { "subtopic": "The concept of a specification" },
+              {
+                "subtopic": "Defensive programming (e.g. secure coding, exception handling)"
+              },
+              { "subtopic": "Code reviews" },
+              { "subtopic": "Testing fundamentals and test-case generation" },
+              {
+                "subtopic": "The role and the use of contracts, including pre- and post-conditions"
+              },
+              { "subtopic": "Unit testing" }
+            ]
+          },
+          { "topic": "Simple refactoring" },
+          {
+            "topic": "Modern programming environments",
+            "subtopics": [
+              { "subtopic": "Code search" },
+              {
+                "subtopic": "Programming using library components and their APIs"
+              }
+            ]
+          },
+          { "topic": "Debugging strategies" },
+          { "topic": "Documentation and program style" }
+        ],
+        "outcomes": [
+          "Trace the execution of a variety of code segments and write summaries of their computations. [Assessment]",
+          "Explain why the creation of correct program components is important in the production of high-quality software. [Familiarity]",
+          "Identify common coding errors that lead to insecure programs (e.g., buffer overflows, memory leaks, malicious code) and apply strategies for avoiding such errors. [Usage]",
+          "Conduct a personal code review (focused on common coding errors) on a program component using a provided checklist. [Usage]",
+          "Contribute to a small-team code review focused on component correctness. [Usage]",
+          "Describe how a contract can be used to specify the behavior of a program component. [Familiarity]",
+          "Refactor a program by identifying opportunities to apply procedural abstraction. [Usage]",
+          "Apply a variety of strategies to the testing and debugging of simple programs. [Usage]",
+          "Construct, execute and debug programs using a modern IDE and associated tools such as unit testing tools and visual debuggers. [Usage]",
+          "Construct and debug programs using the standard libraries available with a chosen programming language.  [Usage]",
+          "Analyze the extent to which another programmer’s code meets documentation and programming style standards. [Assessment]",
+          "Apply consistent documentation and program style standards that contribute to the readability and maintainability of software. [Usage]"
+        ]
+      }
+    ]
+  },
+  {
+    "ka": "Programming Languages",
+    "shortka": "PL"
+  },
+  {
+    "ka": "Software Engineering",
+    "shortka": "SE",
+    "units": [
+      {
+        "ku": "Software Processes",
+        "topics": [
+          {
+            "topic": "Systems level considerations, i.e., the interaction of software with its intended environment (crossreference IAS/Secure Software Engineering)",
+            "xref": { "shortka": "IAS", "topic": "Secure Software Engineering" }
+          },
+          {
+            "topic": "Introduction to software process models (e.g., waterfall, incremental, agile)",
+            "subtopics": [
+              { "subtopic": "Activities within software lifecycles" }
+            ]
+          },
+          {
+            "topic": "Programming in the large vs. individual programming"
+          },
+          {
+            "topic": "Evaluation of software process models"
+          },
+          {
+            "topic": "Software quality concepts"
+          },
+          {
+            "topic": "Process improvement"
+          },
+          {
+            "topic": "Software process capability maturity models"
+          },
+          {
+            "topioc": "Software process measurements"
+          }
+        ],
+        "outcomes": [
+          "Describe how software can interact with and participate in various systems including information management, embedded, process control, and communications systems. [Familiarity]",
+          "Describe the relative advantages and disadvantages among several major process models (e.g., waterfall, iterative, and agile). [Familiarity]",
+          "Describe the different practices that are key components of various process models. [Familiarity]",
+          "Differentiate among the phases of software development. [Familiarity]",
+          "Describe how programming in the large differs from individual efforts with respect to understanding a large code base, code reading, understanding builds, and understanding context of changes. [Familiarity]",
+          "Explain the concept of a software lifecycle and provide an example, illustrating its phases including the deliverables that are produced. [Familiarity]",
+          "Compare several common process models with respect to their value for development of particular classes of software systems taking into account issues such as requirement stability, size, and non-functional characteristics. [Usage]",
+          "Define software quality and describe the role of quality assurance activities in the software process. [Familiarity]",
+          "Describe the intent and fundamental similarities among process improvement approaches. [Familiarity]",
+          "Compare several process improvement models such as CMM, CMMI, CQI, Plan-Do-Check-Act, or ISO9000. [Assessment]",
+          "Assess a development effort and recommend potential changes by participating in process improvement (using a model such as PSP) or engaging in a project retrospective. [Usage]",
+          "Explain the role of process maturity models in process improvement. [Familiarity]",
+          "Describe several process metrics for assessing and controlling a project. [Familiarity]",
+          "Use project metrics to describe the current state of a project. [Usage]"
+        ]
+      }
+    ]
+  },
+  {
+    "ka": "Systems Fundamentals",
+    "shortka": "SF"
+  },
+  {
+    "ka": "Information Assurance and Security",
+    "shortka": "IAS",
+    "units": [
+      {
+        "ku": "Foundational Concepts in Security",
+        "topics": [
+          { "topic": "CIA (Confidentiality, Integrity, Availability)" },
+          {
+            "topic": "Concepts of risk, threats, vulnerabilities, and attack vectors (crosreference SE/Software Project Management/Risk)",
+            "xref": {
+              "shortka": "SE",
+              "topic": "Software Project Management",
+              "subtopic": "Risk"
+            }
+          },
+          {
+            "topic": "Authentication and authorization, access control (mandatory vs. discretionary)"
+          },
+          { "topic": "Concept of trust and trustworthiness" },
+          {
+            "topic": "Ethics (responsible disclosure). (crossreference SP/Professional Ethics/Accountability, responsibility and liability)",
+            "xref": {
+              "shortka": "SP",
+              "topic": "Professional Ethics",
+              "subtopic": "Accountability, responsibility and liability"
+            }
+          }
+        ],
+        "outcomes": [
+          "Analyze the tradeoffs of balancing key security properties (Confidentiality, Integrity, and Availability). [Usage]",
+          "Describe the concepts of risk, threats, vulnerabilities and attack vectors (including the fact that there is no such thing as perfect security). [Familiarity]",
+          "Explain the concepts of authentication, authorization, access control. [Familiarity]",
+          "Explain the concept of trust and trustworthiness. [Familiarity]",
+          "Describe important ethical issues to consider in computer security, including ethical issues associated with fixing or not fixing vulnerabilities and disclosing or not disclosing vulnerabilities. [Familiarity]"
+        ]
+      },
+      {
+        "ku": "Principles of Secure Design",
+        "topics": [
+          {
+            "topic": "Least privilege and isolation (cross-reference OS/Security and Protection/Policy/mechanism separation and SF/Virtualization and Isolation/Rationale for protection and predictable performance and PL/Language Translation and Execution/Memory management)",
+            "xrefs": [
+              {
+                "shortka": "OS",
+                "ku": "Security and Protection",
+                "topic": "Policy/mechanism separation"
+              },
+              {
+                "shortka": "SF",
+                "ku": "Virtualization and Isolation",
+                "topic": "Rationale for protection and predictable performance"
+              },
+              {
+                "shortka": "PL",
+                "ku": "Language Translation and Execution",
+                "topic": "Memory management"
+              }
+            ]
+          },
+          {
+            "topic": "Fail-safe defaults (cross-reference SE/Software Construction/Coding practices: techniques, idioms/patterns, mechanisms for building quality programs and SDF/Development Methods/Programming correctness)",
+            "xrefs": [
+              {
+                "shortka": "SE",
+                "ku": "Software Construction",
+                "topic": "Coding practices: techniques, idioms/patterns, mechanisms for building quality programs"
+              },
+              {
+                "shortka": "SDF",
                 "ku": "Development Methods",
-                "topics": [
-                    { "topic": "Program comprehension" },
-                    { "topic": "Program correctness",
-                      "subtopics": [
-                        { "subtopic": "Types of errors (syntax, logic, run-time)" },
-                        { "subtopic": "The concept of a specification" },
-                        { "subtopic": "Defensive programming (e.g. secure coding, exception handling)" },
-                        { "subtopic": "Code reviews" },
-                        { "subtopic": "Testing fundamentals and test-case generation" },
-                        { "subtopic": "The role and the use of contracts, including pre- and post-conditions" },
-                        { "subtopic": "Unit testing" }
-                      ]
-                    },
-                    { "topic": "Simple refactoring" },
-                    { "topic": "Modern programming environments",
-                      "subtopics": [
-                        { "subtopic": "Code search" },
-                        { "subtopic": "Programming using library components and their APIs" }
-                      ]
-                    },
-                    { "topic": "Debugging strategies" },
-                    { "topic": "Documentation and program style" }
-                ],
-                "outcomes": [
-                    "Trace the execution of a variety of code segments and write summaries of their computations. [Assessment]",
-                    "Explain why the creation of correct program components is important in the production of high-quality software. [Familiarity]",
-                    "Identify common coding errors that lead to insecure programs (e.g., buffer overflows, memory leaks, malicious code) and apply strategies for avoiding such errors. [Usage]",
-                    "Conduct a personal code review (focused on common coding errors) on a program component using a provided checklist. [Usage]",
-                    "Contribute to a small-team code review focused on component correctness. [Usage]",
-                    "Describe how a contract can be used to specify the behavior of a program component. [Familiarity]",
-                    "Refactor a program by identifying opportunities to apply procedural abstraction. [Usage]",
-                    "Apply a variety of strategies to the testing and debugging of simple programs. [Usage]",
-                    "Construct, execute and debug programs using a modern IDE and associated tools such as unit testing tools and visual debuggers. [Usage]",
-                    "Construct and debug programs using the standard libraries available with a chosen programming language.  [Usage]",
-                    "Analyze the extent to which another programmer’s code meets documentation and programming style standards. [Assessment]",
-                    "Apply consistent documentation and program style standards that contribute to the readability and maintainability of software. [Usage]"
-                ]
-            }
+                "topic": "Programming correctness"
+              }
+            ]
+          },
+          {
+            "topic": "Open design (cross-reference SE/Software Evolution/ Software development in the context of large, preexisting code bases)",
+            "xrefs": [
+              {
+                "shortka": "SE",
+                "ku": "Software Evolution",
+                "topic": "Software development in the context of large, preexisting code bases}"
+              }
+            ]
+          },
+          {
+            "topic": "End-to-end security (cross-reference SF/Reliability through Redundancy/How errors increase the longer the distance between the communicating entities; the end-to-end principle)",
+            "xrefs": [
+              {
+                "shortka": "SF",
+                "ku": "Reliability through Redundancy",
+                "topic": "How errors increase the longer the distance between the communicating entities; the end-to-end principle"
+              }
+            ]
+          },
+          {
+            "topic": "Defense in depth (e.g., defensive programming, layered defense)"
+          },
+          {
+            "topic": "Security by design (cross-reference SE/Software Design/System design principles)",
+            "xrefs": [
+              {
+                "shortka": "SE",
+                "ku": "Software Design",
+                "topic": "System design principles"
+              }
+            ]
+          },
+          {
+            "topic": "Tensions between security and other design goals"
+          },
+          {
+            "topic": "Complete mediation"
+          },
+          {
+            "topic": "Use of vetted security components"
+          },
+          {
+            "topic": "Economy of mechanism (reducing trusted computing base, minimize attack surface) (cross-reference SE/Software Design/System design principles and SE/Software Construction/Development context: \"green field\" vs. existing code base)",
+            "xrefs": [
+              {
+                "shortka": "SE",
+                "ku": "Software Design",
+                "topic": "System design principles"
+              },
+              {
+                "shortka": "SE",
+                "ku": "Software Construction",
+                "topic": "Development context: \"green field\" vs. existing code base"
+              }
+            ]
+          },
+          {
+            "topic": "Usable security (cross-reference HCI/Foundations/Cognitive models that inform interaction design)",
+            "xrefs": [
+              {
+                "shortka": "HCI",
+                "ku": "Foundations",
+                "topic": "Cognitive models that inform interaction design"
+              }
+            ]
+          },
+          {
+            "topic": "Security composability"
+          },
+          {
+            "topic": "Prevention, detection, and deterrence (cross-reference SF/Reliability through Redundancy/Distinction between bugs and faults and NC/Reliable Data Delivery/Error control and NC/Reliable Data Delivery/Flow control)",
+            "xrefs": [
+              {
+                "shortka": "SF",
+                "ku": "Reliability through Redundancy",
+                "topic": "Distinction between bugs and faults"
+              },
+              {
+                "shortka": "NC",
+                "ku": "Reliable Data Delivery",
+                "topic": "Error control and NC/Reliable Data Delivery/Flow control"
+              }
+            ]
+          }
+        ],
+        "outcomes": [
+          "Describe the principle of least privilege and isolation as applied to system design. [Familiarity]",
+          "Summarize the principle of fail-safe and deny-by-default. [Familiarity]",
+          "Discuss the implications of relying on open design or the secrecy of design for security. [Familiarity]",
+          "Explain the goals of end-to-end data security. [Familiarity]",
+          "Discuss the benefits of having multiple layers of defenses. [Familiarity]",
+          "For each stage in the lifecycle of a product, describe what security considerations should be evaluated. [Familiarity]",
+          "Describe the cost and tradeoffs associated with designing security into a product. [Familiarity]",
+          "Describe the concept of mediation and the principle of complete mediation. [Familiarity]",
+          "Describe standard components for security operations, and explain the benefits of their use instead of reinventing fundamentals operations. [Familiarity]",
+          "Explain the concept of trusted computing including trusted computing base and attack surface and the principle of minimizing trusted computing base. [Familiarity]",
+          "Discuss the importance of usability in security mechanism design. [Familiarity]",
+          "Describe security issues that arise at boundaries between multiple components. [Familiarity]",
+          "Identify the different roles of prevention mechanisms and detection/deterrence mechanisms. [Familiarity]"
         ]
-    },
-    {
-        "ka": "Programming Languages",
-        "shortka": "PL"
-    },
-    {   "ka": "Software Engineering",
-        "shortka": "SE",
-        "units": [
-            {
-                "ku": "Software Processes",
-                "topics": [
-                    {
-                        "topic": "Systems level considerations, i.e., the interaction of software with its intended environment (crossreference IAS/Secure Software Engineering)",
-                        "xref": { "shortka": "IAS", "topic": "Secure Software Engineering" }
-                    },
-                    {
-                        "topic": "Introduction to software process models (e.g., waterfall, incremental, agile)",
-                        "subtopics": [
-                            { "subtopic": "Activities within software lifecycles" }
-                        ]
-                    },
-                    {
-                        "topic": "Programming in the large vs. individual programming"
-                    },
-                    {
-                        "topic": "Evaluation of software process models"
-                    },
-                    {
-                        "topic": "Software quality concepts"
-                    },
-                    {
-                        "topic": "Process improvement"
-                    },
-                    {
-                        "topic": "Software process capability maturity models"
-                    },
-                    {
-                        "topioc": "Software process measurements"
-                    }
-                ],
-                "outcomes": [
-                    "Describe how software can interact with and participate in various systems including information management, embedded, process control, and communications systems. [Familiarity]",
-                    "Describe the relative advantages and disadvantages among several major process models (e.g., waterfall, iterative, and agile). [Familiarity]",
-                    "Describe the different practices that are key components of various process models. [Familiarity]",
-                    "Differentiate among the phases of software development. [Familiarity]",
-                    "Describe how programming in the large differs from individual efforts with respect to understanding a large code base, code reading, understanding builds, and understanding context of changes. [Familiarity]",
-                    "Explain the concept of a software lifecycle and provide an example, illustrating its phases including the deliverables that are produced. [Familiarity]",
-                    "Compare several common process models with respect to their value for development of particular classes of software systems taking into account issues such as requirement stability, size, and non-functional characteristics. [Usage]",
-                    "Define software quality and describe the role of quality assurance activities in the software process. [Familiarity]",
-                    "Describe the intent and fundamental similarities among process improvement approaches. [Familiarity]",
-                    "Compare several process improvement models such as CMM, CMMI, CQI, Plan-Do-Check-Act, or ISO9000. [Assessment]",
-                    "Assess a development effort and recommend potential changes by participating in process improvement (using a model such as PSP) or engaging in a project retrospective. [Usage]",
-                    "Explain the role of process maturity models in process improvement. [Familiarity]",
-                    "Describe several process metrics for assessing and controlling a project. [Familiarity]",
-                    "Use project metrics to describe the current state of a project. [Usage]"
-                ]
-            }
-        ]
-    },
-    {
-        "ka": "Systems Fundamentals",
-        "shortka": "SF"
-    },
-    {
-        "ka": "Information Assurance and Security",
-        "shortka": "IAS",
-        "units": [
-            {
-                "ku": "Foundational Concepts in Security",
-                "topics": [
-                    { "topic": "CIA (Confidentiality, Integrity, Availability)" },
-                    { 
-                        "topic": "Concepts of risk, threats, vulnerabilities, and attack vectors (crosreference SE/Software Project Management/Risk)",
-                        "xref": { "shortka": "SE", "topic": "Software Project Management", "subtopic": "Risk" }
-                    },
-                    { "topic": "Authentication and authorization, access control (mandatory vs. discretionary)" },
-                    { "topic": "Concept of trust and trustworthiness" },
-                    { 
-                        "topic": "Ethics (responsible disclosure). (crossreference SP/Professional Ethics/Accountability, responsibility and liability)",
-                        "xref": {"shortka": "SP", "topic": "Professional Ethics", "subtopic" :"Accountability, responsibility and liability" }
-                    }
-                ],
-                "outcomes": [
-                    "Analyze the tradeoffs of balancing key security properties (Confidentiality, Integrity, and Availability). [Usage]",
-                    "Describe the concepts of risk, threats, vulnerabilities and attack vectors (including the fact that there is no such thing as perfect security). [Familiarity]",
-                    "Explain the concepts of authentication, authorization, access control. [Familiarity]",
-                    "Explain the concept of trust and trustworthiness. [Familiarity]",
-                    "Describe important ethical issues to consider in computer security, including ethical issues associated with fixing or not fixing vulnerabilities and disclosing or not disclosing vulnerabilities. [Familiarity]"
-                ]
-            },
-            {
-                "ku": "Principles of Secure Design",
-                "topics": [
-                    { 
-                        "topic": "Least privilege and isolation (cross-reference OS/Security and Protection/Policy/mechanism separation and SF/Virtualization and Isolation/Rationale for protection and predictable performance and PL/Language Translation and Execution/Memory management)",
-                        "xrefs": [
-                            { "shortka": "OS", "ku": "Security and Protection", "topic": "Policy/mechanism separation" },
-                            { "shortka": "SF", "ku": "Virtualization and Isolation", "topic": "Rationale for protection and predictable performance" },
-                            { "shortka": "PL", "ku": "Language Translation and Execution", "topic": "Memory management" }
-                        ]
-                    },
-                    { 
-                        "topic": "Fail-safe defaults (cross-reference SE/Software Construction/Coding practices: techniques, idioms/patterns, mechanisms for building quality programs and SDF/Development Methods/Programming correctness)",
-                        "xrefs": [
-                            {
-                                "shortka": "SE",
-                                "ku": "Software Construction",
-                                "topic": "Coding practices: techniques, idioms/patterns, mechanisms for building quality programs"
-                            },
-                            {
-                                "shortka": "SDF",
-                                "ku": "Development Methods",
-                                "topic": "Programming correctness"
-                            }
-                        ] 
-                    },
-                    {
-                        "topic": "Open design (cross-reference SE/Software Evolution/ Software development in the context of large, preexisting code bases)",
-                        "xrefs": [
-                            {"shortka": "SE", "ku": "Software Evolution", "topic": "Software development in the context of large, preexisting code bases}" }
-                        ]
-                    },
-                    {
-                        "topic": "End-to-end security (cross-reference SF/Reliability through Redundancy/How errors increase the longer the distance between the communicating entities; the end-to-end principle)",
-                        "xrefs": [
-                            { "shortka": "SF", "ku": "Reliability through Redundancy", "topic": "How errors increase the longer the distance between the communicating entities; the end-to-end principle" }
-                        ]
-                    },
-                    {
-                        "topic": "Defense in depth (e.g., defensive programming, layered defense)"
-                    },
-                    {
-                        "topic": "Security by design (cross-reference SE/Software Design/System design principles)",
-                        "xrefs": [
-                            { "shortka": "SE", "ku": "Software Design", "topic": "System design principles" }
-                        ]
-                    },
-                    {
-                        "topic": "Tensions between security and other design goals"
-                    },
-                    {
-                        "topic": "Complete mediation"
-                    },
-                    {
-                        "topic": "Use of vetted security components"
-                    },
-                    {
-                        "topic": "Economy of mechanism (reducing trusted computing base, minimize attack surface) (cross-reference SE/Software Design/System design principles and SE/Software Construction/Development context: \"green field\" vs. existing code base)",
-                        "xrefs": [
-                            { "shortka": "SE", "ku": "Software Design", "topic": "System design principles" },
-                            { "shortka": "SE", "ku": "Software Construction", "topic": "Development context: \"green field\" vs. existing code base" }
-                        ]
-                    },
-                    {
-                        "topic": "Usable security (cross-reference HCI/Foundations/Cognitive models that inform interaction design)",
-                        "xrefs": [
-                            { "shortka": "HCI", "ku": "Foundations", "topic": "Cognitive models that inform interaction design" }
-                        ]
-                    },
-                    {                 
-                        "topic": "Security composability"
-                    },
-                    {
-                        "topic": "Prevention, detection, and deterrence (cross-reference SF/Reliability through Redundancy/Distinction between bugs and faults and NC/Reliable Data Delivery/Error control and NC/Reliable Data Delivery/Flow control)",
-                        "xrefs": [
-                            { "shortka": "SF", "ku": "Reliability through Redundancy", "topic": "Distinction between bugs and faults" },
-                            { "shortka": "NC", "ku": "Reliable Data Delivery", "topic": "Error control and NC/Reliable Data Delivery/Flow control" }
-                        ]
-                    }
-                ],
-                "outcomes": [
-                    "Describe the principle of least privilege and isolation as applied to system design. [Familiarity]",
-                    "Summarize the principle of fail-safe and deny-by-default. [Familiarity]",
-                    "Discuss the implications of relying on open design or the secrecy of design for security. [Familiarity]",
-                    "Explain the goals of end-to-end data security. [Familiarity]",
-                    "Discuss the benefits of having multiple layers of defenses. [Familiarity]",
-                    "For each stage in the lifecycle of a product, describe what security considerations should be evaluated. [Familiarity]",
-                    "Describe the cost and tradeoffs associated with designing security into a product. [Familiarity]",
-                    "Describe the concept of mediation and the principle of complete mediation. [Familiarity]",
-                    "Describe standard components for security operations, and explain the benefits of their use instead of reinventing fundamentals operations. [Familiarity]",
-                    "Explain the concept of trusted computing including trusted computing base and attack surface and the principle of minimizing trusted computing base. [Familiarity]",
-                    "Discuss the importance of usability in security mechanism design. [Familiarity]",
-                    "Describe security issues that arise at boundaries between multiple components. [Familiarity]",
-                    "Identify the different roles of prevention mechanisms and detection/deterrence mechanisms. [Familiarity]"
-                ]
-            }
-        ]
-    }
+      }
+    ]
+  }
 ]
