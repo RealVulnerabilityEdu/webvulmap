@@ -11,64 +11,79 @@
    related to {2023_ka.json}?"
 
 ## Evaluating Generative AI Libraries
+
 ### LangChain
-**What it is**
-- a framework, written in **Python and JavaScript**, for developing applications powered by large language models (LLMs)
-- **open source** and widely used in the LLM ecosystem
 
-**Capability**
-- enables chaining of LLMs, prompts, tools, and memory for complex tasks and supports integrations with APIs, databases, and external tools
-- provides modules for agents, **retrieval-augmented generation (RAG)**, and conversational memory
+1. What it is
+   - a framework, written in **Python and JavaScript**, for developing
+     applications powered by large language models (LLMs)
+   - **open source** and widely used in the LLM ecosystem
 
-**Debugging**
-- great for local dev and terminal-based debugging
-- allows for building of chains in modular pieces which helps isolate bugs
+1. Capability
+   - enables chaining of LLMs, prompts, tools, and memory for complex tasks and
+     supports integrations with APIs, databases, and external tools
+   - provides modules for agents, **retrieval-augmented generation (RAG)**, and
+     conversational memory
 
-**Suitability for mapping**
-- **strong fit**, especially for building modular, LLM-powered pipelines for curriculum-to-CWE mapping
-- reusable and parameterized templates help with reasoning and traceability
+1. Debugging
+   - great for local dev and terminal-based debugging
+   - allows for building of chains in modular pieces which helps isolate bugs
 
-**Documentation/tutorials**
-- extensive official documentation: https://python.langchain.com/docs/
-- quickstart guides, tutorials, and example projects
-- community forums and Discord for **support**
+1. Suitability for mapping
+   - **strong fit**, especially for building modular, LLM-powered pipelines for
+     curriculum-to-CWE mapping
+   - reusable and parameterized templates help with reasoning and traceability
 
-**Development and user base**
-- over 70k GitHub stars (as of 2024).
-- thousands of contributors and a large, active user community so it is frequently updated
+1. Documentation/tutorials
+   - [extensive official documentation](https://python.langchain.com/docs/)
+   - quickstart guides, tutorials, and example projects
+   - community forums and Discord for **support**
 
-**Affordability**
-- **free** and open source for core features and good starting point with free templates
-- some integrations may require **paid API keys** (e.g., OpenAI, Anthropic)
+1. Development and user base
+   - over 70k GitHub stars (as of 2024).
+   - thousands of contributors and a large, active user community so it is
+     frequently updated
+
+1. Affordability
+   - **free** and open source for core features and good starting point with
+     free templates
+   - some integrations may require **paid API keys** (e.g., OpenAI, Anthropic)
 
 ### CrewAI
-**What it is**
-- a framework for building multi-agent AI systems in **Python**
-- **open source** so you can see how it works, inspect it, run it yourself, modify it, share it, etc.
 
-**Capability**
-- open source and in python means you can **run it locally**
-- allows for **tracing** so you can see the behavior of the LLMs before they respond
+1. What it is
+   - a framework for building multi-agent AI systems in **Python**
+   - **open source** so you can see how it works, inspect it, run it yourself,
+     modify it, share it, etc.
 
-**Debugging**
-- no native debugging dashboard, however has debug logging with environmental variables
-- set "DEBUG = true" to generate logs including agent thoughts, tool invocations, and task transitions
+1. Capability
+   - open source and in python means you can **run it locally**
+   - allows for **tracing** so you can see the behavior of the LLMs before they
+     respond
 
-**Suitability for mapping**
-- suitable if **structured well**
-- requires careful setup and may face challenges due to ambiguity, data inconsistency, and limitations of LLM reasoning
+1. Debugging
+   - no native debugging dashboard, however has debug logging with environmental
+     variables
+   - set "DEBUG = true" to generate logs including agent thoughts, tool
+     invocations, and task transitions
 
-**Documentation/tutorials**
-- guides for quickstarts, installation, agents, flows, prompt customization
-- examples and community forums for **questions and concerns**
+1. Suitability for mapping
+   - suitable if **structured well**
+   - requires careful setup and may face challenges due to ambiguity, data
+     inconsistency, and limitations of LLM reasoning
 
-**Development and user base**
-- over 100k certified developers
-- about 2k active contributors
+1. Documentation/tutorials
+   - guides for quickstarts, installation, agents, flows, prompt customization
+   - examples and community forums for **questions and concerns**
 
-**Affordability**
-- open source core for small scale development and prototypes are **free**
-- **paid plans** available for production, large scale development, and enterprise features
+1. Development and user base
+   - over 100k certified developers
+   - about 2k active contributors
+
+1. Affordability
+   - open source core for small scale development and prototypes are **free**
+   - **paid plans** available for production, large scale development, and
+     enterprise features
 
 ## References
 
