@@ -10,6 +10,66 @@
 1. "Which cwe represents a vulnerability that can occur in risky software
    related to {2023_ka.json}?"
 
+## Evaluating Generative AI Libraries
+### LangChain
+**What it is**
+- a framework, written in **Python and JavaScript**, for developing applications powered by large language models (LLMs)
+- **open source** and widely used in the LLM ecosystem
+
+**Capability**
+- enables chaining of LLMs, prompts, tools, and memory for complex tasks and supports integrations with APIs, databases, and external tools
+- provides modules for agents, **retrieval-augmented generation (RAG)**, and conversational memory
+
+**Debugging**
+- great for local dev and terminal-based debugging
+- allows for building of chains in modular pieces which helps isolate bugs
+
+**Suitability for mapping**
+- **strong fit**, especially for building modular, LLM-powered pipelines for curriculum-to-CWE mapping
+- reusable and parameterized templates help with reasoning and traceability
+
+**Documentation/tutorials**
+- extensive official documentation: https://python.langchain.com/docs/
+- quickstart guides, tutorials, and example projects
+- community forums and Discord for **support**
+
+**Development and user base**
+- over 70k GitHub stars (as of 2024).
+- thousands of contributors and a large, active user community so it is frequently updated
+
+**Affordability**
+- **free** and open source for core features and good starting point with free templates
+- some integrations may require **paid API keys** (e.g., OpenAI, Anthropic)
+
+### CrewAI
+**What it is**
+- a framework for building multi-agent AI systems in **Python**
+- **open source** so you can see how it works, inspect it, run it yourself, modify it, share it, etc.
+
+**Capability**
+- open source and in python means you can **run it locally**
+- allows for **tracing** so you can see the behavior of the LLMs before they respond
+
+**Debugging**
+- no native debugging dashboard, however has debug logging with environmental variables
+- set "DEBUG = true" to generate logs including agent thoughts, tool invocations, and task transitions
+
+**Suitability for mapping**
+- suitable if **structured well**
+- requires careful setup and may face challenges due to ambiguity, data inconsistency, and limitations of LLM reasoning
+
+**Documentation/tutorials**
+- guides for quickstarts, installation, agents, flows, prompt customization
+- examples and community forums for **questions and concerns**
+
+**Development and user base**
+- over 100k certified developers
+- about 2k active contributors
+
+**Affordability**
+- open source core for small scale development and prototypes are **free**
+- **paid plans** available for production, large scale development, and enterprise features
+
 ## References
 
 ### Prompt Engineering
