@@ -1,0 +1,95 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Knowledge Area/Skill Area Unified Schema v2",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "version": { "type": "string" },
+        "generated_at": { "type": "string", "format": "date-time" },
+        "source": { "type": "string" }
+      },
+      "required": ["name", "version"]
+    },
+    "knowledge_area": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "code": { "type": "string" }
+      },
+      "required": ["name", "code"]
+    },
+    "description": { "type": "string" },
+    "sections": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/section" }
+    }
+  },
+  "required": ["schema", "knowledge_area", "description", "sections"],
+  "$defs": {
+    "section": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "order": { "type": "integer" },
+        "summary": { "type": "string" },
+        "topics": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "name": { "type": "string" }
+            },
+            "required": ["id", "name"]
+          }
+        },
+        "learning_outcomes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "text": { "type": "string" },
+              "cognitive_level": { "type": "string" }
+            },
+            "required": ["id", "text", "cognitive_level"]
+          }
+        },
+        "bullets": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/bullet" }
+        },
+        "crossrefs": { "type": "array" },
+        "qa_flags": { "type": "object" },
+        "source_loc": { "type": "object" },
+        "subsections": { "type": "array" }
+      },
+      "required": [
+        "id",
+        "title",
+        "order",
+        "bullets",
+        "crossrefs",
+        "qa_flags",
+        "source_loc",
+        "subsections"
+      ]
+    },
+    "bullet": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "text": { "type": "string" },
+        "subbullets": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/bullet" }
+        }
+      },
+      "required": ["id", "text", "subbullets"]
+    }
+  }
+}
