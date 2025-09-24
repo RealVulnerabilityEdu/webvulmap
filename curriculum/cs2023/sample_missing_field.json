@@ -1,0 +1,13 @@
+{
+  "schema": {
+    "name": "ka.schema.v2",
+    "version": "1.0.0",
+    "generated_at": "2025-09-22T00:00:00Z",
+    "source": "test"
+  },
+  "knowledge_area": {
+    "name": "Sample Area",
+    "code": "SA"
+  },
+  "sections": []
+}

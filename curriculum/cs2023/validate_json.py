@@ -2,7 +2,7 @@ import json
 from jsonschema import validate, ValidationError
 import sys
 
-SCHEMA_PATH = "k.schema.v2.json"
+SCHEMA_PATH = "curriculum/cs2023/k.schema.v2.json"
 
 def main(json_file):
     with open(SCHEMA_PATH, "r") as f:
