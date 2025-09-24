@@ -1,8 +1,7 @@
 import os
 
-from st_pages import Page, show_pages
-
 from pages.cwe import main
+from st_pages import Page, show_pages
 
 show_pages(
     [
@@ -25,7 +24,7 @@ show_pages(
             os.path.join(os.path.dirname(__file__), "pages", "about.py"),
             "About",
             ":question:",
-        )
+        ),
     ]
 )
 

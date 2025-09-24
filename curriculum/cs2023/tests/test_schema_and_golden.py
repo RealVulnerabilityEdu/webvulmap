@@ -1,5 +1,8 @@
+"""Test schema."""
+
 import json
-from jsonschema import validate, Draft202012Validator
+
+from jsonschema import Draft202012Validator, validate
 
 
 def test_output_matches_schema(tmp_path, run_parser, write_text, schema_path):
@@ -35,6 +38,7 @@ def test_output_matches_golden(tmp_path, run_parser, golden_path, cs2023_dir):
 
     actual = norm(json.loads(out.read_text(encoding="utf-8")))
     expected = norm(json.loads(golden_path.read_text(encoding="utf-8")))
-    assert actual == expected, (
-        "Golden mismatch: update the golden only if the schema/format intentionally changed."
-    )
+    assert (
+        actual == expected
+    ), "Golden mismatch: update the golden only \
+        if the schema/format intentionally changed."

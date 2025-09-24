@@ -1,3 +1,5 @@
+"""Knowledge Areas."""
+
 import json
 
 
@@ -63,7 +65,6 @@ class LearningOutcome:
         self.mastery = mastery
         self.tier = outcomes_tier
         self.xref = outcome_xref
-    
 
     def to_json(self):
         return {
@@ -71,9 +72,8 @@ class LearningOutcome:
             "outcome": self.outcome,
             "mastery": self.mastery,
             "tier": self.tier,
-            "xref": self.xref
+            "xref": self.xref,
         }
-
 
 
 class KnowledgeUnitTier:

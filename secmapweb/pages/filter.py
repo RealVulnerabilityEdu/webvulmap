@@ -3,10 +3,8 @@ import os
 import pandas as pd
 import streamlit as st
 from loguru import logger
-
 from utils.cmdl_utils import get_run_settings
 from view.table import Table
-
 
 # Assuming Table is defined in a separate file
 # Function to read CSV files
@@ -35,6 +33,7 @@ from view.table import Table
 
 #     return df1, df2
 
+
 def load_data(cve_cwe_file, cwe_list_file, topic_to_cwe_file):
     cve_cwe_df = pd.read_csv(cve_cwe_file)
     cwe_list_df = pd.read_csv(cwe_list_file)
@@ -54,8 +53,8 @@ def create_tables(cve_cwe_df, cwe_list_df, topic_to_cwe_df):
         knowledge_subtopic = row["Subtopic"]
 
         for cwe_id in [cwe.strip().upper() for cwe in row["CWE"].split(",")]:
-            cwe_df = cwe_list_df[cwe_list_df['ID'] == cwe_id]
-            cve_df = cve_cwe_df[cve_cwe_df['CWE ID'] == cwe_id]
+            cwe_df = cwe_list_df[cwe_list_df["ID"] == cwe_id]
+            cve_df = cve_cwe_df[cve_cwe_df["CWE ID"] == cwe_id]
             for _, cve_row in cve_df.iterrows():
                 tables.append(
                     Table(
@@ -64,15 +63,16 @@ def create_tables(cve_cwe_df, cwe_list_df, topic_to_cwe_df):
                         knowledge_unit,
                         knowledge_topic,
                         knowledge_subtopic,
-                        cwe_df['ID'],
-                        cwe_df['Title'],
-                        cwe_df['URL'],
-                        cve_row['CVE ID'],
-                        cve_row['NVD URL']
+                        cwe_df["ID"],
+                        cwe_df["Title"],
+                        cwe_df["URL"],
+                        cve_row["CVE ID"],
+                        cve_row["NVD URL"],
                     )
                 )
 
     return tables
+
 
 def main():
     logger.debug("running script " + __file__ + " off working directory " + os.getcwd())
@@ -81,7 +81,11 @@ def main():
     st.set_page_config(page_title="Pathway Page")
     st.write("""# Search the Mapping""")
 
-    cve_cwe_df, cwe_list_df, topic_cwe_df = load_data(app_settings.cve_cwe_file, app_settings.cwe_list_file, app_settings.topic_to_cwe_file)
+    cve_cwe_df, cwe_list_df, topic_cwe_df = load_data(
+        app_settings.cve_cwe_file,
+        app_settings.cwe_list_file,
+        app_settings.topic_to_cwe_file,
+    )
 
     tables = create_tables(cve_cwe_df, cwe_list_df, topic_cwe_df)
     filtered_tables = tables
@@ -94,28 +98,27 @@ def main():
     )
 
     mapped_cwe_list = []
-    for topic_cwe in topic_cwe_df['CWE']:
-        mapped_cwe_list.extend([cwe.strip().upper() for cwe in topic_cwe.split(',')])
+    for topic_cwe in topic_cwe_df["CWE"]:
+        mapped_cwe_list.extend([cwe.strip().upper() for cwe in topic_cwe.split(",")])
     mapped_cwe_set = set(mapped_cwe_list)
     filter_cwe_id = st.multiselect(
         "Filter by CWE-ID",
-        [ cwe_id for cwe_id in mapped_cwe_set],
+        [cwe_id for cwe_id in mapped_cwe_set],
         default=[],
         key=2,
     )
 
-
-
-    mapped_cve_list = cve_cwe_df['CVE ID'].tolist()
+    mapped_cve_list = cve_cwe_df["CVE ID"].tolist()
     filter_cve_id = st.multiselect(
         "Filter by CVE-ID",
-        [ cve_id for cve_id in mapped_cve_list],
+        [cve_id for cve_id in mapped_cve_list],
         default=[],
         key=3,
     )
 
-
-    filter_topic_kw = st.text_input("Filter by Keywords in Topic or Subtopic", "", key=4).lower()
+    filter_topic_kw = st.text_input(
+        "Filter by Keywords in Topic or Subtopic", "", key=4
+    ).lower()
 
     if filter_ka:
         filtered_tables = [
@@ -136,9 +139,9 @@ def main():
         filtered_tables = [
             table
             for table in filtered_tables
-            if filter_topic_kw in table.knowledgeTopic.lower() or filter_topic_kw in table.knowledgeSubtopic.lower()
+            if filter_topic_kw in table.knowledgeTopic.lower()
+            or filter_topic_kw in table.knowledgeSubtopic.lower()
         ]
-
 
     for table in filtered_tables:
         table.make_custom_table()

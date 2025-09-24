@@ -1,9 +1,12 @@
-import os
-import json
-import sys
+"""Extract text by knowledge area from a CS2023 curriculum PDF."""
+
 import argparse
-from pathlib import Path
+import json
+import os
+import sys
+
 import fitz  # PyMuPDF
+
 
 def extract_knowledge_areas(input_file, pdf_file, output_dir):
     """
@@ -37,7 +40,9 @@ def extract_knowledge_areas(input_file, pdf_file, output_dir):
             start_page = ka["begin-page"] - 1  # PyMuPDF is 0-indexed
             end_page = ka["end-page"]
 
-            print(f"Extracting {short_code} from pages {start_page + 1} to {end_page}...")
+            print(
+                f"Extracting {short_code} from pages {start_page + 1} to {end_page}..."
+            )
 
             if start_page < 0 or end_page > len(doc) or start_page >= end_page:
                 print(f"Warning: Skipping {short_code} due to invalid page range.")
@@ -48,15 +53,32 @@ def extract_knowledge_areas(input_file, pdf_file, output_dir):
                 text = ""
                 for page_num in range(start_page, end_page):
                     text += doc[page_num].get_text()
-            except Exception as e:
+            except (fitz.fitz.FileDataError, OSError) as e:
                 # Log and skip if extraction fails for a specific KA
                 print(f"Error extracting {short_code}: {e}")
                 continue
 
             # Save the extracted text to a separate .txt file
-            safe_short_code = short_code.replace(" ", "_").replace("/", "-").replace(":", "_").replace("&", "and").replace("(", "").replace(")", "")
-            safe_long_name = long_name.replace(" ", "_").replace("/", "-").replace(":", "_").replace("&", "and").replace("–", "-").replace("(", "").replace(")", "")
-            output_file = os.path.join(output_dir, f"{safe_short_code}_{safe_long_name}.txt")
+            safe_short_code = (
+                short_code.replace(" ", "_")
+                .replace("/", "-")
+                .replace(":", "_")
+                .replace("&", "and")
+                .replace("(", "")
+                .replace(")", "")
+            )
+            safe_long_name = (
+                long_name.replace(" ", "_")
+                .replace("/", "-")
+                .replace(":", "_")
+                .replace("&", "and")
+                .replace("–", "-")
+                .replace("(", "")
+                .replace(")", "")
+            )
+            output_file = os.path.join(
+                output_dir, f"{safe_short_code}_{safe_long_name}.txt"
+            )
 
             with open(output_file, "w", encoding="utf-8") as out_file:
                 out_file.write(text.strip())
@@ -73,20 +95,34 @@ def extract_knowledge_areas(input_file, pdf_file, output_dir):
         print("Error: Failed to decode the JSON input file.")
         print(f"Details: {e}")
         return False
-    except Exception as e:
-        print(f"An unexpected error occurred during extraction: {e}")
+    except OSError as e:
+        print(f"OS error occurred during extraction: {e}")
+        return False
+    except fitz.fitz.FileDataError as e:
+        print(f"PyMuPDF file data error: {e}")
         return False
 
 
 def main():
     """
-    Main function to parse arguments and initiate the knowledge area text extraction process.
+    Main function to parse arguments and initiate the
+    knowledge area text extraction process.
     """
-    parser = argparse.ArgumentParser(description="Extract text by knowledge area from a CS2023 curriculum PDF.")
-    parser.add_argument("--input", required=True, help="Path to the knowledge_areas.json file")
-    parser.add_argument("--pdf", required=True, help="Path to the CS2023_Curriculum_Guidelines.pdf file")
-    parser.add_argument("--output", required=True, help="Directory where extracted .txt files will be saved")
-    
+    parser = argparse.ArgumentParser(
+        description="Extract text by knowledge area from a CS2023 curriculum PDF."
+    )
+    parser.add_argument(
+        "--input", required=True, help="Path to the knowledge_areas.json file"
+    )
+    parser.add_argument(
+        "--pdf", required=True, help="Path to the CS2023_Curriculum_Guidelines.pdf file"
+    )
+    parser.add_argument(
+        "--output",
+        required=True,
+        help="Directory where extracted .txt files will be saved",
+    )
+
     args = parser.parse_args()
 
     if extract_knowledge_areas(args.input, args.pdf, args.output):

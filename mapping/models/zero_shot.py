@@ -1,25 +1,34 @@
-import pandas as pd
+"""Use Zero-Shot promping for mapping."""
+
 import json
 import re
 import subprocess
 
+import pandas as pd
+
 file_path = "CS2023_ka_meta.csv"
 df = pd.read_csv(file_path, encoding="utf-8")
 
-def query_model(prompt, model="mistral"):
+
+def query_model(model_prompt, model="mistral"):
     result = subprocess.run(
-        ["ollama", "run", model, prompt],
+        ["ollama", "run", model, model_prompt],
         capture_output=True,
         text=True,
         encoding="utf-8",
-        errors="replace"
+        errors="replace",
+        check=True,
     )
     return result.stdout.strip()
 
-def extract_cwe_data(response):
+
+def extract_cwe_data(model_response):
     pattern = r"(CWE-\d+)\s+(.+)\n\s*(.+)"
-    matches = re.findall(pattern, response)
-    return [{"cwe": m[0], "name": m[1].strip(), "reason": m[2].strip()} for m in matches]
+    matches = re.findall(pattern, model_response)
+    return [
+        {"cwe": m[0], "name": m[1].strip(), "reason": m[2].strip()} for m in matches
+    ]
+
 
 mappings = {}
 for topic in df["ka"]:
@@ -28,11 +37,15 @@ for topic in df["ka"]:
     # Balanced prompt: Focused but flexible
     prompt = (
         f"Identify 3 to 5 security CWEs relevant to the topic '{topic}'. "
-        f"Prioritize CWEs that are commonly associated with this topic or related areas.\n"
-        f"If specific CWEs are not obvious, include common software security risks that could still apply.\n\n"
+        f"Prioritize CWEs that are commonly associated with this topic or "
+        f"related areas.\n"
+        f"If specific CWEs are not obvious, include common software security "
+        f"risks that could still apply.\n\n"
         f"Format strictly as:\n"
         f"CWE-ID CWE Name\nReason\n\n"
-        f"Example:\nCWE-79 Improper Neutralization of Input During Web Page Generation\nReason: This occurs when user inputs are not properly sanitized, leading to XSS attacks.\n\n"
+        f"Example:\nCWE-79 Improper Neutralization of Input During Web Page "
+        f"Generation\nReason: This occurs when user inputs are not properly "
+        f"sanitized, leading to XSS attacks.\n\n"
         f"Begin now:\n"
     )
     response = query_model(prompt)
@@ -55,7 +68,7 @@ for topic in df["ka"]:
 
     if cwe_data:
         for item in cwe_data:
-            print(f"{item['cwe']} {item['name']}\n{item['reason']}\n")
+            print(f'{item["cwe"]} {item["name"]}\n{item["reason"]}\n')
     else:
         print("Still no CWE found after retry.\n")
 

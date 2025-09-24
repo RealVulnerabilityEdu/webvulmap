@@ -1,14 +1,28 @@
 {
+<<<<<<< HEAD
   "schema": {
     "name": "Knowledge Area/Skill Area Unified Schema v2",
     "version": "2.0",
     "generated_at": "2025-09-24T17:25:56.666855Z",
     "source": "curriculum/cs2023/SE_SAMPLE_v1.json"
   },
+=======
+  "$schema": "https://example.org/ka.schema.v2.json",
+  "$id": "https://example.org/cs2023/se_sample_v2.json",
+
+  "schema": {
+    "name": "ka.schema.v2",
+    "version": "2.0.0",
+    "generated_at": "2025-09-15T00:00:00Z",
+    "source": { "name": "CS2023", "edition": "Gamma" }
+  },
+
+>>>>>>> origin/main
   "knowledge_area": {
     "name": "Software Engineering",
     "code": "SE"
   },
+<<<<<<< HEAD
   "description": "Software engineering is the discipline concerned with the application of theory, knowledge, and practice to effectively and efficiently build reliable software systems that satisfy the needs of customers and users.",
   "sections": [
     {
@@ -75,16 +89,439 @@
           "id": "lo-2",
           "text": "Students will learn about concepts like coupling, cohesion, and modularity",
           "cognitive_level": "Understand"
+=======
+
+  "description": "Software engineering emphasizes teamwork and long-term evolution (multi-version) of systems—beyond individual programming skill—covering design, construction, testing, maintenance, and professional practice.",
+
+  "section_order": [
+    "se-teamwork",
+    "se-tools",
+    "se-requirements",
+    "se-design",
+    "se-construction",
+    "se-validation",
+    "se-refactoring",
+    "se-reliability",
+    "sep-ethics-communication"
+  ],
+
+  "sections": [
+    {
+      "id": "se-teamwork",
+      "ka_code": "SE",
+      "title": "SE/Teamwork",
+      "order": 1,
+      "summary": "Collaboration, accountability, communication norms, and team processes.",
+      "content_as_text": "Team roles, ceremonies, and communication patterns that enable effective collaboration.",
+      "content_as_md": "",
+      "topics": [
+        { "id": "tw-collaboration", "name": "collaboration" },
+        { "id": "tw-communication", "name": "communication" },
+        { "id": "tw-accountability", "name": "accountability" },
+        { "id": "tw-roles", "name": "roles" }
+      ],
+      "learning_outcomes": [
+        {
+          "id": "SE-LO-TW-001",
+          "text": "Contribute effectively to a software team using agreed workflows and communication channels.",
+          "cognitive_level": "Apply"
+        }
+      ],
+      "bullets": [
+        {
+          "id": "b-tw-1",
+          "text": "Define roles, responsibilities, and handoff expectations.",
+          "subbullets": [
+            {
+              "id": "b-tw-1a",
+              "text": "Run effective code reviews with constructive feedback.",
+              "subbullets": []
+            }
+          ]
+        }
+      ],
+      "crossrefs": [
+        {
+          "type": "KA",
+          "target": "se-tools",
+          "rel": "related",
+          "notes": "Team norms depend on tooling choices."
+        }
+      ],
+      "qa_flags": { "needs_review": false, "reasons": [], "notes": "" },
+      "source_loc": {
+        "pages": { "start": 185, "end": 188 },
+        "anchors": [{ "id": "se-teamwork", "label": "Teamwork" }]
+      },
+      "subsections": []
+    },
+
+    {
+      "id": "se-tools",
+      "ka_code": "SE",
+      "title": "SE/Tools and Environments",
+      "order": 2,
+      "summary": "Version control, IDEs, build, CI, static/dynamic analysis, dependency management.",
+      "content_as_text": "Tools and environments supporting software development, including VCS, CI/CD, and analyzers.",
+      "content_as_md": "",
+      "topics": [
+        { "id": "tools-vcs", "name": "version control" },
+        { "id": "tools-ci", "name": "CI" },
+        { "id": "tools-static", "name": "static analysis" },
+        { "id": "tools-build", "name": "build systems" },
+        { "id": "tools-deps", "name": "dependencies" }
+      ],
+      "learning_outcomes": [
+        {
+          "id": "SE-LO-TO-001",
+          "text": "Use VCS branching strategies and CI to maintain code quality.",
+          "cognitive_level": "Apply"
+        }
+      ],
+      "bullets": [
+        {
+          "id": "b-to-1",
+          "text": "Contrast static vs dynamic analysis and when to apply each.",
+          "subbullets": []
+        }
+      ],
+      "crossrefs": [
+        {
+          "type": "KA",
+          "target": "se-validation",
+          "rel": "related",
+          "notes": "CI integrates tests and quality gates."
+        }
+      ],
+      "qa_flags": { "needs_review": false, "reasons": [], "notes": "" },
+      "source_loc": {
+        "pages": { "start": 188, "end": 191 },
+        "anchors": [{ "id": "se-tools", "label": "Tools and Environments" }]
+      },
+      "subsections": []
+    },
+
+    {
+      "id": "se-requirements",
+      "ka_code": "SE",
+      "title": "SE/Product Requirements",
+      "order": 3,
+      "summary": "Elicitation, specification, validation, change management.",
+      "content_as_text": "Defining verifiable requirements; managing changes and stakeholder alignment.",
+      "content_as_md": "",
+      "topics": [
+        { "id": "req-elicitation", "name": "elicitation" },
+        { "id": "req-spec", "name": "specification" },
+        { "id": "req-validation", "name": "validation" },
+        { "id": "req-change", "name": "change management" }
+      ],
+      "learning_outcomes": [
+        {
+          "id": "SE-LO-REQ-001",
+          "text": "Write verifiable, testable requirements and manage changes.",
+          "cognitive_level": "Apply"
+        }
+      ],
+      "bullets": [
+        {
+          "id": "b-req-1",
+          "text": "Stakeholder analysis and conflict resolution.",
+          "subbullets": []
+        }
+      ],
+      "crossrefs": [
+        {
+          "type": "KA",
+          "target": "se-design",
+          "rel": "prereq",
+          "notes": "Design depends on clear requirements."
+        }
+      ],
+      "qa_flags": { "needs_review": false, "reasons": [], "notes": "" },
+      "source_loc": {
+        "pages": { "start": 191, "end": 194 },
+        "anchors": [
+          { "id": "se-requirements", "label": "Product Requirements" }
+        ]
+      },
+      "subsections": []
+    },
+
+    {
+      "id": "se-design",
+      "ka_code": "SE",
+      "title": "SE/Software Design",
+      "order": 4,
+      "summary": "Architecture, design patterns, modularity, coupling/cohesion, rationale.",
+      "content_as_text": "Architectural styles and component-level design emphasizing modularity and rationale capture.",
+      "content_as_md": "",
+      "topics": [
+        { "id": "design-architecture", "name": "architecture" },
+        { "id": "design-patterns", "name": "design patterns" },
+        { "id": "design-modularity", "name": "modularity" },
+        { "id": "design-cohesion", "name": "cohesion" }
+      ],
+      "learning_outcomes": [
+        {
+          "id": "SE-LO-DES-001",
+          "text": "Create and document an architecture and component design with rationale.",
+          "cognitive_level": "Create"
+        }
+      ],
+      "bullets": [
+        {
+          "id": "b-des-1",
+          "text": "Apply layered or microservices styles; justify tradeoffs.",
+          "subbullets": [
+            {
+              "id": "b-des-1a",
+              "text": "Document decisions with ADRs.",
+              "subbullets": []
+            }
+          ]
+        }
+      ],
+      "crossrefs": [
+        {
+          "type": "KA",
+          "target": "se-validation",
+          "rel": "related",
+          "notes": "Design-for-testability"
+        },
+        {
+          "type": "CWE",
+          "target": "CWE-209",
+          "rel": "related",
+          "notes": "Information exposure via design choices"
+        }
+      ],
+      "qa_flags": { "needs_review": false, "reasons": [], "notes": "" },
+      "source_loc": {
+        "pages": { "start": 194, "end": 197 },
+        "anchors": [{ "id": "se-design", "label": "Software Design" }]
+      },
+      "subsections": [
+        {
+          "id": "se-design-architecture-styles",
+          "ka_code": "SE",
+          "title": "Architecture Styles",
+          "order": 4.1,
+          "summary": "Layered, microservices, event-driven, hexagonal.",
+          "content_as_text": "Survey of architectural styles with typical forces and tradeoffs.",
+          "content_as_md": "",
+          "topics": [
+            { "id": "arch-layered", "name": "layered architecture" },
+            { "id": "arch-msa", "name": "microservices" },
+            { "id": "arch-eda", "name": "event-driven architecture" },
+            { "id": "arch-hex", "name": "hexagonal architecture" }
+          ],
+          "learning_outcomes": [],
+          "bullets": [],
+          "crossrefs": [
+            {
+              "type": "KA",
+              "target": "se-refactoring",
+              "rel": "related",
+              "notes": "Refactors between styles"
+            }
+          ],
+          "qa_flags": { "needs_review": false, "reasons": [], "notes": "" },
+          "source_loc": {
+            "pages": { "start": 195, "end": 196 },
+            "anchors": [{ "id": "arch-styles", "label": "Architecture Styles" }]
+          },
+          "subsections": []
+        }
+      ]
+    },
+
+    {
+      "id": "se-construction",
+      "ka_code": "SE",
+      "title": "SE/Software Construction",
+      "order": 5,
+      "summary": "Implementation practices, coding standards, readability, defensive programming.",
+      "content_as_text": "Coding conventions, defensive techniques, and maintainability practices.",
+      "content_as_md": "",
+      "topics": [
+        { "id": "constr-impl", "name": "implementation" },
+        { "id": "constr-readability", "name": "readability" },
+        { "id": "constr-defensive", "name": "defensive programming" }
+      ],
+      "learning_outcomes": [
+        {
+          "id": "SE-LO-CON-001",
+          "text": "Apply coding standards and defensive techniques to produce maintainable code.",
+          "cognitive_level": "Apply"
+>>>>>>> origin/main
         }
       ],
       "bullets": [],
       "crossrefs": [],
+<<<<<<< HEAD
       "qa_flags": {},
       "source_loc": {
         "file": "SE_SAMPLE_v1.json",
         "section": 2
+=======
+      "qa_flags": { "needs_review": false, "reasons": [], "notes": "" },
+      "source_loc": {
+        "pages": { "start": 197, "end": 198 },
+        "anchors": [
+          { "id": "se-construction", "label": "Software Construction" }
+        ]
+      },
+      "subsections": []
+    },
+
+    {
+      "id": "se-validation",
+      "ka_code": "SE",
+      "title": "SE/Verification and Validation",
+      "order": 6,
+      "summary": "Testing levels, strategies, coverage, CI testing, reviews, static/dynamic analysis.",
+      "content_as_text": "Unit, integration, and system testing; CI integration; reviews and analysis.",
+      "content_as_md": "",
+      "topics": [
+        { "id": "vv-unit", "name": "unit testing" },
+        { "id": "vv-integration", "name": "integration testing" },
+        { "id": "vv-coverage", "name": "coverage" },
+        { "id": "vv-reviews", "name": "reviews" }
+      ],
+      "learning_outcomes": [
+        {
+          "id": "SE-LO-VV-001",
+          "text": "Design automated tests and interpret coverage & CI results.",
+          "cognitive_level": "Apply"
+        }
+      ],
+      "bullets": [],
+      "crossrefs": [
+        {
+          "type": "KA",
+          "target": "se-tools",
+          "rel": "related",
+          "notes": "Static analysis and CI tie-in"
+        }
+      ],
+      "qa_flags": { "needs_review": false, "reasons": [], "notes": "" },
+      "source_loc": {
+        "pages": { "start": 198, "end": 200 },
+        "anchors": [
+          { "id": "se-validation", "label": "Verification and Validation" }
+        ]
+      },
+      "subsections": []
+    },
+
+    {
+      "id": "se-refactoring",
+      "ka_code": "SE",
+      "title": "SE/Refactoring and Code Evolution",
+      "order": 7,
+      "summary": "Safe refactors, deprecation, migrations, backward compatibility.",
+      "content_as_text": "Planning and executing safe refactors with test support and rollout plans.",
+      "content_as_md": "",
+      "topics": [
+        { "id": "refactoring", "name": "refactoring" },
+        { "id": "compat", "name": "compatibility" },
+        { "id": "migrations", "name": "migrations" }
+      ],
+      "learning_outcomes": [
+        {
+          "id": "SE-LO-REF-001",
+          "text": "Plan and execute safe refactors supported by tests and CI.",
+          "cognitive_level": "Apply"
+        }
+      ],
+      "bullets": [],
+      "crossrefs": [
+        {
+          "type": "KA",
+          "target": "se-design",
+          "rel": "related",
+          "notes": "Design evolution"
+        }
+      ],
+      "qa_flags": { "needs_review": false, "reasons": [], "notes": "" },
+      "source_loc": {
+        "pages": { "start": 200, "end": 201 },
+        "anchors": [
+          { "id": "se-refactoring", "label": "Refactoring and Evolution" }
+        ]
+      },
+      "subsections": []
+    },
+
+    {
+      "id": "se-reliability",
+      "ka_code": "SE",
+      "title": "SE/Software Reliability",
+      "order": 8,
+      "summary": "Reliability concepts, fault tolerance, SLOs/SLIs, incident learning.",
+      "content_as_text": "Reliability engineering practices and metrics.",
+      "content_as_md": "",
+      "topics": [
+        { "id": "rel-concepts", "name": "reliability" },
+        { "id": "rel-ft", "name": "fault tolerance" },
+        { "id": "rel-slo", "name": "SLO/SLI" }
+      ],
+      "learning_outcomes": [
+        {
+          "id": "SE-LO-REL-001",
+          "text": "Explain reliability measures and propose practices to improve them.",
+          "cognitive_level": "Evaluate"
+        }
+      ],
+      "bullets": [],
+      "crossrefs": [],
+      "qa_flags": { "needs_review": false, "reasons": [], "notes": "" },
+      "source_loc": {
+        "pages": { "start": 201, "end": 203 },
+        "anchors": [{ "id": "se-reliability", "label": "Software Reliability" }]
+      },
+      "subsections": []
+    },
+
+    {
+      "id": "sep-ethics-communication",
+      "ka_code": "SEP",
+      "title": "SEP/Professional Ethics & Communication (SE context)",
+      "order": 9,
+      "summary": "Ethics, responsible practice, and professional communication integrated with SE.",
+      "content_as_text": "Professional responsibility, ethics in software, and communication in SE artifacts.",
+      "content_as_md": "",
+      "topics": [
+        { "id": "sep-ethics", "name": "ethics" },
+        { "id": "sep-comm", "name": "professional communication" }
+      ],
+      "learning_outcomes": [
+        {
+          "id": "SE-LO-SEP-001",
+          "text": "Apply ethical reasoning and communicate professionally in code reviews and design docs.",
+          "cognitive_level": "Apply"
+        }
+      ],
+      "bullets": [],
+      "crossrefs": [
+        {
+          "type": "KA",
+          "target": "se-teamwork",
+          "rel": "related",
+          "notes": "Communication norms"
+        }
+      ],
+      "qa_flags": { "needs_review": false, "reasons": [], "notes": "" },
+      "source_loc": {
+        "pages": { "start": 203, "end": 205 },
+        "anchors": [{ "id": "sep-ethics", "label": "Ethics & Communication" }]
+>>>>>>> origin/main
       },
       "subsections": []
     }
   ]
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/main

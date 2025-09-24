@@ -5,7 +5,9 @@ import streamlit as st
 
 
 class Table:
-    def __init__(self, short_ka, ka, ku, kt, kst, cwe_id, cwe_title, cwe_url, cve_id, cve_url):
+    def __init__(
+        self, short_ka, ka, ku, kt, kst, cwe_id, cwe_title, cwe_url, cve_id, cve_url
+    ):
         self.ka = short_ka
         self.knowledgeArea = ka
         self.knowledgeUnit = ku
@@ -46,7 +48,7 @@ class Table:
             "cweTitle",
             "cweUrl",
             "cveId",
-            "cveUrl"
+            "cveUrl",
         ]
         # use the colNames array to create a dataframe where the values are created based on what was passed to the constructor
         df = pd.DataFrame(columns=colNames)

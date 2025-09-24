@@ -2,12 +2,13 @@ import argparse
 import os
 import re
 from enum import Enum
+
 from ka import (
     KnowledgeArea,
-    KnowledgeUnit,
     KnowledgeTopic,
-    LearningOutcome,
+    KnowledgeUnit,
     KnowledgeUnitTier,
+    LearningOutcome,
 )
 
 PATTERN_KA_HEADING_FMT = r"^\f{{0,1}}({}) \(({})\)$"

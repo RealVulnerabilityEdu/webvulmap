@@ -1,4 +1,7 @@
+fitz
 numpy
 pandas
 pytest
+pylint
 jsonschema
+requests_mock
