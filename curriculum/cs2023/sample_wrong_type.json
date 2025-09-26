@@ -1,0 +1,28 @@
+{
+  "schema": {
+    "name": "ka.schema.v2",
+    "version": "1.0.0",
+    "generated_at": "2025-09-22T00:00:00Z",
+    "source": "test"
+  },
+  "knowledge_area": {
+    "name": "Sample Area",
+    "code": "SA"
+  },
+  "description": "A test case with wrong type.",
+  "sections": [
+    {
+      "id": "sec-1",
+      "title": "Section 1",
+      "order": "first",  
+      "summary": "Summary.",
+      "topics": [],
+      "learning_outcomes": [],
+      "bullets": [],
+      "crossrefs": [],
+      "qa_flags": { "needs_review": false },
+      "source_loc": { "pages": { "start": 1, "end": 1 } },
+      "subsections": []
+    }
+  ]
+}

@@ -1,4 +1,12 @@
 {
+<<<<<<< HEAD
+  "schema": {
+    "name": "Knowledge Area/Skill Area Unified Schema v2",
+    "version": "2.0",
+    "generated_at": "2025-09-24T17:25:56.666855Z",
+    "source": "curriculum/cs2023/SE_SAMPLE_v1.json"
+  },
+=======
   "$schema": "https://example.org/ka.schema.v2.json",
   "$id": "https://example.org/cs2023/se_sample_v2.json",
 
@@ -9,10 +17,79 @@
     "source": { "name": "CS2023", "edition": "Gamma" }
   },
 
+>>>>>>> origin/main
   "knowledge_area": {
     "name": "Software Engineering",
     "code": "SE"
   },
+<<<<<<< HEAD
+  "description": "Software engineering is the discipline concerned with the application of theory, knowledge, and practice to effectively and efficiently build reliable software systems that satisfy the needs of customers and users.",
+  "sections": [
+    {
+      "id": "se-sec-1",
+      "title": "SE/Software Processes",
+      "order": 1,
+      "summary": "This section covers the fundamentals of software processes, including different lifecycle models like waterfall, iterative, and agile",
+      "topics": [
+        {
+          "id": "topic-1",
+          "name": "different lifecycle models like waterfall"
+        },
+        {
+          "id": "topic-2",
+          "name": "iterative"
+        },
+        {
+          "id": "topic-3",
+          "name": "and agile"
+        }
+      ],
+      "learning_outcomes": [
+        {
+          "id": "lo-1",
+          "text": "the ability to select and justify an appropriate software process for a given project.",
+          "cognitive_level": "Apply"
+        }
+      ],
+      "bullets": [],
+      "crossrefs": [],
+      "qa_flags": {},
+      "source_loc": {
+        "file": "SE_SAMPLE_v1.json",
+        "section": 1
+      },
+      "subsections": []
+    },
+    {
+      "id": "se-sec-2",
+      "title": "SE/Software Design",
+      "order": 2,
+      "summary": "This section focuses on the principles of software design, including architectural patterns, design patterns, and component-level design",
+      "topics": [
+        {
+          "id": "topic-1",
+          "name": "architectural patterns"
+        },
+        {
+          "id": "topic-2",
+          "name": "design patterns"
+        },
+        {
+          "id": "topic-3",
+          "name": "and component-level design"
+        }
+      ],
+      "learning_outcomes": [
+        {
+          "id": "lo-1",
+          "text": "creating and documenting a software design for a medium-sized software system.",
+          "cognitive_level": "Apply"
+        },
+        {
+          "id": "lo-2",
+          "text": "Students will learn about concepts like coupling, cohesion, and modularity",
+          "cognitive_level": "Understand"
+=======
 
   "description": "Software engineering emphasizes teamwork and long-term evolution (multi-version) of systems—beyond individual programming skill—covering design, construction, testing, maintenance, and professional practice.",
 
@@ -276,10 +353,17 @@
           "id": "SE-LO-CON-001",
           "text": "Apply coding standards and defensive techniques to produce maintainable code.",
           "cognitive_level": "Apply"
+>>>>>>> origin/main
         }
       ],
       "bullets": [],
       "crossrefs": [],
+<<<<<<< HEAD
+      "qa_flags": {},
+      "source_loc": {
+        "file": "SE_SAMPLE_v1.json",
+        "section": 2
+=======
       "qa_flags": { "needs_review": false, "reasons": [], "notes": "" },
       "source_loc": {
         "pages": { "start": 197, "end": 198 },
@@ -431,8 +515,13 @@
       "source_loc": {
         "pages": { "start": 203, "end": 205 },
         "anchors": [{ "id": "sep-ethics", "label": "Ethics & Communication" }]
+>>>>>>> origin/main
       },
       "subsections": []
     }
   ]
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/main

@@ -1,0 +1,38 @@
+{
+  "schema": {
+    "name": "ka.schema.v2",
+    "version": "1.0.0",
+    "generated_at": "2025-09-22T00:00:00Z",
+    "source": "test"
+  },
+  "knowledge_area": {
+    "name": "Sample Area",
+    "code": "SA"
+  },
+  "description": "A valid test case.",
+  "sections": [
+    {
+      "id": "sec-1",
+      "title": "Section 1",
+      "order": 1,
+      "summary": "Summary.",
+      "topics": [
+        { "id": "t1", "name": "Topic 1" }
+      ],
+      "learning_outcomes": [
+        { "id": "lo1", "text": "Outcome 1", "cognitive_level": "Understand" }
+      ],
+      "bullets": [
+        {
+          "id": "b1",
+          "text": "Bullet 1",
+          "subbullets": []
+        }
+      ],
+      "crossrefs": [],
+      "qa_flags": { "needs_review": false },
+      "source_loc": { "pages": { "start": 1, "end": 1 } },
+      "subsections": []
+    }
+  ]
+}
