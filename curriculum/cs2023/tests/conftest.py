@@ -48,7 +48,8 @@ def golden_path() -> Path:
 @pytest.fixture()
 def run_parser():
     """
-    Returns a function: (inp: Path|None, out: Path|None) -> (returncode, stdout, stderr)
+    Returns a function:
+    (inp: Path|None, out: Path|None) -> (returncode, stdout, stderr)
     """
 
     def _run(inp: Path | None = None, out: Path | None = None):
@@ -59,7 +60,9 @@ def run_parser():
             cmd.append(str(out))
         proc = None
         try:
-            proc = subprocess.run(cmd, capture_output=True, text=True, check=True)
+            proc = subprocess.run(
+                cmd, capture_output=True, text=True, check=True
+            )
             return proc.returncode, (proc.stdout or ""), (proc.stderr or "")
         except subprocess.CalledProcessError as e:
             print(f"Subprocess failed: {e}")

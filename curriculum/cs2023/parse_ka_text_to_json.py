@@ -48,7 +48,8 @@ def parse_ka_text_to_json(input_txt, output_json):
     section_pattern = re.compile(r"^[A-Z]+-[A-Za-z-]+: .+$", re.MULTILINE)
     if not section_pattern.search(text):
         print(
-            "Error: missing or invalid header (expected lines like 'SE-...: ...')",
+            "Error: missing or invalid header "
+            "(expected lines like 'SE-...: ...')",
             file=sys.stderr,
         )
         sys.exit(1)
@@ -94,6 +95,8 @@ def parse_ka_text_to_json(input_txt, output_json):
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("Usage: python3 parse_ka_text_to_json.py <input_txt> <output_json>")
+        print(
+            "Usage: python3 parse_ka_text_to_json.py <input_txt> <output_json>"
+        )
         sys.exit(1)
     parse_ka_text_to_json(sys.argv[1], sys.argv[2])

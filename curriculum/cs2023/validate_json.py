@@ -4,6 +4,7 @@ import sys
 
 SCHEMA_PATH = "curriculum/cs2023/k.schema.v2.json"
 
+
 def main(json_file):
     with open(SCHEMA_PATH, "r") as f:
         schema = json.load(f)
@@ -15,6 +16,7 @@ def main(json_file):
     except ValidationError as e:
         print(f"{json_file} is INVALID ❌")
         print(e)
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:

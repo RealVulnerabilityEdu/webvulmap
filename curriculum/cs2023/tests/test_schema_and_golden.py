@@ -7,7 +7,9 @@ from jsonschema import Draft202012Validator, validate
 
 def test_output_matches_schema(tmp_path, run_parser, write_text, schema_path):
     """Parser output should satisfy the JSON Schema."""
-    inp = write_text("se_sample.txt", "SE-Design: Header\nBody line 1\nBody line 2")
+    inp = write_text(
+        "se_sample.txt", "SE-Design: Header\nBody line 1\nBody line 2"
+    )
     out = tmp_path / "out.json"
 
     code, stdout, stderr = run_parser(inp, out)
