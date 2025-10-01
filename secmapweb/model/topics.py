@@ -1,7 +1,11 @@
 class Topics:
     subtopics = {}
-    cve = ""  # cve within a topic. mostly used by AppPage2.py for organizing Software Vulnerabilities
-    cwe = ""  # cwe within a topic. mostly used by AppPage2.py for organizing Software Vulnerabilities
+    # cve within a topic. mostly used by AppPage2.py for organizing
+    # Software Vulnerabilities
+    cve = ""
+    # cwe within a topic. mostly used by AppPage2.py for organizing
+    # Software Vulnerabilities
+    cwe = ""
 
     # string topic name, topic id
     topic_name = ""
@@ -48,7 +52,8 @@ class Topics:
     def getCves(self):
         return "CVE: " + self.cve
 
-    # add source url to software vulnerability object (mostly for organizing Software Vulnerabilities)
+    # add source url to software vulnerability object (mostly for organizing
+    # Software Vulnerabilities)
     def add_CveSource(self, source_url):
         self.source_url = source_url
 

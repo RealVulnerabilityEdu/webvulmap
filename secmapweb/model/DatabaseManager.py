@@ -22,9 +22,15 @@
 #         else:
 #             topic_id = topic_row[0]
 
-#         c.execute("INSERT INTO subtopics (subtopic_name, topic_id) VALUES (?, ?)", (sub_topic, topic_id))
+#         c.execute(
+#             "INSERT INTO subtopics (subtopic_name, topic_id) VALUES (?, ?)",
+#             (sub_topic, topic_id)
+#         )
 #         subtopic_id = c.lastrowid
-#         c.execute("INSERT INTO links (link_url, subtopic_id) VALUES (?, ?)", (link_url, subtopic_id))
+#         c.execute(
+#             "INSERT INTO links (link_url, subtopic_id) VALUES (?, ?)",
+#             (link_url, subtopic_id)
+#         )
 
 # conn.commit()
 # conn.close()

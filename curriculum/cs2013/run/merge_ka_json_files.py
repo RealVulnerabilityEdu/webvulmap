@@ -1,5 +1,4 @@
 # Task 2 for CISC 4900
-
 """
 This program should read in all the json files and turn it into one json file.
 This is the format.

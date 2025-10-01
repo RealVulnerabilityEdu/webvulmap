@@ -16,7 +16,10 @@ class Cwe(SubTopics):
 
     # to string method to print out the cwe id and cwe name and source url
     def toString(self):
-        return f"CWE ID: <{self.cwe_id}> CWE Name: {self.cwe_name} Source URL: {self.source_url}"
+        return (
+            f"CWE ID: <{self.cwe_id}> CWE Name: {self.cwe_name} "
+            f"Source URL: {self.source_url}"
+        )
 
     # get cwe id
     def getCweID(self):

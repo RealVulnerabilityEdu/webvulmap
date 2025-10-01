@@ -2,9 +2,8 @@ from ka import LearningOutcome
 
 
 def test_learning_outcome_to_json():
-    lo = LearningOutcome(
-        "1", "Understand basic concepts", "Familiarity", "Core-Tier1", "This outcome..."
-    )
+    lo = LearningOutcome("1", "Understand basic concepts", "Familiarity",
+                         "Core-Tier1", "This outcome...")
     expected = {
         "number": "1",
         "outcome": "Understand basic concepts",

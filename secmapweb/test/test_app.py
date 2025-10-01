@@ -35,7 +35,8 @@ def test_process_data():
     # assertions
     assert len(test_topic_dict) == 1
     assert "Language 1.1" in test_topic_dict[1].subtopics
-    assert "Language 1.1" in test_topic_dict[1].subtopics["Language 1.1"].toString()
+    assert ("Language 1.1"
+            in test_topic_dict[1].subtopics["Language 1.1"].toString())
 
 
 # Mock Streamlit functions to test display_cwes function
@@ -66,7 +67,11 @@ def test_display_cwes(mock_write):
 
 def test_load_data():
     test_csv_path = "test_data.csv"
-    test_csv_content = "TopicID,Topic Name,SubTopic Name,Weakness Name,CWE ID,Source URL\n1,Topic 1,Subtopic 1.1,Weakness 1.1.1,CWE-111,http://example.com/cwe-111\n"
+    test_csv_content = (
+        "TopicID,Topic Name,SubTopic Name,Weakness Name,CWE ID,Source URL\n"
+        "1,Topic 1,Subtopic 1.1,Weakness 1.1.1,CWE-111,"
+        "http://example.com/cwe-111\n"
+    )
     with open(test_csv_path, "w") as test_csv:
         test_csv.write(test_csv_content)
 

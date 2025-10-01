@@ -3,9 +3,10 @@ import csv
 
 # Parse arguments
 parser = argparse.ArgumentParser(
-    description="Validate CSV file for required columns and page order."
-)
-parser.add_argument("--input-file", required=True, help="Path to the input CSV file.")
+    description="Validate CSV file for required columns and page order.")
+parser.add_argument("--input-file",
+                    required=True,
+                    help="Path to the input CSV file.")
 args = parser.parse_args()
 file_path = args.input_file
 
@@ -46,8 +47,9 @@ def validate(file_path):
 
                     if current_end <= current_begin:
                         print(
-                            f"Error on row {i+2}: 'end_page' ({current_end}) is not greater than 'begin_page' ({current_begin})."
-                        )
+                            f"Error on row {i+2}: 'end_page' ({current_end}) "
+                            f"is not greater than 'begin_page' "
+                            f"({current_begin}).")
                         return False
                 except ValueError:
                     print(f"Error: Non-numeric page value on row {i+2}.")
@@ -60,9 +62,9 @@ def validate(file_path):
                     next_begin = int(rows[i + 1]["page_begin"])
 
                     if current_end + 1 != next_begin:
-                        print(
-                            f"Error: Page {current_end} is not immediately followed by {next_begin} (Row {i+2} → Row {i+3})."
-                        )
+                        print(f"Error: Page {current_end} is not immediately "
+                              f"followed by {next_begin} "
+                              f"(Row {i+2} → Row {i+3}).")
                         return False
                 except ValueError:
                     print(f"Error: Invalid page number at Row {i+2}.")

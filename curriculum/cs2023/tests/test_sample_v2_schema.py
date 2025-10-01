@@ -61,5 +61,4 @@ def test_order_strictly_increasing():
     sample = load_json("curriculum/cs2023/SE_SAMPLE_v2.json")
     orders = get_orders(sample["sections"])
     assert orders == sorted(
-        orders
-    ), "Section orders are not strictly increasing"
+        orders), "Section orders are not strictly increasing"

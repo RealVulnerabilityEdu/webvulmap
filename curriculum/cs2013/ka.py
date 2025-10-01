@@ -4,6 +4,7 @@ import json
 
 
 class KnowledgeArea:
+
     def __init__(self, ka, short_ka) -> None:
         self.ka = ka
         self.short_ka = short_ka
@@ -26,6 +27,7 @@ class KnowledgeArea:
 
 
 class KnowledgeUnit:
+
     def __init__(self, ku) -> None:
         self.ku = ku
         self.tiers = []
@@ -47,6 +49,7 @@ class KnowledgeUnit:
 
 
 class KnowledgeTopic:
+
     def __init__(self, topic, tier=None) -> None:
         self.topic = topic
         self.tier = tier
@@ -57,9 +60,9 @@ class KnowledgeTopic:
 
 
 class LearningOutcome:
-    def __init__(
-        self, outcome_no, outcome, mastery, outcomes_tier, outcome_xref
-    ) -> None:
+
+    def __init__(self, outcome_no, outcome, mastery, outcomes_tier,
+                 outcome_xref) -> None:
         self.number = outcome_no
         self.outcome = outcome
         self.mastery = mastery
@@ -77,12 +80,14 @@ class LearningOutcome:
 
 
 class KnowledgeUnitTier:
+
     def __init__(self, tier, hours) -> None:
         self.tier = tier
         self.hours = hours
 
 
 class KnowledgeAreaReference:
+
     def __init__(self, ref_no, ref_entry) -> None:
         self.ref_no = ref_no
         self.ref_entry = ref_entry
