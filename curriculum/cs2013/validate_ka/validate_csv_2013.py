@@ -12,11 +12,10 @@ from validate_csv import validate
 
 # parses command line arguments
 def parse_arguments():
-    parser = argparse.ArgumentParser(
-        description="Convert a CSV file into JSON format.")
-    parser.add_argument("--input-file",
-                        required=True,
-                        help="Path to the input CSV file.")
+    parser = argparse.ArgumentParser(description="Convert a CSV file into JSON format.")
+    parser.add_argument(
+        "--input-file", required=True, help="Path to the input CSV file."
+    )
     parser.add_argument(
         "--output-file",
         help="Path to the output JSON file. If not specified, "

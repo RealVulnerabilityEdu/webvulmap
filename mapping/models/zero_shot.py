@@ -25,11 +25,9 @@ def query_model(model_prompt, model="mistral"):
 def extract_cwe_data(model_response):
     pattern = r"(CWE-\d+)\s+(.+)\n\s*(.+)"
     matches = re.findall(pattern, model_response)
-    return [{
-        "cwe": m[0],
-        "name": m[1].strip(),
-        "reason": m[2].strip()
-    } for m in matches]
+    return [
+        {"cwe": m[0], "name": m[1].strip(), "reason": m[2].strip()} for m in matches
+    ]
 
 
 mappings = {}
@@ -48,7 +46,8 @@ for topic in df["ka"]:
         f"Example:\nCWE-79 Improper Neutralization of Input During Web Page "
         f"Generation\nReason: This occurs when user inputs are not properly "
         f"sanitized, leading to XSS attacks.\n\n"
-        f"Begin now:\n")
+        f"Begin now:\n"
+    )
     response = query_model(prompt)
     cwe_data = extract_cwe_data(response)
 
@@ -61,7 +60,8 @@ for topic in df["ka"]:
             f"CWEs.\n"
             f"Format exactly as:\nCWE-ID CWE Name\nReason\n\n"
             f"Do not leave this blank.\n"
-            f"Begin:\n")
+            f"Begin:\n"
+        )
         response = query_model(fallback_prompt)
         cwe_data = extract_cwe_data(response)
 
