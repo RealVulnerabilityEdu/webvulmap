@@ -29,8 +29,10 @@ You are a cybersecurity expert.
 Knowledge Area: {ka}
 Knowledge Unit: {ku}
 
-Step by step, identify Common Weakness Enumerations (CWEs) that are most relevant to this unit.
-For each CWE, provide the CWE-ID, CWE title, and a one-line justification.
+Step by step, identify Common Weakness Enumerations (CWEs) that are
+most relevant to this unit.
+For each CWE, provide the CWE-ID, CWE title, and a one-line
+justification.
 Format:
 CWE-ID: CWE Title — Reason
 """

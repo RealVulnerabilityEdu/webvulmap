@@ -7,15 +7,13 @@ def test_cleaning_and_header_detection(tmp_path, run_parser, write_text):
     """
     Should handle form feeds, hyphen-joins, and detect section header.
     """
-    sample = (
-        "123\n"
-        "Form\fFeed\n"
-        "Hyphen-\n"
-        "join\n"
-        "\n"
-        "SE-Design: Header\n"
-        "Body.\n"
-    )
+    sample = ("123\n"
+              "Form\fFeed\n"
+              "Hyphen-\n"
+              "join\n"
+              "\n"
+              "SE-Design: Header\n"
+              "Body.\n")
     inp = write_text("edge.txt", sample)
     out = tmp_path / "out.json"
 

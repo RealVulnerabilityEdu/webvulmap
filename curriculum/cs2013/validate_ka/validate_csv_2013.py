@@ -1,4 +1,6 @@
-"""This script converts a CSV file containing knowledge area data into a JSON file."""
+"""
+This script converts a CSV file containing knowledge area data to JSON.
+"""
 
 import argparse
 import csv
@@ -10,15 +12,16 @@ from validate_csv import validate
 
 # parses command line arguments
 def parse_arguments():
-    parser = argparse.ArgumentParser(description="Convert a CSV file into JSON format.")
-    parser.add_argument(
-        "--input-file", required=True, help="Path to the input CSV file."
-    )
+    parser = argparse.ArgumentParser(
+        description="Convert a CSV file into JSON format.")
+    parser.add_argument("--input-file",
+                        required=True,
+                        help="Path to the input CSV file.")
     parser.add_argument(
         "--output-file",
-        help="Path to the output JSON file. If not specified, \
-              the JSON file will be created with the same name \
-              as the CSV file.",
+        help="Path to the output JSON file. If not specified, "
+        "the JSON file will be created with the same name "
+        "as the CSV file.",
     )
     return parser.parse_args()
 

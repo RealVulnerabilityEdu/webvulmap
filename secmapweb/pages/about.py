@@ -1,11 +1,13 @@
 import streamlit as st
 
-# a simple about page to display the version of the app (0.0.1) and the goal of this app:
-# This is a web application maps between software security topics (CWEs and CVEs) and CS curriculum topics. It serves two main goals:
-# it allows instructors or learners understand what prerequisite material is needed to help teach/learn about certain
-# secure programming topics in terms of CWEs and CVEs, and
-# it also helps them locate real world examples, such as CWEs and CVEs relevant to a course topic.
-# printed on the page using html and styled with css
+# A simple about page to display the version of the app (0.0.1) and the
+# goal of this app: This is a web application maps between software
+# security topics (CWEs and CVEs) and CS curriculum topics. It serves
+# two main goals: it allows instructors or learners understand what
+# prerequisite material is needed to help teach/learn about certain
+# secure programming topics in terms of CWEs and CVEs, and it also helps
+# them locate real world examples, such as CWEs and CVEs relevant to a
+# course topic. Printed on the page using html and styled with css
 
 
 def main():
@@ -22,11 +24,14 @@ def main():
     st.markdown(
         """
         <p class="big-font">
-        This is a web application maps between software security topics (CWEs and CVEs) and CS curriculum topics. It serves two main goals:
+        This is a web application maps between software security topics
+        (CWEs and CVEs) and CS curriculum topics. It serves two main goals:
         <ul>
-        <li>it allows instructors or learners understand what prerequisite material is needed to help teach/learn about certain
+        <li>it allows instructors or learners understand what prerequisite
+        material is needed to help teach/learn about certain
         secure programming topics in terms of CWEs and CVEs, and</li>
-        <li>it also helps them locate real world examples, such as CWEs and CVEs relevant to a course topic.</li>
+        <li>it also helps them locate real world examples, such as CWEs
+        and CVEs relevant to a course topic.</li>
         </ul>
         </p>
         """,

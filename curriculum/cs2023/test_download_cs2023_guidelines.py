@@ -22,10 +22,8 @@ from download_cs2023_guidelines import (
 )
 
 # Explicitly add the 'cs2023_downloader' directory to Python's path.
-module_path = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)),
-    "cs2023_downloader"
-)
+module_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                           "cs2023_downloader")
 if module_path not in sys.path:
     sys.path.insert(0, module_path)
 
@@ -67,8 +65,7 @@ class TestDownloadPDF(unittest.TestCase):
 
         self.temp_target_abs_path = os.path.abspath(TARGET_DIR)
         self.temp_output_filepath_abs_path = os.path.join(
-            self.temp_target_abs_path, OUTPUT_FILENAME
-        )
+            self.temp_target_abs_path, OUTPUT_FILENAME)
 
         self.mocker.reset()
 
@@ -98,8 +95,7 @@ class TestDownloadPDF(unittest.TestCase):
         Verifies directory creation, file content, and success messages.
         """
         mock_content = (
-            b"%PDF-1.4\n% Sample PDF content for successful download.\n%%EOF"
-        )
+            b"%PDF-1.4\n% Sample PDF content for successful download.\n%%EOF")
         self.mocker.get(
             PDF_URL,
             content=mock_content,
@@ -142,9 +138,8 @@ class TestDownloadPDF(unittest.TestCase):
         self.assertFalse(os.path.exists(self.temp_output_filepath_abs_path))
 
         output = self.get_captured_output()
-        self.assertIn(
-            "Error: Failed to download file. HTTP Status code: 404", output
-        )
+        self.assertIn("Error: Failed to download file. HTTP Status code: 404",
+                      output)
         self.assertIn(
             f"Details: 404 Client Error: Not Found for url: {PDF_URL}\n",
             output,
@@ -170,18 +165,15 @@ class TestDownloadPDF(unittest.TestCase):
             "internet connection or the URL.",
             output,
         )
-        self.assertIn(
-            "Details: Mock Connection Error\n", output
-        )
+        self.assertIn("Details: Mock Connection Error\n", output)
         print("\nTest 'connection_error': Passed.")
 
     def test_timeout_error(self):
         """
         Test case for handling a request timeout error.
         """
-        self.mocker.get(
-            PDF_URL, exc=requests.exceptions.Timeout("Mock Timeout Error")
-        )
+        self.mocker.get(PDF_URL,
+                        exc=requests.exceptions.Timeout("Mock Timeout Error"))
 
         result = download_pdf(PDF_URL, TARGET_DIR, OUTPUT_FILENAME)
         self.assertFalse(result)
@@ -206,10 +198,8 @@ class TestDownloadPDF(unittest.TestCase):
             headers={"Content-Type": "application/pdf"},
         )
 
-        mock_file_open.side_effect = IOError(
-            13,
-            "Permission denied: Mock Error"
-        )
+        mock_file_open.side_effect = IOError(13,
+                                             "Permission denied: Mock Error")
 
         result = download_pdf(PDF_URL, TARGET_DIR, OUTPUT_FILENAME)
         self.assertFalse(result)
@@ -231,9 +221,7 @@ class TestDownloadPDF(unittest.TestCase):
             output,
         )
         mock_file_open.assert_called_once_with(
-            os.path.join(TARGET_DIR, OUTPUT_FILENAME),
-            "wb"
-        )
+            os.path.join(TARGET_DIR, OUTPUT_FILENAME), "wb")
         print("\nTest 'file_write_permission_denied': Passed.")
 
     def test_non_pdf_content_type_warning(self):
@@ -243,8 +231,7 @@ class TestDownloadPDF(unittest.TestCase):
         return True.
         """
         mock_content = (
-            b"<html><body><h1>This is HTML, not PDF</h1></body></html>"
-        )
+            b"<html><body><h1>This is HTML, not PDF</h1></body></html>")
         mock_content_type = "text/html"
         self.mocker.get(
             PDF_URL,
@@ -296,11 +283,9 @@ class TestDownloadPDF(unittest.TestCase):
             "Details: Mock directory creation error\n",
             output,
         )
-        mock_makedirs.assert_called_once_with(
-            TARGET_DIR,
-            exist_ok=True
-        )
+        mock_makedirs.assert_called_once_with(TARGET_DIR, exist_ok=True)
         print("\nTest 'directory_creation_failure': Passed.")
+
 
 # To run these tests:
 # 1. Ensure the main program 'download_cs2023_guidelines.py' is
@@ -312,7 +297,6 @@ class TestDownloadPDF(unittest.TestCase):
 # 3. Navigate to your 'webvulmap' root directory in the terminal.
 # 4. Run the tests using the Python unittest module:
 #    python3 -m unittest test_download_cs2023_guidelines.py
-
 
 if __name__ == "__main__":
     unittest.main()

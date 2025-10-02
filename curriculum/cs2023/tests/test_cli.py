@@ -8,9 +8,8 @@ def test_cli_usage_error(run_parser):
     code, out, err = run_parser()
     msg = out + err
     assert code != 0, "Running parser without args should return non-zero"
-    assert (
-        "usage" in msg.lower() or "Usage" in msg
-    ), "Expected a usage/help message"
+    assert ("usage" in msg.lower()
+            or "Usage" in msg), "Expected a usage/help message"
 
 
 def test_cli_writes_json(tmp_path, run_parser, write_text):

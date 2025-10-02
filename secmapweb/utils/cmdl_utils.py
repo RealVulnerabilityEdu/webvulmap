@@ -11,6 +11,7 @@ CWE_LIST_FN = "cwe_list.csv"
 
 
 class RunSettings:
+
     def __init__(self, *, data_dir=None):
         self._data_dir = data_dir if data_dir else MAPPING_DATA_DIR
         self._topic_to_cwe_data_fn = TOPIC_TO_CWE_DATA_FN
@@ -40,8 +41,7 @@ class RunSettings:
 
 def setup_parser(app_name):
     parser = argparse.ArgumentParser(
-        prog=app_name, formatter_class=argparse.ArgumentDefaultsHelpFormatter
-    )
+        prog=app_name, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     parser.add_argument(
         "--data_dir",

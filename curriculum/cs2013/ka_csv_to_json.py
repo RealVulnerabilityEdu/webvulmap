@@ -10,7 +10,6 @@ from validate_ka import validate_csv_content
 
 # File name, method name
 
-
 parser = argparse.ArgumentParser()
 parser.add_argument(
     "--input-file",  # Input CSV
@@ -43,7 +42,7 @@ def csv_to_json(input_csv_file, output_json_file):
 
         for row in reader:
             ka_data = {
-                "short-ka": row["short_ka"],  # Short name of the knowledge area
+                "short-ka": row["short_ka"],  # Short name of the KA
                 "long-ka": row["ka"],  # Long name of the knowledge area
                 "begin-page": int(row["page_begin"]),  # Start page number
                 "end-page": int(row["page_end"]),  # End page number

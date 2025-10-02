@@ -31,10 +31,8 @@ def extract_knowledge_areas(input_file, pdf_file, output_dir):
 
         # Ensure the output directory exists
         os.makedirs(output_dir, exist_ok=True)
-        print(
-            "Ensuring output directory exists: "
-            f"{os.path.abspath(output_dir)}"
-        )
+        print("Ensuring output directory exists: "
+              f"{os.path.abspath(output_dir)}")
 
         # Open the PDF file using PyMuPDF
         doc = fitz.open(pdf_file)
@@ -46,20 +44,13 @@ def extract_knowledge_areas(input_file, pdf_file, output_dir):
             start_page = ka["begin-page"] - 1  # PyMuPDF is 0-indexed
             end_page = ka["end-page"]
 
-            print(
-                f"Extracting {short_code} from pages "
-                f"{start_page + 1} to {end_page}..."
-            )
+            print(f"Extracting {short_code} from pages "
+                  f"{start_page + 1} to {end_page}...")
 
-            if (
-                start_page < 0
-                or end_page > len(doc)
-                or start_page >= end_page
-            ):
-                print(
-                    "Warning: Skipping {} due to invalid page "
-                    "range.".format(short_code)
-                )
+            if (start_page < 0 or end_page > len(doc)
+                    or start_page >= end_page):
+                print("Warning: Skipping {} due to invalid page "
+                      "range.".format(short_code))
                 continue
 
             try:
@@ -69,65 +60,43 @@ def extract_knowledge_areas(input_file, pdf_file, output_dir):
                     text += doc[page_num].get_text()
             except (fitz.fitz.FileDataError, OSError) as e:
                 # Log and skip if extraction fails for a specific KA
-                print(
-                    f"Error extracting {short_code}: {e}"
-                )
+                print(f"Error extracting {short_code}: {e}")
                 continue
 
             # Save the extracted text to a separate .txt file
-            safe_short_code = (
-                short_code.replace(" ", "_")
-                .replace("/", "-")
-                .replace(":", "_")
-                .replace("&", "and")
-                .replace("(", "")
-                .replace(")", "")
-            )
-            safe_long_name = (
-                long_name.replace(" ", "_")
-                .replace("/", "-")
-                .replace(":", "_")
-                .replace("&", "and")
-                .replace("–", "-")
-                .replace("(", "")
-                .replace(")", "")
-            )
+            safe_short_code = (short_code.replace(" ", "_").replace(
+                "/",
+                "-").replace(":",
+                             "_").replace("&",
+                                          "and").replace("(",
+                                                         "").replace(")", ""))
+            safe_long_name = (long_name.replace(" ", "_").replace(
+                "/", "-").replace(":", "_").replace("&", "and").replace(
+                    "–", "-").replace("(", "").replace(")", ""))
             output_file = os.path.join(
-                output_dir,
-                f"{safe_short_code}_{safe_long_name}.txt"
-            )
+                output_dir, f"{safe_short_code}_{safe_long_name}.txt")
 
             with open(output_file, "w", encoding="utf-8") as out_file:
                 out_file.write(text.strip())
 
-            print(
-                f"Saved to {os.path.abspath(output_file)}"
-            )
+            print(f"Saved to {os.path.abspath(output_file)}")
 
         doc.close()
         return True
 
     except FileNotFoundError as e:
-        print(
-            f"Error: File not found - {e.filename}"
-        )
+        print(f"Error: File not found - {e.filename}")
         return False
     except json.JSONDecodeError as e:
         print("Error: Failed to decode the JSON input file.")
-        print(
-            f"Details: {e}"
-        )
+        print(f"Details: {e}")
         return False
     except OSError as e:
-        print(
-            "OS error occurred during extraction: "
-            f"{e}"
-        )
+        print("OS error occurred during extraction: "
+              f"{e}")
         return False
     except fitz.fitz.FileDataError as e:
-        print(
-            f"PyMuPDF file data error: {e}"
-        )
+        print(f"PyMuPDF file data error: {e}")
         return False
 
 
@@ -139,11 +108,10 @@ def main():
     parser = argparse.ArgumentParser(
         description="""Extract text by knowledge area from a CS2023
 curriculum PDF.
-"""
-    )
-    parser.add_argument(
-        "--input", required=True, help="Path to the knowledge_areas.json file"
-    )
+""")
+    parser.add_argument("--input",
+                        required=True,
+                        help="Path to the knowledge_areas.json file")
     parser.add_argument(
         "--pdf",
         required=True,
