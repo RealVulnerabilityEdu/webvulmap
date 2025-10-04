@@ -100,9 +100,9 @@ Prerequisite: Python 3.8+ installed (https://www.python.org/downloads/)
    from langchain_community.llms import Ollama
 
    from langchain_ollama import OllamaLLM
-7) On Git Bash, run command 'ollama pull mistral' **Note** you can replace 'mistral' with any model name
-8) Navigate to project directory, ex) cd webvulmap
-9) Run python script with command: python 'zero_shot.py'
+6) On Git Bash, run command 'ollama pull mistral' **Note** you can replace 'mistral' with any model name
+7) Navigate to project directory, ex) cd webvulmap
+8) Run python script with command: python 'zero_shot.py'
 
 ## References
 
