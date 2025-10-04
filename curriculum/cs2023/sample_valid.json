@@ -16,9 +16,7 @@
       "title": "Section 1",
       "order": 1,
       "summary": "Summary.",
-      "topics": [
-        { "id": "t1", "name": "Topic 1" }
-      ],
+      "topics": [{ "id": "t1", "name": "Topic 1" }],
       "learning_outcomes": [
         { "id": "lo1", "text": "Outcome 1", "cognitive_level": "Understand" }
       ],

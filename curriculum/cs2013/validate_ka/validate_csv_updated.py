@@ -10,15 +10,16 @@ from validate_ka import validate_csv_content
 
 # parses command line arguments
 def parse_arguments():
-    parser = argparse.ArgumentParser(
-        description="Convert a CSV file into JSON format.")
-    parser.add_argument("--input-file",
-                        required=True,
-                        help="Path to the input CSV file.")
+    parser = argparse.ArgumentParser(description="Convert a CSV file into JSON format.")
+    parser.add_argument(
+        "--input-file", required=True, help="Path to the input CSV file."
+    )
     parser.add_argument(
         "--output-file",
-        help=("Path to output JSON file. If not specified, creates JSON "
-              "with same name as CSV file."),
+        help=(
+            "Path to output JSON file. If not specified, creates JSON "
+            "with same name as CSV file."
+        ),
     )
     return parser.parse_args()
 
@@ -32,8 +33,7 @@ def csv_to_json(input_csv_path, output_json_path):
     all_dict = {"curriculum": "cs2013", "knowledge-areas": []}
     # error handling
     try:
-        with open(input_csv_path, "r", encoding="utf-8",
-                  newline="") as csvfile:
+        with open(input_csv_path, "r", encoding="utf-8", newline="") as csvfile:
             reader = csv.DictReader(csvfile)
 
             for row in reader:
@@ -55,8 +55,10 @@ def csv_to_json(input_csv_path, output_json_path):
     except FileNotFoundError:
         print(f"Error: The file '{input_csv_path}' was not found.")
     except PermissionError:
-        print(f"Permission denied when accessing the file \
-                '{input_csv_path}' or '{output_json_path}'.")
+        print(
+            f"Permission denied when accessing the file \
+                '{input_csv_path}' or '{output_json_path}'."
+        )
     except json.JSONDecodeError as e:
         print(f"JSON decoding error: {e}")
     except csv.Error as e:

@@ -7,8 +7,7 @@ from jsonschema import Draft202012Validator, validate
 
 def test_output_matches_schema(tmp_path, run_parser, write_text, schema_path):
     """Parser output should satisfy the JSON Schema."""
-    inp = write_text("se_sample.txt",
-                     "SE-Design: Header\nBody line 1\nBody line 2")
+    inp = write_text("se_sample.txt", "SE-Design: Header\nBody line 1\nBody line 2")
     out = tmp_path / "out.json"
 
     code, stdout, stderr = run_parser(inp, out)
@@ -39,5 +38,7 @@ def test_output_matches_golden(tmp_path, run_parser, golden_path, cs2023_dir):
 
     actual = norm(json.loads(out.read_text(encoding="utf-8")))
     expected = norm(json.loads(golden_path.read_text(encoding="utf-8")))
-    assert (actual == expected), "Golden mismatch: update the golden only \
+    assert (
+        actual == expected
+    ), "Golden mismatch: update the golden only \
         if the schema/format intentionally changed."

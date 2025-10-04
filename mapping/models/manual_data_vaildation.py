@@ -24,10 +24,7 @@ def load_and_merge_json(files):
                         combined[topic][cwe_id] = cwe_obj
 
     # Convert sets back to lists
-    return {
-        topic: list(cwe_dict.values())
-        for topic, cwe_dict in combined.items()
-    }
+    return {topic: list(cwe_dict.values()) for topic, cwe_dict in combined.items()}
 
 
 def write_combined_json(data, output_path):
@@ -48,7 +45,7 @@ def create_sample_csvs_strict(data, sample_size, output_prefix):
     # Shuffle and split topics
     random.shuffle(all_topics)
     topics1 = all_topics[:sample_size]
-    topics2 = all_topics[sample_size:sample_size * 2]
+    topics2 = all_topics[sample_size : sample_size * 2]
 
     def build_sample(topics_subset):
         mappings = []
@@ -61,13 +58,15 @@ def create_sample_csvs_strict(data, sample_size, output_prefix):
         return mappings
 
     def make_df(mappings):
-        return pd.DataFrame({
-            "mapping": mappings,
-            "accepted": ["" for _ in mappings],
-            "rejected": ["" for _ in mappings],
-            "comments": ["" for _ in mappings],
-            "human": ["" for _ in mappings],
-        })
+        return pd.DataFrame(
+            {
+                "mapping": mappings,
+                "accepted": ["" for _ in mappings],
+                "rejected": ["" for _ in mappings],
+                "comments": ["" for _ in mappings],
+                "human": ["" for _ in mappings],
+            }
+        )
 
     df1 = make_df(build_sample(topics1))
     df2 = make_df(build_sample(topics2))

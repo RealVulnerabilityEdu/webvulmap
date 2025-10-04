@@ -3,13 +3,8 @@ import os
 import re
 from enum import Enum
 
-from ka import (
-    KnowledgeArea,
-    KnowledgeTopic,
-    KnowledgeUnit,
-    KnowledgeUnitTier,
-    LearningOutcome,
-)
+from ka import (KnowledgeArea, KnowledgeTopic, KnowledgeUnit,
+                KnowledgeUnitTier, LearningOutcome)
 
 PATTERN_KA_HEADING_FMT = r"^\f{{0,1}}({}) \(({})\)$"
 # PATTERN_KU_HEADING_FMT = r"^{}/([A-Z].*)$"
@@ -21,7 +16,8 @@ PATTERN_SDF_HEADING = r"^\f{0,1}(Software Development Fundamentals) \((SDF)\)$"
 PATTERN_SDF_KU_HEADING = r"^SDF/([A-Z].*)$"
 PATTERN_TIER_HOURS = (
     r"\[((\d+)\s+([^\s,\,]+)\s+hour[s]{0,1})"
-    r"([,;]\s*(\d+)\s+([^\s,\,]+)\s+hour[s]{0,1})*\]|\[(Elective)\]")
+    r"([,;]\s*(\d+)\s+([^\s,\,]+)\s+hour[s]{0,1})*\]|\[(Elective)\]"
+)
 PATTERN_TIER_HOURS_ALT = r"\[(\d+)\s+(Core-Tier\d+)\]"
 PATTERN_KU_TOPICS_HEADING = r"^Topics:$"
 PATTERN_TOPICS_TIER = r"\[(Core-Tier\d+)\]|\[(Elective[s]{0,1})\]"
@@ -30,12 +26,10 @@ PATTERN_KU_SUBTOPIC_LINE = r"(?!^Learning [Oo]utomes:$)^o\s*(\w.*)$"
 PATTERN_KU_LEARNING_OUTCOMES_HEADING = r"^Learning [Oo]utcomes:$"
 PATTERN_KU_PARTIAL_OUTCOMES_LINE = r"^\d+\.\s*\w.*$"
 PATTERN_KU_OUTCOMES_LINE = r"^(\d+)\.\s*(\w.*)\[(.*)\]$"
-PATTERN_KU_OUTCOMES_LINE_XREF = (
-    r"^(\d+)\.\s*(\w.*)\[(.*)\]\s*(This outcome.*)$")
+PATTERN_KU_OUTCOMES_LINE_XREF = r"^(\d+)\.\s*(\w.*)\[(.*)\]\s*(This outcome.*)$"
 PATTERN_KA_REFS_HEADING = r"^References$"
 PATTERN_KA_REFS_ENTRY_LINE = r"^\[(\d+)\]\s+(\w+.*)$"
-PATTERN_XREF = (
-    r"^.*\(cross-reference\s+([A-Z]+/[^/]*/[^/]*(?!and [A-Z]+).*)\)$")
+PATTERN_XREF = r"^.*\(cross-reference\s+([A-Z]+/[^/]*/[^/]*(?!and [A-Z]+).*)\)$"
 # extracting x-refs
 PATTERN_PAGE_NUMBER = r"^\s*\d+\s*$"
 
@@ -105,10 +99,12 @@ def get_topic_line(line, f, line_stack):
             return line
         if pattern_page_number.match(next_line):
             continue
-        if (not pattern_ku_topic_line.match(next_line)
-                and not pattern_ku_subtopic_line.match(next_line)
-                and not pattern_topics_tier.search(next_line)
-                and not pattern_ku_outcomes_heading.match(next_line)):
+        if (
+            not pattern_ku_topic_line.match(next_line)
+            and not pattern_ku_subtopic_line.match(next_line)
+            and not pattern_topics_tier.search(next_line)
+            and not pattern_ku_outcomes_heading.match(next_line)
+        ):
             if next_line.strip():
                 line = line.strip() + " " + next_line.strip()
         else:
@@ -124,10 +120,12 @@ def get_subtopic_line(line, f, line_stack):
             return line
         if pattern_page_number.match(next_line):
             continue
-        if (not pattern_ku_subtopic_line.match(next_line)
-                and not pattern_ku_topic_line.match(next_line)
-                and not pattern_topics_tier.search(next_line)
-                and not pattern_ku_outcomes_heading.match(next_line)):
+        if (
+            not pattern_ku_subtopic_line.match(next_line)
+            and not pattern_ku_topic_line.match(next_line)
+            and not pattern_topics_tier.search(next_line)
+            and not pattern_ku_outcomes_heading.match(next_line)
+        ):
             if next_line.strip():
                 line = line.strip() + " " + next_line.strip()
         else:
@@ -143,10 +141,12 @@ def get_outcome_line(line, f, line_stack):
             return line
         if pattern_page_number.match(next_line):
             continue
-        if (not pattern_ku_partial_outcomes_line.match(next_line)
-                and not pattern_ku_heading.match(next_line)
-                and not pattern_ka_refs_heading.match(next_line)
-                and not pattern_topics_tier.search(next_line)):
+        if (
+            not pattern_ku_partial_outcomes_line.match(next_line)
+            and not pattern_ku_heading.match(next_line)
+            and not pattern_ka_refs_heading.match(next_line)
+            and not pattern_topics_tier.search(next_line)
+        ):
             if next_line.strip():
                 line = line.strip() + " " + next_line.strip()
         else:
@@ -163,7 +163,8 @@ def get_references_line(line, f, line_stack):
         if pattern_page_number.match(next_line):
             continue
         if not pattern_ka_refs_entry_line.match(
-                next_line) and not pattern_all_ka_heading.match(next_line):
+            next_line
+        ) and not pattern_all_ka_heading.match(next_line):
             if next_line.strip():
                 line = line.strip() + " " + next_line.strip()
         else:
@@ -280,9 +281,9 @@ def parse_subtopic_line(line):
 def parse_ka(ka_fn, ka_text, short_ka_text):
     global pattern_ka_heading, pattern_ku_heading
     pattern_ka_heading = re.compile(
-        PATTERN_KA_HEADING_FMT.format(ka_text, short_ka_text))
-    pattern_ku_heading = re.compile(
-        PATTERN_KU_HEADING_FMT.format(short_ka_text))
+        PATTERN_KA_HEADING_FMT.format(ka_text, short_ka_text)
+    )
+    pattern_ku_heading = re.compile(PATTERN_KU_HEADING_FMT.format(short_ka_text))
     ka = None
     topics_tier = None
     state = None
@@ -297,8 +298,7 @@ def parse_ka(ka_fn, ka_text, short_ka_text):
                 state = State.IN_KA
                 ka_title, ka_short_title = parse_ka_title_line(line)
                 ka = KnowledgeArea(ka_title, ka_short_title)
-            elif state == State.IN_KA and is_ku_heading(
-                    state, line, f, line_stack):
+            elif state == State.IN_KA and is_ku_heading(state, line, f, line_stack):
                 state = State.KU_HEADING
                 ku_title = parse_ku_title_line(line)
                 ku = KnowledgeUnit(ku_title)
@@ -307,51 +307,52 @@ def parse_ka(ka_fn, ka_text, short_ka_text):
                 state = State.KU_HOURS
                 ku_tiers = parse_ku_tier_line(line)
                 ku.set_tiers(ku_tiers)
-            elif (state == State.KU_TOPICS_HEADING
-                  and not pattern_topics_tier.search(line)):
+            elif state == State.KU_TOPICS_HEADING and not pattern_topics_tier.search(
+                line
+            ):
                 state = State.NO_TOPICS_TIER
                 topics_tier = None
                 line_stack.append(line)
-            elif state == State.KU_HOURS and pattern_ku_topics_heading.match(
-                    line):
+            elif state == State.KU_HOURS and pattern_ku_topics_heading.match(line):
                 state = State.KU_TOPICS_HEADING
-            elif (state == State.KU_TOPICS_HEADING
-                  and pattern_topics_tier.search(line)):
+            elif state == State.KU_TOPICS_HEADING and pattern_topics_tier.search(line):
                 state = State.TOPICS_TIER
                 topics_tier = parse_topics_tier(line)
-            elif (state == State.KU_TOPICS_HEADING
-                  and not pattern_topics_tier.search(line)):
+            elif state == State.KU_TOPICS_HEADING and not pattern_topics_tier.search(
+                line
+            ):
                 state = State.NO_TOPICS_TIER
                 topics_tier = None
                 line_stack.append(line)
-            elif (state == State.KU_TOPICS_HEADING or state
-                  == State.TOPICS_TIER or state == State.NO_TOPICS_TIER
-                  ) and pattern_ku_topic_line.match(line):
+            elif (
+                state == State.KU_TOPICS_HEADING
+                or state == State.TOPICS_TIER
+                or state == State.NO_TOPICS_TIER
+            ) and pattern_ku_topic_line.match(line):
                 state = State.TOPICS_LIST
                 line_stack.append(line)
-            elif state == State.TOPICS_LIST and pattern_ku_topic_line.match(
-                    line):
+            elif state == State.TOPICS_LIST and pattern_ku_topic_line.match(line):
                 topic_line = get_topic_line(line, f, line_stack)
                 topic = parse_topic_line(topic_line)
                 ku.add_topic(KnowledgeTopic(topic, topics_tier))
-            elif state == State.TOPICS_LIST and pattern_ku_subtopic_line.match(
-                    line):
+            elif state == State.TOPICS_LIST and pattern_ku_subtopic_line.match(line):
                 subtopic_line = get_subtopic_line(line, f, line_stack)
                 subtopic = parse_subtopic_line(subtopic_line)
                 ku.get_last_topic().add_subtopic(subtopic)
-            elif state == State.TOPICS_LIST and pattern_topics_tier.search(
-                    line):
+            elif state == State.TOPICS_LIST and pattern_topics_tier.search(line):
                 state = State.TOPICS_TIER
                 topics_tier = parse_topics_tier(line)
-            elif (state == State.TOPICS_LIST
-                  and pattern_ku_outcomes_heading.match(line)):
+            elif state == State.TOPICS_LIST and pattern_ku_outcomes_heading.match(line):
                 state = State.LEARNING_OUTCOMES_HEADING
                 outcomes_tier = None
-            elif (state == State.LEARNING_OUTCOMES_HEADING
-                  and pattern_ku_partial_outcomes_line.match(line)):
+            elif (
+                state == State.LEARNING_OUTCOMES_HEADING
+                and pattern_ku_partial_outcomes_line.match(line)
+            ):
                 outcome_line = get_outcome_line(line, f, line_stack)
-                outcome_no, outcome, mastery, outcome_xref = (
-                    parse_outcome_line(outcome_line))
+                outcome_no, outcome, mastery, outcome_xref = parse_outcome_line(
+                    outcome_line
+                )
                 ku.add_outcome(
                     LearningOutcome(
                         outcome_no,
@@ -359,21 +360,27 @@ def parse_ka(ka_fn, ka_text, short_ka_text):
                         mastery,
                         outcomes_tier,
                         outcome_xref,
-                    ))
-            elif (state == State.LEARNING_OUTCOMES_HEADING
-                  and pattern_topics_tier.search(line)):
+                    )
+                )
+            elif (
+                state == State.LEARNING_OUTCOMES_HEADING
+                and pattern_topics_tier.search(line)
+            ):
                 outcomes_tier = parse_topics_tier(line)
             elif state == State.LEARNING_OUTCOMES_HEADING and is_refs_heading(
-                    state, line, f, line_stack):
+                state, line, f, line_stack
+            ):
                 state = State.KA_REFS_HEADING
-            elif (state == State.KA_REFS_HEADING
-                  and pattern_ka_refs_entry_line.match(line)):
+            elif state == State.KA_REFS_HEADING and pattern_ka_refs_entry_line.match(
+                line
+            ):
                 refs_entry_line = get_references_line(line, f, line_stack)
-                ref_no, ref_entry = parse_references_entry_line(
-                    refs_entry_line)
+                ref_no, ref_entry = parse_references_entry_line(refs_entry_line)
                 ka.add_ref_entry(ref_no, ref_entry)
-            elif (state == State.LEARNING_OUTCOMES_HEADING or state
-                  == State.KA_REFS_HEADING) and pattern_ku_heading.match(line):
+            elif (
+                state == State.LEARNING_OUTCOMES_HEADING
+                or state == State.KA_REFS_HEADING
+            ) and pattern_ku_heading.match(line):
                 state = State.KU_HEADING
                 ku_title = parse_ku_title_line(line)
                 ku = KnowledgeUnit(ku_title)
@@ -393,20 +400,19 @@ def parse_ka(ka_fn, ka_text, short_ka_text):
 
 def parse_cmd_line():
     parser = argparse.ArgumentParser(prog="PROG")
-    parser.add_argument("--data_dir",
-                        nargs=1,
-                        help="directory for input and output files")
-    parser.add_argument("ka",
-                        nargs="+",
-                        help="knowledge area, e.g., 'Software Engineering'")
-    parser.add_argument("short_ka",
-                        nargs="+",
-                        help="short name for knowledge area, e.g., 'SE'")
+    parser.add_argument(
+        "--data_dir", nargs=1, help="directory for input and output files"
+    )
+    parser.add_argument(
+        "ka", nargs="+", help="knowledge area, e.g., 'Software Engineering'"
+    )
+    parser.add_argument(
+        "short_ka", nargs="+", help="short name for knowledge area, e.g., 'SE'"
+    )
     parser.add_argument(
         "in_file",
         nargs="+",
-        help=("input text file extracted from ACM/IEEE CS2013 "
-              "Curriculum pdf file"),
+        help=("input text file extracted from ACM/IEEE CS2013 " "Curriculum pdf file"),
     )
     parser.add_argument("out_file", nargs="+", help="output json file")
     args = parser.parse_args()

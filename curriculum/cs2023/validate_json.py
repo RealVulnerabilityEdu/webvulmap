@@ -1,14 +1,17 @@
+"""Validate JSON schema for knowledge areas."""
+
 import json
-from jsonschema import validate, ValidationError
 import sys
+
+from jsonschema import ValidationError, validate
 
 SCHEMA_PATH = "curriculum/cs2023/k.schema.v2.json"
 
 
 def main(json_file):
-    with open(SCHEMA_PATH, "r") as f:
+    with open(SCHEMA_PATH, "r", encoding="utf-8") as f:
         schema = json.load(f)
-    with open(json_file, "r") as f:
+    with open(json_file, "r", encoding="utf-8") as f:
         data = json.load(f)
     try:
         validate(instance=data, schema=schema)
