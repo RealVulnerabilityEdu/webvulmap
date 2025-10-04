@@ -17,7 +17,6 @@ if __name__ == "__main__":
         df = pd.read_csv(csv_f)
         df_list.append(df)
     df = pd.concat(df_list)
-    out_fn = os.path.join("webknwlmap", "curriculum", "data",
-                          "cs2013_web_final.csv")
+    out_fn = os.path.join("webknwlmap", "curriculum", "data", "cs2013_web_final.csv")
     df.to_csv(out_fn, index=False)
     print("worte to {}".format(out_fn))

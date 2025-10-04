@@ -7,15 +7,15 @@ import pandas as pd
 
 def parse_cmd_line():
     parser = argparse.ArgumentParser(prog="PROG")
-    parser.add_argument("--data_dir",
-                        nargs=1,
-                        help="directory for input and output files")
-    parser.add_argument("in_file",
-                        nargs="+",
-                        help="input json file for a knowledge area")
-    parser.add_argument("out_file",
-                        nargs="+",
-                        help="output csv file for the knowledge area")
+    parser.add_argument(
+        "--data_dir", nargs=1, help="directory for input and output files"
+    )
+    parser.add_argument(
+        "in_file", nargs="+", help="input json file for a knowledge area"
+    )
+    parser.add_argument(
+        "out_file", nargs="+", help="output csv file for the knowledge area"
+    )
     args = parser.parse_args()
     return args
 
@@ -38,14 +38,16 @@ def convert_to_dataframe(ka_fn):
                     tier = ku["tiers"][0]["tier"]
                 else:
                     tier = ku["tiers"]["tier"]
-                row_list.append({
-                    "KA": ka["short_ka"],
-                    "Knowledge Area": ka["ka"],
-                    "Knowledge Unit": ku["ku"],
-                    "Tier": tier,
-                    "Topic": t["topic"],
-                    "Subtopic": st if st else t["topic"],
-                })
+                row_list.append(
+                    {
+                        "KA": ka["short_ka"],
+                        "Knowledge Area": ka["ka"],
+                        "Knowledge Unit": ku["ku"],
+                        "Tier": tier,
+                        "Topic": t["topic"],
+                        "Subtopic": st if st else t["topic"],
+                    }
+                )
     df = pd.DataFrame(row_list)
     return df
 

@@ -48,8 +48,7 @@ def parse_ka_text_to_json(input_txt, output_json):
     section_pattern = re.compile(r"^[A-Z]+-[A-Za-z-]+: .+$", re.MULTILINE)
     if not section_pattern.search(text):
         print(
-            "Error: missing or invalid header "
-            "(expected lines like 'SE-...: ...')",
+            "Error: missing or invalid header " "(expected lines like 'SE-...: ...')",
             file=sys.stderr,
         )
         sys.exit(1)
@@ -64,22 +63,22 @@ def parse_ka_text_to_json(input_txt, output_json):
     description = ""
 
     if section_headers:
-        description = text[:section_headers[0].start()].strip()
+        description = text[: section_headers[0].start()].strip()
         for i, match in enumerate(section_headers):
             title = match.group(0).strip()
             start = match.end()
-            end = (section_headers[i + 1].start() if i +
-                   1 < len(section_headers) else len(text))
+            end = (
+                section_headers[i + 1].start()
+                if i + 1 < len(section_headers)
+                else len(text)
+            )
             content = text[start:end].strip()
             sections.append({"title": title, "content_as_text": content})
     else:
         description = text.strip()
 
     result = {
-        "knowledge_area": {
-            "name": ka_name,
-            "code": ka_code
-        },
+        "knowledge_area": {"name": ka_name, "code": ka_code},
         "description": description,
         "sections": sections,
     }
@@ -87,14 +86,14 @@ def parse_ka_text_to_json(input_txt, output_json):
     with open(output_json, "w", encoding="utf-8") as f:
         json.dump(result, f, indent=2)
 
-    print(f"Parsed {len(sections)} sections from '{input_txt}' \
-          and wrote JSON to '{output_json}'.")
+    print(
+        f"Parsed {len(sections)} sections from '{input_txt}' \
+          and wrote JSON to '{output_json}'."
+    )
 
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print(
-            "Usage: python3 parse_ka_text_to_json.py <input_txt> <output_json>"
-        )
+        print("Usage: python3 parse_ka_text_to_json.py <input_txt> <output_json>")
         sys.exit(1)
     parse_ka_text_to_json(sys.argv[1], sys.argv[2])

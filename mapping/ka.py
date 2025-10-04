@@ -36,5 +36,6 @@ class KnowledgeArea:
 
 if __name__ == "__main__":
     knowledge_area = KnowledgeArea.from_json(
-        os.path.join(os.path.dirname(__file__), "ka.json"))
+        os.path.join(os.path.dirname(__file__), "ka.json")
+    )
     print("tested")

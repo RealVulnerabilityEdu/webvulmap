@@ -1,10 +1,13 @@
+"""Test CS Knowledge Schema v2."""
+
 import json
+
 import jsonschema
 
-with open("curriculum/cs2023/SE_SAMPLE_v2.json") as f:
+with open("curriculum/cs2023/SE_SAMPLE_v2.json", encoding="utf-8") as f:
     instance = json.load(f)
 
-with open("curriculum/cs2023/k.schema.v2.json") as f:
+with open("curriculum/cs2023/k.schema.v2.json", encoding="utf-8") as f:
     schema = json.load(f)
 
 try:

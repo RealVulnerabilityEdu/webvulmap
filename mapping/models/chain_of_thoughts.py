@@ -25,11 +25,9 @@ def query_model(model_prompt, model="mistral"):
 def extract_cwe_data(model_response):
     pattern = r"(CWE-\d+)\s+\((.+?)\)\n(.+)"
     matches = re.findall(pattern, model_response)
-    return [{
-        "cwe": m[0],
-        "name": m[1].strip(),
-        "reason": m[2].strip()
-    } for m in matches]
+    return [
+        {"cwe": m[0], "name": m[1].strip(), "reason": m[2].strip()} for m in matches
+    ]
 
 
 mappings = {}
@@ -51,7 +49,8 @@ for topic in df["ka"]:
         f"Example:\nCWE-79 (Improper Neutralization of Input During Web Page \
           Generation)\nReason: This occurs when user inputs are not properly \
           sanitized, leading to XSS attacks.\n\n"
-        f"Begin now:\n")
+        f"Begin now:\n"
+    )
     response = query_model(prompt)
     cwe_data = extract_cwe_data(response)
 
@@ -64,21 +63,21 @@ for topic in df["ka"]:
               Security Assessment).\n"
             f"Chain of Thought: Explain your reasoning first, then present \
               the CWE as:\n"
-            f"CWE-ID (CWE Name)\nReason\n")
+            f"CWE-ID (CWE Name)\nReason\n"
+        )
         response = query_model(FALLBACK_PROMPT)
         cwe_data = extract_cwe_data(response)
 
         # If still empty, hard fallback
         if not cwe_data:
-            cwe_data = [{
-                "cwe":
-                "CWE-1000",
-                "name":
-                "Default Weakness: Insufficient Security Assessment",
-                "reason":
-                "No direct CWE found; assigned a general weakness for \
+            cwe_data = [
+                {
+                    "cwe": "CWE-1000",
+                    "name": "Default Weakness: Insufficient Security Assessment",
+                    "reason": "No direct CWE found; assigned a general weakness for \
                      lacking thorough security evaluation.",
-            }]
+                }
+            ]
 
     mappings[topic] = cwe_data
 
