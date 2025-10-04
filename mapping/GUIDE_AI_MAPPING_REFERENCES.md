@@ -85,6 +85,25 @@
    - **paid plans** available for production, large scale development, and
      enterprise features
 
+## Running Scripts Locally (LangChain + Ollama)
+Prerequisite: Python 3.8+ installed (https://www.python.org/downloads/)
+1) Install Git Bash at https://gitforwindows.org/ **Note** use 'git' command for LINUX/UNIX
+2) Download Ollama at https://ollama.com/download
+3) Clone repository locally with command 'git clone https://github.com/cunymasslab/webvulmap'
+4) pip install commands:
+
+   pip install -U langchain langchain-community
+
+   pip install -U langchain-ollama
+5) At the top of your Python script, add these imports:
+
+   from langchain_community.llms import Ollama
+
+   from langchain_ollama import OllamaLLM
+7) On Git Bash, run command 'ollama pull mistral' **Note** you can replace 'mistral' with any model name
+8) Navigate to project directory, ex) cd webvulmap
+9) Run python script with command: python 'zero_shot.py'
+
 ## References
 
 ### Prompt Engineering
@@ -102,3 +121,8 @@
 ### CWE
 
 1. [CWEs](https://cwe.mitre.org/) (we will define a scope of cwes for the 2023 curriculum)
+
+### Running code locally
+1. [Python download](https://www.python.org/downloads/)
+2. [Git Bash download](https://gitforwindows.org/)
+3. [Ollama download](https://ollama.com/download)
