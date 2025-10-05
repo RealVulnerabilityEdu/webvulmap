@@ -87,22 +87,22 @@
 
 ## Running Scripts Locally (LangChain + Ollama)
 Prerequisite: Python 3.8+ installed (https://www.python.org/downloads/)
-1) Install Git Bash at https://gitforwindows.org/ **Note** use 'git' command for LINUX/UNIX
-2) Download Ollama at https://ollama.com/download
-3) Clone repository locally with command 'git clone https://github.com/cunymasslab/webvulmap'
-4) pip install commands:
+1. Install Git Bash at https://gitforwindows.org/ **Note** use 'git' command for LINUX/UNIX
+1. Download Ollama at https://ollama.com/download
+1. Clone repository locally with command 'git clone https://github.com/cunymasslab/webvulmap'
+1. pip install commands:
 
    pip install -U langchain langchain-community
 
    pip install -U langchain-ollama
-5) At the top of your Python script, add these imports:
+1. At the top of your Python script, add these imports:
 
    from langchain_community.llms import Ollama
 
    from langchain_ollama import OllamaLLM
-6) On Git Bash, run command 'ollama pull mistral' **Note** you can replace 'mistral' with any model name
-7) Navigate to project directory, ex) cd webvulmap
-8) Run python script with command: python 'zero_shot.py'
+1. On Git Bash, run command 'ollama pull mistral' **Note** you can replace 'mistral' with any model name
+1. Navigate to project directory, ex) cd webvulmap
+1. Run python script with command: python 'zero_shot.py'
 
 ## References
 
@@ -124,5 +124,5 @@ Prerequisite: Python 3.8+ installed (https://www.python.org/downloads/)
 
 ### Running code locally
 1. [Python download](https://www.python.org/downloads/)
-2. [Git Bash download](https://gitforwindows.org/)
-3. [Ollama download](https://ollama.com/download)
+1. [Git Bash download](https://gitforwindows.org/)
+1. [Ollama download](https://ollama.com/download)
