@@ -88,12 +88,12 @@
 
 ## Running Scripts Locally (LangChain + Ollama)
 
-Prerequisite: Python 3.8+ installed (https://www.python.org/downloads/)
+Prerequisite: [Python 3.8+](https://www.python.org/downloads/) installed
 
-1. Install Git Bash at https://gitforwindows.org/.  
-   **Note:** Use the `git` command for Linux/UNIX.
+1. Install [Git Bash](https://gitforwindows.org/).  
+   **Note:** Use the `git` command for Linux/Unix.
 
-1. Download Ollama at https://ollama.com/download.
+1. Download [Ollama](https://ollama.com/download).
 
 1. Clone the repository locally with the command:
 
@@ -113,14 +113,17 @@ Prerequisite: Python 3.8+ installed (https://www.python.org/downloads/)
    from langchain_ollama import OllamaLLM
    
 1. On Git Bash, run command:
+
    `ollama pull mistral`
 
    **Note:** you can replace `mistral` with any model name.
 
 1. Navigate to project directory:
+
    `cd webvulmap`
 
 1. Run python script with command:
+
    `python 'zero_shot.py'`
 
    **Note:** `'zero_shot.py'` can be replaced with the file you want to run.
