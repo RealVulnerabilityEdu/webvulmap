@@ -97,8 +97,10 @@ Prerequisite: [Python 3.8+](https://www.python.org/downloads/) installed
 
 1. Clone the repository locally with the command:
 
-   ```bash  
+   ```bash
    git clone https://github.com/cunymasslab/webvulmap
+
+   ```
 
 1. Run these pip install commands:
 
@@ -106,12 +108,16 @@ Prerequisite: [Python 3.8+](https://www.python.org/downloads/) installed
    pip install -U langchain langchain-community
    pip install -U langchain-ollama
 
+   ```
+
 1. At the top of your Python script, add these imports:
 
    ```bash
    from langchain_community.llms import Ollama
    from langchain_ollama import OllamaLLM
-   
+
+   ```
+
 1. On Git Bash, run command:
 
    `ollama pull mistral`
