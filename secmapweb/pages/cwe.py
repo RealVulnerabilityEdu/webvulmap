@@ -16,9 +16,7 @@ def load_data(csv_path):
 
 
 def display_mapped_cwes(topic_row, cwe_df):
-    mapped_cwe_list = [
-        cwe.strip().upper() for cwe in topic_row["CWE"].split(",")
-    ]
+    mapped_cwe_list = [cwe.strip().upper() for cwe in topic_row["CWE"].split(",")]
     logger.debug("mapped_cwe_list: {}".format(mapped_cwe_list))
     cwe_df_list = []
     for cwe in mapped_cwe_list:
@@ -33,9 +31,7 @@ def display_mapped_cwes(topic_row, cwe_df):
 
 
 def main():
-    logger.debug(
-        "running script " + __file__ + " off working directory " + os.getcwd()
-    )
+    logger.debug("running script " + __file__ + " off working directory " + os.getcwd())
 
     app_settings = get_run_settings("Secure Software Knowledge Mapping")
     st.title("Mapping CS Topics to CWE List")
@@ -43,9 +39,7 @@ def main():
     topic_df = load_data(app_settings.topic_to_cwe_file)
     cwe_df = load_data(app_settings.cwe_list_file)
     cwe_df["URL"] = cwe_df.apply(
-        lambda x: '<a href="{}" target="_blank">{}</a>'.format(
-            x["URL"], x["URL"]
-        ),
+        lambda x: '<a href="{}" target="_blank">{}</a>'.format(x["URL"], x["URL"]),
         axis=1,
     )
 

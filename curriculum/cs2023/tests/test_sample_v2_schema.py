@@ -9,11 +9,13 @@ from jsonschema import validate
 
 
 def load_json(path):
+    """Load JSON data from file path."""
     with open(path, encoding="utf-8") as f:
         return json.load(f)
 
 
 def get_all_ids(sections):
+    """Collect all unique IDs from sections structure."""
     ids = set()
 
     def collect(section):
@@ -33,6 +35,7 @@ def get_all_ids(sections):
 
 
 def get_orders(sections):
+    """Extract all order values from sections structure."""
     orders = []
 
     def collect(section):
@@ -46,18 +49,21 @@ def get_orders(sections):
 
 
 def test_sample_v2_schema_valid():
+    """Test that sample v2 data validates against v2 schema."""
     schema = load_json("curriculum/cs2023/ka.schema.v2.json")
     sample = load_json("curriculum/cs2023/SE_SAMPLE_v2.json")
     validate(instance=sample, schema=schema)
 
 
 def test_ids_unique():
+    """Test that all IDs in the sample are unique."""
     sample = load_json("curriculum/cs2023/SE_SAMPLE_v2.json")
     all_ids = list(get_all_ids(sample["sections"]))
     assert len(all_ids) == len(set(all_ids)), "Duplicate IDs found"
 
 
 def test_order_strictly_increasing():
+    """Test that section orders are strictly increasing."""
     sample = load_json("curriculum/cs2023/SE_SAMPLE_v2.json")
     orders = get_orders(sample["sections"])
     assert orders == sorted(orders), "Section orders are not strictly increasing"

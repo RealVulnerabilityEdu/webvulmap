@@ -36,7 +36,8 @@ class Table:
     # # list argument: usually a list of CVE
     def generate_links(self, url_list):
         return "".join(
-            [f'<a href="{url}" target="_blank">Link</a> ' for url in url_list])
+            [f'<a href="{url}" target="_blank">Link</a> ' for url in url_list]
+        )
 
     # single argument: usually a single CWE url
     def generate_link(self, string):
@@ -82,10 +83,10 @@ class Table:
 
         # Construct the correct file paths based on the folder structure
         current_folder = os.path.dirname(os.path.abspath(__file__))
-        template_path = os.path.join(current_folder, "..", "templates",
-                                     "table_template.html")
-        style_path = os.path.join(current_folder, "..", "styles",
-                                  "table_styles.css")
+        template_path = os.path.join(
+            current_folder, "..", "templates", "table_template.html"
+        )
+        style_path = os.path.join(current_folder, "..", "styles", "table_styles.css")
 
         # Read HTML template from file
         with open(template_path, "r") as template_file:

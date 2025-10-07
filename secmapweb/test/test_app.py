@@ -35,8 +35,7 @@ def test_process_data():
     # assertions
     assert len(test_topic_dict) == 1
     assert "Language 1.1" in test_topic_dict[1].subtopics
-    assert ("Language 1.1"
-            in test_topic_dict[1].subtopics["Language 1.1"].toString())
+    assert "Language 1.1" in test_topic_dict[1].subtopics["Language 1.1"].toString()
 
 
 # Mock Streamlit functions to test display_cwes function

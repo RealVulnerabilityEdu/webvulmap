@@ -27,16 +27,12 @@ def display_mapped_cves(cve_record, cwe_list_df, topic_cwe_df):
         topic_df = retrieve_topics_by_cwe(cwe, topic_cwe_df)
         topic_df_list.append(topic_df)
     logger.debug("topic_df_list: {}".format(topic_df_list))
-    cve_topic_df = pd.concat(topic_df_list).reset_index(
-        drop=True, inplace=False
-    )
+    cve_topic_df = pd.concat(topic_df_list).reset_index(drop=True, inplace=False)
     if not cve_topic_df.empty:
         st.table(cve_topic_df)
     else:
         st.write(
-            pd.DataFrame(
-                ["CS Topic mapping: work in progress"], columns=["Status"]
-            )
+            pd.DataFrame(["CS Topic mapping: work in progress"], columns=["Status"])
         )
     ref_cwe_df = cwe_list_df[cwe_list_df["ID"].isin(cwes)].reset_index(
         drop=True, inplace=False
@@ -44,17 +40,11 @@ def display_mapped_cves(cve_record, cwe_list_df, topic_cwe_df):
     if not ref_cwe_df.empty:
         st.table(ref_cwe_df)
     else:
-        st.write(
-            pd.DataFrame(
-                ["CWE mapping: work in progress"], columns=["Status"]
-            )
-        )
+        st.write(pd.DataFrame(["CWE mapping: work in progress"], columns=["Status"]))
 
 
 def main():
-    logger.debug(
-        "running script " + __file__ + " off working directory " + os.getcwd()
-    )
+    logger.debug("running script " + __file__ + " off working directory " + os.getcwd())
 
     app_settings = get_run_settings("Secure Software Dev Web App")
     st.set_page_config(page_title="CVE and CWE")  # Set the page title

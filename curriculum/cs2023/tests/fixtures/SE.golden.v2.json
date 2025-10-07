@@ -1,0 +1,322 @@
+{
+  "description": "Software Engineering (SE)\nPreamble\nAs far back as the early 1970s, British computer scientist Brian Randell allegedly said, “Software\nengineering is the multi-person construction of multi-version programs.” This is an essential insight:\nwhile programming is the skill that governs our ability to write a program, software engineering is\ndistinct in two dimensions: time and people.\nFirst, a software engineering project is a team endeavor; being a solitary programming expert is\ninsufficient. Skilled software engineers must demonstrate expertise in communication and collaboration.\nProgramming may be an individual activity, but software engineering is a collaborative one, deeply tied\nto issues of professionalism, teamwork, and communication.\nSecond, a software engineering project is usually “multi-version.” It has an expected lifespan; it needs\nto function properly for months, years, or decades. Features may be added or removed to meet product\nrequirements. The engineering team itself will likely change. The technological context will shift, as our\ncomputing platforms evolve, programming languages change, dependencies upgrade, etc. This\nexposure to matters of time and change is novel when compared to a programming project: it isn’t\nenough to build a thing that works, instead it must work and stay working. Many of the most challenging\ntopics in tech share “time will lead to change” as a root cause: backward compatibility, version skew,\ndependency management, schema changes, protocol evolution.\nSoftware engineering presents a particularly difficult challenge for learning in an academic setting.\nGiven that the major differences between programming and software engineering are time and\nteamwork, it is hard to generate lessons that require successful teamwork and that faithfully present the\nchallenges of time. Additionally, some topics in software engineering will be more authentic and more\nrelevant if our learners experience collaborative and long-term software engineering projects in vivo\nrather than in the classroom. Regardless of whether that happens as an internship, involvement in an\nopen-source project, or full-time engineering role, a month of full-time hands-on experience has more\navailable hours than the average software engineering course.\nThus, a software engineering curriculum must focus on concepts needed by most new-graduate hires,\nand that either are novel for those who are trained primarily as programmers, or that are abstract\nconcepts that may not get explicitly stated/shared on the job. Such topics include, but are not limited to:\n● Testing\n● Teamwork, collaboration\n● Communication\n● Design\n● Maintenance and evolution\n● Software engineering tools\nSome such material is reasonably suited to a standard lecture or lecture + lab course. Discussing\ntheoretical underpinnings of version control systems, or branching strategies in such systems, can be\nan effective way to familiarize students with those ideas. Similarly, a theoretical discussion can highlight\n\nthe difference between static and dynamic analysis tools or may motivate discussion of diamond\ndependency problems in dependency networks.\nOn the other hand, many of the fundamental topics of software engineering are best experienced in a\nhands-on fashion. Historically, project-oriented courses have been a common vehicle for such learning.\nWe believe that such experience is valuable but also bears some interesting risks: students may form\nerroneous notions about the difficulty/complexity of collaboration if their only exposure is a single\nproject with teams formed of other novice software engineers. It falls to instructors to decide on the right\nbalance between theoretical material and hands-on projects – neither is a perfect vehicle for this\nchallenging material. We strongly encourage instructors of project courses to aim for iteration and fast\nfeedback – a few simple tasks repeated, as in an Agile-structured project, is better than singular highfriction introductions to many types of tasks. Projects with real-world industry partners and clients are\nalso especially encouraged. If long-running project courses are not an option, anything that can expose\nlearners to the collaborative and long-term aspects of software engineering is valuable – adding\nfeatures to an existing codebase, collaborating on distinct parts of a larger whole, pairing up to write an\nencoder and decoder, etc.\nAll evidence suggests that the role of software in our society will continue to grow for the foreseeable\nfuture. Additionally, the era of “two programmers in a garage” seems to have drawn to a close. Most\nimportant software these days is a team effort, building on existing code and leveraging existing\nfunctionality. The study of software engineering skills is a deeply important counterpoint to the everyday\nexperience of computing students – we must impress on them the reality that few software projects are\nmanaged by writing from scratch as a solo endeavor. Communication, teamwork, planning, testing, and\ntooling are far more important as our students move on from the classroom and make their mark on the\nwider world.\nAlthough most CS graduates will go on to an industry position that requires this material, the CS Core\ntopics presented here are of value regardless of whether graduates go on to industry or academia.\nChanges since CS 2013\nThis document shifts the focus of the Software Engineering knowledge area in a few ways compared to\nthe goals of CS2013. The common reason behind most of these changes is to focus on material that\nlearners would not pick up elsewhere in the curriculum, and that will be relevant immediately upon\ngraduation, rather than at some future point in their careers.\n● More explicit focus on the software workflow (version control, testing, code review, tooling).\n● Less focus on team leadership and project management.\n● More focus on team participation, communication, and collaboration.\nOverview\n1. SE-Teamwork: Because of the nature of learning programming, most students in introductory SE\nhave little or no exposure to the collaborative nature of SE. Practice (for instance in project work)\nmay help, but lecture and discussion time spent on the value of clear, effective, and efficient\ncommunication and collaboration is essential for Software Engineering.\n\n2. SE-Tools: Industry reliance on SE tools has exploded in the past generation, with version control\nbecoming ubiquitous, testing frameworks growing in popularity, increased reliance on static and\ndynamic analysis in practice, and the near-ubiquitous use of continuous integration systems.\nIncreasingly powerful IDEs provide code searching and indexing capabilities, as well as small scale\nrefactoring tools and integration with other SE tools. An understanding of the nature of these tools is\nbroadly valuable - especially version control systems.\n3. SE-Requirements: Knowing how to build something is of little help if we do not know what to build.\nProduct Requirements (aka Requirements Engineering, Product Design, Product Requirements\nsolicitation, Product Requirements Documents, etc.) introduces students to the processes\nsurrounding the specification of the broad requirements governing development of a new product or\nfeature.\n4. SE-Design: While Product Requirements focus on the user-facing functionality of a software\nsystem, Software Design focuses on the engineer-facing design of internal software components.\nThis encompasses large design concerns such as software architecture, as well as small-scale\ndesign choices like API design.\n5. SE-Construction: Software Construction focuses on practices that influence the direct production\nof software: use of tests, test driven development, coding style. More advanced topics extend into\nsecure coding, dependency injection, work prioritization, etc.\n6. SE-Validation: Software Verification and Validation focuses on how to improve the value of testing\n– understand the role of testing, failure modes, and differences between good tests and poor ones.\n7. SE-Refactoring: Refactoring and Code Evolution focuses on refactoring and maintenance\nstrategies, incorporating code health, use of tools, and backwards compatibility considerations.\n8. SE-Reliability: Software Reliability aims to improve understanding of and attention to error cases,\nfailure modes, redundancy, and reasoning about fault tolerance.\n9. SE-Formal: Formal Methods provides mathematically rigorous mechanisms to apply to software,\nfrom specification to verification. (Prerequisites: Substantial dependence on core material from the\nDiscrete Structures area, particularly knowledge units DS/Basic Logic and DS/Proof Techniques.)\n\nCore Hours\nKnowledge Unit\n\nCS Core\n\nKA Core\n\nTeamwork\n\n2 + 3 (SEP)\n\nTools and Environments\n\n3 + 1 (SDF)\n\nProduct Requirements\n\n0 + 3 (SEP)\n\n4 + 2 (DM)\n\n1 + 3 (SDF)\n\n3 + 1 (SDF)\n\nSoftware Design\nSoftware Construction\nSoftware Verification and Validation\n\nRefactoring and Code Evolution\n\nSoftware Reliability\n\nFormal Methods\nTotal\n\nNote: We have specifically highlighted Teamwork and Product Requirements as two knowledge units\nwhere SEP lessons are most directly obvious and applicable. Issues like impact on society, interaction\nwith others, and social power disparities are pervasive in Software Engineering and should be woven\ninto as many practical lessons as possible.\n\nKnowledge Units",
+  "knowledge_area": {
+    "code": "SE",
+    "name": "Se"
+  },
+  "schema": {
+    "generated_at": "NORMALIZED_TIMESTAMP",
+    "name": "Knowledge Area/Skill Area Unified Schema v2",
+    "source": "NORMALIZED_SOURCE_PATH",
+    "version": "2.0"
+  },
+  "sections": [
+    {
+      "bullets": [],
+      "crossrefs": [],
+      "id": "se-sec-1",
+      "learning_outcomes": [
+        {
+          "cognitive_level": "Apply",
+          "id": "lo-1",
+          "text": "Learning Outcomes:\nCS Core:\n1."
+        }
+      ],
+      "order": 1,
+      "qa_flags": {},
+      "source_loc": {
+        "file": "NORMALIZED_SOURCE_FILE",
+        "section": 1
+      },
+      "subsections": [],
+      "summary": "CS Core:\n1",
+      "title": "SE-Teamwork: Teamwork",
+      "topics": [
+        {
+          "id": "topic-1",
+          "name": "oral and written"
+        },
+        {
+          "id": "topic-2",
+          "name": "as well as formal (email"
+        },
+        {
+          "id": "topic-3",
+          "name": "docs"
+        },
+        {
+          "id": "topic-4",
+          "name": "comments"
+        },
+        {
+          "id": "topic-5",
+          "name": ""
+        }
+      ]
+    },
+    {
+      "bullets": [],
+      "crossrefs": [],
+      "id": "se-sec-2",
+      "learning_outcomes": [
+        {
+          "cognitive_level": "Apply",
+          "id": "lo-1",
+          "text": "Learning Outcomes:\nCS Core:\n1."
+        }
+      ],
+      "order": 2,
+      "qa_flags": {},
+      "source_loc": {
+        "file": "NORMALIZED_SOURCE_FILE",
+        "section": 2
+      },
+      "subsections": [],
+      "summary": "CS Core:\n1",
+      "title": "SE-Tools: Tools and Environments",
+      "topics": [
+        {
+          "id": "topic-1",
+          "name": "static and dynamic analysis tools"
+        }
+      ]
+    },
+    {
+      "bullets": [],
+      "crossrefs": [],
+      "id": "se-sec-3",
+      "learning_outcomes": [
+        {
+          "cognitive_level": "Apply",
+          "id": "lo-1",
+          "text": "Learning Outcomes:\nKA Core:\n1."
+        },
+        {
+          "cognitive_level": "Understand",
+          "id": "lo-2",
+          "text": "Create a prototype of a software system to validate a set of requirements – building a mock-up,\nMVP, etc.\n8"
+        }
+      ],
+      "order": 3,
+      "qa_flags": {},
+      "source_loc": {
+        "file": "NORMALIZED_SOURCE_FILE",
+        "section": 3
+      },
+      "subsections": [],
+      "summary": "KA Core:\n1",
+      "title": "SE-Requirements: Product Requirements",
+      "topics": [
+        {
+          "id": "topic-1",
+          "name": "consistency"
+        },
+        {
+          "id": "topic-2",
+          "name": "validity"
+        },
+        {
+          "id": "topic-3",
+          "name": "completeness"
+        },
+        {
+          "id": "topic-4",
+          "name": "and feasibility"
+        }
+      ]
+    },
+    {
+      "bullets": [],
+      "crossrefs": [],
+      "id": "se-sec-4",
+      "learning_outcomes": [
+        {
+          "cognitive_level": "Apply",
+          "id": "lo-1",
+          "text": "Learning Outcomes:\nCS Core:\n1."
+        },
+        {
+          "cognitive_level": "Understand",
+          "id": "lo-2",
+          "text": "Documenting contracts\ni.\nAPI operations should describe their effect on the system, but not generally their\nimplementation\nii.\nPreconditions, postconditions, and invariants\n\n6.\n7.\n8.\n\n9.\n\nd"
+        }
+      ],
+      "order": 4,
+      "qa_flags": {},
+      "source_loc": {
+        "file": "NORMALIZED_SOURCE_FILE",
+        "section": 4
+      },
+      "subsections": [],
+      "summary": "CS Core:\n1",
+      "title": "SE-Design: Software Design",
+      "topics": [
+        {
+          "id": "topic-1",
+          "name": "REST"
+        }
+      ]
+    },
+    {
+      "bullets": [],
+      "crossrefs": [],
+      "id": "se-sec-5",
+      "learning_outcomes": [
+        {
+          "cognitive_level": "Apply",
+          "id": "lo-1",
+          "text": "Learning Outcomes:\nCS Core:\n1."
+        },
+        {
+          "cognitive_level": "Understand",
+          "id": "lo-2",
+          "text": "Documentation (See also: SDF-Practices)\na"
+        },
+        {
+          "cognitive_level": "Understand",
+          "id": "lo-3",
+          "text": "Documentation (autogenerated)\n12"
+        }
+      ],
+      "order": 5,
+      "qa_flags": {},
+      "source_loc": {
+        "file": "NORMALIZED_SOURCE_FILE",
+        "section": 5
+      },
+      "subsections": [],
+      "summary": "CS Core:\n1",
+      "title": "SE-Construction: Software Construction",
+      "topics": [
+        {
+          "id": "topic-1",
+          "name": "(formal or"
+        }
+      ]
+    },
+    {
+      "bullets": [],
+      "crossrefs": [],
+      "id": "se-sec-6",
+      "learning_outcomes": [
+        {
+          "cognitive_level": "Apply",
+          "id": "lo-1",
+          "text": "Learning Outcomes:\nCS Core:\n1."
+        },
+        {
+          "cognitive_level": "Understand",
+          "id": "lo-2",
+          "text": "Create a test plan for a medium-size code segment which includes a test matrix and generation of\ntest data and inputs.\n7"
+        },
+        {
+          "cognitive_level": "Understand",
+          "id": "lo-3",
+          "text": "Create a test plan for a medium-size code segment which contains asynchronous, concurrent,\nand/or parallel code, including a test matrix and generation of test data and inputs.\n31"
+        }
+      ],
+      "order": 6,
+      "qa_flags": {},
+      "source_loc": {
+        "file": "NORMALIZED_SOURCE_FILE",
+        "section": 6
+      },
+      "subsections": [],
+      "summary": "CS Core:\n1",
+      "title": "SE-Validation: Software Verification and Validation",
+      "topics": [
+        {
+          "id": "topic-1",
+          "name": "code coverage"
+        },
+        {
+          "id": "topic-2",
+          "name": "static analysis"
+        },
+        {
+          "id": "topic-3",
+          "name": "and fuzzing"
+        }
+      ]
+    },
+    {
+      "bullets": [],
+      "crossrefs": [],
+      "id": "se-sec-7",
+      "learning_outcomes": [
+        {
+          "cognitive_level": "Apply",
+          "id": "lo-1",
+          "text": "Learning Outcomes:\nKA-Core:\n1."
+        }
+      ],
+      "order": 7,
+      "qa_flags": {},
+      "source_loc": {
+        "file": "NORMALIZED_SOURCE_FILE",
+        "section": 7
+      },
+      "subsections": [],
+      "summary": "KA Core:\n1",
+      "title": "SE-Refactoring: Refactoring and Code Evolution",
+      "topics": []
+    },
+    {
+      "bullets": [],
+      "crossrefs": [],
+      "id": "se-sec-8",
+      "learning_outcomes": [
+        {
+          "cognitive_level": "Apply",
+          "id": "lo-1",
+          "text": "Learning Outcomes:\nKA Core:\n1."
+        }
+      ],
+      "order": 8,
+      "qa_flags": {},
+      "source_loc": {
+        "file": "NORMALIZED_SOURCE_FILE",
+        "section": 8
+      },
+      "subsections": [],
+      "summary": "KA Core:\n1",
+      "title": "SE-Reliability: Software Reliability",
+      "topics": [
+        {
+          "id": "topic-1",
+          "name": "reviews"
+        },
+        {
+          "id": "topic-2",
+          "name": "testing"
+        },
+        {
+          "id": "topic-3",
+          "name": "practical model checking"
+        }
+      ]
+    },
+    {
+      "bullets": [],
+      "crossrefs": [],
+      "id": "se-sec-9",
+      "learning_outcomes": [
+        {
+          "cognitive_level": "Apply",
+          "id": "lo-1",
+          "text": "Learning Outcomes:\n1."
+        }
+      ],
+      "order": 9,
+      "qa_flags": {},
+      "source_loc": {
+        "file": "NORMALIZED_SOURCE_FILE",
+        "section": 9
+      },
+      "subsections": [],
+      "summary": "Non-Core:\n1",
+      "title": "SE-Formal: Formal Methods",
+      "topics": []
+    }
+  ]
+}
