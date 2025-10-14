@@ -41,7 +41,8 @@ class RunSettings:
 
 def setup_parser(app_name):
     parser = argparse.ArgumentParser(
-        prog=app_name, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+        prog=app_name, formatter_class=argparse.ArgumentDefaultsHelpFormatter
+    )
 
     parser.add_argument(
         "--data_dir",

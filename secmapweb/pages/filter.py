@@ -48,9 +48,7 @@ def create_tables(cve_cwe_df, cwe_list_df, topic_to_cwe_df):
 
 
 def main():
-    logger.debug(
-        "running script " + __file__ + " off working directory " + os.getcwd()
-    )
+    logger.debug("running script " + __file__ + " off working directory " + os.getcwd())
 
     app_settings = get_run_settings("Secure Software Dev Web App")
     st.set_page_config(page_title="Pathway Page")
@@ -67,19 +65,14 @@ def main():
 
     filter_ka = st.multiselect(
         "Filter by Knowledge Area",
-        [
-            knowledge_area
-            for knowledge_area in topic_cwe_df["Knowledge Area"].unique()
-        ],
+        [knowledge_area for knowledge_area in topic_cwe_df["Knowledge Area"].unique()],
         default=[],
         key=1,
     )
 
     mapped_cwe_list = []
     for topic_cwe in topic_cwe_df["CWE"]:
-        mapped_cwe_list.extend(
-            [cwe.strip().upper() for cwe in topic_cwe.split(",")]
-        )
+        mapped_cwe_list.extend([cwe.strip().upper() for cwe in topic_cwe.split(",")])
     mapped_cwe_set = set(mapped_cwe_list)
     filter_cwe_id = st.multiselect(
         "Filter by CWE-ID",
@@ -102,14 +95,12 @@ def main():
 
     if filter_ka:
         filtered_tables = [
-            table for table in filtered_tables
-            if table.knowledgeArea in filter_ka
+            table for table in filtered_tables if table.knowledgeArea in filter_ka
         ]
 
     if filter_cwe_id:
         filtered_tables = [
-            table for table in filtered_tables
-            if table.cwe_id.isin(filter_cwe_id).all()
+            table for table in filtered_tables if table.cwe_id.isin(filter_cwe_id).all()
         ]
 
     if filter_cve_id:
@@ -119,7 +110,8 @@ def main():
 
     if filter_topic_kw:
         filtered_tables = [
-            table for table in filtered_tables
+            table
+            for table in filtered_tables
             if filter_topic_kw in table.knowledgeTopic.lower()
             or filter_topic_kw in table.knowledgeSubtopic.lower()
         ]

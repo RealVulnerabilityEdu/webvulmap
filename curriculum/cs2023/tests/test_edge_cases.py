@@ -14,7 +14,7 @@ def test_cleaning_and_header_detection(tmp_path, run_parser, write_text):
     out = tmp_path / "out.json"
 
     code, stdout, stderr = run_parser(inp, out)
-    assert code == 0, f"Parser failed:\nSTDOUT:\n{stdout}\nSTDERR:\n{stderr}"
+    assert not code, f"Parser failed:\nSTDOUT:\n{stdout}\nSTDERR:\n{stderr}"
 
     data = json.loads(out.read_text(encoding="utf-8"))
     assert isinstance(data, dict)
@@ -28,7 +28,7 @@ def test_handles_empty_file_gracefully(tmp_path, run_parser, write_text):
     out = tmp_path / "out.json"
 
     code, stdout, stderr = run_parser(inp, out)
-    assert code != 0, "Empty input should not succeed"
+    assert code, "Empty input should not succeed"
     assert "empty" in (stdout + stderr).lower()
 
 
@@ -40,5 +40,5 @@ def test_invalid_header_format(tmp_path, run_parser, write_text):
     out = tmp_path / "out.json"
 
     code, stdout, stderr = run_parser(inp, out)
-    assert code != 0
+    assert code
     assert "header" in (stdout + stderr).lower()
