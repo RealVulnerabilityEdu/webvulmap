@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Knowledge Area v2 Schema",
+  "description": "A comprehensive schema for defining Knowledge Areas from the CS2023 curriculum with enhanced structure and metadata.",
+  "type": "object",
+  "required": ["schema", "knowledge_area", "description", "sections"],
+  "properties": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "generated_at": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        }
+      },
+      "required": ["name", "version", "generated_at", "source"],
+      "additionalProperties": false
+    },
+    "knowledge_area": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        }
+      },
+      "required": ["name", "code"],
+      "additionalProperties": false
+    },
+    "description": {
+      "type": "string"
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z]+-[a-z]+-\\d+$"
+          },
+          "title": {
+            "type": "string"
+          },
+          "order": {
+            "type": "integer"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "topics": {
+            "type": "array"
+          },
+          "learning_outcomes": {
+            "type": "array"
+          },
+          "bullets": {
+            "type": "array"
+          },
+          "crossrefs": {
+            "type": "array"
+          },
+          "qa_flags": {
+            "type": "object"
+          },
+          "source_loc": {
+            "type": "object"
+          },
+          "subsections": {
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "order",
+          "summary",
+          "topics",
+          "learning_outcomes",
+          "bullets",
+          "crossrefs",
+          "qa_flags",
+          "source_loc",
+          "subsections"
+        ],
+        "additionalProperties": true
+      }
+    }
+  }
+}
