@@ -9,14 +9,9 @@ from unittest.mock import mock_open, patch
 
 import requests
 import requests_mock  # For mocking HTTP requests
-
 # Import the function and constants to be tested from the main script.
-from download_cs2023_guidelines import (
-    OUTPUT_FILENAME,
-    PDF_URL,
-    TARGET_DIR,
-    download_pdf,
-)
+from download_cs2023_guidelines import (OUTPUT_FILENAME, PDF_URL, TARGET_DIR,
+                                        download_pdf)
 
 # Explicitly add the 'cs2023_downloader' directory to Python's path.
 module_path = os.path.join(

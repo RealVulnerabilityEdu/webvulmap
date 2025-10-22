@@ -3,7 +3,6 @@ import os
 import pandas as pd
 import streamlit as st
 from loguru import logger
-
 # from model.cwe import Cwe
 # from model.subtopics import SubTopics
 # from model.topics import Topics
