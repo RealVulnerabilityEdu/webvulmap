@@ -15,12 +15,13 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+from typing import Union
 
 
 def run_cli_with_text(
     text: str,
     tmp_path: Path,
-    schema_path: Path | None = None,
+    schema_path: Union[Path, None] = None,
     filename: str = "SE_Software_Engineering.txt",
 ):
     """Run CLI with custom text input."""
@@ -44,6 +45,14 @@ def run_cli_with_text(
     ]
     if schema_path:
         cmd.extend(["--schema", str(schema_path)])
+
+    # Add knowledge area parameters based on filename
+    if "SE" in filename:
+        cmd.extend(["--ka-code", "SE", "--ka-name", "Software Engineering"])
+    elif "SEC" in filename:
+        cmd.extend(["--ka-code", "SEC", "--ka-name", "Security"])
+    elif "OS" in filename:
+        cmd.extend(["--ka-code", "OS", "--ka-name", "Operating Systems"])
 
     r = subprocess.run(
         cmd, capture_output=True, text=True, check=False, cwd=str(v2_dir)
@@ -69,15 +78,16 @@ Illustrative Learning Outcomes—Students will be able to:
     assert r.returncode == 0, f"Parser failed: {r.stderr}"
 
     data = json.loads(output_file.read_text(encoding="utf-8"))
-    assert "sections" in data
-    # Check that at least one section was created
-    assert len(data["sections"]) > 0, "No sections were parsed from the input"
+    assert "knowledge_units" in data
+    # Check that at least one knowledge unit was created
+    assert (
+        len(data["knowledge_units"]) > 0
+    ), "No knowledge units were parsed from the input"
 
-    # Check that the section has the expected structure
-    section = data["sections"][0]
-    assert "id" in section
-    assert "title" in section
-    assert "summary" in section
+    # Check that the knowledge unit has the expected structure
+    ku = data["knowledge_units"][0]
+    assert "id" in ku
+    assert "title" in ku
 
 
 def test_windows_newlines(tmp_path: Path, schema_path):
@@ -98,8 +108,8 @@ Learning Outcomes:
     assert r.returncode == 0, f"Parser failed: {r.stderr}"
 
     data = json.loads(output_file.read_text(encoding="utf-8"))
-    assert "sections" in data
-    assert len(data["sections"]) > 0
+    assert "knowledge_units" in data
+    assert len(data["knowledge_units"]) > 0
 
 
 def test_empty_file_is_error(tmp_path: Path):
@@ -131,6 +141,6 @@ Learning Outcomes:
     data = json.loads(output_file.read_text(encoding="utf-8"))
     assert "schema" in data
     assert "knowledge_area" in data
-    assert "sections" in data
+    assert "knowledge_units" in data
     # The parser infers SE from the filename "SE_Software_Engineering.txt"
     assert data["knowledge_area"]["code"] == "SE"
