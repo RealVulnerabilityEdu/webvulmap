@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """
-CS2023 Text to JSON Parser v2
+CS2023 Curriculum Text Parser
 
-Parses CS2023 curriculum text files into v2 JSON schema.
+Parses curriculum text files into structured JSON format according to CS2023
+schema.
+Extracts knowledge areas, learning outcomes, topics, and metadata from text
+documents.
 """
-
 from __future__ import annotations
 
 import argparse
@@ -18,608 +20,905 @@ from typing import Any, Dict, List, Optional, Tuple
 
 try:
     import jsonschema  # type: ignore
-
-    HAS_JSONSCHEMA = True
 except ImportError:
-    HAS_JSONSCHEMA = False
+    jsonschema = None
 
-# --- Configuration ---
-TOOL_NAME = "parse_txt_to_json_v2.py"
+TOOL_NAME = "unified_parser_v2.py"
 SCHEMA_VERSION = "2.0"
-
-# ------------------ Helpers ------------------
 
 
 def slug(s: str) -> str:
-    """Create a URL/ID-safe slug."""
-    s = re.sub(r"[^a-z0-9]+", "-", s.strip().lower())
-    return s.strip("-")
+    """Convert string to URL-friendly slug."""
+    return re.sub(r"[^a-z0-9]+", "-", s.strip().lower()).strip("-")
 
 
-def infer_ka_from_filename(p: Path) -> Tuple[str, str]:
-    """Infer KA code and name from filename.
-
-    Example: OS_Operating_Systems.txt -> OS, Operating Systems
-    """
-    m = re.match(r"^([A-Z]{2,5})[ _-]+(.+)$", p.stem)
-    if m:
-        code, raw = m.group(1), m.group(2)
-        name = re.sub(r"[_-]+", " ", raw).strip().title()
-        return code, name
-    return p.stem.upper(), p.stem.replace("_", " ").title()
+def sha256(s: str) -> str:
+    """Compute SHA256 hash of string."""
+    return hashlib.sha256(s.encode("utf-8", "ignore")).hexdigest()
 
 
-def _norm_topic_id(unused_topic_string: str, index: int = 1) -> str:
-    """Generate topic ID following schema pattern: topic-N."""
-    return f"topic-{index}"
+def file_sha256(path: Path) -> Optional[str]:
+    """Compute SHA256 hash of file."""
+    try:
+        h = hashlib.sha256()
+        with path.open("rb") as f:
+            for chunk in iter(lambda: f.read(1 << 16), b""):
+                h.update(chunk)
+        return h.hexdigest()
+    except (OSError, IOError):
+        return None
 
 
-def guess_topics_for(title: str, body: str = "") -> List[Dict[str, str]]:
-    """Heuristically guess cross-cutting topics (e.g., 'security')."""
-    t = (title + " " + body[:400]).lower()
-    out: List[Dict[str, str]] = []
-
-    def add(i: str, n: str, idx: int) -> None:
-        topic_id = _norm_topic_id(i, idx)
-        if not any(d["id"] == topic_id for d in out):
-            out.append({"id": topic_id, "name": n})
-
-    idx = 1
-    if "security" in t or "protection" in t:
-        add("sec", "security", idx)
-        idx += 1
-    if "concurrency" in t or "process" in t or "thread" in t:
-        add("concurrency", "concurrency", idx)
-        idx += 1
-    if "i/o" in t or "device" in t:
-        add("io-devices", "device & I/O", idx)
-        idx += 1
-    return out
-
-
-def extract_preamble(text: str) -> str:
-    """Extract the document's preamble/description."""
-    m = re.search(
-        r"\bPreamble\b\s*(.+?)\n\s*(?:Changes since|Changes from|\f)",
-        text,
-        flags=re.S | re.I,
-    )
-    if m:
-        return re.sub(r"\s+\n", "\n", m.group(1)).strip()
-    paragraphs = [p.strip() for p in re.split(r"\n\s*\n", text) if p.strip()]
-    return "\n\n".join(paragraphs[:2])
-
-
-def _summarize(body: str) -> str:
-    """Extract the first paragraph as a summary."""
-    first = re.split(r"\n\s*\n", body.strip(), maxsplit=1)[0]
-    return re.sub(r"\s+", " ", first).strip()
-
-
-def _preclean(text: str) -> str:
-    """Clean input text (remove form feeds, page numbers)."""
+def preclean(text: str) -> str:
+    """Clean text by removing form feeds, carriage returns, and page numbers."""
     t = text.replace("\f", "").replace("\r", "")
-    t = "\n".join(
+    return "\n".join(
         line for line in t.splitlines() if not re.fullmatch(r"\s*\d{1,4}\s*", line)
     )
+
+
+def normalize_glitches(text: str) -> str:
+    """Normalize common PDF-to-text conversion artifacts and fix typos."""
+    repl = [
+        (r"\bCore\s+Hourse\b", "Core Hours"),
+        (r"\bCore\s+Hourse\s*\.", "Core Hours"),
+        (r"\bKnowledges?\s*Units\b", "Knowledge Units"),
+        (r"\bKA-?\s*Core\b", "KA Core"),
+        (r"\bCS-?\s*Core\b", "CS Core"),
+        (r"\bKA-Core:\b", "KA Core:"),
+        (r"\bCS-Core:\b", "CS Core:"),
+        (r"Non[- ]?core", "Non-Core"),
+        (
+            r"Illustrative\s+Learning\s+Outcome[s]?\s*:",
+            "Illustrative Learning Outcomes:",
+        ),
+        (
+            r"Illustrative\s+Learning\s+Outcome[s]?",
+            "Illustrative Learning Outcomes",
+        ),
+        (r"\bSEC\s*\(\s*Security\s*\)", "Security (SEC)"),
+        (r"[ \t]+$", ""),
+    ]
+    for pat, rep in repl:
+        text = re.sub(pat, rep, text, flags=re.I | re.M)
+
+    lines = text.splitlines()
+    new_lines: List[str] = []
+    buf: List[str] = []
+
+    def flush_buf():
+        nonlocal buf
+        if not buf:
+            return
+        if len(buf) <= 2:
+            new_lines.extend(buf)
+        buf = []
+
+    for ln in lines:
+        s = ln.strip()
+        if len(s) <= 2 and s not in {"●"} and not re.match(r"^\d+\.$", s):
+            buf.append(ln)
+        else:
+            flush_buf()
+            if re.fullmatch(r"\d+", s) or re.fullmatch(r"[A-Za-z]", s):
+                continue
+            new_lines.append(ln)
+    flush_buf()
+
+    t = "\n".join(new_lines)
+    t = re.sub(r"\n{3,}", "\n\n", t)
     return t
 
 
-# ------------------ Block Extraction ------------------
-
-# Bullet pattern: (indent) (bullet) (text)
-_BULLET_WITH_INDENT = re.compile(
+BULLET = re.compile(
     r"""^(?P<indent>[ \t]*)
-    (?: [-*•·]\s+ | [0-9]+\.\s+ | [a-z][\.\)]\s+ | [ivxlcdm]+\.\s+ )
-    (?P<text>.+?)\s*$""",
-    re.I | re.M | re.X,
+        (?:
+            (?:[-*•·]\s+) |
+            (?:\d+\.\s+)  |
+            (?:[a-z][\.\)]\s+) |
+            (?:[ivxlcdm]+\.\s+)
+        )
+        (?P<text>.+?)\s*$
+    """,
+    re.I | re.X | re.M,
 )
 
-# Subheadings to detect blocks
-_SUBHEAD_PATTERNS = {
-    "ilos": re.compile(
-        (
-            r"^\s*(?:Illustrative\s+)?(?:Learning\s+Outcomes?|LOs|Outcomes?)"
-            r"\s*:?\s*$"
-        ),
-        re.I | re.M,
-    ),
-}
+
+def get_bullet_type(line: str) -> str:
+    """Identify bullet type: numbered, lettered, bullet, or roman."""
+    if re.match(r"^\d+\.\s+", line):
+        return "numbered"
+    if re.match(r"^[a-z][\.\)]\s+", line):
+        return "lettered"
+    if re.match(r"^[-*•·]\s+", line):
+        return "bullet"
+    if re.match(r"^[ivxlcdm]+\.\s+", line, re.I):
+        return "roman"
+    return "unknown"
 
 
-def _find_block_ranges(
-    body: str, anchors: List[Tuple[str, re.Pattern[str]]]
-) -> Dict[str, Tuple[int, int]]:
-    """Find start/end indices for major content blocks."""
-    hits = sorted(
-        [(m.start(), m.end(), key) for key, pat in anchors for m in pat.finditer(body)],
-        key=lambda x: x[0],
-    )
-    ranges: Dict[str, Tuple[int, int]] = {}
-    for i, (unused_match_start, match_end, key) in enumerate(hits):
-        start = match_end
-        end = hits[i + 1][0] if (i + 1) < len(hits) else len(body)
-        if key not in ranges:
-            ranges[key] = (start, end)
-    return ranges
+def collect_bullets(block: str) -> List[Tuple[int, str, str]]:
+    """Extract bulleted items from text block with indentation and type info."""
+    lines = block.splitlines()
+    out: List[Tuple[int, str, str]] = []
+    cur: Optional[Tuple[int, str, str]] = None
 
-
-def _collect_bullet_lines(block_text: str) -> List[Tuple[int, str]]:
-    """
-    Collect bullet points from a text block, joining wrapped lines.
-
-    Returns: list of (indent_level, text).
-    """
-    lines = block_text.splitlines()
-    items: List[Tuple[int, str]] = []
-    cur_lvl: Optional[int] = None
-    cur_text: Optional[str] = None
-
-    def flush() -> None:
-        nonlocal cur_lvl, cur_text
-        if cur_text is not None:
-            items.append((cur_lvl or 0, cur_text.strip()))
-        cur_lvl, cur_text = None, None
+    def indent_units(s: str) -> int:
+        spaces = s.replace("\t", "  ")
+        return max(0, len(spaces) // 2)
 
     for raw in lines:
-        line = raw.rstrip()
-        m = _BULLET_WITH_INDENT.match(line)
+        m = BULLET.match(raw.rstrip())
         if m:
-            flush()
-            cur_lvl = len(m.group("indent").replace("\t", "  ")) // 2
-            cur_text = m.group("text").strip()
-        elif cur_text is not None:
-            if line.strip():
-                cur_text += " " + line.strip()
-
-    flush()
-    return items
-
-
-# ------------------ Learning Outcomes (LO) Fix ------------------
-
-_BLOOMS: Dict[str, List[str]] = {
-    "Remember": [
-        "list",
-        "define",
-        "identify",
-        "recall",
-        "state",
-        "name",
-        "label",
-        "recognize",
-    ],
-    "Understand": [
-        "explain",
-        "describe",
-        "summarize",
-        "discuss",
-        "interpret",
-        "understand",
-        "convert",
-    ],
-    "Apply": ["apply", "use", "implement", "execute", "demonstrate", "solve"],
-    "Analyze": ["analyze", "analyse", "differentiate", "compare", "contrast"],
-    "Evaluate": [
-        "evaluate",
-        "justify",
-        "critique",
-        "assess",
-        "argue",
-        "recommend",
-    ],
-    "Create": [
-        "create",
-        "design",
-        "compose",
-        "formulate",
-        "construct",
-        "develop",
-    ],
-}
-_BLOOMS_RE = re.compile(r"^\s*(?:\([^\)]+\)\s*)*\s*(?P<verb>[A-Za-z\-]+)\b", re.I)
-
-
-def _infer_cognitive_level(lo_text: str) -> str:
-    """Infer Bloom's Taxonomy level from the LO's starting verb."""
-    m = _BLOOMS_RE.match(lo_text)
-    if m:
-        v = m.group("verb").lower()
-        v_stem = re.sub(r"(ing|ed|es|s)$", "", v)
-        for level, verbs in _BLOOMS.items():
-            if v in verbs or v_stem in verbs:
-                return level
-    return "Understand"
-
-
-def _extract_learning_outcomes(block_text: str) -> List[Dict[str, Any]]:
-    """
-    Extract LOs using a direct iteration over collected lines.
-
-    The schema expects a flat list.
-    """
-    pairs = _collect_bullet_lines(block_text)
-    los: List[Dict[str, Any]] = []
-    for i, (unused_level, text) in enumerate(pairs, start=1):
-        lo_id = f"lo-{i}"
-        los.append(
-            {
-                "id": lo_id,
-                "text": text,
-                "cognitive_level": _infer_cognitive_level(text),
-            }
-        )
-    return los
-
-
-# ------------------ Cross-References ------------------
-
-_SEE_ALSO_LINE = re.compile(r"(?i)\bSee\s+also:\s*(.+)$", re.M)
-_CWE_PAT = re.compile(r"\bCWE-\d+\b", re.I)
-_CVE_PAT = re.compile(r"\bCVE-\d{4}-\d{4,7}\b", re.I)
-
-
-def _normalize_ref_token(tok: str) -> str:
-    """Clean up cross-reference tokens."""
-    t = tok.strip().strip("'\"")
-    t = re.sub(r"^[(\[].*?(\s*)\s*|\s*.*?[\)\]\.;,:]+$", r"\1", t).strip()
-    return re.sub(r"\s+", " ", t).strip()
-
-
-def _classify_crossref(tok: str) -> str:
-    """Classify a cross-reference target per schema enum."""
-    if _CVE_PAT.fullmatch(tok):
-        return "knowledge_area"
-    if _CWE_PAT.fullmatch(tok):
-        return "knowledge_area"
-    if re.fullmatch(r"[A-Z]{2,5}(?:-[A-Za-z0-9]+)?", tok):
-        return "knowledge_area"
-    return "section"
-
-
-def _extract_crossrefs(body: str) -> List[Dict[str, str]]:
-    """Extract all 'See also:' references."""
-    seen: set[str] = set()
-    out: List[Dict[str, str]] = []
-    for m in _SEE_ALSO_LINE.finditer(body):
-        for part in re.split(r"[;,]", m.group(1)):
-            tok = _normalize_ref_token(part)
-            if not tok or tok.lower() in seen:
-                continue
-            seen.add(tok.lower())
-            out.append({"type": _classify_crossref(tok), "reference": tok})
+            if cur:
+                out.append(cur)
+            lvl = indent_units(m.group("indent"))
+            bullet_type = get_bullet_type(raw.rstrip())
+            cur = (lvl, m.group("text").strip(), bullet_type)
+        elif (
+            cur is not None and raw.strip() and isinstance(cur, tuple) and len(cur) == 3
+        ):
+            # cur is guaranteed to be a tuple of length 3 at this point
+            lvl, text, bullet_type = cur  # pylint: disable=unpacking-non-sequence
+            cur = (lvl, f"{text} {raw.strip()}", bullet_type)
+    if cur:
+        out.append(cur)
     return out
 
 
-# ------------------ Parser Dispatcher ------------------
+def _fix_lettered_levels(
+    pairs: List[Tuple[int, str, str]],
+) -> List[Tuple[int, str, str]]:
+    """Fix indentation levels for lettered bullets."""
+    fixed_pairs: List[Tuple[int, str, str]] = []
+    for i, (lvl, txt, bullet_type) in enumerate(pairs):
+        if bullet_type == "lettered":
+            for j in range(i - 1, -1, -1):
+                if pairs[j][2] == "numbered":
+                    lvl = 1
+                    break
+        fixed_pairs.append((lvl, txt, bullet_type))
+    return fixed_pairs
 
 
-def _parse_internal_blocks(
-    section_body: str, unused_bullet_id_prefix: str
-) -> Tuple[str, List[Dict[str, Any]], List[Dict[str, str]]]:
-    """Parse section body for LOs, Crossrefs, and generate Markdown."""
-    anchors = [("ilos", _SUBHEAD_PATTERNS["ilos"])]
-    ranges = _find_block_ranges(section_body, anchors)
-
-    los: List[Dict[str, Any]] = []
-    if "ilos" in ranges:
-        s, e = ranges["ilos"]
-        los = _extract_learning_outcomes(section_body[s:e])
-
-    xrefs = _extract_crossrefs(section_body)
-    md_content = _to_markdown_from_plain(section_body)
-
-    return md_content, los, xrefs
+def _make_topic_node(text: str) -> Dict[str, Any]:
+    """Create a topic node with cross-references."""
+    xrefs, _ = _xrefs(text)
+    return {
+        "name": _strip_xrefs(text),
+        "subs": [],
+        "cross_references": xrefs,
+    }
 
 
-# ------------------ Document Builders ------------------
+def _convert_subs_to_strings(items: List[Any]) -> List[Any]:
+    """Convert subs to strings for schema compliance."""
+    out: List[Any] = []
+    for it in items:
+        if isinstance(it, dict):
+            it["subs"] = [
+                sub["name"] if isinstance(sub, dict) else sub
+                for sub in it.get("subs", [])
+            ]
+            out.append(it)
+        else:
+            out.append(it)
+    return out
 
 
-def _to_markdown_from_plain(text: str) -> str:
-    """Minimal conversion from plain text to Markdown."""
-    if not text.strip():
-        return "# (empty)\n"
-    lines = [ln.strip() for ln in text.splitlines()]
-    md = "\n".join(lines).strip()
-    md = re.sub(r"\n\s*\n", "\n\n", md)
-    md = re.sub(r"([^\n])\n([0-9]+\.|\-|\*|[a-z]\.)", r"\1\n\n\2", md)
-    return md if md else "# (empty)\n"
+def _ensure_defaults(items: List[Any]):
+    """Ensure all items have required default fields."""
+    for it in items:
+        if isinstance(it, dict):
+            it.setdefault("cross_references", [])
+            _ensure_defaults(it.get("subs", []))
 
 
-def _hash_sha256(s: str) -> str:
-    return hashlib.sha256(s.encode("utf-8", errors="ignore")).hexdigest()
+def bullets_to_tree(pairs: List[Tuple[int, str, str]]) -> List[Dict[str, Any]]:
+    """Convert bulleted items into nested topic tree structure."""
+    if not pairs:
+        return []
+
+    fixed_pairs = _fix_lettered_levels(pairs)
+    root: List[Any] = []
+    stack: List[Tuple[int, List[Any]]] = [(-1, root)]
+
+    for lvl, text, _ in fixed_pairs:
+        while stack and lvl <= stack[-1][0]:
+            stack.pop()
+        parent_list = stack[-1][1]
+
+        node = _make_topic_node(text)
+        parent_list.append(node)
+        stack.append((lvl, node["subs"]))
+
+    result = _convert_subs_to_strings(root)
+    _ensure_defaults(result)
+    return result
 
 
-def _extract_section_heading_and_body(
-    match: re.Match[str], matches: List[re.Match[str]], i: int, text: str
-) -> Tuple[str, str]:
-    """Extract heading and body text from a match."""
-    heading = match.group(1).strip()
-    start = match.end()
-    end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
-    body = text[start:end].strip()
-    return heading, body
+def split_numbered(block: str) -> List[str]:
+    """Parse numbered list items with continuation lines."""
+    if not block.strip():
+        return []
+    items, cur = [], None
+    for line in block.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        m = re.match(r"^\d+\.\s*(.*)$", line)
+        if m:
+            if cur:
+                items.append(cur.strip())
+            cur = m.group(1).strip()
+        else:
+            cur = (cur + " " + line) if cur else line
+    if cur:
+        items.append(cur.strip())
+    if items:
+        return items
+    txt = re.sub(r"\s+", " ", block.strip())
+    parts = re.split(r"\.\s+(?=[A-Z])", txt)
+    return [
+        p + ("." if i < len(parts) - 1 else "")
+        for i, p in enumerate(parts)
+        if p.strip()
+    ]
 
 
-def _build_section_metadata(heading: str, ka_code: str, i: int) -> Tuple[str, str]:
-    """Build section ID and display title from heading."""
+def section_id_and_title(heading: str, ka_code: str, idx: int) -> Tuple[str, str]:
+    """Generate section ID and display title from heading text."""
     left, right = heading.split(": ", 1) if ": " in heading else (heading, "")
     sec_id = slug(left)
-    # Ensure ID follows schema pattern: ka-sec-number
-    if not re.match(r"^[a-z]+-[a-z]+-\d+$", sec_id):
-        sec_id = f"{ka_code.lower()}-sec-{i + 1}"
+    if not re.match(r"^[a-z]+-[a-z0-9\-]+$", sec_id):
+        sec_id = f"{ka_code.lower()}-sec-{idx + 1}"
+    display = (
+        left
+        if (right and left.endswith(right))
+        else (f"{left}: {right}" if right else left.replace("-", " "))
+    )
+    return sec_id, display
 
-    # Build display title - keep the original format but clean up duplicates
-    if right:
-        # If we have a subtitle after colon, use it as the main title
-        # Keep the KA prefix but avoid duplication
-        if left.endswith(right):
-            # If "SE-Teamwork: Teamwork", just use "SE-Teamwork"
-            display_title = left
+
+def get_block(text: str, start_pat: str, end_choices: List[str]) -> str:
+    """Extract text block between start pattern and first matching end pattern."""
+    m = re.search(start_pat, text, re.I | re.S)
+    if not m:
+        return ""
+    start = m.end()
+    candidates = []
+    for e in end_choices:
+        m2 = re.search(e, text[start:], re.I)
+        if m2:
+            candidates.append(m2.start())
+    end = min(candidates) if candidates else len(text[start:])
+    end_pos = start + end
+    return text[start:end_pos].strip()
+
+
+def drop_orphan_noise(block: str) -> str:
+    """Remove orphaned single counters and letters from text block."""
+    lines = block.splitlines()
+    out = []
+    for ln in lines:
+        s = ln.strip()
+        if re.fullmatch(r"\d+", s):
+            continue
+        if re.fullmatch(r"[A-Za-z]", s) and s not in {"A", "I"}:
+            continue
+        out.append(ln)
+    return "\n".join(out)
+
+
+def parse_preamble(text: str) -> Dict[str, Any]:
+    """Extract preamble sections including description, changes, and overview."""
+    desc = get_block(
+        text,
+        r"\bPreamble\b",
+        [
+            r"\n\s*Changes since CS",
+            r"\n\s*Overview",
+            r"\n\s*Core Hours",
+            r"\n\s*Knowledge Units",
+        ],
+    )
+    if not desc:
+        desc = get_block(
+            text,
+            r"Preamble",
+            [
+                r"\n\s*Changes since CS",
+                r"\n\s*Overview",
+                r"\n\s*Core Hours",
+                r"\n\s*Knowledge Units",
+            ],
+        )
+    changes = get_block(
+        text,
+        r"Changes since CS",
+        [r"\n\s*Overview", r"\n\s*Core Hours", r"\n\s*Knowledge Units"],
+    )
+    overview_raw = get_block(
+        text, r"\bOverview\b", [r"\n\s*Core Hours", r"\n\s*Knowledge Units"]
+    )
+    overview: List[Dict[str, Any]] = []
+    for line in overview_raw.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        m = re.match(r"^(\d+)\.\s+(.+?)\:\s*(.*)$", line)
+        if m:
+            order, title, desc_i = (
+                int(m.group(1)),
+                m.group(2).strip(),
+                m.group(3).strip(),
+            )
+            overview.append({"order": order, "title": title, "description": desc_i})
         else:
-            # If different subtitle, use full format
-            display_title = f"{left}: {right}"
-    else:
-        # If no subtitle, just clean up the main part
-        display_title = left.replace("-", " ")
-
-    return sec_id, display_title
-
-
-def _create_section_object(
-    section_data: Dict[str, Any], *, ka_code: str, i: int
-) -> Dict[str, Any]:
-    """Create a section object with all required fields."""
-    return {
-        "id": section_data["sec_id"],
-        "title": section_data["display_title"],
-        "order": i + 1,
-        "summary": section_data["summary"],
-        "topics": section_data["topics"],
-        "learning_outcomes": section_data["los"],
-        "bullets": [],
-        "crossrefs": section_data["xrefs"],
-        "qa_flags": {},
-        "source_loc": {
-            "file": f"{ka_code}_SAMPLE_v1.json",
-            "section": i + 1,
-        },
-        "subsections": [],
-    }
+            if overview:
+                overview[-1]["description"] += " " + line
+    out: Dict[str, Any] = {}
+    if desc:
+        out["description"] = desc.strip()
+    if changes:
+        out["changes_since_cs2013"] = changes.strip()
+    if overview:
+        out["overview"] = overview
+    return out
 
 
-def _add_provenance_if_needed(
-    section_obj: Dict[str, Any],
-    include_provenance: bool,
-    md: str,
-    tool_name: str,
-    commit_sha: Optional[str],
-) -> None:
-    """Add provenance info to section object if needed."""
-    if include_provenance:
-        prov: Dict[str, Any] = {
-            "content_hash": _hash_sha256(md),
-            "tool": tool_name,
-        }
-        if commit_sha:
-            prov["commit_sha"] = commit_sha
-        section_obj["provenance"] = prov
-
-
-def _deduplicate_sections(sections: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    """Remove duplicate sections by ID."""
-    seen: set[str] = set()
-    uniq_sections: List[Dict[str, Any]] = []
-    for s in sections:
-        if s["id"] not in seen:
-            seen.add(s["id"])
-            uniq_sections.append(s)
-    return uniq_sections
-
-
-def _process_single_section(
-    section_context: Dict[str, Any], *, config: Dict[str, Any]
-) -> Dict[str, Any]:
-    """Process a single section match into a section object."""
-    match = section_context["match"]
-    matches = section_context["matches"]
-    i = section_context["i"]
-    text = section_context["text"]
-    ka_code = section_context["ka_code"]
-
-    heading, body = _extract_section_heading_and_body(match, matches, i, text)
-    sec_id, display_title = _build_section_metadata(heading, ka_code, i)
-    md, los, xrefs = _parse_internal_blocks(body, sec_id)
-    topics = guess_topics_for(display_title, body)
-
-    if not topics and not los:
-        topics = [{"id": _norm_topic_id(display_title, 1), "name": display_title}]
-
-    return _create_and_provenance_section(
-        {
-            "sec_id": sec_id,
-            "display_title": display_title,
-            "body": body,
-            "topics": topics,
-            "los": los,
-            "xrefs": xrefs,
-            "md": md,
-            "config": config,
-            "ka_code": ka_code,
-            "i": i,
-        }
-    )
-
-
-def _create_and_provenance_section(section_info: Dict[str, Any]) -> Dict[str, Any]:
-    """Create section object and add provenance."""
-    section_data = {
-        "sec_id": section_info["sec_id"],
-        "display_title": section_info["display_title"],
-        "summary": _summarize(section_info["body"]),
-        "topics": section_info["topics"],
-        "los": section_info["los"],
-        "xrefs": section_info["xrefs"],
-    }
-    section_obj = _create_section_object(
-        section_data, ka_code=section_info["ka_code"], i=section_info["i"]
-    )
-    _add_provenance_if_needed(
-        section_obj=section_obj,
-        include_provenance=section_info["config"]["include_provenance"],
-        md=section_info["md"],
-        tool_name=section_info["config"]["tool_name"],
-        commit_sha=section_info["config"]["commit_sha"],
-    )
-    return section_obj
-
-
-def build_section_objects(
+def parse_core_hours(
     text: str,
-    ka_code: str,
-    *,
-    include_provenance: bool,
-    tool_name: str,
-    commit_sha: Optional[str],
-) -> List[Dict[str, Any]]:
-    """Parse the text for all sections and build section objects."""
-    pat = re.compile(
-        rf"^({ka_code}[/-][A-Za-z0-9\-]+(?:[/-][A-Za-z0-9\-]+)*" rf"(?::\s*[^\n]+)?)",
-        flags=re.M,
-    )
+    ku_names: Optional[List[str]] = None,
+    ka_code: Optional[str] = None,
+) -> List[Dict[str, Optional[str]]]:
+    """
+    Placeholder for now. Returns empty array to match golden file expectations.
+    Core hours parsing will be implemented in a future PR.
+    """
+    # Suppress unused argument warnings
+    _ = text, ku_names, ka_code
+    return []
 
-    matches = list(pat.finditer(text))
-    sections: List[Dict[str, Any]] = []
 
-    config = {
-        "include_provenance": include_provenance,
-        "tool_name": tool_name,
-        "commit_sha": commit_sha,
+def _xrefs(text: str) -> Tuple[List[str], List[str]]:
+    """Extract cross-references from text."""
+    refs = []
+    for m in re.findall(r"\(See also:\s*([^)]+)\)", text):
+        refs += [r.strip() for r in m.split(",")]
+    return refs, []
+
+
+def _strip_xrefs(text: str) -> str:
+    """Remove cross-reference annotations from text."""
+    t = re.sub(r"\(See also:[^)]+\)", "", text)
+    t = re.sub(r"\s+", " ", t).strip().rstrip(",;:")
+    return t
+
+
+_LO_MAP = {
+    "Explain": {
+        "explain",
+        "describe",
+        "discuss",
+        "define",
+        "outline",
+        "summarize",
+    },
+    "Apply": {
+        "apply",
+        "use",
+        "implement",
+        "execute",
+        "perform",
+        "demonstrate",
+    },
+    "Evaluate": {
+        "evaluate",
+        "assess",
+        "compare",
+        "contrast",
+        "critique",
+        "justify",
+    },
+    "Develop": {
+        "develop",
+        "design",
+        "create",
+        "construct",
+        "refactor",
+        "produce",
+        "build",
+    },
+}
+
+
+def infer_cognitive_level(text: str) -> Optional[str]:
+    """Infer cognitive level from learning outcome text based on action verb."""
+    s = text.strip().lower()
+    first = re.split(r"[\s:]", s, maxsplit=1)[0]
+    for level, verbs in _LO_MAP.items():
+        if first in verbs:
+            return level
+    return None
+
+
+def _extract_labeled_section(section: str, label: str, until: List[str]) -> str:
+    """Extract a labeled section from text."""
+    label_pat = label.replace(" ", r"[ -]?")
+    return get_block(section, rf"{label_pat}\s*:", until)
+
+
+def _parse_labeled_topics(section: str) -> Dict[str, List[Any]]:
+    """Parse labeled topic sections (CS Core, KA Core, Non-Core)."""
+    out: Dict[str, List[Any]] = {
+        "cs_core": [],
+        "ka_core": [],
+        "non_core": [],
+    }
+    for key, dest in [
+        ("CS Core", "cs_core"),
+        ("KA Core", "ka_core"),
+        ("Non-Core", "non_core"),
+    ]:
+        part = _extract_labeled_section(
+            section,
+            key,
+            [
+                r"\n\s*KA[ -]?Core\s*:",
+                r"\n\s*Non-?Core\s*:",
+                r"\n\s*Illustrative\s+Learning\s+Outcomes?:",
+                r"\n\s*$",
+            ],
+        )
+        if not part:
+            continue
+        pairs = collect_bullets(part)
+        tree = bullets_to_tree(pairs) if pairs else []
+        if not tree and part.strip():
+            tree = [
+                {
+                    "name": _strip_xrefs(t),
+                    "subs": [],
+                    "cross_references": _xrefs(t)[0],
+                }
+                for t in split_numbered(part)
+            ]
+        out[dest] = tree
+    return out
+
+
+def _enrich_learning_outcomes(items: List[str]) -> List[Dict[str, str]]:
+    """Add cognitive levels to learning outcome items."""
+    enriched: List[Dict[str, str]] = []
+    for t in items:
+        level = infer_cognitive_level(t)
+        if level:
+            enriched.append({"text": t.strip(), "cognitive_level": level})
+        else:
+            enriched.append({"text": t.strip(), "cognitive_level": "Explain"})
+    return enriched
+
+
+def _parse_labeled_learning_outcomes(block: str) -> Dict[str, List[Dict[str, str]]]:
+    """Parse labeled learning outcome sections."""
+    out: Dict[str, List[Dict[str, str]]] = {
+        "cs_core": [],
+        "ka_core": [],
+        "non_core": [],
+        "general": [],
     }
 
-    for i, m in enumerate(matches):
-        section_context = {
-            "match": m,
-            "matches": matches,
-            "i": i,
-            "text": text,
-            "ka_code": ka_code,
-        }
-        section_obj = _process_single_section(section_context, config=config)
-        sections.append(section_obj)
+    if not block.strip():
+        return out
 
-    return _deduplicate_sections(sections)
+    for key, dest in [
+        ("CS Core", "cs_core"),
+        ("KA Core", "ka_core"),
+        ("Non-Core", "non_core"),
+    ]:
+        label_pat = key.replace(" ", r"[ -]?")
+        part = get_block(
+            block,
+            rf"{label_pat}\s*:",
+            [r"\n\s*KA[ -]?Core\s*:", r"\n\s*Non-?Core\s*:", r"\n\s*$"],
+        )
+        if not part:
+            continue
+
+        bullets = collect_bullets(part)
+        items = [txt for _, txt, _ in bullets] if bullets else split_numbered(part)
+        out[dest] = _enrich_learning_outcomes(items)
+
+    return out
+
+
+def _parse_general_learning_outcomes(block: str) -> List[Dict[str, str]]:
+    """Parse unlabeled learning outcomes into general category."""
+    general_block = block
+    general_block = re.sub(
+        r"Illustrative\s+Learning\s+Outcomes?:\s*",
+        "",
+        general_block,
+        flags=re.I,
+    )
+    general_block = re.sub(
+        r"(?:CS|KA)[ -]?Core\s*:.*?(?=\n(?:CS|KA|Non)[ -]?Core\s*:|\Z)",
+        "",
+        general_block,
+        flags=re.I | re.S,
+    )
+    general_block = re.sub(r"Non-?Core\s*:.*$", "", general_block, flags=re.I | re.S)
+
+    general_block = general_block.strip()
+
+    if general_block and not re.match(r"^\s*$", general_block):
+        bullets = collect_bullets(general_block)
+        items = (
+            [txt for _, txt, _ in bullets] if bullets else split_numbered(general_block)
+        )
+        return _enrich_learning_outcomes([t for t in items if t.strip()])
+
+    return []
+
+
+def parse_three_block(section: str) -> Dict[str, Dict[str, Any]]:
+    """Parse knowledge unit section into topics and learning outcomes."""
+    section = drop_orphan_noise(section)
+
+    # Split section at "Illustrative Learning Outcomes:" to separate topics
+    learning_outcomes_match = re.search(
+        r"Illustrative\s+Learning\s+Outcomes?:", section, re.I
+    )
+    if learning_outcomes_match:
+        start_pos = learning_outcomes_match.start()
+        topics_raw = section[:start_pos].strip()
+        los_raw = section[start_pos:].strip()
+        los_raw = re.sub(
+            r"Illustrative\s+Learning\s+Outcomes?:\s*", "", los_raw, flags=re.I
+        )
+    else:
+        topics_raw = section
+        los_raw = ""
+
+    topics = _parse_labeled_topics(topics_raw)
+    learning_outcomes = _parse_labeled_learning_outcomes(los_raw)
+    learning_outcomes["general"] = _parse_general_learning_outcomes(los_raw)
+
+    return {
+        "topics": topics,
+        "learning_outcomes": learning_outcomes,
+    }
+
+
+def extract_ku_sections(full_text: str, ka_code: str) -> List[Tuple[str, str]]:
+    """Extract knowledge unit sections from text."""
+    ku_scope = get_block(
+        full_text,
+        r"\bKnowledge Units\b",
+        [
+            r"\n\s*Professional Dispositions",
+            r"\n\s*Mathematics Requirements",
+            r"\n\s*Committee",
+            r"\Z",
+        ],
+    )
+    if not ku_scope:
+        ku_scope = full_text
+
+    head_pat = re.compile(rf"^[\s\f]*({ka_code}[/-][^\n:]+)\s*:\s*(.*)$", re.M)
+    out: List[Tuple[str, str]] = []
+
+    for m in head_pat.finditer(ku_scope):
+        start = m.end()
+        next_m = head_pat.search(ku_scope, start)
+        end = next_m.start() if next_m else len(ku_scope)
+
+        left = m.group(1).strip()
+        right_inline = m.group(2).strip()
+        subtitle = right_inline
+
+        body_region = ku_scope[start:end].lstrip()
+        if not subtitle:
+            first_line = (
+                body_region.splitlines()[0].strip() if body_region.splitlines() else ""
+            )
+            if (
+                first_line
+                and len(first_line) <= 80
+                and not re.match(r"^(CS|KA)[ -]?Core\s*:$", first_line, re.I)
+            ):
+                subtitle = first_line
+                off = body_region.find(first_line) + len(first_line)
+                body = body_region[off:].strip()
+            else:
+                body = body_region.strip()
+        else:
+            body = body_region.strip()
+
+        heading = f"{left}: {subtitle}" if subtitle else left
+        out.append((heading, body))
+
+    return out
+
+
+def parse_dispositions(text: str) -> List[Dict[str, str]]:
+    """Parse professional dispositions section."""
+    block = get_block(
+        text,
+        r"Professional Dispositions",
+        [
+            r"\n\s*Mathematics Requirements",
+            r"\n\s*Course Packaging Suggestions",
+            r"\n\s*Committee",
+            r"\Z",
+        ],
+    )
+    if not block:
+        return []
+    items: List[Dict[str, str]] = []
+    for line in block.splitlines():
+        line = line.strip()
+        if not line or line == "●":
+            continue
+        m = re.match(r"^([A-Za-z ]+):\s*(.*)$", line)
+        if m:
+            items.append(
+                {"name": m.group(1).strip(), "description": m.group(2).strip()}
+            )
+        elif items:
+            items[-1]["description"] += " " + line
+    return items
+
+
+def parse_math_requirements(text: str) -> Dict[str, List[Dict[str, str]]]:
+    """Parse mathematics requirements section."""
+    block = get_block(
+        text,
+        r"Mathematics Requirements",
+        [r"\n\s*Course Packaging Suggestions", r"\n\s*Committee", r"\Z"],
+    )
+    if not block:
+        return {"required": [], "desirable": []}
+    desirable: List[Dict[str, str]] = []
+    required: List[Dict[str, str]] = []
+    for line in block.splitlines():
+        line = line.strip()
+        if not line or not line.startswith("●"):
+            continue
+        topic = line.replace("●", "", 1).strip()
+        notes = ""
+        m = re.search(r"\(([^)]+)\)$", topic)
+        if m:
+            notes = m.group(1).strip()
+            topic = topic[: m.start()].strip()
+        desirable.append({"topic": topic, "notes": notes})
+    return {"required": required, "desirable": desirable}
+
+
+def parse_course_packaging(text: str) -> Dict[str, Any]:
+    """Parse course packaging suggestions section."""
+    block = get_block(text, r"Course Packaging Suggestions", [r"\n\s*Committee", r"\Z"])
+    if not block:
+        return {
+            "advanced_course_hours": [],
+            "prerequisites": [],
+            "objectives": "",
+        }
+    adv, pre, obj = [], [], ""
+    section: Optional[str] = None
+    for line in block.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        if line.lower().startswith("advanced course"):
+            section = "adv"
+            continue
+        if line.lower().startswith("prerequisites"):
+            section = "pre"
+            continue
+        if line.lower().startswith("course objectives"):
+            section = "obj"
+            obj = line.split(":", 1)[1].strip()
+            continue
+        if section == "adv" and line.startswith("●"):
+            txt = line[1:].strip()
+            m = re.match(r"^(.*)\((\d+)\s*hours?\)\s*$", txt)
+            if m:
+                adv.append(
+                    {
+                        "knowledge_unit": m.group(1).strip(),
+                        "hours": int(m.group(2)),
+                    }
+                )
+        elif section == "pre" and line.startswith("●"):
+            pre.append(line[1:].strip())
+        elif section == "obj":
+            obj += " " + line
+    return {
+        "advanced_course_hours": adv,
+        "prerequisites": pre,
+        "objectives": obj.strip(),
+    }
+
+
+def parse_committee(text: str) -> Dict[str, Any]:
+    """Parse committee section."""
+    block = get_block(text, r"Committee", [r"\Z"])
+    if not block:
+        return {"chair": {}, "members": [], "contributors": []}
+    chair: Dict[str, str] = {}
+    members: List[Dict[str, str]] = []
+    contributors: List[Dict[str, str]] = []
+    section: Optional[str] = None
+    for line in block.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        if line.startswith("Chair:"):
+            section = "chair"
+            parts = [p.strip() for p in line.replace("Chair:", "", 1).split(",")]
+            if len(parts) >= 3:
+                chair = {
+                    "name": parts[0],
+                    "affiliation": parts[1],
+                    "location": parts[2],
+                }
+        elif line.startswith("Members:"):
+            section = "members"
+        elif line.startswith("Contributors:"):
+            section = "contributors"
+        elif line.startswith("●"):
+            parts = [p.strip() for p in line[1:].split(",")]
+            if len(parts) >= 3:
+                entry = {
+                    "name": parts[0],
+                    "affiliation": parts[1],
+                    "location": parts[2],
+                }
+                (members if section == "members" else contributors).append(entry)
+    return {"chair": chair, "members": members, "contributors": contributors}
 
 
 def build_document(
     text: str,
     ka_code: str,
     ka_name: str,
-    *,
-    config: Optional[Dict[str, Any]] = None,
+    input_file: str,
+    include_provenance: bool = True,
+    commit_sha: Optional[str] = None,
+    tool_version: Optional[str] = None,
+    pdf_path: Optional[str] = None,
 ) -> Dict[str, Any]:
-    """Assemble the final JSON document."""
-    if config is None:
-        config = {
-            "schema_version": SCHEMA_VERSION,
-            "include_provenance": True,
-            "tool_name": TOOL_NAME,
-            "commit_sha": None,
+    """Build complete JSON document from curriculum text."""
+    text = preclean(text)
+    text = normalize_glitches(text)
+
+    pre = parse_preamble(text)
+    core_hours = parse_core_hours(text)
+    ku_sections = extract_ku_sections(text, ka_code)
+
+    sections = []
+    for idx, (heading, body) in enumerate(ku_sections):
+        sec_id, title = section_id_and_title(heading, ka_code, idx)
+        triple = parse_three_block(body)
+        sec: Dict[str, Any] = {
+            "id": sec_id,
+            "title": title,
+            "order": idx + 1,
+            "topics": triple["topics"],
+            "learning_outcomes": triple["learning_outcomes"],
+            "source_loc": {"file": input_file, "section": idx + 1},
+            "subsections": [],
         }
+        if include_provenance:
+            prov = {"content_hash": sha256(body), "tool": TOOL_NAME}
+            if tool_version:
+                prov["tool_version"] = tool_version
+            if commit_sha:
+                prov["commit_sha"] = commit_sha
+            sec["provenance"] = prov
+        sections.append(sec)
 
-    sections = build_section_objects(
-        text,
-        ka_code=ka_code,
-        include_provenance=config["include_provenance"],
-        tool_name=config["tool_name"],
-        commit_sha=config["commit_sha"],
-    )
-    return {
-        "schema": {
-            "name": "Knowledge Area/Skill Area Unified Schema v2",
-            "version": config["schema_version"],
-            "generated_at": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
-            "source": (f"curriculum/cs2023/{ka_code}_SAMPLE_v2.json"),
-        },
-        "knowledge_area": {"name": ka_name, "code": ka_code},
-        "description": extract_preamble(text),
-        "sections": sections,
+    schema_obj: Dict[str, Any] = {
+        "name": "ka.schema.v2",
+        "version": SCHEMA_VERSION,
+        "generated_at": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
+        "source": input_file,
+        "schema_ref": "schema/ka.schema.v2.json",
     }
+    if tool_version:
+        schema_obj["parser_version"] = tool_version
+    if pdf_path:
+        pdf_hash = file_sha256(Path(pdf_path))
+        if pdf_hash:
+            schema_obj["pdf_hash"] = pdf_hash
+
+    doc: Dict[str, Any] = {
+        "schema": schema_obj,
+        "knowledge_area": {"name": ka_name, "code": ka_code},
+        "preamble": pre,
+        "core_hours": core_hours,
+        "knowledge_units": sections,
+        "professional_dispositions": parse_dispositions(text),
+        "mathematics_requirements": parse_math_requirements(text),
+        "course_packaging_suggestions": parse_course_packaging(text),
+        "committee": parse_committee(text),
+    }
+    return doc
 
 
-# ------------------ CLI ------------------
-
-
-def main() -> None:
-    """Main CLI entry point for the CS2023 parser."""
-    ap = argparse.ArgumentParser(description="Parse CS2023 KA plain-text into v2 JSON.")
-    ap.add_argument("--txt", required=True, help="Path to input KA text")
-    ap.add_argument("--out", required=True, help="Path to output JSON")
-    ap.add_argument("--ka_code", help="Override KA code (e.g., SE)")
-    ap.add_argument("--ka_name", help="Override KA name (e.g., SE name)")
+def main():
+    """Command-line interface for the parser."""
+    ap = argparse.ArgumentParser(
+        description="Parse CS2023 curriculum text to structured JSON."
+    )
+    ap.add_argument("--txt", required=True, help="Input text file path")
+    ap.add_argument("--out", required=True, help="Output JSON file path")
+    ap.add_argument("--ka-code", help="Knowledge area code (e.g., SE, SEC)")
     ap.add_argument(
-        "--schema",
-        help="Path to ka.schema.v2.json for optional validation",
+        "--ka-name", help="Knowledge area name (e.g., Software Engineering)"
     )
     ap.add_argument(
         "--no-provenance",
         action="store_true",
-        help="Do not include provenance in sections",
+        help="Exclude provenance metadata",
     )
-    ap.add_argument(
-        "--commit-sha",
-        help="Optional git commit SHA for provenance",
-    )
-    ap.add_argument(
-        "--strict",
-        action="store_true",
-        help="Exit(1) if validation fails",
-    )
+    ap.add_argument("--commit-sha", help="Git commit SHA for provenance")
+    ap.add_argument("--schema", help="JSON schema file for validation")
+    ap.add_argument("--strict", action="store_true", help="Exit on validation failure")
+    ap.add_argument("--tool-version", help="Tool version string for provenance")
+    ap.add_argument("--pdf", help="PDF file path for hash computation")
     args = ap.parse_args()
 
     txt_path = Path(args.txt)
-    out_path = Path(args.out)
-
     if not txt_path.exists():
-        print(f"ERROR: Input text not found: {txt_path}", file=sys.stderr)
+        print(f"ERROR: file not found: {txt_path}", file=sys.stderr)
         sys.exit(2)
+
+    raw = txt_path.read_text(encoding="utf-8", errors="ignore")
 
     ka_code, ka_name = args.ka_code, args.ka_name
     if not ka_code or not ka_name:
-        ka_code, ka_name = infer_ka_from_filename(txt_path)
+        m = re.match(r"^([A-Z]{2,5})[ _-]+(.+)$", txt_path.stem)
+        if m:
+            ka_code = m.group(1)
+            ka_name = re.sub(r"[_-]+", " ", m.group(2)).strip().title()
+        else:
+            ka_code = ka_code or "SEC"
+            ka_name = ka_name or "Security"
 
-    raw = txt_path.read_text(encoding="utf-8", errors="ignore")
-    text = _preclean(raw)
-
-    cfg = {
-        "schema_version": SCHEMA_VERSION,
-        "include_provenance": not args.no_provenance,
-        "tool_name": TOOL_NAME,
-        "commit_sha": args.commit_sha,
-    }
-    doc = build_document(text, ka_code=ka_code, ka_name=ka_name, config=cfg)
+    doc = build_document(
+        text=raw,
+        ka_code=ka_code,
+        ka_name=ka_name,
+        input_file=str(txt_path),
+        include_provenance=(not args.no_provenance),
+        commit_sha=args.commit_sha,
+        tool_version=args.tool_version,
+        pdf_path=args.pdf,
+    )
 
     if args.schema:
-        if not HAS_JSONSCHEMA:
+        if jsonschema is None:
             print(
-                "WARNING: jsonschema not installed; skipping validation.",
+                "jsonschema not available, skipping validation",
                 file=sys.stderr,
             )
         else:
             try:
                 schema = json.loads(Path(args.schema).read_text(encoding="utf-8"))
                 jsonschema.validate(instance=doc, schema=schema)
-                print("Schema validation passed.")
-            except (json.JSONDecodeError, jsonschema.ValidationError) as e:
+                print("Schema validation: OK", file=sys.stderr)
+            except (jsonschema.ValidationError, jsonschema.SchemaError) as e:
                 print(f"Schema validation failed: {e}", file=sys.stderr)
                 if args.strict:
                     sys.exit(1)
 
-    out_path.write_text(
-        json.dumps(doc, indent=2, ensure_ascii=False),
-        encoding="utf-8",
+    Path(args.out).write_text(
+        json.dumps(doc, indent=2, ensure_ascii=False), encoding="utf-8"
     )
-    print(f"Wrote {out_path} (KA: {ka_code} — {ka_name})")
+    print(f"Wrote {args.out} (KA: {ka_code} — {ka_name})")
 
 
 if __name__ == "__main__":

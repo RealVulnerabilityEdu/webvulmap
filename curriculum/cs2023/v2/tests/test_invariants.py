@@ -19,16 +19,17 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+from typing import Union
 
 import pytest
 
-COG_LEVELS = {"Remember", "Understand", "Apply", "Analyze", "Evaluate", "Create"}
+COG_LEVELS = {"Explain", "Apply", "Evaluate", "Develop"}
 
 
 def parse_via_cli(
     txt_path: Path,
     tmp_path: Path,
-    schema_path: Path | None = None,
+    schema_path: Union[Path, None] = None,
 ) -> dict:
     """Parse a text file via CLI and return the JSON result."""
     out = tmp_path / (txt_path.stem + ".json")
@@ -46,6 +47,14 @@ def parse_via_cli(
     if schema_path:
         cmd.extend(["--schema", str(schema_path)])
 
+    # Add knowledge area parameters based on filename
+    if "SE.txt" in str(txt_path):
+        cmd.extend(["--ka-code", "SE", "--ka-name", "Software Engineering"])
+    elif "SEC_Security.txt" in str(txt_path):
+        cmd.extend(["--ka-code", "SEC", "--ka-name", "Security"])
+    elif "OS_Operating_Systems.txt" in str(txt_path):
+        cmd.extend(["--ka-code", "OS", "--ka-name", "Operating Systems"])
+
     r = subprocess.run(
         cmd,
         capture_output=True,
@@ -59,13 +68,15 @@ def parse_via_cli(
 
 def _collect_learning_outcomes(obj: dict) -> list[dict]:
     """Return the list of learning outcomes from the unified structure."""
-    sections = obj.get("sections", []) or []
+    knowledge_units = obj.get("knowledge_units", []) or []
     all_los: list[dict] = []
 
-    for sec in sections:
-        los = sec.get("learning_outcomes", [])
-        if isinstance(los, list):
-            all_los.extend(los)
+    for ku in knowledge_units:
+        # Check for learning outcomes in each category
+        for category in ["cs_core", "ka_core", "non_core", "general"]:
+            los = ku.get("learning_outcomes", {}).get(category, [])
+            if isinstance(los, list):
+                all_los.extend(los)
 
     return all_los
 
@@ -90,7 +101,7 @@ def test_required_fields_nonempty(  # pylint: disable=unused-argument
     # Top-level
     assert obj.get("schema"), "missing schema metadata"
     assert obj.get("knowledge_area"), "missing knowledge_area"
-    assert obj.get("sections"), "missing sections"
+    assert obj.get("knowledge_units"), "missing knowledge_units"
 
     # Schema metadata
     scm = obj["schema"]
@@ -134,20 +145,28 @@ def test_ids_unique_within_section(
     tmp_path,
     schema_path,
 ) -> None:
-    """Any present IDs/slugs for LOs are unique within each section."""
+    """Any present IDs/slugs for LOs are unique within each knowledge unit."""
     if not sample_txt_paths or not sample_txt_paths[0].exists():
         pytest.skip("No valid input files available")
     obj = parse_via_cli(sample_txt_paths[0], tmp_path, schema_path)
 
-    sections = obj.get("sections", []) or []
-    for section in sections:
-        los = section.get("learning_outcomes", [])
-        ids = [lo.get("id") for lo in los if lo.get("id")]
-        slugs = [lo.get("slug") for lo in los if lo.get("slug")]
+    knowledge_units = obj.get("knowledge_units", []) or []
+    for ku in knowledge_units:
+        all_los = []
+        # Collect all learning outcomes from all categories
+        for category in ["cs_core", "ka_core", "non_core", "general"]:
+            los = ku.get("learning_outcomes", {}).get(category, [])
+            if isinstance(los, list):
+                all_los.extend(los)
 
-        sec_id = section.get("id", "unknown")
-        assert len(ids) == len(set(ids)), f"Duplicate LO ids in section {sec_id}"
-        assert len(slugs) == len(set(slugs)), f"Duplicate LO slugs in section {sec_id}"
+        ids = [lo.get("id") for lo in all_los if lo.get("id")]
+        slugs = [lo.get("slug") for lo in all_los if lo.get("slug")]
+
+        ku_id = ku.get("id", "unknown")
+        assert len(ids) == len(set(ids)), f"Duplicate LO ids in knowledge unit {ku_id}"
+        assert len(slugs) == len(
+            set(slugs)
+        ), f"Duplicate LO slugs in knowledge unit {ku_id}"
 
 
 def test_learning_outcomes_extracted(
@@ -173,19 +192,25 @@ def test_topic_titles_nonempty(
     tmp_path,
     schema_path,
 ) -> None:
-    """If topics section exists, every topic has a non-empty title."""
+    """If knowledge units exist, every topic has a non-empty name."""
     if not sample_txt_paths or not sample_txt_paths[0].exists():
         pytest.skip("No valid input files available")
     obj = parse_via_cli(sample_txt_paths[0], tmp_path, schema_path)
 
-    sections = obj.get("sections", []) or []
-    topics_secs = [
-        s for s in sections if (s.get("type") or "").lower() in {"topics", "topic"}
-    ]
-    for sec in topics_secs:
-        items = sec.get("items") or []
-        for i, it in enumerate(items):
-            assert (it.get("title") or "").strip(), f"Topic[{i}] missing title"
+    knowledge_units = obj.get("knowledge_units", []) or []
+    for ku in knowledge_units:
+        # Check topics in each category
+        for category in ["cs_core", "ka_core", "non_core"]:
+            topics = ku.get("topics", {}).get(category, [])
+            for i, topic in enumerate(topics):
+                if isinstance(topic, dict):
+                    assert (
+                        topic.get("name") or ""
+                    ).strip(), f"Topic[{i}] in {category} missing name"
+                else:
+                    assert (
+                        str(topic) or ""
+                    ).strip(), f"Topic[{i}] in {category} missing name"
 
 
 def test_deterministic_output(
@@ -209,6 +234,21 @@ def test_deterministic_output(
         if "schema" in d_copy:
             d_copy["schema"]["generated_at"] = "NORMALIZED"
             d_copy["schema"]["source"] = "NORMALIZED"
+
+        # Normalize any file paths in the data
+        def normalize_paths(obj):
+            if isinstance(obj, dict):
+                for key, value in obj.items():
+                    if isinstance(value, str) and ("/" in value or "\\" in value):
+                        # Replace file paths with normalized version
+                        obj[key] = re.sub(r'/[^"]*\.txt', "/NORMALIZED.txt", value)
+                    else:
+                        normalize_paths(value)
+            elif isinstance(obj, list):
+                for item in obj:
+                    normalize_paths(item)
+
+        normalize_paths(d_copy)
         return json.dumps(
             d_copy,
             sort_keys=True,

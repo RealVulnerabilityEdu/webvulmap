@@ -14,13 +14,14 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+from typing import Union
 
 import pytest
 from jsonschema import validate
 
 
 def parse_via_cli(
-    txt_path: Path, tmp_path: Path, schema_path: Path | None = None
+    txt_path: Path, tmp_path: Path, schema_path: Union[Path, None] = None
 ) -> dict:
     """Parse a text file via CLI and return the JSON result."""
     out = tmp_path / (txt_path.stem + ".json")
@@ -38,6 +39,14 @@ def parse_via_cli(
     ]
     if schema_path:
         cmd.extend(["--schema", str(schema_path)])
+
+    # Add knowledge area parameters based on filename
+    if "SE.txt" in str(txt_path):
+        cmd.extend(["--ka-code", "SE", "--ka-name", "Software Engineering"])
+    elif "SEC_Security.txt" in str(txt_path):
+        cmd.extend(["--ka-code", "SEC", "--ka-name", "Security"])
+    elif "OS_Operating_Systems.txt" in str(txt_path):
+        cmd.extend(["--ka-code", "OS", "--ka-name", "Operating Systems"])
 
     r = subprocess.run(
         cmd, capture_output=True, text=True, check=False, cwd=str(v2_dir)
@@ -71,7 +80,7 @@ def test_schema_structure(schema):
 
     # Check required fields
     required_fields = schema["required"]
-    expected_required = ["schema", "knowledge_area", "description", "sections"]
+    expected_required = ["schema", "knowledge_area", "preamble", "knowledge_units"]
     for field in expected_required:
         assert field in required_fields, f"Required field '{field}' missing from schema"
 
@@ -86,8 +95,8 @@ def test_output_has_required_fields(sample_txt_paths, tmp_path, schema_path):
     # Check required top-level fields
     assert "schema" in obj
     assert "knowledge_area" in obj
-    assert "description" in obj
-    assert "sections" in obj
+    assert "preamble" in obj
+    assert "knowledge_units" in obj
 
     # Check schema metadata
     schema_obj = obj["schema"]
