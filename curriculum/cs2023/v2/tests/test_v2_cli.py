@@ -14,9 +14,10 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+from typing import Union
 
 
-def run_cli(txt_path: Path, out_path: Path, schema_path: Path | None = None):
+def run_cli(txt_path: Path, out_path: Path, schema_path: Union[Path, None] = None):
     """Run the unified parser CLI with correct arguments."""
     # Get the v2 directory (parent of tests)
     v2_dir = Path(__file__).resolve().parents[1]
@@ -32,6 +33,14 @@ def run_cli(txt_path: Path, out_path: Path, schema_path: Path | None = None):
     ]
     if schema_path:
         cmd.extend(["--schema", str(schema_path)])
+
+    # Add knowledge area parameters based on filename
+    if "SE.txt" in str(txt_path):
+        cmd.extend(["--ka-code", "SE", "--ka-name", "Software Engineering"])
+    elif "SEC_Security.txt" in str(txt_path):
+        cmd.extend(["--ka-code", "SEC", "--ka-name", "Security"])
+    elif "OS_Operating_Systems.txt" in str(txt_path):
+        cmd.extend(["--ka-code", "OS", "--ka-name", "Operating Systems"])
 
     r = subprocess.run(
         cmd,
@@ -70,7 +79,7 @@ def test_cli_produces_json(tmp_path: Path, sample_txt_paths, schema_path):
     assert isinstance(data, dict)
     assert "schema" in data
     assert "knowledge_area" in data
-    assert "sections" in data
+    assert "knowledge_units" in data
 
 
 def test_bad_input_fails(tmp_path: Path):

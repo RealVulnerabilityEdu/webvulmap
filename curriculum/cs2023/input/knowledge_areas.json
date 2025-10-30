@@ -2,103 +2,103 @@
   {
     "short-ka": "AI",
     "long-ka": "Artificial Intelligence",
-    "begin-page": 22,
-    "end-page": 42
+    "begin-page": 65,
+    "end-page": 86
   },
   {
     "short-ka": "AL",
     "long-ka": "Algorithmic Foundations",
-    "begin-page": 43,
-    "end-page": 54
+    "begin-page": 87,
+    "end-page": 100
   },
   {
     "short-ka": "AR",
     "long-ka": "Architecture and Organization",
-    "begin-page": 55,
-    "end-page": 65
+    "begin-page": 101,
+    "end-page": 112
   },
   {
     "short-ka": "DM",
     "long-ka": "Data Management",
-    "begin-page": 66,
-    "end-page": 78
+    "begin-page": 113,
+    "end-page": 126
   },
   {
     "short-ka": "FPL",
     "long-ka": "Foundations of Programming Languages",
-    "begin-page": 79,
-    "end-page": 103
+    "begin-page": 127,
+    "end-page": 150
   },
   {
     "short-ka": "GIT",
     "long-ka": "Graphics and Interactive Techniques",
-    "begin-page": 104,
-    "end-page": 123
+    "begin-page": 151,
+    "end-page": 172
   },
   {
     "short-ka": "HCI",
     "long-ka": "Human-Computer Interaction",
-    "begin-page": 124,
-    "end-page": 134
+    "begin-page": 173,
+    "end-page": 184
   },
   {
     "short-ka": "MSF",
     "long-ka": "Mathematical and Statistical Foundations",
-    "begin-page": 135,
-    "end-page": 145
+    "begin-page": 185,
+    "end-page": 196
   },
   {
     "short-ka": "NC",
     "long-ka": "Networking and Communication",
-    "begin-page": 146,
-    "end-page": 151
+    "begin-page": 197,
+    "end-page": 204
   },
   {
     "short-ka": "OS",
     "long-ka": "Operating Systems",
-    "begin-page": 152,
-    "end-page": 165
+    "begin-page": 205,
+    "end-page": 216
   },
   {
     "short-ka": "PDC",
     "long-ka": "Parallel and Distributed Computing",
-    "begin-page": 166,
-    "end-page": 177
+    "begin-page": 217,
+    "end-page": 228
   },
   {
     "short-ka": "SDF",
     "long-ka": "Software Development Fundamentals",
-    "begin-page": 178,
-    "end-page": 184
+    "begin-page": 229,
+    "end-page": 236
   },
   {
     "short-ka": "SE",
     "long-ka": "Software Engineering",
-    "begin-page": 185,
-    "end-page": 200
+    "begin-page": 237,
+    "end-page": 254
   },
   {
     "short-ka": "SEC",
     "long-ka": "Security",
-    "begin-page": 201,
-    "end-page": 213
+    "begin-page": 255,
+    "end-page": 268
   },
   {
     "short-ka": "SEP",
     "long-ka": "Society, Ethics and Professionalism",
-    "begin-page": 214,
-    "end-page": 233
+    "begin-page": 269,
+    "end-page": 290
   },
   {
     "short-ka": "SF",
     "long-ka": "Systems Fundamentals",
-    "begin-page": 234,
-    "end-page": 242
+    "begin-page": 291,
+    "end-page": 300
   },
   {
     "short-ka": "SPD",
     "long-ka": "Specialized Platform Development",
-    "begin-page": 243,
-    "end-page": 257
+    "begin-page": 301,
+    "end-page": 316
   }
 ]

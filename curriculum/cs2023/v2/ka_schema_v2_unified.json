@@ -1,100 +1,328 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Knowledge Area v2 Schema",
-  "description": "A comprehensive schema for defining Knowledge Areas from the CS2023 curriculum with enhanced structure and metadata.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/ka.schema.v2.json",
+  "title": "CS2023 Knowledge Area Schema v2",
   "type": "object",
-  "required": ["schema", "knowledge_area", "description", "sections"],
+  "required": [
+    "schema",
+    "knowledge_area",
+    "preamble",
+    "core_hours",
+    "professional_dispositions",
+    "mathematics_requirements",
+    "course_packaging_suggestions",
+    "committee",
+    "knowledge_units"
+  ],
   "properties": {
+    "$schema": { "type": "string" },
+    "$id": { "type": "string", "format": "uri" },
+
     "schema": {
       "type": "object",
+      "required": ["name", "version", "generated_at", "source", "schema_ref"],
       "properties": {
-        "name": {
-          "type": "string"
-        },
-        "version": {
-          "type": "string"
-        },
-        "generated_at": {
-          "type": "string"
-        },
+        "name": { "const": "ka.schema.v2" },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+$" },
+        "generated_at": { "type": "string", "format": "date-time" },
         "source": {
-          "type": "string"
-        }
+          "oneOf": [
+            { "type": "string" },
+            {
+              "type": "object",
+              "required": ["name"],
+              "properties": {
+                "name": { "type": "string" },
+                "edition": { "type": "string" }
+              },
+              "additionalProperties": false
+            }
+          ]
+        },
+        "schema_ref": { "type": "string" }
       },
-      "required": ["name", "version", "generated_at", "source"],
       "additionalProperties": false
     },
+
     "knowledge_area": {
       "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "code": {
-          "type": "string"
-        }
-      },
       "required": ["name", "code"],
+      "properties": {
+        "name": { "type": "string" },
+        "code": { "type": "string", "pattern": "^[A-Z]{2,5}$" }
+      },
       "additionalProperties": false
     },
-    "description": {
-      "type": "string"
+
+    "preamble": {
+      "type": "object",
+      "properties": {
+        "description": { "type": "string" },
+        "changes_since_cs2013": { "type": "string" },
+        "overview": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["order", "title", "description"],
+            "properties": {
+              "order": { "type": "integer" },
+              "title": { "type": "string" },
+              "description": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
     },
-    "sections": {
+
+    "core_hours": {
       "type": "array",
       "items": {
         "type": "object",
+        "required": ["ku", "cs_core", "ka_core"],
         "properties": {
-          "id": {
-            "type": "string",
-            "pattern": "^[a-z]+-[a-z]+-\\d+$"
-          },
-          "title": {
-            "type": "string"
-          },
-          "order": {
-            "type": "integer"
-          },
-          "summary": {
-            "type": "string"
-          },
-          "topics": {
-            "type": "array"
-          },
-          "learning_outcomes": {
-            "type": "array"
-          },
-          "bullets": {
-            "type": "array"
-          },
-          "crossrefs": {
-            "type": "array"
-          },
-          "qa_flags": {
-            "type": "object"
-          },
-          "source_loc": {
-            "type": "object"
-          },
-          "subsections": {
-            "type": "array"
+          "ku": { "type": "string" },
+          "cs_core": { "type": ["string", "null"] },
+          "ka_core": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "professional_dispositions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "description"],
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "mathematics_requirements": {
+      "type": "object",
+      "required": ["required", "desirable"],
+      "properties": {
+        "required": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["topic"],
+            "properties": {
+              "topic": { "type": "string" },
+              "notes": { "type": "string" }
+            },
+            "additionalProperties": false
           }
         },
-        "required": [
-          "id",
-          "title",
-          "order",
-          "summary",
-          "topics",
-          "learning_outcomes",
-          "bullets",
-          "crossrefs",
-          "qa_flags",
-          "source_loc",
-          "subsections"
-        ],
-        "additionalProperties": true
-      }
+        "desirable": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["topic"],
+            "properties": {
+              "topic": { "type": "string" },
+              "notes": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "course_packaging_suggestions": {
+      "type": "object",
+      "required": ["advanced_course_hours", "prerequisites", "objectives"],
+      "properties": {
+        "advanced_course_hours": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["knowledge_unit", "hours"],
+            "properties": {
+              "knowledge_unit": { "type": "string" },
+              "hours": { "type": "integer" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "prerequisites": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "objectives": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "committee": {
+      "type": "object",
+      "required": ["chair", "members", "contributors"],
+      "properties": {
+        "chair": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "affiliation": { "type": "string" },
+            "location": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "affiliation", "location"],
+            "properties": {
+              "name": { "type": "string" },
+              "affiliation": { "type": "string" },
+              "location": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "contributors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "affiliation", "location"],
+            "properties": {
+              "name": { "type": "string" },
+              "affiliation": { "type": "string" },
+              "location": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "knowledge_units": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/section" }
+    }
+  },
+  "additionalProperties": false,
+
+  "$defs": {
+    "compact_topic": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "subs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "cross_references": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": []
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "learning_outcome": {
+      "type": "object",
+      "required": ["text", "cognitive_level"],
+      "properties": {
+        "text": { "type": "string" },
+        "cognitive_level": {
+          "type": "string",
+          "enum": ["Explain", "Apply", "Evaluate", "Develop"]
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "source_loc": {
+      "type": "object",
+      "required": ["file", "section"],
+      "properties": {
+        "file": { "type": "string" },
+        "section": { "type": "integer" }
+      },
+      "additionalProperties": false
+    },
+
+    "section": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "order",
+        "topics",
+        "learning_outcomes",
+        "source_loc",
+        "subsections",
+        "provenance"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "title": { "type": "string" },
+        "order": { "type": "number" },
+        "topics": {
+          "type": "object",
+          "properties": {
+            "cs_core": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/compact_topic" }
+            },
+            "ka_core": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/compact_topic" }
+            },
+            "non_core": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/compact_topic" }
+            }
+          },
+          "additionalProperties": false
+        },
+
+        "learning_outcomes": {
+          "type": "object",
+          "properties": {
+            "cs_core": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/learning_outcome" }
+            },
+            "ka_core": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/learning_outcome" }
+            },
+            "non_core": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/learning_outcome" }
+            },
+            "general": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/learning_outcome" }
+            }
+          },
+          "additionalProperties": false
+        },
+        "source_loc": { "$ref": "#/$defs/source_loc" },
+
+        "subsections": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/section" }
+        },
+        "provenance": {
+          "type": "object",
+          "properties": {
+            "content_hash": { "type": "string" },
+            "tool": { "type": "string" }
+          },
+          "required": ["content_hash", "tool"],
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
     }
   }
 }
