@@ -5,6 +5,7 @@ import os
 import sys
 
 from langchain_ollama import OllamaLLM
+from ollama._types import ResponseError
 
 
 def load_ka_name(json_path):
@@ -22,7 +23,7 @@ def query_ollama(ka_name, model_name="mistral"):
         f"What ONE cwe is most relevant to the computer science topic"
         f" {ka_name}?\n"
         f"\nFORMAT YOUR ANSWER STRICTLY AS:\n"
-        f"CWE-ID: (NUMBER ONLY)\n"
+        f"CWE: (NO WORDS HERE ONLY NUMBER)\n"
         f"Name:\n"
         f"Reason:"
     )
@@ -30,23 +31,31 @@ def query_ollama(ka_name, model_name="mistral"):
         f"Which potential cwes can be relevant to the computer science"
         f"knowledge area {ka_name}? Give me 3-5 cwes.\n"
         f"\nFORMAT YOUR ANSWER STRICTLY AS:\n"
-        f"CWE-ID: (NUMBER ONLY)\n"
+        f"CWE: (NO WORDS HERE ONLY NUMBER)"
         f"Name:\n"
         f"Reason:"
     )
 
     print(f"\nAsking primary prompt:\n{primary_prompt}\n")
-    primary_response = llm.invoke(primary_prompt).strip()
+    try:
+        primary_response = llm.invoke(primary_prompt).strip()
+    except (ValueError, ConnectionError, ResponseError) as e:
+        print(f"Error calling Ollama: {e}")
+        return "Error: LLM invocation failed."
 
-    if "CWE-" in primary_response:
+    if "CWE:" in primary_response:
         print("MAPPING NOW (from primary prompt).....")
         return primary_response
 
     print("\nNo direct CWE found in primary response. Trying fallback...\n")
     print(f"Asking fallback prompt:\n{fallback_prompt}\n")
-    fallback_response = llm.invoke(fallback_prompt).strip()
+    try:
+        fallback_response = llm.invoke(fallback_prompt).strip()
+    except (ValueError, ConnectionError, ResponseError) as e:
+        print(f"Error calling Ollama (fallback): {e}")
+        return "Error: Fallback LLM invocation failed."
 
-    if "CWE-" in fallback_response:
+    if "CWE:" in fallback_response:
         print("MAPPING NOW (from fallback prompt).....")
         return fallback_response
 
@@ -67,11 +76,11 @@ def parse_cwe_result(cwe_result):
     current_entry = {}
 
     for line in cwe_result.strip().splitlines():
-        if line.startswith("CWE-ID:"):
+        if line.startswith("CWE: "):
             if current_entry:
                 cwe_entries.append(current_entry)
                 current_entry = {}
-            current_entry["cwe"] = f'CWE-{line.replace("CWE-ID:", "").strip()}'
+            current_entry["cwe"] = line.replace("CWE:", "").strip()
         elif line.startswith("Name:"):
             current_entry["name"] = line.replace("Name:", "").strip()
         elif line.startswith("Reason:"):
@@ -102,6 +111,12 @@ def update_output(output_file, ka_name, cwe_entries):
         existing_data = {}
 
     if ka_name in existing_data:
+        existing_cwes = {entry["cwe"] for entry in existing_data[ka_name]}
+        cwe_entries = [
+            entry for entry in cwe_entries if entry["cwe"] not in existing_cwes
+        ]
+
+    if ka_name in existing_data:
         existing_data[ka_name].extend(cwe_entries)
     else:
         existing_data[ka_name] = cwe_entries
@@ -117,18 +132,23 @@ def parse_args():
     Returns:
         tuple: (json_path, output_file)
     """
-    if len(sys.argv) != 3:
-        print("Usage: python cs2023_zero_shot.py <SE_v2.json> <output.json>")
+    if len(sys.argv) < 3:
+        print("Usage: python cs2023_zero_shot.py <SE_v2.json>"
+              "<output.json> [--mock]")
         sys.exit(1)
-    return sys.argv[1], sys.argv[2]
+
+    mock_mode = "--mock" in sys.argv
+
+    return sys.argv[1], sys.argv[2], mock_mode
 
 
 def main():
     """
     Main program entry point. Loads input,
     queries LLM, parses results, and writes output.
+    OR handles mock mode for testing without Ollama.
     """
-    json_path, output_file = parse_args()
+    json_path, output_file, mock_mode = parse_args()
     ka_name = load_ka_name(json_path)
 
     if not ka_name:
@@ -136,12 +156,31 @@ def main():
         sys.exit(1)
 
     print(f"Mapping Knowledge Area: {ka_name}")
+
+    if mock_mode:
+        print("\n[MOCK MODE ENABLED] Skipping Ollama call...")
+        mock_response = (
+            f"CWE: 79\n"
+            f"Name: Improper Neutralization of Input During"
+            f"Web Page Generation ('Cross-site Scripting')\n"
+            f"Reason: {ka_name} may involve topics that require"
+            f"safe input/output handling to prevent injection flaws."
+        )
+        print(f"\nMock Result (not saved):\n{mock_response}\n")
+        print("[MOCK MODE COMPLETE] No output file was modified.")
+        return
+
     cwe_result = query_ollama(ka_name)
+
     print(f"\nFinal Result:\n{cwe_result}\n")
 
-    cwe_entries = parse_cwe_result(cwe_result)
-    update_output(output_file, ka_name, cwe_entries)
-    print(f"Mappings saved to {output_file}")
+    if (not cwe_result.startswith("Error:")
+            and "No CWE mapping" not in cwe_result):
+        cwe_entries = parse_cwe_result(cwe_result)
+        update_output(output_file, ka_name, cwe_entries)
+        print(f"Mappings saved to {output_file}")
+    else:
+        print("[ERROR] Mapping not saved due to Ollama error or no CWE found.")
 
 
 if __name__ == "__main__":
