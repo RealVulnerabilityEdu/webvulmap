@@ -133,8 +133,7 @@ def parse_args():
         tuple: (json_path, output_file)
     """
     if len(sys.argv) < 3:
-        print("Usage: python cs2023_zero_shot.py <SE_v2.json>"
-              "<output.json> [--mock]")
+        print("Usage: python cs2023_zero_shot.py <SE_v2.json>" "<output.json> [--mock]")
         sys.exit(1)
 
     mock_mode = "--mock" in sys.argv
@@ -174,8 +173,7 @@ def main():
 
     print(f"\nFinal Result:\n{cwe_result}\n")
 
-    if (not cwe_result.startswith("Error:")
-            and "No CWE mapping" not in cwe_result):
+    if not cwe_result.startswith("Error:") and "No CWE mapping" not in cwe_result:
         cwe_entries = parse_cwe_result(cwe_result)
         update_output(output_file, ka_name, cwe_entries)
         print(f"Mappings saved to {output_file}")
