@@ -28,7 +28,7 @@ query to the LLM.
 
 ## Usage
 
-```python
+```bash
 python
 <full path to the mapping program (e.g., cs2023_zero_shot.py)>
 <full path to the KA JSON file (e.g., SE_v2.json)>
@@ -41,11 +41,11 @@ python
 
 **Example run:**
 
-python .../cs2023_zero_shot.py .../SE_v2.json .../cs2023_zero_shot_output.json
+`python .../cs2023_zero_shot.py .../SE_v2.json .../cs2023_zero_shot_output.json`
 
 **With mock mode:**
 
-python .../cs2023_zero_shot.py .../SE_v2.json .../cs2023_zero_shot_output.json --mock
+`python .../cs2023_zero_shot.py .../SE_v2.json .../cs2023_zero_shot_output.json --mock`
 
 ## Sample Output
 
