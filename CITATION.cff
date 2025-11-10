@@ -9,6 +9,8 @@ authors:
     given-names: Jeffrey
   - family-names: Liang
     given-names: Wesley
+  - family-names: Abid
+    given-names: Mansoor
 title: "CS Topic-CWE-CVE Mapping and Tool"
 version: 0.0.1
 date-released: 2025-04-09
