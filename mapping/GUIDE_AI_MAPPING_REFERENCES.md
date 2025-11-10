@@ -97,32 +97,15 @@ Prerequisite: [Python 3.8+](https://www.python.org/downloads/) installed
 
 1. Clone the repository locally with the command:
 
-   ```bash
-   git clone https://github.com/cunymasslab/webvulmap
-
-   ```
+   `git clone https://github.com/cunymasslab/webvulmap`
 
 1. Run these pip install commands:
 
-   ```bash
-   pip install -U langchain langchain-community
-   pip install -U langchain-ollama
-
-   ```
+   `pip install -U langchain-ollama`
 
 1. At the top of your Python script, add these imports:
 
-   ```bash
-   from langchain_community.llms import Ollama
-   from langchain_ollama import OllamaLLM
-
-   ```
-
-1. On Git Bash, run command:
-
-   `ollama pull mistral`
-
-   **Note:** you can replace `mistral` with any model name.
+   `from langchain_ollama import OllamaLLM`
 
 1. Navigate to project directory:
 
@@ -133,6 +116,8 @@ Prerequisite: [Python 3.8+](https://www.python.org/downloads/) installed
    `python 'zero_shot.py'`
 
    **Note:** `'zero_shot.py'` can be replaced with the file you want to run.
+
+   **Note:** See README.md files for specific program usage (commands)
 
 ## References
 
