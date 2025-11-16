@@ -210,9 +210,10 @@
   "$defs": {
     "compact_topic": {
       "type": "object",
-      "required": ["name"],
+      "required": ["name", "order"],
       "properties": {
         "name": { "type": "string" },
+        "order": { "type": "integer", "minimum": 1 },
         "subs": {
           "type": "array",
           "items": { "type": "string" }
@@ -221,6 +222,10 @@
           "type": "array",
           "items": { "type": "string" },
           "default": []
+        },
+        "parsing_anomaly": {
+          "type": "boolean",
+          "description": "Flag indicating potential parsing issue (e.g., merged items, orphaned numbers)"
         }
       },
       "additionalProperties": false
@@ -228,12 +233,21 @@
 
     "learning_outcome": {
       "type": "object",
-      "required": ["text", "cognitive_level"],
+      "required": ["text", "cognitive_level", "order"],
       "properties": {
         "text": { "type": "string" },
         "cognitive_level": {
           "type": "string",
           "enum": ["Explain", "Apply", "Evaluate", "Develop"]
+        },
+        "cognitive_level_source": {
+          "type": "string",
+          "description": "Source dictionary or method used to determine cognitive level"
+        },
+        "order": { "type": "integer", "minimum": 1 },
+        "parsing_anomaly": {
+          "type": "boolean",
+          "description": "Flag indicating potential parsing issue (e.g., merged items, orphaned numbers)"
         }
       },
       "additionalProperties": false

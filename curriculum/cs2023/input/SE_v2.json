@@ -2,8 +2,8 @@
   "schema": {
     "name": "ka.schema.v2",
     "version": "2.0",
-    "generated_at": "2025-10-26T05:59:45.959566Z",
-    "source": "../input/SE.txt",
+    "generated_at": "2025-11-16T06:40:20.954155Z",
+    "source": "curriculum/cs2023/input/SE_Software_Engineering.txt",
     "schema_ref": "schema/ka.schema.v2.json"
   },
   "knowledge_area": {
@@ -11,7 +11,7 @@
     "code": "SE"
   },
   "preamble": {
-    "description": "As far back as the early 1970s, British computer scientist Brian Randell allegedly said, “Software\nengineering is the multi-person construction of multi-version programs.” This is an essential insight:\nwhile programming is the skill that governs our ability to write a program, software engineering is\ndistinct in two dimensions: time and people.\nFirst, a software engineering project is a team endeavor; being a solitary programming expert is\ninsufficient. Skilled software engineers must demonstrate expertise in communication and collaboration.\nProgramming may be an individual activity, but software engineering is a collaborative one, deeply tied\nto issues of professionalism, teamwork, and communication.\nSecond, a software engineering project is usually “multi-version.” It has an expected lifespan; it needs\nto function properly for months, years, or decades. Features may be added or removed to meet product\nrequirements. The engineering team itself will likely change. The technological context will shift, as our\ncomputing platforms evolve, programming languages change, dependencies upgrade, etc. This\nexposure to matters of time and change is novel when compared to a programming project: it isn’t\nenough to build a thing that works, instead it must work and stay working. Many of the most challenging\ntopics in tech share “time will lead to change” as a root cause: backward compatibility, version skew,\ndependency management, schema changes, protocol evolution.\nSoftware engineering presents a particularly difficult challenge for learning in an academic setting.\nGiven that the major differences between programming and software engineering are time and\nteamwork, it is hard to generate lessons that require successful teamwork and that faithfully present the\nchallenges of time. Additionally, some topics in software engineering will be more authentic and more\nrelevant if our learners experience collaborative and long-term software engineering projects in vivo\nrather than in the classroom. Regardless of whether that happens as an internship, involvement in an\nopen-source project, or full-time engineering role, a month of full-time hands-on experience has more\navailable hours than the average software engineering course.\nThus, a software engineering curriculum must focus on concepts needed by most new-graduate hires,\nand that either are novel for those who are trained primarily as programmers, or that are abstract\nconcepts that may not get explicitly stated/shared on the job. Such topics include, but are not limited to:\n● Testing\n● Teamwork, collaboration\n● Communication\n● Design\n● Maintenance and evolution\n● Software engineering tools\nSome such material is reasonably suited to a standard lecture or lecture + lab course. Discussing\ntheoretical underpinnings of version control systems, or branching strategies in such systems, can be\nan effective way to familiarize students with those ideas. Similarly, a theoretical discussion can highlight\n\nthe difference between static and dynamic analysis tools or may motivate discussion of diamond\ndependency problems in dependency networks.\nOn the other hand, many of the fundamental topics of software engineering are best experienced in a\nhands-on fashion. Historically, project-oriented courses have been a common vehicle for such learning.\nWe believe that such experience is valuable but also bears some interesting risks: students may form\nerroneous notions about the difficulty/complexity of collaboration if their only exposure is a single\nproject with teams formed of other novice software engineers. It falls to instructors to decide on the right\nbalance between theoretical material and hands-on projects – neither is a perfect vehicle for this\nchallenging material. We strongly encourage instructors of project courses to aim for iteration and fast\nfeedback – a few simple tasks repeated, as in an Agile-structured project, is better than singular highfriction introductions to many types of tasks. Projects with real-world industry partners and clients are\nalso especially encouraged. If long-running project courses are not an option, anything that can expose\nlearners to the collaborative and long-term aspects of software engineering is valuable – adding\nfeatures to an existing codebase, collaborating on distinct parts of a larger whole, pairing up to write an\nencoder and decoder, etc.\nAll evidence suggests that the role of software in our society will continue to grow for the foreseeable\nfuture. Additionally, the era of “two programmers in a garage” seems to have drawn to a close. Most\nimportant software these days is a team effort, building on existing code and leveraging existing\nfunctionality. The study of software engineering skills is a deeply important counterpoint to the everyday\nexperience of computing students – we must impress on them the reality that few software projects are\nmanaged by writing from scratch as a solo endeavor. Communication, teamwork, planning, testing, and\ntooling are far more important as our students move on from the classroom and make their mark on the\nwider world.\nAlthough most CS graduates will go on to an industry position that requires this material, the CS Core\ntopics presented here are of value regardless of whether graduates go on to industry or academia.",
+    "description": "As far back as the early 1970s, British computer scientist Brian Randell allegedly said, “Software\nengineering is the multi-person construction of multi-version programs.” This is an essential insight:\nwhile programming is the skill that governs our ability to write a program, software engineering is\ndistinct in two dimensions: time and people.\n\nFirst, a software engineering project is a team endeavor; being a solitary programming expert is\ninsufficient. Skilled software engineers must demonstrate expertise in communication and collaboration.\nProgramming may be an individual activity, but software engineering is a collaborative one, deeply tied\nto issues of professionalism, teamwork, and communication.\n\nSecond, a software engineering project is usually “multi-version.” It has an expected lifespan; it needs\nto function properly for months, years, or decades. Features may be added or removed to meet product\nrequirements. The engineering team itself will likely change. The technological context will shift, as our\ncomputing platforms evolve, programming languages change, dependencies upgrade, etc. This\nexposure to matters of time and change is novel when compared to a programming project: it isn’t\nenough to build a thing that works, instead it must work and stay working. Many of the most challenging\ntopics in tech share “time will lead to change” as a root cause: backward compatibility, version skew,\ndependency management, schema changes, protocol evolution.\n\nSoftware engineering presents a particularly difficult challenge for learning in an academic setting.\nGiven that the major differences between programming and software engineering are time and\nteamwork, it is hard to generate lessons that require successful teamwork and that faithfully present the\nchallenges of time. Additionally, some topics in software engineering will be more authentic and more\nrelevant if our learners experience collaborative and long-term software engineering projects in vivo\nrather than in the classroom. Regardless of whether that happens as an internship, involvement in an\nopen-source project, or full-time engineering role, a month of full-time hands-on experience has more\navailable hours than the average software engineering course.\n\nThus, a software engineering curriculum must focus on concepts needed by most new-graduate hires,\nand that either are novel for those who are trained primarily as programmers, or that are abstract\nconcepts that may not get explicitly stated/shared on the job. Such topics include, but are not limited to:\n● Testing\n● Teamwork, collaboration\n● Communication\n● Design\n● Maintenance and evolution\n● Software engineering tools\nSome such material is reasonably suited to a standard lecture or lecture + lab course. Discussing\ntheoretical underpinnings of version control systems, or branching strategies in such systems, can be\nan effective way to familiarize students with those ideas. Similarly, a theoretical discussion can highlight\n\nthe difference between static and dynamic analysis tools or may motivate discussion of diamond\ndependency problems in dependency networks.\n\nOn the other hand, many of the fundamental topics of software engineering are best experienced in a\nhands-on fashion. Historically, project-oriented courses have been a common vehicle for such learning.\nWe believe that such experience is valuable but also bears some interesting risks: students may form\nerroneous notions about the difficulty/complexity of collaboration if their only exposure is a single\nproject with teams formed of other novice software engineers. It falls to instructors to decide on the right\nbalance between theoretical material and hands-on projects – neither is a perfect vehicle for this\nchallenging material. We strongly encourage instructors of project courses to aim for iteration and fast\nfeedback – a few simple tasks repeated, as in an Agile-structured project, is better than singular high-\nfriction introductions to many types of tasks. Projects with real-world industry partners and clients are\nalso especially encouraged. If long-running project courses are not an option, anything that can expose\nlearners to the collaborative and long-term aspects of software engineering is valuable – adding\nfeatures to an existing codebase, collaborating on distinct parts of a larger whole, pairing up to write an\nencoder and decoder, etc.\n\nAll evidence suggests that the role of software in our society will continue to grow for the foreseeable\nfuture. Additionally, the era of “two programmers in a garage” seems to have drawn to a close. Most\nimportant software these days is a team effort, building on existing code and leveraging existing\nfunctionality. The study of software engineering skills is a deeply important counterpoint to the everyday\nexperience of computing students – we must impress on them the reality that few software projects are\nmanaged by writing from scratch as a solo endeavor. Communication, teamwork, planning, testing, and\ntooling are far more important as our students move on from the classroom and make their mark on the\nwider world.\n\nAlthough most CS graduates will go on to an industry position that requires this material, the CS Core\ntopics presented here are of value regardless of whether graduates go on to industry or academia.",
     "changes_since_cs2013": "2013\nThis document shifts the focus of the Software Engineering knowledge area in a few ways compared to\nthe goals of CS2013. The common reason behind most of these changes is to focus on material that\nlearners would not pick up elsewhere in the curriculum, and that will be relevant immediately upon\ngraduation, rather than at some future point in their careers.\n● More explicit focus on the software workflow (version control, testing, code review, tooling).\n● Less focus on team leadership and project management.\n● More focus on team participation, communication, and collaboration.",
     "overview": [
       {
@@ -61,7 +61,58 @@
       }
     ]
   },
-  "core_hours": [],
+  "core_hours": [
+    {
+      "ku": "Teamwork",
+      "cs_core": "2 + 3 (SEP)",
+      "ka_core": "2"
+    },
+    {
+      "ku": "Tools and Environments",
+      "cs_core": "1 3 + 1 (SDF)",
+      "ka_core": null
+    },
+    {
+      "ku": "Product Requirements",
+      "cs_core": "0 + 3 (SEP)",
+      "ka_core": "2"
+    },
+    {
+      "ku": "Software Design",
+      "cs_core": "1 4 + 2 (DM)",
+      "ka_core": null
+    },
+    {
+      "ku": "Software Construction",
+      "cs_core": "1 + 3 (SDF) 3 + 1 (SDF)",
+      "ka_core": null
+    },
+    {
+      "ku": "Software Verification and Validation",
+      "cs_core": "1",
+      "ka_core": "3"
+    },
+    {
+      "ku": "Refactoring and Code Evolution",
+      "cs_core": null,
+      "ka_core": "2"
+    },
+    {
+      "ku": "Software Reliability",
+      "cs_core": null,
+      "ka_core": "2"
+    },
+    {
+      "ku": "Formal Methods",
+      "cs_core": null,
+      "ka_core": null
+    },
+    {
+      "ku": "Total",
+      "cs_core": "6",
+      "ka_core": "21"
+    }
+  ],
   "knowledge_units": [
     {
       "id": "se-teamwork",
@@ -70,16 +121,19 @@
       "topics": {
         "cs_core": [
           {
+            "order": 1,
             "name": "Effective communication, including oral and written, as well as formal (email, docs, comments, presentations) and informal (team chat, meetings).",
             "subs": [],
             "cross_references": ["SEP-Communication"]
           },
           {
+            "order": 2,
             "name": "Common causes of team conflict, and approaches for conflict resolution.",
             "subs": [],
             "cross_references": []
           },
           {
+            "order": 3,
             "name": "Cooperative programming",
             "subs": [
               "Pair programming or Swarming",
@@ -89,6 +143,7 @@
             "cross_references": []
           },
           {
+            "order": 4,
             "name": "Roles and responsibilities in a software team",
             "subs": [
               "Advantages of teamwork",
@@ -97,11 +152,13 @@
             "cross_references": ["SEP-Professional-Ethics"]
           },
           {
+            "order": 5,
             "name": "Team processes – responsibilities for tasks, effort estimation, meeting structure, work schedule",
             "subs": [],
             "cross_references": []
           },
           {
+            "order": 6,
             "name": "Importance of team diversity and inclusivity.",
             "subs": [],
             "cross_references": ["SEP-Communication"]
@@ -109,6 +166,7 @@
         ],
         "ka_core": [
           {
+            "order": 7,
             "name": "Interfacing with stakeholders, as a team",
             "subs": [
               "Management & other non-technical teams",
@@ -118,6 +176,7 @@
             "cross_references": []
           },
           {
+            "order": 8,
             "name": "Risks associated with physical, distributed, hybrid, and virtual teams – including communication, perception, structure, points of failure, mitigation, and recovery, etc.",
             "subs": [],
             "cross_references": []
@@ -128,38 +187,78 @@
       "learning_outcomes": {
         "cs_core": [
           {
+            "order": 1,
             "text": "Follow effective team communication practices.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Apply",
+            "cognitive_level_source": "blooms"
           },
           {
-            "text": "Articulate the sources of, hazards of, and potential benefits of team conflict – especially focusing on the value of disagreeing about ideas or proposals without insulting people. 3. 4. 5. 6. 7. Facilitate a conflict-resolution and problem-solving strategy in a team setting. Collaborate effectively in cooperative development/programming. Propose and delegate necessary roles and responsibilities in a software development team. Compose and follow an agenda for a team meeting. Facilitate through involvement in a team project, the central elements of team building, establishing healthy team culture, and team management including creating and executing a team work plan.",
-            "cognitive_level": "Explain"
+            "order": 2,
+            "text": "Articulate the sources of, hazards of, and potential benefits of team conflict – especially focusing on the value of disagreeing about ideas or proposals without insulting people.",
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "fallback-default"
           },
           {
+            "order": 3,
+            "text": "Facilitate a conflict-resolution and problem-solving strategy in a team setting.",
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "fallback-default"
+          },
+          {
+            "order": 4,
+            "text": "Collaborate effectively in cooperative development/programming.",
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "fallback-default"
+          },
+          {
+            "order": 5,
+            "text": "Propose and delegate necessary roles and responsibilities in a software development team.",
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "fallback-default"
+          },
+          {
+            "order": 6,
+            "text": "Compose and follow an agenda for a team meeting.",
+            "cognitive_level": "Develop",
+            "cognitive_level_source": "cs2023"
+          },
+          {
+            "order": 7,
+            "text": "Facilitate through involvement in a team project, the central elements of team building, establishing healthy team culture, and team management including creating and executing a team work plan.",
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "fallback-default"
+          },
+          {
+            "order": 8,
             "text": "Promote the importance of and benefits that diversity and inclusivity brings to a software development team.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "fallback-default"
           }
         ],
         "ka_core": [
           {
+            "order": 9,
             "text": "Reference, as a team, the importance of, and strategies to interface with stakeholders outside the team on both technical and non-technical levels.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "fallback-default"
           },
           {
+            "order": 10,
             "text": "Enumerate the risks associated with physical, distributed, hybrid, and virtual teams and possible points of failure and how to mitigate against and recover/learn from failures.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           }
         ],
         "non_core": [],
         "general": []
       },
       "source_loc": {
-        "file": "../input/SE.txt",
+        "file": "curriculum/cs2023/input/SE_Software_Engineering.txt",
         "section": 1
       },
       "subsections": [],
       "provenance": {
-        "content_hash": "db953fe7860aee4fc2ea5d4347943a34cbe5b83c6690545490cac734a700d381",
+        "content_hash": "0b1df9f40cc5a45481c1a36ae484bedad10ee10c3e494888a0f6907860618d84",
         "tool": "unified_parser_v2.py"
       }
     },
@@ -170,6 +269,7 @@
       "topics": {
         "cs_core": [
           {
+            "order": 1,
             "name": "Software configuration management and version control",
             "subs": [
               "Configuration in version control, reproducible builds/configuration.",
@@ -181,16 +281,19 @@
         ],
         "ka_core": [
           {
+            "order": 2,
             "name": "Release management.",
             "subs": [],
             "cross_references": []
           },
           {
+            "order": 3,
             "name": "Testing tools including static and dynamic analysis tools.",
             "subs": [],
             "cross_references": ["SDF-Practices", "SEC-Coding"]
           },
           {
+            "order": 4,
             "name": "Software process automation",
             "subs": [
               "Build systems – the value of fast, hermetic, reproducible builds, compare/contrast approaches to building a project.",
@@ -200,16 +303,19 @@
             "cross_references": []
           },
           {
+            "order": 5,
             "name": "Design and communication tools (docs, diagrams, common forms of design diagrams like UML).",
             "subs": [],
             "cross_references": []
           },
           {
+            "order": 6,
             "name": "Tool integration concepts and mechanisms.",
             "subs": [],
             "cross_references": ["SDF-Practices"]
           },
           {
+            "order": 7,
             "name": "Use of modern IDE facilities – debugging, refactoring, searching/indexing, ML-powered code assistants, etc.",
             "subs": [],
             "cross_references": ["SDF-Practices"]
@@ -220,46 +326,60 @@
       "learning_outcomes": {
         "cs_core": [
           {
+            "order": 1,
             "text": "Describe the difference between centralized and distributed software configuration management.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 2,
             "text": "Describe how version control can be used to help manage software release management.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 3,
             "text": "Identify configuration items and use a source code control tool in a small team-based project.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           }
         ],
         "ka_core": [
           {
+            "order": 4,
             "text": "Describe how available static and dynamic test tools can be integrated into the software development environment.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 5,
             "text": "Understand the use of CI systems as a ground-truth for the state of the team’s shared code (build and test success).",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "fallback-default"
           },
           {
+            "order": 6,
             "text": "Describe the issues that are important in selecting a set of tools for the development of a specific software system, including tools for requirements tracking, design modeling, implementation, build automation, and testing.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 7,
             "text": "Demonstrate the capability to use software tools in support of the development of a software product of medium size.",
-            "cognitive_level": "Apply"
+            "cognitive_level": "Apply",
+            "cognitive_level_source": "blooms"
           }
         ],
         "non_core": [],
         "general": []
       },
       "source_loc": {
-        "file": "../input/SE.txt",
+        "file": "curriculum/cs2023/input/SE_Software_Engineering.txt",
         "section": 2
       },
       "subsections": [],
       "provenance": {
-        "content_hash": "ebaadecc23fdc1b9f928299f56b37e17bd611a4a43fe0019c5f283597fdda6b6",
+        "content_hash": "a6eded2bdf1d6145c390a7685e7225eaee1989062fbba47678e1be176ada6339",
         "tool": "unified_parser_v2.py"
       }
     },
@@ -271,6 +391,7 @@
         "cs_core": [],
         "ka_core": [
           {
+            "order": 1,
             "name": "Describe functional requirements using, for example, use cases or user stories.",
             "subs": [
               "Using at least one method of documenting and structuring functional requirements.",
@@ -280,11 +401,13 @@
             "cross_references": []
           },
           {
+            "order": 2,
             "name": "Properties of requirements including consistency, validity, completeness, and feasibility.",
             "subs": [],
             "cross_references": []
           },
           {
+            "order": 3,
             "name": "Requirements elicitation.",
             "subs": [
               "Sources of requirements, for example, users, administrators, or support personnel.",
@@ -293,16 +416,19 @@
             "cross_references": []
           },
           {
+            "order": 4,
             "name": "Non-functional requirements, for example, security, usability, or performance, also called as Quality Attributes.",
             "subs": [],
             "cross_references": ["SEP-Sustainability"]
           },
           {
+            "order": 5,
             "name": "Risk identification and management, including ethical considerations surrounding the proposed product.",
             "subs": [],
             "cross_references": ["SEP-Professional-Ethics"]
           },
           {
+            "order": 6,
             "name": "Communicating and/or formalizing requirement specifications.",
             "subs": [],
             "cross_references": []
@@ -310,16 +436,19 @@
         ],
         "non_core": [
           {
+            "order": 7,
             "name": "Prototyping a tool for both eliciting and validating/confirming requirements.",
             "subs": [],
             "cross_references": []
           },
           {
+            "order": 8,
             "name": "Product evolution: when requirements change, how to understand what effect that has and what changes need to be made.",
             "subs": [],
             "cross_references": []
           },
           {
+            "order": 9,
             "name": "Effort estimation",
             "subs": [
               "Learning techniques for better estimating the effort required to complete a task",
@@ -334,57 +463,77 @@
         "cs_core": [],
         "ka_core": [
           {
+            "order": 1,
             "text": "Compare different methods of eliciting requirements along multiple axes.",
-            "cognitive_level": "Evaluate"
+            "cognitive_level": "Evaluate",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 2,
             "text": "Identify differences between two methods of describing functional requirements (e.g., customer interviews, user studies) and the situations where each would be preferred.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 3,
             "text": "Identify which behaviors are required, allowed, or barred from a given set of requirements and a list of candidate behaviors.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 4,
             "text": "Collect a set of requirements for a simple software system.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Develop",
+            "cognitive_level_source": "blooms"
           },
           {
+            "order": 5,
             "text": "Identify areas of a software system that need to be changed, given a description of the system and a set of new requirements to be implemented.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 6,
             "text": "Identify the functional and non-functional requirements in a set of requirements.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           }
         ],
         "non_core": [
           {
+            "order": 7,
             "text": "Create a prototype of a software system to validate a set of requirements – building a mock-up, MVP, etc.",
-            "cognitive_level": "Develop"
+            "cognitive_level": "Develop",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 8,
             "text": "Estimate the time to complete a set of tasks, then compare estimates to the actual time taken.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "blooms"
           },
           {
+            "order": 9,
             "text": "Determine an implementation sequence for a set of tasks, adhering to dependencies between them, with a goal to retire risk as early as possible.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "fallback-default"
           },
           {
+            "order": 10,
             "text": "Write a requirement specification for a simple software system.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Develop",
+            "cognitive_level_source": "cs2023"
           }
         ],
         "general": []
       },
       "source_loc": {
-        "file": "../input/SE.txt",
+        "file": "curriculum/cs2023/input/SE_Software_Engineering.txt",
         "section": 3
       },
       "subsections": [],
       "provenance": {
-        "content_hash": "2ea00e9a63405a49f46bab0b3f34c9822c446f139a99da61b0a20ad370874bc6",
+        "content_hash": "c43cd39910523944673df12a2521adb2acd669b4cee8b561ce39b8676a55431d",
         "tool": "unified_parser_v2.py"
       }
     },
@@ -395,6 +544,7 @@
       "topics": {
         "cs_core": [
           {
+            "order": 1,
             "name": "System design principles.",
             "subs": [
               "Levels of abstraction (e.g., architectural design and detailed design)",
@@ -405,6 +555,7 @@
             "cross_references": ["SF-Reliability"]
           },
           {
+            "order": 2,
             "name": "Software architecture.",
             "subs": [
               "Design paradigms i. Top-down functional decomposition/layered design ii. Data-oriented architecture iii. Object-oriented analysis and design iv. Event-driven design",
@@ -414,27 +565,53 @@
             "cross_references": ["SF-Reliability"]
           },
           {
+            "order": 3,
             "name": "Programming in the large vs programming in the small.",
             "subs": [],
             "cross_references": ["SF-Reliability"]
           },
           {
+            "order": 4,
             "name": "Code smells and other indications of code quality, distinct from correctness.",
             "subs": [],
-            "cross_references": ["SECEngineering"]
+            "cross_references": ["SEC- Engineering"]
           }
         ],
         "ka_core": [
           {
+            "order": 5,
             "name": "API design principles",
             "subs": [
               "Consistency i. Consistent APIs are easier to learn and less error-prone ii. Consistency is both internal (between different portions of the API) and external (following common API patterns)",
               "Composability",
-              "Documenting contracts i. API operations should describe their effect on the system, but not generally their implementation ii. Preconditions, postconditions, and invariants 6. 7. 8. 9.",
+              "Documenting contracts i. API operations should describe their effect on the system, but not generally their implementation ii. Preconditions, postconditions, and invariants",
               "Expandability",
-              "Error reporting i. Errors should be clear, predictable, and actionable ii. Input that does not match the contract should produce an error iii. Errors that can be reliably managed without reporting should be managed Identifying and codifying data invariants and time invariants Structural and behavioral models of software designs Data design",
-              "Data structures",
-              "Storage systems Requirement traceability",
+              "Error reporting i. Errors should be clear, predictable, and actionable ii. Input that does not match the contract should produce an error iii. Errors that can be reliably managed without reporting should be managed"
+            ],
+            "cross_references": []
+          },
+          {
+            "order": 6,
+            "name": "Identifying and codifying data invariants and time invariants",
+            "subs": [],
+            "cross_references": []
+          },
+          {
+            "order": 7,
+            "name": "Structural and behavioral models of software designs",
+            "subs": [],
+            "cross_references": []
+          },
+          {
+            "order": 8,
+            "name": "Data design",
+            "subs": ["Data structures", "Storage systems"],
+            "cross_references": ["DM-Modeling"]
+          },
+          {
+            "order": 9,
+            "name": "Requirement traceability",
+            "subs": [
               "Understanding which requirements are satisfied by a design"
             ],
             "cross_references": []
@@ -442,16 +619,19 @@
         ],
         "non_core": [
           {
+            "order": 10,
             "name": "Design modeling, for instance with class diagrams, entity relationship diagrams, or sequence diagrams",
             "subs": [],
             "cross_references": []
           },
           {
+            "order": 11,
             "name": "Measurement and analysis of design quality",
             "subs": [],
             "cross_references": []
           },
           {
+            "order": 12,
             "name": "Principles of secure design and coding",
             "subs": [
               "Principle of least privilege",
@@ -461,6 +641,7 @@
             "cross_references": ["SEC-Engineering"]
           },
           {
+            "order": 13,
             "name": "Evaluating design tradeoffs (e.g., efficiency vs reliability, security vs usability)",
             "subs": [],
             "cross_references": []
@@ -470,67 +651,91 @@
       "learning_outcomes": {
         "cs_core": [
           {
+            "order": 1,
             "text": "Identify the standard software architecture of a given high-level design.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 2,
             "text": "Select and use an appropriate design paradigm to design a simple software system and explain how system design principles have been applied in this design.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 3,
             "text": "Adapt a flawed system design to better follow principles such as separation of concerns or information hiding.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "fallback-default"
           },
           {
+            "order": 4,
             "text": "Identify the dependencies among a set of software components in an architectural design.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           }
         ],
         "ka_core": [
           {
+            "order": 5,
             "text": "Design an API for a single component of a large software system, including identifying and documenting each operation’s invariants, contract, and error conditions.",
-            "cognitive_level": "Develop"
+            "cognitive_level": "Develop",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 6,
             "text": "Evaluate an API description in terms of consistency, composability, and expandability.",
-            "cognitive_level": "Evaluate"
+            "cognitive_level": "Evaluate",
+            "cognitive_level_source": "blooms"
           },
           {
+            "order": 7,
             "text": "Expand an existing design to include a new piece of functionality.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "fallback-default"
           },
           {
+            "order": 8,
             "text": "Design a set of data structures to implement a provided API surface.",
-            "cognitive_level": "Develop"
+            "cognitive_level": "Develop",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 9,
             "text": "Identify which requirements are satisfied by a provided software design.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           }
         ],
         "non_core": [
           {
+            "order": 10,
             "text": "Translate a natural language software design into class diagrams.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 11,
             "text": "Adapt a flawed system design to better follow the principles of least privilege and fail-safe defaults.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "fallback-default"
           },
           {
+            "order": 12,
             "text": "Contrast two software designs across different qualities, such as efficiency or usability.",
-            "cognitive_level": "Evaluate"
+            "cognitive_level": "Evaluate",
+            "cognitive_level_source": "cs2023"
           }
         ],
         "general": []
       },
       "source_loc": {
-        "file": "../input/SE.txt",
+        "file": "curriculum/cs2023/input/SE_Software_Engineering.txt",
         "section": 4
       },
       "subsections": [],
       "provenance": {
-        "content_hash": "dca90493753dbe8ce58ada80d8f5b69a4c29f74e363d0307ce8749a2fc352520",
+        "content_hash": "6b026ae2811172020633638de5f762dff86a73ff3115bd47289e8b0f9f85100d",
         "tool": "unified_parser_v2.py"
       }
     },
@@ -541,6 +746,7 @@
       "topics": {
         "cs_core": [
           {
+            "order": 1,
             "name": "Practical small-scale testing",
             "subs": [
               "Unit testing",
@@ -549,6 +755,7 @@
             "cross_references": ["SDF-Practices"]
           },
           {
+            "order": 2,
             "name": "Documentation",
             "subs": [
               "Interface documentation – describe interface requirements, potentially including (formal or informal) contracts, pre and post conditions, invariants.",
@@ -559,11 +766,13 @@
         ],
         "ka_core": [
           {
+            "order": 3,
             "name": "Coding style",
             "subs": ["Style guides", "Commenting", "Naming"],
             "cross_references": ["SDF-Practices"]
           },
           {
+            "order": 4,
             "name": "“Best Practices” for coding: techniques, idioms/patterns, mechanisms for building quality programs",
             "subs": [
               "Defensive coding practices",
@@ -573,16 +782,19 @@
             "cross_references": ["SEC-Coding", "SDF-Practices"]
           },
           {
+            "order": 5,
             "name": "Debugging",
             "subs": [],
             "cross_references": ["SDF-Practices"]
           },
           {
+            "order": 6,
             "name": "Logging",
             "subs": [],
             "cross_references": []
           },
           {
+            "order": 7,
             "name": "Use of libraries and frameworks developed by others",
             "subs": [],
             "cross_references": ["SDF-Practices"]
@@ -590,6 +802,7 @@
         ],
         "non_core": [
           {
+            "order": 8,
             "name": "Larger-scale testing",
             "subs": [
               "Test doubles (stubs, mocks, fakes)",
@@ -598,6 +811,7 @@
             "cross_references": []
           },
           {
+            "order": 9,
             "name": "Work sequencing, including dependency identification, milestones, and risk retirement",
             "subs": [
               "Dependency identification: Identifying the dependencies between different tasks",
@@ -607,6 +821,7 @@
             "cross_references": []
           },
           {
+            "order": 10,
             "name": "Potential security problems in programs",
             "subs": [
               "Buffer and other types of overflows",
@@ -617,21 +832,25 @@
             "cross_references": ["SEC-Coding"]
           },
           {
+            "order": 11,
             "name": "Documentation (autogenerated)",
             "subs": [],
             "cross_references": []
           },
           {
+            "order": 12,
             "name": "Development context: “green field” vs existing code base",
             "subs": ["Change impact analysis", "Change actualization"],
             "cross_references": []
           },
           {
+            "order": 13,
             "name": "Release management",
             "subs": [],
             "cross_references": []
           },
           {
+            "order": 14,
             "name": "DevOps practices",
             "subs": [],
             "cross_references": []
@@ -641,63 +860,85 @@
       "learning_outcomes": {
         "cs_core": [
           {
+            "order": 1,
             "text": "Write appropriate unit tests for a small component (several functions, a single type, etc.).",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Develop",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 2,
             "text": "Write appropriate interface and (if needed) implementation comments for a small component.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Develop",
+            "cognitive_level_source": "cs2023"
           }
         ],
         "ka_core": [
           {
+            "order": 3,
             "text": "Describe techniques, coding idioms and mechanisms for implementing designs to achieve desired properties such as reliability, efficiency, and robustness.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 4,
             "text": "Write robust code using exception handling mechanisms.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Develop",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 5,
             "text": "Describe secure coding and defensive coding practices.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 6,
             "text": "Select and use a defined coding standard in a small software project.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 7,
             "text": "Compare and contrast integration strategies including top-down, bottom-up, and sandwich integration.",
-            "cognitive_level": "Evaluate"
+            "cognitive_level": "Evaluate",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 8,
             "text": "Describe the process of analyzing and implementing changes to code base developed for a specific project.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 9,
             "text": "Describe the process of analyzing and implementing changes to a large existing code base.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           }
         ],
         "non_core": [
           {
+            "order": 10,
             "text": "Rewrite a simple program to remove common vulnerabilities, such as buffer overflows, integer overflows and race conditions.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Develop",
+            "cognitive_level_source": "cs2023"
           },
           {
-            "text": "Write a software component that performs some non-trivial task and is resilient to input and runtime errors.",
-            "cognitive_level": "Explain"
+            "order": 11,
+            "text": "Write a software component that performs some non-trivial task and is resilient to input and run- time errors.",
+            "cognitive_level": "Develop",
+            "cognitive_level_source": "cs2023"
           }
         ],
         "general": []
       },
       "source_loc": {
-        "file": "../input/SE.txt",
+        "file": "curriculum/cs2023/input/SE_Software_Engineering.txt",
         "section": 5
       },
       "subsections": [],
       "provenance": {
-        "content_hash": "3069b880e80497c218300aa47e84c9720d4f55123c33d740465b3dee2901c528",
+        "content_hash": "a8bb31bca6216d0b6ab5a719481d74b243ad5d7dea3c506f8bf760b9d21bc690",
         "tool": "unified_parser_v2.py"
       }
     },
@@ -708,6 +949,7 @@
       "topics": {
         "cs_core": [
           {
+            "order": 1,
             "name": "Verification and validation concepts",
             "subs": [
               "Verification: Are we building the thing right?",
@@ -716,11 +958,13 @@
             "cross_references": []
           },
           {
+            "order": 2,
             "name": "Why testing matters: Does the component remain functional as the code evolves?",
             "subs": [],
             "cross_references": []
           },
           {
+            "order": 3,
             "name": "Testing objectives",
             "subs": [
               "Usability",
@@ -732,11 +976,13 @@
             "cross_references": []
           },
           {
+            "order": 4,
             "name": "Test kinds",
             "subs": ["Unit", "Integration", "Validation", "System"],
             "cross_references": []
           },
           {
+            "order": 5,
             "name": "Stylistic differences between tests and production code: DAMP vs DRY – more duplication is warranted in test code.",
             "subs": [],
             "cross_references": []
@@ -744,6 +990,7 @@
         ],
         "ka_core": [
           {
+            "order": 6,
             "name": "Test planning and generation",
             "subs": [
               "Test case generation, from formal models, specifications, etc.",
@@ -753,6 +1000,7 @@
             "cross_references": []
           },
           {
+            "order": 7,
             "name": "Test development",
             "subs": [
               "Test-driven development",
@@ -763,6 +1011,7 @@
             "cross_references": []
           },
           {
+            "order": 8,
             "name": "Verification and validation in the development cycle",
             "subs": [
               "Code reviews",
@@ -774,6 +1023,7 @@
             "cross_references": []
           },
           {
+            "order": 9,
             "name": "Domain specific verification and validation challenges",
             "subs": [
               "Performance testing and benchmarking",
@@ -786,6 +1036,7 @@
         ],
         "non_core": [
           {
+            "order": 10,
             "name": "Verification and validation tooling and automation",
             "subs": [
               "Static analysis",
@@ -797,6 +1048,7 @@
             "cross_references": []
           },
           {
+            "order": 11,
             "name": "Test planning and generation",
             "subs": [
               "Fault estimation and testing termination including defect seeding",
@@ -805,25 +1057,27 @@
             "cross_references": []
           },
           {
+            "order": 12,
             "name": "Performance testing and benchmarking",
             "subs": [
               "Throughput and latency",
               "Degradation under load (stress testing, FIFO vs LIFO handling of requests)",
               "Speedup and scaling i. Amdahl’s law ii. Gustafson's law iii. Soft and weak scaling",
               "Identifying and measuring figures of merits",
-              "Common performance bottlenecks i. Compute-bound ii. Memory-bandwidth bound iii. Latency-bound",
-              "Statistical methods and best practices for benchmarking i. Estimation of uncertainty ii. Confidence intervals",
+              "Common performance bottlenecks i. Compute-bound ii. Memory-bandwidth bound iii. Latency-bound f. Statistical methods and best practices for benchmarking i. Estimation of uncertainty ii. Confidence intervals",
               "Analysis and presentation (graphs, etc.)",
               "Timing techniques"
             ],
             "cross_references": []
           },
           {
+            "order": 13,
             "name": "Testing asynchronous, parallel, and concurrent systems",
             "subs": [],
             "cross_references": []
           },
           {
+            "order": 14,
             "name": "Verification and validation of non-code artifacts (documentation, training materials)",
             "subs": [],
             "cross_references": []
@@ -833,143 +1087,205 @@
       "learning_outcomes": {
         "cs_core": [
           {
+            "order": 1,
             "text": "Explain why testing is important.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "blooms"
           },
           {
+            "order": 2,
             "text": "Distinguish between program validation and verification.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Evaluate",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 3,
             "text": "Describe different objectives of testing.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 4,
             "text": "Compare and contrast the different types and levels of testing (regression, unit, integration, systems, and acceptance).",
-            "cognitive_level": "Evaluate"
+            "cognitive_level": "Evaluate",
+            "cognitive_level_source": "cs2023"
           }
         ],
         "ka_core": [
           {
+            "order": 5,
             "text": "Describe techniques for creating a test plan and generating test cases.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 6,
             "text": "Create a test plan for a medium-size code segment which includes a test matrix and generation of test data and inputs.",
-            "cognitive_level": "Develop"
+            "cognitive_level": "Develop",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 7,
             "text": "Implement a test plan for a medium-size code segment.",
-            "cognitive_level": "Apply"
+            "cognitive_level": "Apply",
+            "cognitive_level_source": "blooms"
           },
           {
+            "order": 8,
             "text": "Identify the fundamental principles of test-driven development methods and explain the role of automated testing in these methods.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 9,
             "text": "Discuss issues involving the testing of object-oriented software.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 10,
             "text": "Describe mocking and dependency injection and their application.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 11,
             "text": "Undertake, as part of a team activity, a code review of a medium-size code segment.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "fallback-default"
           },
           {
+            "order": 12,
             "text": "Describe the role that tools can play in the validation of software.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 13,
             "text": "Automate the testing in a small software project.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "fallback-default"
           },
           {
+            "order": 14,
             "text": "Explain the roles, pros, and cons of pre-commit and post-commit testing.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "blooms"
           },
           {
+            "order": 15,
             "text": "Discuss the tradeoffs between test coverage and test throughput/latency and how this can impact verification.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 16,
             "text": "Use a defect tracking tool to manage software defects in a small software project.",
-            "cognitive_level": "Apply"
+            "cognitive_level": "Apply",
+            "cognitive_level_source": "blooms"
           },
           {
+            "order": 17,
             "text": "Discuss the limitations of testing in certain domains.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           }
         ],
         "non_core": [
           {
+            "order": 18,
             "text": "Describe and compare different tools for verification and validation.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 19,
             "text": "Automate the use of different tools in a small software project.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "fallback-default"
           },
           {
+            "order": 20,
             "text": "Explain how and when random numbers should be used in testing.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "blooms"
           },
           {
+            "order": 21,
             "text": "Describe approaches for fault estimation.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 22,
             "text": "Estimate the number of faults in a small software application based on fault density and fault seeding.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "blooms"
           },
           {
+            "order": 23,
             "text": "Describe throughput and latency and provide examples of each.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 24,
             "text": "Explain speedup and the different forms of scaling and how they are computed.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "blooms"
           },
           {
+            "order": 25,
             "text": "Describe common performance bottlenecks.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 26,
             "text": "Describe statistical methods and best practices for benchmarking software.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 27,
             "text": "Explain techniques for and challenges with measuring time when constructing a benchmark.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "blooms"
           },
           {
+            "order": 28,
             "text": "Identify the figures of merit, construct and run a benchmark, and statistically analyze and visualize the results for a small software project.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 29,
             "text": "Describe techniques and issues with testing asynchronous, concurrent, and parallel software.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 30,
             "text": "Create a test plan for a medium-size code segment which contains asynchronous, concurrent, and/or parallel code, including a test matrix and generation of test data and inputs.",
-            "cognitive_level": "Develop"
+            "cognitive_level": "Develop",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 31,
             "text": "Describe techniques for the verification and validation of non-code artifacts.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           }
         ],
         "general": []
       },
       "source_loc": {
-        "file": "../input/SE.txt",
+        "file": "curriculum/cs2023/input/SE_Software_Engineering.txt",
         "section": 6
       },
       "subsections": [],
       "provenance": {
-        "content_hash": "9a0c9cd76701b6fc6e2b52bc027a7f3e1e78ac8bc95fa9a8899dcdbd3dbb20f3",
+        "content_hash": "c29b503d428eeb8b580ce6f235b3e33ab88e3a493f631239626237c44badcb0c",
         "tool": "unified_parser_v2.py"
       }
     },
@@ -981,19 +1297,22 @@
         "cs_core": [],
         "ka_core": [
           {
+            "order": 1,
             "name": "Hyrum’s Law/The Law of Implicit Interfaces",
             "subs": [],
             "cross_references": []
           },
           {
+            "order": 2,
             "name": "Backward compatibility",
             "subs": [
               "Compatibility is not a property of a single entity, it’s a property of a relationship.",
-              "Backward compatibility needs to be evaluated in terms of provider + consumer(s) or with a wellspecified model of what forms of compatibility a provider aspires to/promises."
+              "Backward compatibility needs to be evaluated in terms of provider + consumer(s) or with a well- specified model of what forms of compatibility a provider aspires to/promises."
             ],
             "cross_references": []
           },
           {
+            "order": 3,
             "name": "Refactoring",
             "subs": [
               "Standard refactoring patterns (rename, inline, outline, etc.)",
@@ -1004,6 +1323,7 @@
             "cross_references": []
           },
           {
+            "order": 4,
             "name": "Versioning",
             "subs": ["Semantic Versioning (SemVer)", "Trunk-based development"],
             "cross_references": []
@@ -1011,6 +1331,7 @@
         ],
         "non_core": [
           {
+            "order": 5,
             "name": "“Large Scale” Refactoring – techniques when a refactoring change is too large to commit safely (large projects), or when it is impossible to synchronize change between provider + all consumers (multiple repositories, consumers with private code).",
             "subs": [
               "Express both old and new APIs so that they can co-exist.",
@@ -1025,41 +1346,53 @@
         "cs_core": [],
         "ka_core": [
           {
+            "order": 1,
             "text": "Identify both explicit and implicit behavior of an interface and identify potential risks from Hyrum’s Law.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 2,
             "text": "Consider inputs from static analysis tools and/or Software Design principles to identify code in need of refactoring.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "fallback-default"
           },
           {
+            "order": 3,
             "text": "Identify changes that can be broadly considered “backward compatible,” potentially with explicit statements about what usage is or is not supported.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 4,
             "text": "Refactor the implementation of an interface to improve design, clarity, etc. with minimal/zero impact on existing users.",
-            "cognitive_level": "Develop"
+            "cognitive_level": "Develop",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 5,
             "text": "Evaluate whether a proposed change is sufficiently safe given the versioning methodology in use for a given project.",
-            "cognitive_level": "Evaluate"
+            "cognitive_level": "Evaluate",
+            "cognitive_level_source": "blooms"
           }
         ],
         "non_core": [
           {
+            "order": 6,
             "text": "Plan a complex multi-step refactoring to change default behavior of an API safely.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Develop",
+            "cognitive_level_source": "cs2023"
           }
         ],
         "general": []
       },
       "source_loc": {
-        "file": "../input/SE.txt",
+        "file": "curriculum/cs2023/input/SE_Software_Engineering.txt",
         "section": 7
       },
       "subsections": [],
       "provenance": {
-        "content_hash": "c2fd25ce8c992d341eb6400844680870b75b144b2ef92a02aa3c7d18cc19ec00",
+        "content_hash": "b7f95edc9709b2d47b4477b2318b2c8c149d3bc79f7e37552eba9dafd9d9e7ea",
         "tool": "unified_parser_v2.py"
       }
     },
@@ -1071,31 +1404,37 @@
         "cs_core": [],
         "ka_core": [
           {
+            "order": 1,
             "name": "Concept of reliability as probability of failure or mean time between failures, and faults as cause of failures",
             "subs": [],
             "cross_references": []
           },
           {
+            "order": 2,
             "name": "Identifying reliability requirements for different kinds of software",
             "subs": [],
             "cross_references": []
           },
           {
+            "order": 3,
             "name": "Software failures caused by defects/bugs, and so for high reliability the goal is to have minimum defects – by injecting fewer defects (better training, education, planning), and by removing most of the injected defects (testing, code review, etc.)",
             "subs": [],
             "cross_references": []
           },
           {
+            "order": 4,
             "name": "Software reliability, system reliability and failure behavior",
             "subs": [],
             "cross_references": []
           },
           {
+            "order": 5,
             "name": "Defect injection and removal cycle, and different approaches for defect removal",
             "subs": [],
             "cross_references": []
           },
           {
+            "order": 6,
             "name": "Compare the “error budget” approach to reliability with the “error-free” approach and identify domains where each is relevant.",
             "subs": [],
             "cross_references": []
@@ -1103,11 +1442,13 @@
         ],
         "non_core": [
           {
+            "order": 7,
             "name": "Software reliability models",
             "subs": [],
             "cross_references": []
           },
           {
+            "order": 8,
             "name": "Software fault tolerance techniques and models",
             "subs": [
               "Contextual differences in fault tolerance (e.g., crashing a flight critical system is strongly avoided, crashing a data processing system before corrupt data is written to storage is highly valuable)"
@@ -1115,16 +1456,19 @@
             "cross_references": []
           },
           {
+            "order": 9,
             "name": "Software reliability engineering practices – including reviews, testing, practical model checking",
             "subs": [],
             "cross_references": []
           },
           {
+            "order": 10,
             "name": "Identification of dependent and independent failure domains, and their impact on system reliability",
             "subs": [],
             "cross_references": []
           },
           {
+            "order": 11,
             "name": "Measurement-based analysis of software reliability – telemetry, monitoring and alerting, dashboards, release qualification metrics, etc.",
             "subs": [],
             "cross_references": []
@@ -1135,45 +1479,59 @@
         "cs_core": [],
         "ka_core": [
           {
+            "order": 1,
             "text": "Describe how to determine the level of reliability required by a software system.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 2,
             "text": "Explain the problems that exist in achieving very high levels of reliability.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "blooms"
           },
           {
+            "order": 3,
             "text": "Understand approaches to minimizing faults that can be applied at each stage of the software lifecycle.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "fallback-default"
           }
         ],
         "non_core": [
           {
+            "order": 4,
             "text": "Demonstrate the ability to apply multiple methods to develop reliability estimates for a software system.",
-            "cognitive_level": "Apply"
+            "cognitive_level": "Apply",
+            "cognitive_level_source": "blooms"
           },
           {
+            "order": 5,
             "text": "Identify methods that will lead to the realization of a software architecture that achieves a specified level of reliability.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 6,
             "text": "Identify ways to apply redundancy to achieve fault tolerance.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 7,
             "text": "Identify single-point-of-failure (SPF) dependencies in a system design.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           }
         ],
         "general": []
       },
       "source_loc": {
-        "file": "../input/SE.txt",
+        "file": "curriculum/cs2023/input/SE_Software_Engineering.txt",
         "section": 8
       },
       "subsections": [],
       "provenance": {
-        "content_hash": "7106670296f3d74e4cce610ecd7835c6c3897163c0ddcb2a0ab9d0a2ba6f8bcd",
+        "content_hash": "9c906b16a4bdf05eccf1a721a422714d59cd56779d5b686c4bd96d5b7f189157",
         "tool": "unified_parser_v2.py"
       }
     },
@@ -1186,6 +1544,7 @@
         "ka_core": [],
         "non_core": [
           {
+            "order": 1,
             "name": "Formal specification of interfaces",
             "subs": [
               "Specification of pre- and post- conditions",
@@ -1194,6 +1553,7 @@
             "cross_references": []
           },
           {
+            "order": 2,
             "name": "Problem areas well served by formal methods",
             "subs": [
               "Lock-free programming, data races",
@@ -1202,11 +1562,13 @@
             "cross_references": []
           },
           {
+            "order": 3,
             "name": "Comparison to other tools and techniques for defect detection",
             "subs": ["Testing", "Fuzzing"],
             "cross_references": []
           },
           {
+            "order": 4,
             "name": "Formal approaches to software modeling and analysis",
             "subs": ["Model checkers", "Model finders"],
             "cross_references": []
@@ -1219,26 +1581,32 @@
         "non_core": [],
         "general": [
           {
+            "order": 1,
             "text": "Describe the role formal specification and analysis techniques can play in the development of complex software and compare their use as validation and verification techniques with testing.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "cs2023"
           },
           {
+            "order": 2,
             "text": "Apply formal specification and analysis techniques to software designs and programs with low complexity.",
-            "cognitive_level": "Apply"
+            "cognitive_level": "Apply",
+            "cognitive_level_source": "blooms"
           },
           {
+            "order": 3,
             "text": "Explain the potential benefits and drawbacks of using formal specification languages.",
-            "cognitive_level": "Explain"
+            "cognitive_level": "Explain",
+            "cognitive_level_source": "blooms"
           }
         ]
       },
       "source_loc": {
-        "file": "../input/SE.txt",
+        "file": "curriculum/cs2023/input/SE_Software_Engineering.txt",
         "section": 9
       },
       "subsections": [],
       "provenance": {
-        "content_hash": "a17478907a00f0650574b58f33c6eb99be7447bf3cd7a1167480d208c08cca55",
+        "content_hash": "613a02578bf02a52247ef04e4f8b65d5effafbfa5454c55e5c0840a4ddf38f45",
         "tool": "unified_parser_v2.py"
       }
     }
@@ -1258,7 +1626,7 @@
     },
     {
       "name": "Meticulous",
-      "description": "Software engineering requires attention to detail and consistent behavior from everyone on the team. Success in this field is clearly influenced by a meticulous approach comprehensive understanding, proper procedures, and a solid avoidance of cutting corners."
+      "description": "Software engineering requires attention to detail and consistent behavior from everyone on the team. Success in this field is clearly influenced by a meticulous approach - comprehensive understanding, proper procedures, and a solid avoidance of cutting corners."
     },
     {
       "name": "Responsible",
