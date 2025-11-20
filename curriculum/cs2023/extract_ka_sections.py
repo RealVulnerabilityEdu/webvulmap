@@ -7,7 +7,7 @@ import json
 import os
 import sys
 
-import fitz  # PyMuPDF
+import pymupdf as fitz
 
 
 def extract_knowledge_areas(input_file, pdf_file, output_dir):
